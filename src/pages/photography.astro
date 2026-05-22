@@ -1,0 +1,69 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import DosDonts from '../components/DosDonts.astro';
+
+const styles = [
+  {
+    context: 'Produktové fotky',
+    do: 'High-contrast B&W',
+    dont: 'Stock photos / AI generated produkt',
+    doDesc: 'Sluneční světlo skrz oválné díry, ostrý stín, makro detail úpletu.',
+    dontDesc: 'Vyhni se generickým stock fotkám — okamžitě prozradí, že nemáš vlastní content.'
+  },
+  {
+    context: 'Athlete action',
+    do: 'Color, slow-mo, golden hour',
+    dont: 'Instagram vintage filtry',
+    doDesc: 'Hráč v eldee, golden hour, pohyb, low angle. Vibe Off-White × Adidas × KITH.',
+    dontDesc: '90s Instagram filtry, oranžové LUTy, mood presety.'
+  },
+  {
+    context: 'Founder / community',
+    do: 'Authentic, B&W preferred',
+    dont: 'Studio gym selfies',
+    doDesc: 'Lukáš v šatně, na hřišti, s ambasadorem. B&W, natural light, bez ego pozic.',
+    dontDesc: 'Bez gym selfies, bez CEO pose, bez stock-look fotek.'
+  },
+  {
+    context: 'Memy / comedy',
+    do: 'Pestré, kontrastní, TikTok native',
+    dont: 'Generický humor',
+    doDesc: 'Specifický fotbalový humor — POV šatny, reactions, satira amatérského fotbalu.',
+    dontDesc: 'Generický rage face content. Lukáš to nikdy nepoužívá.'
+  },
+];
+---
+<Layout title="Photography" section="11 · PHOTOGRAPHY">
+  <SectionTitle
+    number="11 · PHOTOGRAPHY"
+    title="Vizuální styl"
+    subtitle="Co fotit, co nefotit. High-contrast, authentic, žádný stock."
+  />
+
+  <div class="space-y-12">
+    {styles.map((s) => (
+      <section>
+        <div class="font-mono text-caption text-gold mb-4">{s.context.toUpperCase()}</div>
+        <DosDonts
+          doTitle={s.do}
+          doDesc={s.doDesc}
+          dontTitle={s.dont}
+          dontDesc={s.dontDesc}
+        />
+      </section>
+    ))}
+  </div>
+
+  <section class="mt-16 bg-ink/60 border border-bone/10 rounded-lg p-8">
+    <h2 class="font-display text-h2 text-bone mb-4">Tabu</h2>
+    <ul class="space-y-2 text-body-lg text-bone/85">
+      <li class="flex gap-3"><span class="text-blood">✗</span> Stock photos</li>
+      <li class="flex gap-3"><span class="text-blood">✗</span> AI-generated produkt na noze (jen jako wireframe ref, nikdy public)</li>
+      <li class="flex gap-3"><span class="text-blood">✗</span> Instagram vintage filtry (Mayfair, Sutro, etc.)</li>
+      <li class="flex gap-3"><span class="text-blood">✗</span> Gym selfies bez kontextu</li>
+      <li class="flex gap-3"><span class="text-blood">✗</span> Generický lifestyle stock</li>
+    </ul>
+  </section>
+
+</Layout>
