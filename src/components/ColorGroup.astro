@@ -1,0 +1,20 @@
+---
+import ColorSwatch from './ColorSwatch.astro';
+
+interface Props {
+  id: string;
+  name: string;
+  subtitle?: string;
+  colors: Array<any>;
+}
+const { id, name, subtitle, colors } = Astro.props;
+---
+<section class="mb-16" id={id}>
+  <div class="mb-6">
+    <h2 class="font-display text-h2 text-bone">{name}</h2>
+    {subtitle && <p class="text-body text-bone/60 mt-2">{subtitle}</p>}
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {colors.map((c) => <ColorSwatch {...c} />)}
+  </div>
+</section>

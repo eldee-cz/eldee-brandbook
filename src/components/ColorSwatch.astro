@@ -1,0 +1,35 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  hex: string;
+  rgb: string;
+  cmyk: string;
+  pantone?: string;
+  wcag?: number;
+  wcagOnInk?: number;
+  wcagOnBone?: number;
+  primary?: boolean;
+  drop?: string;
+}
+const { id, name, hex, rgb, cmyk, pantone, wcag, wcagOnInk, wcagOnBone, primary, drop } = Astro.props;
+const wcagValue = wcag ?? wcagOnInk ?? wcagOnBone;
+const darkColors = ['#0A0A0A', '#3A3A3A', '#7F1D1D', '#B91C1C', '#DC2626', '#B8860B', '#FF6B00', '#2563EB'];
+const textColor = darkColors.includes(hex) ? '#F5F5F0' : '#0A0A0A';
+---
+<div class="rounded-lg overflow-hidden border border-bone/10">
+  <div class="aspect-[4/3] p-4 flex flex-col justify-between" style={`background:${hex};color:${textColor}`}>
+    <div class="flex justify-between items-start">
+      <div class="font-display text-h3 italic">{name}</div>
+      {primary && <div class="font-mono text-caption opacity-70">PRIMARY</div>}
+      {drop && <div class="font-mono text-caption opacity-70">DROP {drop}</div>}
+    </div>
+    <div class="font-mono text-body">{hex.toUpperCase()}</div>
+  </div>
+  <div class="bg-ink/60 p-4 space-y-1 text-caption font-mono text-bone/80">
+    <div class="flex justify-between"><span>RGB</span><span>{rgb}</span></div>
+    <div class="flex justify-between"><span>CMYK</span><span>{cmyk}</span></div>
+    {pantone && <div class="flex justify-between"><span>PANTONE</span><span>{pantone}</span></div>}
+    {wcagValue !== undefined && <div class="flex justify-between"><span>WCAG</span><span>{wcagValue.toFixed(1)} : 1</span></div>}
+  </div>
+</div>
