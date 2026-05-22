@@ -1,0 +1,33 @@
+---
+interface Props {
+  doTitle: string;
+  doDesc: string;
+  dontTitle: string;
+  dontDesc: string;
+}
+const { doTitle, doDesc, dontTitle, dontDesc } = Astro.props;
+---
+<div class="grid md:grid-cols-2 gap-6">
+  <div class="bg-ink/60 border-l-4 border-emerald-500 rounded p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-emerald-500 text-2xl leading-none">✓</span>
+      <span class="font-mono text-caption text-emerald-500">DO</span>
+    </div>
+    <div class="font-display text-h3 italic text-bone mb-2">{doTitle}</div>
+    <div class="text-body text-bone/80">{doDesc}</div>
+    <div class="mt-4">
+      <slot name="do" />
+    </div>
+  </div>
+  <div class="bg-ink/60 border-l-4 border-blood rounded p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-blood text-2xl leading-none">✗</span>
+      <span class="font-mono text-caption text-blood">DON'T</span>
+    </div>
+    <div class="font-display text-h3 italic text-bone mb-2">{dontTitle}</div>
+    <div class="text-body text-bone/80">{dontDesc}</div>
+    <div class="mt-4">
+      <slot name="dont" />
+    </div>
+  </div>
+</div>

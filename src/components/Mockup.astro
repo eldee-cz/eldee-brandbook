@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  caption?: string;
+  variant?: 'product' | 'digital' | 'print';
+}
+const { title, caption, variant = 'product' } = Astro.props;
+
+const bgMap: Record<string, string> = {
+  product: 'bg-gradient-to-br from-ink to-ash/40',
+  digital: 'bg-ink',
+  print:   'bg-bone/5',
+};
+---
+<figure class="rounded-lg overflow-hidden border border-bone/10">
+  <div class={`${bgMap[variant]} aspect-[4/3] flex items-center justify-center p-12`}>
+    <slot />
+  </div>
+  <figcaption class="bg-ink/60 p-4">
+    <div class="font-mono text-caption text-gold">{title.toUpperCase()}</div>
+    {caption && <div class="text-body text-bone/70 mt-1">{caption}</div>}
+  </figcaption>
+</figure>
