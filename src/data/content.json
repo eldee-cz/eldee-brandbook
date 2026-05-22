@@ -21,6 +21,35 @@
       { "date": "2026 Q4", "event": "Veřejný launch eldee.cz s první edicí." }
     ]
   },
+  "audience": {
+    "primary": {
+      "name": "Mladý fotbalista 13-19 let",
+      "age": "13-19",
+      "geography": "ČR — Praha, Brno, Ostrava, regionální okresní města",
+      "income": "Kapesné rodičů 1-3k Kč/měs + brigády (15-19 let)",
+      "lifestyle": [
+        "Trénuje 3-5×/týden v amatérském/dorostencém klubu",
+        "Sleduje fotbalové TikToky, IG hráčských kont, YouTube highlight reels",
+        "Estetika důležitější než cena (do limitu kapesného)",
+        "Sociální status — co nosíš v šatně je signál"
+      ],
+      "pain": "Levné štulpny vypadají jako levné. Drahé štulpny vypadají generické. Není mezi tím nic, co by mělo charakter a bylo zároveň cenově OK.",
+      "motivation": "Vypadat jako ten, kdo má vlastní styl. Ne jako klon Real Madridu z Decathlonu."
+    },
+    "secondary": {
+      "name": "Amatérský fotbalový klub (B2B)",
+      "type": "Mládežnické kluby U13-U19, krajský přebor, okresní soutěž",
+      "geography": "Celá ČR, ~940 klubů v databázi",
+      "decisionMaker": "Trenér, vedoucí mládeže, předseda klubu",
+      "lifestyle": [
+        "Rozpočet limitovaný, závislý na sponzorech",
+        "Hledá způsob, jak odlišit hráče od konkurence",
+        "Komunikuje přes e-mail, FB Messenger, telefon"
+      ],
+      "pain": "Stejní výrobci sportovní výbavy (Decathlon, Sportisimo), žádná diferenciace. Klubový obchod vypadá jako klubový obchod konkurence.",
+      "motivation": "Najít originální dodavatel, který nabídne kvalitu + slevu klubu + příběh."
+    }
+  },
   "dna": {
     "personality": [
       { "trait": "Drzý",        "description": "Bere si trochu prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní." },

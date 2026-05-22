@@ -1,0 +1,65 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import content from '../data/content.json';
+
+const personas = [
+  { key: 'primary',   p: content.audience.primary,   label: 'PRIMARY · B2C' },
+  { key: 'secondary', p: content.audience.secondary, label: 'SECONDARY · B2B' },
+];
+---
+<Layout title="Target Audience" section="04 · AUDIENCE">
+  <SectionTitle
+    number="04 · TARGET AUDIENCE"
+    title="Kdo nosí eldee"
+    subtitle="Dvě cílovky — primárně mladí fotbalisti, sekundárně amatérské kluby."
+  />
+
+  {personas.map(({ key, p, label }) => (
+    <section class="mb-16" id={key}>
+      <div class="bg-ink/60 border border-bone/10 rounded-lg p-8">
+        <div class="font-mono text-caption text-blood mb-3">{label}</div>
+        <h2 class="font-display text-h2 italic text-bone mb-6">{p.name}</h2>
+
+        <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-8">
+          {p.age && (<>
+            <dt class="font-mono text-caption text-gold">VĚK</dt>
+            <dd class="text-body text-bone">{p.age}</dd>
+          </>)}
+          {p.type && (<>
+            <dt class="font-mono text-caption text-gold">TYP</dt>
+            <dd class="text-body text-bone">{p.type}</dd>
+          </>)}
+          <dt class="font-mono text-caption text-gold">GEOGRAFIE</dt>
+          <dd class="text-body text-bone">{p.geography}</dd>
+          {p.income && (<>
+            <dt class="font-mono text-caption text-gold">PŘÍJEM</dt>
+            <dd class="text-body text-bone">{p.income}</dd>
+          </>)}
+          {p.decisionMaker && (<>
+            <dt class="font-mono text-caption text-gold">DECISION MAKER</dt>
+            <dd class="text-body text-bone">{p.decisionMaker}</dd>
+          </>)}
+        </dl>
+
+        <div class="mb-6">
+          <div class="font-mono text-caption text-gold mb-2">LIFESTYLE</div>
+          <ul class="text-body text-bone/80 space-y-1">
+            {p.lifestyle.map((l) => <li>· {l}</li>)}
+          </ul>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border-l-4 border-blood pl-4">
+            <div class="font-mono text-caption text-blood mb-1">PAIN</div>
+            <p class="text-body text-bone/85">{p.pain}</p>
+          </div>
+          <div class="border-l-4 border-gold pl-4">
+            <div class="font-mono text-caption text-gold mb-1">MOTIVATION</div>
+            <p class="text-body text-bone/85">{p.motivation}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+</Layout>
