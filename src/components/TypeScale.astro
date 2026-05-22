@@ -1,0 +1,29 @@
+---
+import typographyData from '../data/typography.json';
+
+const fontMap: Record<string, string> = {
+  display: 'font-display',
+  body: 'font-body',
+  brush: 'font-brush',
+  mono: 'font-mono',
+};
+---
+<div class="bg-ink/60 border border-bone/10 rounded-lg p-8">
+  <div class="font-mono text-caption text-gold mb-6">TYPE SCALE — 8 LEVELS</div>
+  <div class="space-y-6">
+    {typographyData.scale.map((s) => (
+      <div class="flex items-baseline gap-8 pb-6 border-b border-bone/5 last:border-0">
+        <div
+          class={`${fontMap[s.fontId]} text-bone min-w-[300px]`}
+          style={`font-size:${s.size};line-height:${s.lineHeight};font-weight:${s.weight};font-style:${s.style};text-transform:${s.transform};letter-spacing:${s.letterSpacing}`}
+        >
+          {s.name}
+        </div>
+        <div class="text-caption font-mono text-bone/60 leading-relaxed">
+          <div>{s.size} / {s.lineHeight} / {s.weight} {s.style !== 'normal' ? s.style : ''}</div>
+          <div class="text-bone/40 mt-1">{s.usage}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

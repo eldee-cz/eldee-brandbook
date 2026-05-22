@@ -1,0 +1,62 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  purpose: string;
+  source: string;
+  license: string;
+  weights: number[];
+  styles: string[];
+  downloadUrl: string;
+  primary?: boolean;
+  accent?: boolean;
+  utility?: boolean;
+}
+const { id, name, purpose, source, license, weights, styles, downloadUrl, primary, accent, utility } = Astro.props;
+
+const sampleTextMap: Record<string, string> = {
+  display: 'HOLY SOCKS.',
+  body: 'Sock-streetwear s charakterem.',
+  brush: 'holy socks.',
+  mono: '#B91C1C',
+};
+const sampleText = sampleTextMap[id] ?? 'Aa Bb Cc 123';
+
+const fontClassMap: Record<string, string> = {
+  display: 'font-display italic',
+  body: 'font-body',
+  brush: 'font-brush',
+  mono: 'font-mono',
+};
+const fontClass = fontClassMap[id] ?? 'font-body';
+
+const sampleSizeMap: Record<string, string> = {
+  display: 'text-[64px] leading-none',
+  body: 'text-[32px] leading-tight',
+  brush: 'text-[56px] leading-none',
+  mono: 'text-[40px] leading-none',
+};
+const sampleSize = sampleSizeMap[id] ?? 'text-[32px]';
+---
+<div class="bg-ink/60 border border-bone/10 rounded-lg p-8 mb-6">
+  <div class="flex items-start justify-between mb-6">
+    <div>
+      <div class="font-mono text-caption text-gold mb-1">
+        {primary && 'PRIMARY · '}{accent && 'ACCENT · '}{utility && 'UTILITY · '}{name.toUpperCase()}
+      </div>
+      <div class="text-body-lg text-bone">{purpose}</div>
+    </div>
+    <a href={downloadUrl} target="_blank" rel="noopener" class="text-caption font-mono text-blood hover:text-blood-light transition">
+      DOWNLOAD ↗
+    </a>
+  </div>
+  <div class={`${fontClass} ${sampleSize} text-bone mb-6`}>
+    {sampleText}
+  </div>
+  <div class="grid grid-cols-2 gap-4 text-caption font-mono text-bone/60">
+    <div>WEIGHTS: {weights.join(', ')}</div>
+    <div>STYLES: {styles.join(', ')}</div>
+    <div>SOURCE: {source}</div>
+    <div>LICENSE: {license}</div>
+  </div>
+</div>
