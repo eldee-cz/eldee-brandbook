@@ -14,6 +14,7 @@
     "build:full": "npm run build && node scripts/generate-pdf.mjs && npm run build"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.3.7",
     "tailwindcss": "^4.3.0"

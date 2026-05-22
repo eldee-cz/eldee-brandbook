@@ -26,3 +26,6 @@ pnpm-debug.log*
 test-results/
 playwright-report/
 playwright/.cache/
+
+# Lighthouse
+lighthouse-report.json
