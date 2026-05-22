@@ -1,0 +1,107 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Mockup from '../components/Mockup.astro';
+---
+<Layout title="Digital Applications" section="14 · DIGITAL">
+  <SectionTitle
+    number="14 · DIGITAL APPLICATIONS"
+    title="Digital materials"
+    subtitle="Web hero, IG post, TikTok cover, email signature, podcast cover."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Web hero</h2>
+    <Mockup title="eldee.cz — hero" variant="digital">
+      <div class="bg-ink w-full max-w-md aspect-video rounded p-6 flex flex-col justify-between">
+        <div class="font-mono text-caption text-gold">DROP 001 · LIVE</div>
+        <div>
+          <div class="font-display italic text-h2 text-bone">Holy Socks.</div>
+          <div class="font-brush text-gold text-h3 inline-block" style="transform:rotate(-2deg)">no, just socks with holes.</div>
+        </div>
+        <div class="flex gap-2">
+          <div class="bg-blood text-bone px-4 py-2 rounded font-mono text-caption">SHOP NOW</div>
+          <div class="border border-bone/20 text-bone/80 px-4 py-2 rounded font-mono text-caption">PŘÍBĚH</div>
+        </div>
+      </div>
+    </Mockup>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Instagram post (1080×1080)</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <Mockup title="Drop announcement" variant="digital">
+        <div class="bg-ink w-full aspect-square rounded p-6 flex flex-col justify-between">
+          <div class="font-mono text-caption text-gold">DROP 001</div>
+          <div class="font-display italic text-h2 text-blood">Holy<br/>Socks.</div>
+          <div class="font-mono text-caption text-bone/60">@ELDEE.CZ</div>
+        </div>
+      </Mockup>
+      <Mockup title="Meme post" variant="digital">
+        <div class="bg-bone w-full aspect-square rounded p-6 flex flex-col items-center justify-center text-center text-ink">
+          <div class="font-display italic text-h3 leading-tight">POV: trénink za 5 min,<br/>štulpny jsou ještě<br/>v krabičce.</div>
+          <div class="font-mono text-caption text-blood mt-4">@ELDEE.CZ · #HOLYSOCKS</div>
+        </div>
+      </Mockup>
+      <Mockup title="UGC repost" variant="digital">
+        <div class="bg-gradient-to-br from-blood to-blood-dark w-full aspect-square rounded p-6 flex flex-col justify-between text-bone">
+          <div class="font-mono text-caption">REPOST FROM @username</div>
+          <div class="font-display italic text-h2">„Tyhle jsou jiný."</div>
+          <div class="flex items-center gap-2">
+            <span class="font-display italic text-h3">eldee</span>
+            <span class="flex gap-0.5">
+              <span class="w-2 h-3 border border-bone rounded-full"></span>
+              <span class="w-2 h-3 border border-bone rounded-full"></span>
+            </span>
+          </div>
+        </div>
+      </Mockup>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">TikTok / Reels cover (1080×1920)</h2>
+    <Mockup title="TikTok cover" variant="digital">
+      <div class="bg-ink w-48 aspect-[9/16] rounded p-4 flex flex-col justify-between">
+        <div class="font-mono text-caption text-gold">DROP 001</div>
+        <div class="space-y-2">
+          <div class="font-display italic text-h2 text-bone leading-none">HOLY<br/>SOCKS.</div>
+          <div class="font-brush text-gold text-h3" style="transform:rotate(-3deg)">drop incoming.</div>
+        </div>
+        <div class="font-mono text-caption text-bone/60">@eldee.cz</div>
+      </div>
+    </Mockup>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Email signature</h2>
+    <Mockup title="Lukáš signature" variant="digital">
+      <div class="bg-bone/5 border border-bone/10 rounded p-5 w-full max-w-md text-bone/80">
+        <div class="flex items-baseline gap-3 mb-2">
+          <span class="font-display italic text-h3 text-bone">Lukáš Hledík</span>
+          <span class="font-mono text-caption text-bone/40">FOUNDER & COACH</span>
+        </div>
+        <div class="font-display italic text-h3 text-blood">eldee</div>
+        <div class="font-mono text-caption text-bone/60 mt-3 space-y-0.5">
+          <div>lukas@eldee.cz</div>
+          <div>eldee.cz · @eldee.cz</div>
+        </div>
+      </div>
+    </Mockup>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-2">Podcast cover (3000×3000)</h2>
+    <Mockup title="eldee podcast cover" variant="digital">
+      <div class="bg-ink w-64 aspect-square rounded p-6 flex flex-col justify-between border border-gold/40">
+        <div class="font-mono text-caption text-gold">EPIZODA 01</div>
+        <div class="space-y-2">
+          <div class="font-display italic text-h1 text-bone leading-none">HOLY<br/>SOCKS.</div>
+          <div class="font-brush text-gold text-h3" style="transform:rotate(-2deg)">podcast.</div>
+        </div>
+        <div class="font-mono text-caption text-bone/60">LUKÁŠ HLEDÍK</div>
+      </div>
+    </Mockup>
+  </section>
+
+</Layout>
