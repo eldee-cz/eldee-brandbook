@@ -1,7 +1,35 @@
 ---
 import Layout from '../components/Layout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import PrintBreak from '../components/PrintBreak.astro';
+import content from '../data/content.json';
 ---
-<Layout title="Manifesto" section="01 · MANIFESTO">
-  <h1 class="font-display text-h1 italic text-blood">eldee brand book</h1>
-  <p class="font-body text-body-lg text-bone/80 mt-4">Holy Socks. No, just socks with holes.</p>
+<Layout title="Manifesto" section="01 · MANIFESTO" description="eldee brand book — Holy Socks. No, just socks with holes.">
+
+  <!-- Cover -->
+  <div class="min-h-[80vh] flex flex-col justify-center">
+    <div class="flex items-center gap-4 mb-12">
+      <div class="w-2 h-12 bg-blood"></div>
+      <div class="font-mono text-caption text-gold">eldee · brand book · v1.0 · 2026</div>
+    </div>
+
+    <h1 class="font-display italic text-bone text-[clamp(64px,12vw,180px)] leading-[0.9] tracking-tight">
+      {content.manifesto.headline}
+    </h1>
+    <div class="font-brush text-gold text-[clamp(32px,6vw,80px)] leading-none mt-4 -rotate-2 inline-block">
+      {content.manifesto.subhead}
+    </div>
+
+    <div class="mt-16 max-w-2xl space-y-4">
+      {content.manifesto.paragraphs.map((p) => (
+        <p class="text-body-lg text-bone/80">{p}</p>
+      ))}
+    </div>
+  </div>
+
+  <PrintBreak />
+
+  <!-- TOC -->
+  <TableOfContents />
+
 </Layout>
