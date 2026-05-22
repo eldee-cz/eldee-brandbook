@@ -1,0 +1,50 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import content from '../data/content.json';
+---
+<Layout title="Positioning" section="05 · POSITIONING">
+  <SectionTitle
+    number="05 · POSITIONING"
+    title="Where eldee stands"
+    subtitle="Jak se eldee liší od všeho ostatního na trhu."
+  />
+
+  <section class="mb-16">
+    <div class="font-mono text-caption text-gold mb-3">POSITIONING STATEMENT</div>
+    <p class="font-display text-h3 italic text-bone leading-relaxed border-l-4 border-blood pl-6">
+      {content.positioning.statement}
+    </p>
+  </section>
+
+  <section class="mb-16">
+    <div class="font-mono text-caption text-gold mb-3">BRAND PROMISE</div>
+    <p class="text-body-lg text-bone/85 max-w-2xl">{content.positioning.promise}</p>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Konkurence</h2>
+    <div class="space-y-3">
+      {content.positioning.competitors.map((c) => (
+        <div class="grid grid-cols-[1fr_auto_2fr] gap-6 items-baseline pb-3 border-b border-bone/10">
+          <div class="font-display text-h3 italic text-bone">{c.name}</div>
+          <div class="font-mono text-caption text-gold">{c.axis.toUpperCase()}</div>
+          <div class="text-body text-bone/70">{c.differentiator}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-6">USP — co eldee má, jiní ne</h2>
+    <ol class="space-y-4">
+      {content.positioning.usp.map((u, i) => (
+        <li class="flex gap-6">
+          <div class="font-display text-h2 italic text-blood w-12 shrink-0">{i + 1}.</div>
+          <div class="text-body-lg text-bone/85 pt-2">{u}</div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+</Layout>

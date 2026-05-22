@@ -50,6 +50,23 @@
       "motivation": "Najít originální dodavatel, který nabídne kvalitu + slevu klubu + příběh."
     }
   },
+  "positioning": {
+    "statement": "Pro mladé fotbalisty 13-19 let, kteří odmítají vypadat jako klon — eldee je české streetwear-sport brand štulpen se dvěma chráněnými průmyslovými vzory, který kombinuje prémiovou kvalitu s irreverentním marketingem.",
+    "promise": "Holy Socks. No, just socks with holes. — Premium produkt, který se nebere vážně. Český výrobce, dva chráněné designy, ceník 599 Kč.",
+    "competitors": [
+      { "name": "Nike / Adidas",        "axis": "premium-mainstream", "differentiator": "Žádná originalita — všichni mají stejné." },
+      { "name": "Sondico / Decathlon",  "axis": "budget-mainstream",  "differentiator": "Žádná kvalita ani charakter." },
+      { "name": "Trusox",               "axis": "premium-niche",      "differentiator": "Funkční (anti-slip), ale vizuálně neviditelné." },
+      { "name": "Soccergrip / TruSocks","axis": "premium-niche",      "differentiator": "Funkční, ale není to streetwear." },
+      { "name": "MORO Streetwear (CZ)", "axis": "streetwear-fashion", "differentiator": "Streetwear, ale není sport. Nemá štulpny." }
+    ],
+    "usp": [
+      "Dva CHRÁNĚNÉ průmyslové vzory (oválné díry, kapsa na chránič)",
+      "Vyrobeno v ČR (ne čínský dropship)",
+      "Streetwear estetika v sport produktu (ne sport v streetwearu)",
+      "599 Kč MSRP — premium, ale dosažitelné"
+    ]
+  },
   "dna": {
     "personality": [
       { "trait": "Drzý",        "description": "Bere si trochu prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní." },
