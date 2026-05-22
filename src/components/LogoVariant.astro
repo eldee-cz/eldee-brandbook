@@ -1,0 +1,31 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  bg: 'ink' | 'bone' | 'blood' | 'gold';
+  showSafeZone?: boolean;
+  caption?: string;
+}
+const { src, alt, bg, showSafeZone, caption } = Astro.props;
+
+const bgMap: Record<string, { bg: string; text: string }> = {
+  ink:   { bg: '#0A0A0A', text: '#F5F5F0' },
+  bone:  { bg: '#F5F5F0', text: '#0A0A0A' },
+  blood: { bg: '#B91C1C', text: '#F5F5F0' },
+  gold:  { bg: '#C9A227', text: '#0A0A0A' },
+};
+const colors = bgMap[bg];
+---
+<div class="rounded-lg overflow-hidden border border-bone/10">
+  <div class="aspect-[4/3] flex items-center justify-center p-12 relative" style={`background:${colors.bg}`}>
+    {showSafeZone && (
+      <div class="absolute inset-8 border-2 border-dashed opacity-30" style={`border-color:${colors.text}`}></div>
+    )}
+    <img src={src} alt={alt} class="max-w-full max-h-full" style={showSafeZone ? 'padding:24px' : ''} />
+  </div>
+  {caption && (
+    <div class="bg-ink/60 p-4">
+      <div class="font-mono text-caption text-bone/70">{caption}</div>
+    </div>
+  )}
+</div>
