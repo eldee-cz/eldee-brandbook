@@ -20,5 +20,24 @@
       { "date": "2026 Q2", "event": "První fyzické vzorky. Brand book launch." },
       { "date": "2026 Q4", "event": "Veřejný launch eldee.cz s první edicí." }
     ]
+  },
+  "dna": {
+    "personality": [
+      { "trait": "Drzý",        "description": "Bere si trochu prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní." },
+      { "trait": "Sebevědomý",  "description": "Ví, že produkt je dobrý. Nemusí se ospravedlňovat." },
+      { "trait": "Premium",     "description": "Český výrobce, dva chráněné designy, žádné kompromisy na kvalitě nití nebo úpletu." },
+      { "trait": "Self-aware",  "description": "Slogan „Holy Socks. No, just socks with holes.\" je vtip o vlastní jednoduchosti." }
+    ],
+    "values": [
+      { "value": "Kvalita",     "description": "Top materiály, český výrobce, dlouholetá životnost." },
+      { "value": "Originalita", "description": "Dva chráněné průmyslové vzory. Žádné kopírování." },
+      { "value": "Komunita",    "description": "Mladí fotbalisti, kluby, ambasadoři. Spolupráce > transakce." },
+      { "value": "Férovost",    "description": "Komise ambasadorům 10 %, slevy klubům, transparentní ceník." }
+    ],
+    "archetypes": [
+      { "primary": true, "name": "Rebel", "description": "Eldee je revolt proti uniformitě. Hráč v eldee říká: nejsem jako ostatní." },
+      { "primary": false, "name": "Hero",  "description": "Eldee je nástroj, který hráče posouvá. Lepší produkt = lepší výkon = více sebevědomí." },
+      { "primary": false, "name": "Creator", "description": "Dva chráněné designy = originální tvorba. Eldee přidává něco nového do fotbalového šatníku." }
+    ]
   }
 }

@@ -1,0 +1,53 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import content from '../data/content.json';
+---
+<Layout title="Brand DNA" section="03 · DNA">
+  <SectionTitle
+    number="03 · BRAND DNA"
+    title="Personality, hodnoty, archetypy"
+    subtitle="Kdo je eldee jako značka. Pravidla pro chování, hlas, rozhodování."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Personality</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      {content.dna.personality.map((p) => (
+        <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+          <div class="font-display text-h3 italic text-blood mb-2">{p.trait}</div>
+          <p class="text-body text-bone/80">{p.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Hodnoty</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      {content.dna.values.map((v) => (
+        <div class="border-l-4 border-gold pl-6 py-2">
+          <div class="font-display text-h3 italic text-gold mb-1">{v.value}</div>
+          <p class="text-body text-bone/80">{v.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-6">Archetypy</h2>
+    <p class="text-body-lg text-bone/70 mb-8 max-w-2xl">Jungian brand archetypy — pomáhají rozhodovat se v hraničních případech (campaign, content, sponsorship).</p>
+    <div class="space-y-4">
+      {content.dna.archetypes.map((a) => (
+        <div class:list={['bg-ink/60 border rounded-lg p-6', a.primary ? 'border-blood' : 'border-bone/10']}>
+          <div class="flex items-baseline gap-3 mb-2">
+            <div class="font-display text-h3 italic text-bone">{a.name}</div>
+            {a.primary && <span class="font-mono text-caption text-blood">PRIMARY</span>}
+          </div>
+          <p class="text-body text-bone/80">{a.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</Layout>
