@@ -1,0 +1,85 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import voice from '../data/voice-examples.json';
+
+const templateLabels: Record<string, string> = {
+  igCaptionLaunch:  'IG CAPTION · LAUNCH',
+  igCaptionMeme:    'IG CAPTION · MEME',
+  emailClubOpener:  'EMAIL · KLUB OPENER',
+  podcastIntro:     'PODCAST · INTRO',
+  pressReleaseHead: 'PRESS RELEASE · HEADLINE',
+};
+---
+<Layout title="Voice & Tone" section="06 · VOICE">
+  <SectionTitle
+    number="06 · VOICE & TONE"
+    title="Jak eldee mluví"
+    subtitle="Pravidla pro psaní. Pro web, IG, e-maily, podcast, press."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Principy</h2>
+    <div class="space-y-4">
+      {voice.principles.map((p) => (
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-ink/60 border-l-4 border-emerald-500 rounded p-5">
+            <div class="font-mono text-caption text-emerald-500 mb-2">✓ DO — {p.do}</div>
+            <div class="text-body text-bone/80 italic">„{p.exampleDo}"</div>
+          </div>
+          <div class="bg-ink/60 border-l-4 border-blood rounded p-5">
+            <div class="font-mono text-caption text-blood mb-2">✗ DON'T — {p.dont}</div>
+            <div class="text-body text-bone/80 italic">„{p.exampleDont}"</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Slovník</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-ink/60 border border-emerald-500/30 rounded-lg p-6">
+        <div class="font-mono text-caption text-emerald-500 mb-3">POUŽÍVEJ</div>
+        <div class="flex flex-wrap gap-2">
+          {voice.vocabulary.use.map((w) => (
+            <span class="bg-emerald-500/10 text-emerald-100 px-3 py-1 rounded-full text-body">{w}</span>
+          ))}
+        </div>
+      </div>
+      <div class="bg-ink/60 border border-blood/30 rounded-lg p-6">
+        <div class="font-mono text-caption text-blood mb-3">NEPOUŽÍVEJ</div>
+        <div class="flex flex-wrap gap-2">
+          {voice.vocabulary.dont.map((w) => (
+            <span class="bg-blood/10 text-bone/70 px-3 py-1 rounded-full text-body line-through">{w}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Šablony</h2>
+    <div class="space-y-4">
+      {Object.entries(voice.templates).map(([key, value]) => (
+        <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+          <div class="font-mono text-caption text-gold mb-3">{templateLabels[key] ?? key.toUpperCase()}</div>
+          <pre class="font-body text-body text-bone whitespace-pre-wrap leading-relaxed">{value}</pre>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-6">Tabu</h2>
+    <ul class="space-y-2 max-w-2xl">
+      {voice.taboo.map((t) => (
+        <li class="flex gap-3 text-body-lg text-bone/85">
+          <span class="text-blood text-h3 leading-none">✗</span>
+          <span>{t}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+</Layout>

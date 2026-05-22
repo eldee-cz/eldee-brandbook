@@ -1,0 +1,27 @@
+{
+  "principles": [
+    { "do": "Mluv konkrétně.",      "dont": "Žvaň obecnosti.",         "exampleDo": "599 Kč, vyrobeno v Olomouci, MOQ 100 párů.", "exampleDont": "Kvalitní produkt za dobrou cenu." },
+    { "do": "Bavit > prodávat.",    "dont": "Násilný sales pitch.",    "exampleDo": "Holy Socks. Tvoje další pár.",               "exampleDont": "Kupte teď a získáte slevu 10 %!" },
+    { "do": "Self-aware humor.",    "dont": "Sebechválí seriózně.",    "exampleDo": "No, just socks with holes.",                  "exampleDont": "Revoluční inovace v sportovní módě." },
+    { "do": "Krátké, ostré věty.",   "dont": "Dlouhé souvětí.",         "exampleDo": "Český výrobce. Dva chráněné designy. Hotovo.","exampleDont": "Eldee je značka, která se snaží o vyhledávání originálního designu v rámci českého trhu sportovních doplňků..." },
+    { "do": "Mluv jako mladý hráč.","dont": "Mluv jako PR agentura.",  "exampleDo": "Tyhle ti změní šatnu.",                       "exampleDont": "Naše produkty osloví Vaši cílovou skupinu." }
+  ],
+  "vocabulary": {
+    "use": ["štulpna", "holy", "drop", "edice", "kapsa", "díry", "klub", "trénink", "hráč", "originální"],
+    "dont": ["produkt revoluce", "exkluzivní", "nejlepší na trhu", "číslo jedna", "100% kvalita", "stylový", "trendový", "must-have"]
+  },
+  "templates": {
+    "igCaptionLaunch":  "Drop 001. Holy Socks dropped.\n599 Kč. Czech-made. Two design patents.\nLink in bio. ↗",
+    "igCaptionMeme":    "POV: trénink za 5 min, štulpny jsou ještě v krabičce.\n\n@eldee.cz · #HolySocks",
+    "emailClubOpener":  "Ahoj [jméno trenéra],\nčetl jsem, že [klub] hraje [soutěž]. Mám pro vás něco, co se ještě nikde v ČR nedá koupit — eldee štulpny.\nDva chráněné designy, vyrobeno v ČR, 599 Kč. Kluby dostávají 5-7 % zpět.\nMrkneš na vzorek? Pošlu zdarma.\nLukáš",
+    "podcastIntro":     "Vítej u eldee podcastu. Já jsem Lukáš, zakladatel značky. Dneska budeme řešit [téma]. Pojďme na to.",
+    "pressReleaseHead": "Česká značka eldee uvádí štulpny s dvěma chráněnými průmyslovými vzory."
+  },
+  "taboo": [
+    "Reálné náboženské symboly (kříž, růženec, ikony svatých)",
+    "Homofobní / sexistické vtipy",
+    "Bro-talk („pánové\", „kluci ze šatny\", „pánská záležitost\")",
+    "Body-shaming",
+    "Pohrdání amatérským fotbalem"
+  ]
+}
