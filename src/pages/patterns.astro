@@ -1,0 +1,54 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Mockup from '../components/Mockup.astro';
+---
+<Layout title="Patterns & Graphics" section="12 · PATTERNS">
+  <SectionTitle
+    number="12 · PATTERNS & GRAPHICS"
+    title="Hole pattern, halo, brush"
+    subtitle="Sekundární vizuální elementy, které doplňují loga."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Hole Pattern</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Chráněný průmyslový vzor — 5×2 oválných děr. Geometrie pro vyšívání i pro grafiku.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <Mockup title="Standard 5×2" caption="Velikost ovál: 12×16 mm">
+        <img src="/logo/hole-pattern.svg" alt="Hole pattern" class="max-w-full" />
+      </Mockup>
+      <Mockup title="Repetitivní (wallpaper)" caption="Tile horizontálně i vertikálně">
+        <div class="grid grid-cols-3 gap-2 opacity-80">
+          <img src="/logo/hole-pattern.svg" alt="" />
+          <img src="/logo/hole-pattern.svg" alt="" />
+          <img src="/logo/hole-pattern.svg" alt="" />
+        </div>
+      </Mockup>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Halo (Svatozář)</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Sekundární symbol — odkazuje na Holy Socks narrative. Vždy v gold.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <Mockup title="Standard halo" caption="Šířka = 1.5× šířky wordmarku">
+        <img src="/logo/halo.svg" alt="Halo" class="max-w-full" />
+      </Mockup>
+      <Mockup title="Halo + wordmark" caption="Použití nad logem v Holy momentech">
+        <div class="flex flex-col items-center gap-1">
+          <img src="/logo/halo.svg" alt="Halo" class="w-32" />
+          <img src="/logo/wordmark-light.svg" alt="" class="w-40" />
+        </div>
+      </Mockup>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-2">Brush element</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Caveat Brush font používaný pro „holy socks" tagline. Nikdy jako hlavní wordmark.</p>
+    <Mockup title="Tagline brush" caption="V gold nebo blood red, max 1× per design">
+      <div class="font-brush text-[80px] text-gold" style="transform:rotate(-3deg)">holy socks.</div>
+    </Mockup>
+  </section>
+
+</Layout>
