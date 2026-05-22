@@ -1,0 +1,46 @@
+---
+import Layout from '../../components/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+
+const misuses = [
+  { title: 'Nestlačuj proporce',     dont: 'Neměnit poměr stran (squash/stretch)',                       fix: 'Drž originální aspect ratio.' },
+  { title: 'Nepoužívej špatné barvy', dont: 'Wordmark v neon green nebo růžové',                          fix: 'Jen brand colors: bone, ink, blood, gold.' },
+  { title: 'Neaplikuj na low-contrast pozadí', dont: 'Tmavý wordmark na tmavé fotce',                     fix: 'Always min WCAG 4.5:1.' },
+  { title: 'Nerotuj logo',            dont: 'Nakloněné nebo otočené wordmarky',                           fix: 'Jen italic styl z fontu, ne CSS rotation.' },
+  { title: 'Nepřidávej shadows / gradients', dont: 'Drop shadow, glow, gradient na wordmark',             fix: 'Flat, ostrý wordmark v jedné barvě.' },
+  { title: 'Nepoužívej staré logo',   dont: 'Holy Red varianta z r. 2025 nebo Electric Blue verze',       fix: 'Aktuální verze viz /logo.' },
+  { title: 'Nevyšívej wordmark',      dont: 'Vyšívání wordmarku s kruhy v písmenech e — nit rozpustí kruhy',     fix: 'Použij LD monogram nebo hole pattern.' },
+  { title: 'Nekombinuj s jinými logy bez pravidel', dont: 'Wordmark vedle loga klubu bez safe space',     fix: 'Min. clear space = výška písmene e. Viz /co-branding.' },
+];
+---
+<Layout title="Logo Misuse" section="08 · MISUSE">
+  <SectionTitle
+    number="08 · LOGO MISUSE"
+    title="Takhle ne"
+    subtitle="Osm příkladů, co s logem nedělat — a co dělat místo toho."
+  />
+
+  <div class="grid md:grid-cols-2 gap-6">
+    {misuses.map((m, i) => (
+      <div class="bg-ink/60 border border-bone/10 rounded-lg overflow-hidden">
+        <div class="aspect-[4/3] bg-gradient-to-br from-blood/20 to-ink relative flex items-center justify-center p-6">
+          <div class="absolute top-3 left-3 font-mono text-caption text-blood">{`✗ DON'T #${String(i+1).padStart(2, '0')}`}</div>
+          <div class="text-bone/40 text-h3 font-display italic">{`[ misuse ${i+1} ]`}</div>
+        </div>
+        <div class="p-5">
+          <div class="font-display text-h3 italic text-blood mb-2">{m.title}</div>
+          <p class="text-body text-bone/80 mb-3">{m.dont}</p>
+          <div class="border-t border-bone/10 pt-3">
+            <div class="font-mono text-caption text-emerald-500 mb-1">✓ FIX</div>
+            <p class="text-body text-bone/80">{m.fix}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <p class="mt-12 text-body text-bone/60 max-w-2xl">
+    Pozn.: Placeholdery <code class="font-mono text-bone bg-ink/60 px-1">[ misuse N ]</code> budou nahrazeny reálnými vizuálními příklady při finálním produkčním kole. Vygenerujeme je jako SVG ilustrace v navazujícím tasku.
+  </p>
+
+</Layout>
