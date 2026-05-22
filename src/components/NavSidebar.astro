@@ -1,0 +1,50 @@
+---
+const sections = [
+  { num: '01', title: 'Manifesto',         href: '/' },
+  { num: '02', title: 'Brand Story',       href: '/story' },
+  { num: '03', title: 'Brand DNA',         href: '/dna' },
+  { num: '04', title: 'Target Audience',   href: '/audience' },
+  { num: '05', title: 'Positioning',       href: '/positioning' },
+  { num: '06', title: 'Voice & Tone',      href: '/voice' },
+  { num: '07', title: 'Logo System',       href: '/logo' },
+  { num: '08', title: 'Logo Misuse',       href: '/logo/misuse' },
+  { num: '09', title: 'Color System',      href: '/colors' },
+  { num: '10', title: 'Typography',        href: '/typography' },
+  { num: '11', title: 'Photography',       href: '/photography' },
+  { num: '12', title: 'Patterns',          href: '/patterns' },
+  { num: '13', title: 'Print',             href: '/print' },
+  { num: '14', title: 'Digital',           href: '/digital' },
+  { num: '15', title: 'Co-branding',       href: '/co-branding' },
+  { num: '—',  title: 'Asset Index',       href: '/assets' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<nav aria-label="Brand book sections" class="w-64 shrink-0 border-r border-ink/40 bg-ink/95 p-6 sticky top-0 h-screen overflow-y-auto print:hidden">
+  <a href="/" class="block mb-8">
+    <div class="font-display text-h2 italic text-bone">eldee</div>
+    <div class="font-mono text-caption text-bone/50">BRAND BOOK · v1.0</div>
+  </a>
+  <ul class="space-y-1">
+    {sections.map((s) => {
+      const isActive = currentPath === s.href.replace(/\/$/, '');
+      return (
+        <li>
+          <a
+            href={s.href}
+            aria-current={isActive ? 'page' : undefined}
+            class:list={[
+              'flex items-baseline gap-3 px-3 py-2 rounded text-body transition',
+              isActive
+                ? 'bg-blood/20 text-bone'
+                : 'text-bone/60 hover:text-bone hover:bg-bone/5',
+            ]}
+          >
+            <span class="font-mono text-caption text-gold w-6 shrink-0">{s.num}</span>
+            <span>{s.title}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

@@ -1,0 +1,35 @@
+---
+import '../styles/globals.css';
+import NavSidebar from './NavSidebar.astro';
+
+interface Props {
+  title: string;
+  section?: string;
+  description?: string;
+}
+
+const { title, section, description } = Astro.props;
+const fullTitle = `${title} — eldee Brand Book`;
+---
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen flex">
+    <NavSidebar />
+    <main class="flex-1 max-w-4xl mx-auto px-8 py-12 lg:px-16">
+      {section && (
+        <div class="font-mono text-caption text-gold mb-4">{section}</div>
+      )}
+      <slot />
+      <footer class="mt-32 pt-8 border-t border-bone/10 text-caption text-bone/40 print:hidden">
+        eldee.cz · brand book v1.0 · © 2026 Lukáš Hledík
+      </footer>
+    </main>
+  </body>
+</html>
