@@ -1,0 +1,43 @@
+{
+  "groups": [
+    {
+      "id": "canvas",
+      "name": "Canvas",
+      "subtitle": "Neutrální barvy — 90 % vizuálního pole",
+      "colors": [
+        { "id": "ink",  "name": "Carbon Black", "hex": "#0A0A0A", "rgb": "10, 10, 10",    "cmyk": "0, 0, 0, 96",   "pantone": "Black 6 C",   "wcagOnBone": 19.3 },
+        { "id": "bone", "name": "Off-white",    "hex": "#F5F5F0", "rgb": "245, 245, 240", "cmyk": "0, 0, 2, 4",    "pantone": "11-0107 TPG", "wcagOnInk": 19.3 },
+        { "id": "ash",  "name": "Ash Gray",     "hex": "#3A3A3A", "rgb": "58, 58, 58",    "cmyk": "0, 0, 0, 77",   "pantone": "Black 4 C",   "wcagOnBone": 11.2 }
+      ]
+    },
+    {
+      "id": "signature",
+      "name": "Signature",
+      "subtitle": "Blood Red — hlavní brand accent, 5+ let stálost",
+      "colors": [
+        { "id": "blood",      "name": "Blood Red",        "hex": "#B91C1C", "rgb": "185, 28, 28",  "cmyk": "0, 85, 85, 27", "pantone": "187 C",  "wcagOnInk": 4.7, "primary": true },
+        { "id": "blood-dark", "name": "Blood Red Dark",   "hex": "#7F1D1D", "rgb": "127, 29, 29",  "cmyk": "0, 77, 77, 50", "pantone": "188 C",  "wcagOnInk": 7.3 },
+        { "id": "blood-light","name": "Blood Red Light",  "hex": "#DC2626", "rgb": "220, 38, 38",  "cmyk": "0, 83, 83, 14", "pantone": "186 C",  "wcagOnInk": 4.0 }
+      ]
+    },
+    {
+      "id": "premium",
+      "name": "Premium Accent",
+      "subtitle": "Burnished Gold — Holy moments, luxe applications",
+      "colors": [
+        { "id": "gold",        "name": "Burnished Gold", "hex": "#C9A227", "rgb": "201, 162, 39", "cmyk": "0, 19, 81, 21", "pantone": "7563 C", "wcagOnInk": 7.6, "primary": true },
+        { "id": "gold-antique","name": "Antique Gold",   "hex": "#B8860B", "rgb": "184, 134, 11", "cmyk": "0, 27, 94, 28", "pantone": "131 C",  "wcagOnInk": 6.3 }
+      ]
+    },
+    {
+      "id": "drop",
+      "name": "Drop Accents",
+      "subtitle": "Sezónní, mění se s každým drop release",
+      "colors": [
+        { "id": "drop-green",  "name": "Toxic Green",   "hex": "#BFFF00", "rgb": "191, 255, 0",   "cmyk": "25, 0, 100, 0", "pantone": "389 C",  "wcagOnInk": 17.4, "drop": "001" },
+        { "id": "drop-orange", "name": "UV Orange",     "hex": "#FF6B00", "rgb": "255, 107, 0",   "cmyk": "0, 58, 100, 0", "pantone": "1655 C", "wcagOnInk": 6.7,  "drop": "002" },
+        { "id": "drop-blue",   "name": "Electric Blue", "hex": "#2563EB", "rgb": "37, 99, 235",   "cmyk": "84, 58, 0, 8",  "pantone": "2728 C", "wcagOnInk": 5.0,  "drop": "003" }
+      ]
+    }
+  ]
+}
