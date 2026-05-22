@@ -1,0 +1,44 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import content from '../data/content.json';
+---
+<Layout title="Brand Story" section="02 · STORY">
+  <SectionTitle
+    number="02 · BRAND STORY"
+    title="Origin"
+    subtitle="Jak vzniklo eldee — z frustrace, designu a českého řemesla."
+  />
+
+  <div class="space-y-12 max-w-2xl">
+
+    <section>
+      <div class="font-mono text-caption text-gold mb-3">PROČ TO VZNIKLO</div>
+      <p class="text-body-lg text-bone/85">{content.story.origin}</p>
+    </section>
+
+    <section>
+      <div class="font-mono text-caption text-gold mb-3">MOMENT ROZHODNUTÍ</div>
+      <p class="text-body-lg text-bone/85">{content.story.moment}</p>
+    </section>
+
+    <section>
+      <div class="font-mono text-caption text-gold mb-3">CO SLIBUJEME</div>
+      <p class="text-body-lg text-bone/85">{content.story.promise}</p>
+    </section>
+
+  </div>
+
+  <section class="mt-16">
+    <h2 class="font-display text-h2 text-bone mb-8">Timeline</h2>
+    <ol class="space-y-6">
+      {content.story.milestones.map((m) => (
+        <li class="flex gap-8 pb-6 border-b border-bone/10 last:border-0">
+          <div class="font-mono text-caption text-blood min-w-[100px]">{m.date}</div>
+          <div class="text-body-lg text-bone/85">{m.event}</div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+</Layout>

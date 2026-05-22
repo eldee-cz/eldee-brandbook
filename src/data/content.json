@@ -8,5 +8,17 @@
       "Pravidlo eldee: prémiový produkt, irreverentní marketing. Žádné kompromisy na kvalitě, žádné kompromisy na originalitě.",
       "Wear them like a sin."
     ]
+  },
+  "story": {
+    "origin": "Eldee vzniklo z frustrace. Lukáš Hledík — vedoucí logistiky v Iveco, trenér mládeže — viděl, jak hráči stříhají díry do levných štulpen, aby vypadali jako jejich idoly. Amatérsky, asymetricky, deset minut před zápasem v šatně.",
+    "moment": "V roce 2025 se rozhodl, že to udělá pořádně. Najal českého výrobce. Nechal si chránit dva designy: oválné díry, které drží symetrii, a vnitřní kapsu na chránič, která řeší klasický problém všech amatérských fotbalistů.",
+    "promise": "Eldee je premium produkt vyrobený v Česku, s irreverentním marketingem, který nebere vážně sám sebe. Holy Socks. No, just socks with holes.",
+    "milestones": [
+      { "date": "2024 Q3", "event": "První skica designu na papíru." },
+      { "date": "2025 Q1", "event": "Registrace dvou průmyslových vzorů u ÚPV." },
+      { "date": "2025 Q4", "event": "Smlouva s českým výrobcem (MOQ 100 párů)." },
+      { "date": "2026 Q2", "event": "První fyzické vzorky. Brand book launch." },
+      { "date": "2026 Q4", "event": "Veřejný launch eldee.cz s první edicí." }
+    ]
   }
 }
