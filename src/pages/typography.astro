@@ -1,0 +1,37 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import TypeSpecimen from '../components/TypeSpecimen.astro';
+import TypeScale from '../components/TypeScale.astro';
+import typoData from '../data/typography.json';
+---
+<Layout title="Typography" section="10 · TYPOGRAPHY">
+  <SectionTitle
+    number="10 · TYPOGRAPHY"
+    title="Čtyři fonty, osm levelů"
+    subtitle="Big Shoulders Display pro hlavičky, Space Grotesk pro tělo, Caveat Brush pro brush taglines, JetBrains Mono pro data."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Fonty</h2>
+    {typoData.fonts.map((f) => <TypeSpecimen {...f} />)}
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Type scale</h2>
+    <TypeScale />
+  </section>
+
+  <section class="bg-ink/60 border border-bone/10 rounded-lg p-8">
+    <h2 class="font-display text-h2 text-bone mb-4">Pravidla použití</h2>
+    <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
+      <li>· <strong>Display (Big Shoulders Black Italic)</strong> jen pro H1/H2, sloganový text a wordmark. NIKDY pro běžný odstavec.</li>
+      <li>· <strong>Body (Space Grotesk)</strong> pro všechen souvislý text — odstavce, popisy, tlačítka, navigace.</li>
+      <li>· <strong>Brush (Caveat Brush)</strong> jen pro tagline akcent a UGC vibe. Maximálně 1× per stránka.</li>
+      <li>· <strong>Mono (JetBrains Mono)</strong> pro HEX hodnoty, kód, captions, labels.</li>
+      <li>· <strong>Italic</strong> jen v display fontu (Big Shoulders). Body italic NEPOUŽÍVAT.</li>
+      <li>· <strong>UPPER + LS:0.18em</strong> = caption styling. Vždy konzistentně.</li>
+    </ul>
+  </section>
+
+</Layout>
