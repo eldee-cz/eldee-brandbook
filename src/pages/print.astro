@@ -1,0 +1,103 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Mockup from '../components/Mockup.astro';
+---
+<Layout title="Print Applications" section="13 · PRINT">
+  <SectionTitle
+    number="13 · PRINT APPLICATIONS"
+    title="Print materials"
+    subtitle="Vizitka, krabička, hangtag, sticker, etiketa. Fyzické projevy značky."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Vizitka (85×55 mm, matte black 350 g)</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Die-cut oválné díry skrz papír. Matte black s gold foil v premium edici.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <Mockup title="Vizitka — přední" variant="print">
+        <div class="bg-ink text-bone w-72 h-44 rounded p-6 flex flex-col justify-between" style="aspect-ratio:85/55">
+          <div class="flex items-center gap-2">
+            <span class="font-display text-2xl italic">eldee</span>
+            <span class="flex gap-1">
+              <span class="w-3 h-4 border border-bone rounded-full"></span>
+              <span class="w-3 h-4 border border-bone rounded-full"></span>
+            </span>
+          </div>
+          <div>
+            <div class="font-mono text-caption text-gold mb-1">FOUNDER & COACH</div>
+            <div class="font-display text-h3 italic">LUKÁŠ HLEDÍK</div>
+          </div>
+        </div>
+      </Mockup>
+      <Mockup title="Vizitka — zadní" variant="print">
+        <div class="bg-ink text-bone w-72 h-44 rounded p-6 flex flex-col justify-center items-center text-center gap-2" style="aspect-ratio:85/55">
+          <div class="font-mono text-caption text-bone/80">lukas@eldee.cz</div>
+          <div class="font-mono text-caption text-bone/80">+420 ...</div>
+          <div class="font-mono text-caption text-bone/80">eldee.cz · @eldee.cz</div>
+          <div class="text-gold mt-1">
+            <span class="font-display italic text-h3">LD</span>
+          </div>
+        </div>
+      </Mockup>
+    </div>
+    <div class="mt-4 text-body text-bone/60 font-mono">CENA: 500 Kč / 100 ks (kuponac.cz, vistaprint, jandybook.cz)</div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Krabička (18×12×5 cm)</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Matte black premium varianta s gold foil wordmarkem. Vnitřek: hedvábný papír + UGC karta.</p>
+    <Mockup title="Krabička eldee" variant="print">
+      <div class="bg-ink text-bone w-80 h-52 rounded p-8 flex flex-col items-center justify-center gap-3 border border-gold/30">
+        <div class="w-24 h-4 border-2 border-gold rounded-full"></div>
+        <div class="font-display text-3xl italic">eldee</div>
+        <div class="font-brush text-gold text-xl" style="transform:rotate(-3deg)">holy socks.</div>
+        <div class="font-mono text-caption text-bone/60 mt-2">DROP 001 · EU SIZE 38-42</div>
+      </div>
+    </Mockup>
+    <div class="mt-4 text-body text-bone/60 font-mono">CENA: 2 500 Kč / 100 ks (printo.cz, packaly.cz)</div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Hangtag (5×8 cm, kraft 300g)</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Hangtag s LD monogramem + drop info + QR na product page.</p>
+    <Mockup title="Hangtag" variant="print">
+      <div class="bg-bone text-ink w-32 h-48 rounded p-4 flex flex-col items-center justify-between">
+        <div class="text-gold">
+          <span class="font-display italic text-h3">LD</span>
+        </div>
+        <div class="text-center">
+          <div class="font-display text-h3 italic">DROP 001</div>
+          <div class="font-mono text-caption text-blood mt-1">HOLY SOCKS</div>
+        </div>
+        <div class="w-12 h-12 bg-ink rounded grid grid-cols-3 gap-px p-1">
+          {Array.from({ length: 9 }).map(() => <div class="bg-bone"></div>)}
+        </div>
+      </div>
+    </Mockup>
+    <div class="mt-4 text-body text-bone/60 font-mono">CENA: 300 Kč / 200 ks</div>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-2">Stickers (3 designy × 100 ks)</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Free pack v každé krabičce. Stickers slep + Holy Red + Gold.</p>
+    <div class="grid md:grid-cols-3 gap-4">
+      <Mockup title="LD monogram sticker" variant="print">
+        <div class="w-24 h-24 bg-blood rounded-full flex items-center justify-center">
+          <span class="font-display italic text-3xl text-ink">LD</span>
+        </div>
+      </Mockup>
+      <Mockup title="Wordmark sticker" variant="print">
+        <div class="w-40 h-12 bg-ink flex items-center justify-center rounded">
+          <span class="font-display italic text-2xl text-bone">eldee</span>
+        </div>
+      </Mockup>
+      <Mockup title="Brush sticker" variant="print">
+        <div class="bg-gold w-32 h-12 rounded flex items-center justify-center" style="transform:rotate(-3deg)">
+          <span class="font-brush text-2xl text-ink">holy socks.</span>
+        </div>
+      </Mockup>
+    </div>
+    <div class="mt-4 text-body text-bone/60 font-mono">CENA: 800 Kč / 300 ks (stickermule.com, polygrafia.cz)</div>
+  </section>
+
+</Layout>
