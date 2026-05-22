@@ -1,0 +1,69 @@
+---
+import Layout from '../../components/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import LogoVariant from '../../components/LogoVariant.astro';
+import AssetDownload from '../../components/AssetDownload.astro';
+---
+<Layout title="Logo System" section="07 · LOGO">
+  <SectionTitle
+    number="07 · LOGO SYSTEM"
+    title="Tři vrstvy log"
+    subtitle="Wordmark pro marketing, LD monogram pro vyšívání, hole pattern pro produkt."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Vrstva 1 — Wordmark</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Hlavní logo eldee se dvěma kruhovými dírami v písmenech „e". Pro web, IG, krabičky, vizitky, podcast cover.</p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on black" bg="ink"   caption="Na tmavém pozadí" />
+      <LogoVariant src="/logo/wordmark-dark.svg"  alt="eldee wordmark on bone"  bg="bone"  caption="Na světlém pozadí" />
+      <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on blood" bg="blood" caption="Na blood red" />
+      <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on gold"  bg="gold"  caption="Na gold (Holy edice)" />
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Vrstva 2 — LD Monogram</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Geometrický italic monogram pro vyšívání, wax seal, malé aplikace. Embroidery digitalizace přes Fiverr (PES/DST formát).</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on black" bg="ink" showSafeZone={true} caption={'Clear space = výška „L“'} />
+      <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on blood" bg="blood" caption="Embroidery target" />
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Vrstva 3 — Hole Pattern</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Chráněný průmyslový vzor — 5×2 oválných děr. Primární vyšívaný motiv na lýtku.</p>
+    <LogoVariant src="/logo/hole-pattern.svg" alt="Hole pattern" bg="ink" caption="5×2 grid, ovály 12×16 mm" />
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Halo — sekundární symbol</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Svatozář v gold — alternativa k „koruně" z streetwear estetiky. Odkazuje na Holy Socks.</p>
+    <LogoVariant src="/logo/halo.svg" alt="Halo gold" bg="ink" caption="Burnished Gold #C9A227" />
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Pravidla</h2>
+    <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
+      <li>· <strong>Clear space</strong> = minimálně výška „L" v monogramu, nebo výška dvou kroužků ve wordmarku</li>
+      <li>· <strong>Minimum size</strong> = wordmark 24 px / 8 mm, monogram 16 px / 5 mm, hole pattern 40 px / 14 mm</li>
+      <li>· <strong>Nikdy</strong> neměnit poměr stran, neflipovat, nezbarvit jinak než brand colors</li>
+      <li>· <strong>Vyšívání</strong> = jen monogram + hole pattern (wordmark NE — kruhy v „e" se rozpustí)</li>
+      <li>· <strong>Foil tisk</strong> = wordmark v gold (Holy edice na krabičkách)</li>
+    </ul>
+    <a href="/logo/misuse" class="inline-block mt-6 font-mono text-caption text-blood hover:text-blood-light transition">→ VIZ TAKÉ: LOGO MISUSE</a>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-6">Stáhnout</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark — light variant" format="SVG" />
+      <AssetDownload href="/logo/wordmark-dark.svg"  label="Wordmark — dark variant"  format="SVG" />
+      <AssetDownload href="/logo/monogram-ld.svg"    label="LD Monogram"               format="SVG" />
+      <AssetDownload href="/logo/hole-pattern.svg"   label="Hole Pattern"              format="SVG" />
+      <AssetDownload href="/logo/halo.svg"           label="Halo"                      format="SVG" />
+    </div>
+  </section>
+
+</Layout>
