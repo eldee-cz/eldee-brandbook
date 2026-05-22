@@ -1,0 +1,68 @@
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 14mm;
+  }
+  html, body {
+    background: white !important;
+    color: #0A0A0A !important;
+    font-size: 11pt;
+  }
+  /* Hide navigation */
+  nav.print\:hidden,
+  .print\:hidden,
+  aside,
+  footer {
+    display: none !important;
+  }
+  /* Reset main width for print */
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  /* Avoid breaks inside cards */
+  figure, section, .rounded-lg {
+    break-inside: avoid;
+  }
+  /* Forced breaks */
+  .print\:break-before-page {
+    break-before: page !important;
+  }
+  /* H1 starts on new page (except first) */
+  h1 {
+    break-before: page;
+  }
+  h1:first-of-type {
+    break-before: avoid;
+  }
+  /* Color tweaks for print (still readable) */
+  .text-bone, .text-bone\/80, .text-bone\/60, .text-bone\/70 {
+    color: #0A0A0A !important;
+  }
+  .bg-ink, .bg-ink\/60, .bg-ink\/95 {
+    background: #FFFFFF !important;
+    border: 1px solid #ddd !important;
+  }
+  .text-blood {
+    color: #B91C1C !important;
+  }
+  .text-gold {
+    color: #C9A227 !important;
+  }
+  /* Print typography */
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  h1, h2 {
+    font-family: 'Big Shoulders Display', Impact, sans-serif;
+  }
+  a {
+    color: inherit !important;
+    text-decoration: underline;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+}

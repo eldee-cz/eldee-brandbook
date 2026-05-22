@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './fonts.css';
+@import './print.css';
 
 @theme {
   --color-ink: #0A0A0A;

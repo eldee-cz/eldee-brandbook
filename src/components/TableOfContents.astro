@@ -1,0 +1,32 @@
+---
+const sections = [
+  { num: '01', title: 'Manifesto',          page: 1 },
+  { num: '02', title: 'Brand Story',        page: 4 },
+  { num: '03', title: 'Brand DNA',          page: 8 },
+  { num: '04', title: 'Target Audience',    page: 12 },
+  { num: '05', title: 'Positioning',        page: 15 },
+  { num: '06', title: 'Voice & Tone',       page: 18 },
+  { num: '07', title: 'Logo System',        page: 23 },
+  { num: '08', title: 'Logo Misuse',        page: 29 },
+  { num: '09', title: 'Color System',       page: 32 },
+  { num: '10', title: 'Typography',         page: 39 },
+  { num: '11', title: 'Photography',        page: 45 },
+  { num: '12', title: 'Patterns',           page: 49 },
+  { num: '13', title: 'Print Applications', page: 53 },
+  { num: '14', title: 'Digital Applications', page: 59 },
+  { num: '15', title: 'Co-branding & Merch', page: 65 },
+  { num: '—',  title: 'Asset Index',        page: 69 },
+];
+---
+<nav class="my-12 max-w-2xl">
+  <div class="font-mono text-caption text-gold mb-6">OBSAH</div>
+  <ul class="space-y-3">
+    {sections.map((s) => (
+      <li class="flex items-baseline gap-4">
+        <span class="font-mono text-caption text-bone/40 w-8">{s.num}</span>
+        <span class="font-display text-h3 text-bone flex-1">{s.title}</span>
+        <span class="font-mono text-caption text-bone/40">str. {s.page}</span>
+      </li>
+    ))}
+  </ul>
+</nav>

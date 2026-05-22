@@ -1,0 +1,23 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  format: string;
+  size?: string;
+}
+const { href, label, format, size } = Astro.props;
+---
+<a
+  href={href}
+  download
+  class="flex items-center justify-between gap-4 px-4 py-3 bg-ink/60 hover:bg-blood/20 border border-bone/10 hover:border-blood rounded transition group"
+>
+  <div>
+    <div class="text-body text-bone group-hover:text-bone">{label}</div>
+    {size && <div class="font-mono text-caption text-bone/40">{size}</div>}
+  </div>
+  <div class="flex items-center gap-3">
+    <span class="font-mono text-caption text-gold">{format.toUpperCase()}</span>
+    <span class="text-blood">↓</span>
+  </div>
+</a>
