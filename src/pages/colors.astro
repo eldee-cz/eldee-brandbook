@@ -1,0 +1,27 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ColorGroup from '../components/ColorGroup.astro';
+import colorsData from '../data/colors.json';
+---
+<Layout title="Color System" section="09 · COLORS">
+  <SectionTitle
+    number="09 · COLOR SYSTEM"
+    title="11 barev, 4 vrstvy"
+    subtitle="Plný color systém s HEX, RGB, CMYK, Pantone a WCAG ratios."
+  />
+
+  {colorsData.groups.map((g) => <ColorGroup {...g} />)}
+
+  <section class="mt-16 bg-ink/60 border border-bone/10 rounded-lg p-8">
+    <h2 class="font-display text-h2 text-bone mb-4">Pravidla použití</h2>
+    <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
+      <li>· <strong>Canvas</strong> tvoří 90 % vizuálního pole. Vždy.</li>
+      <li>· <strong>Blood Red</strong> = signature accent. Hlavní wordmark, CTA tlačítka, hero akcenty.</li>
+      <li>· <strong>Burnished Gold</strong> = premium moments. Holy edice, hangtag foil, ambasador certifikát.</li>
+      <li>· <strong>Drop accents</strong> = sezónní, jen pro konkrétní drop kampaň. Nikdy nesměšuj 2 drop colors v jednom designu.</li>
+      <li>· <strong>WCAG 4.5:1</strong> minimum pro běžný text, 3:1 pro velký text (h1/h2). Vždy ověř kontrast.</li>
+    </ul>
+  </section>
+
+</Layout>
