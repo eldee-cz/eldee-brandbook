@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <g transform="skewX(-12)">
+    <path d="M 40 20 L 40 180 L 100 180 L 100 150 L 70 150 L 70 20 Z" fill="currentColor"/>
+    <path d="M 110 20 L 110 180 L 155 180 Q 190 180 190 130 L 190 70 Q 190 20 155 20 Z M 140 50 L 155 50 Q 165 50 165 65 L 165 135 Q 165 150 155 150 L 140 150 Z" fill="currentColor" fill-rule="evenodd"/>
+  </g>
+</svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <g transform="skewX(-8) translate(20, 0)">
-    <path d="M 40 30 L 40 170 L 90 170" stroke="#F5F5F0" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-    <path d="M 100 30 L 100 170 L 145 170 Q 175 170 175 130 L 175 70 Q 175 30 145 30 L 100 30 Z" fill="#F5F5F0"/>
+  <g transform="skewX(-12)">
+    <path d="M 40 20 L 40 180 L 100 180 L 100 150 L 70 150 L 70 20 Z" fill="#F5F5F0"/>
+    <path d="M 110 20 L 110 180 L 155 180 Q 190 180 190 130 L 190 70 Q 190 20 155 20 Z M 140 50 L 155 50 Q 165 50 165 65 L 165 135 Q 165 150 155 150 L 140 150 Z" fill="#F5F5F0" fill-rule="evenodd"/>
   </g>
 </svg>
