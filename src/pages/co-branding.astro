@@ -1,0 +1,85 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Mockup from '../components/Mockup.astro';
+import DosDonts from '../components/DosDonts.astro';
+---
+<Layout title="Co-branding & Merch" section="15 · CO-BRANDING">
+  <SectionTitle
+    number="15 · CO-BRANDING & MERCH"
+    title="Spojení s partnery"
+    subtitle="Pravidla pro logo eldee × klub × ambasador × sponzor."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Klub lockup</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Když eldee uzavře smlouvu s klubem, lze používat lockup „eldee × KLUB".</p>
+    <Mockup title="eldee × FK Praha Pankrác" variant="digital">
+      <div class="flex items-center gap-6 px-8 py-4">
+        <span class="font-display italic text-h2 text-bone">eldee</span>
+        <span class="font-mono text-h3 text-gold">×</span>
+        <span class="font-display text-h2 text-bone">FK PANKRÁC</span>
+      </div>
+    </Mockup>
+    <div class="mt-4 text-body text-bone/70 max-w-2xl">
+      Pravidla: stejná výška obou log, mezera = výška „e", křížek (×) v gold mezi nimi. Pořadí vždy „eldee × KLUB".
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Ambasador kit</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Pro hráče-ambasadora — personalizovaná certifikace s osobním kódem.</p>
+    <Mockup title="Ambasador certifikát" variant="print">
+      <div class="bg-ink w-80 h-52 rounded p-6 flex flex-col justify-between border-2 border-gold/40">
+        <div class="flex justify-between items-start">
+          <div class="font-mono text-caption text-gold">AMBASSADOR · 2026</div>
+          <div class="font-display italic text-2xl text-bone">eldee</div>
+        </div>
+        <div>
+          <div class="font-mono text-caption text-bone/60 mb-1">CERTIFIED</div>
+          <div class="font-display italic text-h2 text-bone">JAKUB NOVÁK</div>
+          <div class="font-mono text-caption text-blood mt-2">CODE: JAKUB10 — 10 % komise</div>
+        </div>
+      </div>
+    </Mockup>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Sponzor lockup</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Když eldee figuruje jako sponzor klubu/turnaje.</p>
+    <Mockup title="Sponzor podpis na klubovém materiálu" variant="digital">
+      <div class="bg-bone/5 w-full max-w-md p-5 rounded flex items-center justify-between">
+        <div class="font-mono text-caption text-bone/60">OFICIÁLNÍ PARTNER</div>
+        <div class="font-display italic text-h3 text-bone">eldee</div>
+      </div>
+    </Mockup>
+  </section>
+
+  <section class="mb-16">
+    <DosDonts
+      doTitle="Min. clear space"
+      doDesc="Mezi eldee a klubovým logem výška písmene e v eldee wordmarku."
+      dontTitle="Logo nakreslen příliš blízko"
+      dontDesc="Bez safe space působí logo eldee přilepené na partnera."
+    />
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-2">Merch — jersey patch + banner</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Pro budoucí kolaborace s kluby — patch na dres, banner na stadion.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <Mockup title="Jersey patch (~8×3 cm)" variant="product">
+        <div class="bg-blood text-bone px-4 py-1 rounded">
+          <span class="font-display italic text-h3">eldee</span>
+        </div>
+      </Mockup>
+      <Mockup title="Stadion banner (3×0.5 m)" variant="digital">
+        <div class="bg-ink text-bone w-full py-4 px-6 rounded flex items-center justify-between">
+          <span class="font-display italic text-h2">eldee</span>
+          <span class="font-brush text-gold text-h3" style="transform:rotate(-2deg)">holy socks.</span>
+        </div>
+      </Mockup>
+    </div>
+  </section>
+
+</Layout>
