@@ -1,0 +1,63 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import AssetDownload from '../components/AssetDownload.astro';
+---
+
+<Layout title="Asset Index" section="— · ASSET INDEX">
+  <SectionTitle
+    number="— · ASSET INDEX"
+    title="Stáhnout"
+    subtitle="Loga, fonty, brand book PDF, licence, kontakty."
+  />
+
+  <section class="mb-12">
+    <h2 class="font-display text-h2 text-bone mb-6">Loga (SVG)</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark light" format="SVG" />
+      <AssetDownload href="/logo/wordmark-dark.svg" label="Wordmark dark" format="SVG" />
+      <AssetDownload href="/logo/monogram-ld.svg" label="LD Monogram" format="SVG" />
+      <AssetDownload href="/logo/hole-pattern.svg" label="Hole Pattern" format="SVG" />
+      <AssetDownload href="/logo/halo.svg" label="Halo" format="SVG" />
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-display text-h2 text-bone mb-6">PDF</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <AssetDownload href="/eldee-brandbook.pdf" label="Brand Book v1.0 — kompletní" format="PDF" size="~5 MB" />
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-display text-h2 text-bone mb-6">Fonty</h2>
+    <p class="text-body text-bone/70 mb-4">Všechny fonty z Google Fonts, OFL licence (commercial OK).</p>
+    <ul class="space-y-2 font-mono text-caption text-bone/80">
+      <li>· <a href="https://fonts.google.com/specimen/Big+Shoulders+Display" target="_blank" rel="noopener" class="text-blood hover:text-blood-light">Big Shoulders Display</a></li>
+      <li>· <a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank" rel="noopener" class="text-blood hover:text-blood-light">Space Grotesk</a></li>
+      <li>· <a href="https://fonts.google.com/specimen/Caveat+Brush" target="_blank" rel="noopener" class="text-blood hover:text-blood-light">Caveat Brush</a></li>
+      <li>· <a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank" rel="noopener" class="text-blood hover:text-blood-light">JetBrains Mono</a></li>
+    </ul>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-display text-h2 text-bone mb-6">Licence</h2>
+    <ul class="space-y-2 text-body text-bone/80 max-w-2xl">
+      <li>· <strong>Loga eldee:</strong> © 2026 Lukáš Hledík / eldee.cz. Použití jen s písemným svolením.</li>
+      <li>· <strong>Wordmark dírky + Hole Pattern:</strong> chráněné průmyslové vzory (ÚPV, 2025).</li>
+      <li>· <strong>Fonty:</strong> Open Font License (OFL), free commercial use.</li>
+      <li>· <strong>Brand book obsah:</strong> CC BY-NC-ND 4.0 — sdílení OK s atribucí, žádné komerční použití, žádné modifikace.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-6">Kontakt</h2>
+    <ul class="space-y-2 text-body text-bone/80">
+      <li>· E-mail: <a href="mailto:lukas@eldee.cz" class="text-blood hover:text-blood-light">lukas@eldee.cz</a></li>
+      <li>· Web: <a href="https://eldee.cz" class="text-blood hover:text-blood-light">eldee.cz</a></li>
+      <li>· Instagram: <a href="https://instagram.com/eldee.cz" class="text-blood hover:text-blood-light">@eldee.cz</a></li>
+      <li>· Brand book: <a href="https://brand.eldee.cz" class="text-blood hover:text-blood-light">brand.eldee.cz</a></li>
+    </ul>
+  </section>
+
+</Layout>
