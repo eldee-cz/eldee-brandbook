@@ -1,0 +1,111 @@
+---
+import Layout from '../../components/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+
+const variants = [
+  {
+    id: 'A',
+    name: 'Clean baseline',
+    file: '/logo/iterations/A-clean.svg',
+    note: 'eLDee bez italic skew, žádný detail. Referenční čistá verze.',
+    pros: 'Maximální čitelnost. Univerzální. Embroidery friendly.',
+    cons: 'Nemá hook. Vypadá generic. Nic neříká o brandu.',
+  },
+  {
+    id: 'B',
+    name: 'Red dot accent',
+    file: '/logo/iterations/B-dot.svg',
+    note: 'eLDee. — tečka v blood red jako konečná pointa. Reference: MUJI, Audi, Polestar.',
+    pros: 'Subtle, premium, hraje s self-aware tone („to je vše"). Statement-style.',
+    cons: 'Tečka může působit jako CSS bug v některých kontextech.',
+  },
+  {
+    id: 'C',
+    name: 'Gold halo above LD',
+    file: '/logo/iterations/C-halo-ld.svg',
+    note: 'Gold halo přesně nad kapitálkami LD — vizuálně koruna nad monogramem. „Holy".',
+    pros: 'Přímá vazba na manifesto „Holy Socks". LD monogram je literally „saintly".',
+    cons: 'Asymetrické (halo není centrované na celé slovo). Náročnější pro malé velikosti.',
+  },
+  {
+    id: 'D',
+    name: 'Hole in first „e"',
+    file: '/logo/iterations/D-hole-first-e.svg',
+    note: 'Jedna oválná díra v prvním „e" — reference na chráněný design štulpen.',
+    pros: 'Přímá vizuální vazba na produkt (díry na lýtku). Single hole = clean.',
+    cons: 'Vyžaduje precise design — řešení dilly hran pro embroidery.',
+  },
+  {
+    id: 'E',
+    name: 'Hole in last „e"',
+    file: '/logo/iterations/E-hole-last-e.svg',
+    note: 'Stejné jako D, ale díra je na konci slova — vizuální „díra" v ocasu wordmarku.',
+    pros: 'Posunutý focus — oko jde od L-D dál ke konci, kde je hook.',
+    cons: 'Méně intuitivní než D (čteme zleva, hook na konci je pozdě).',
+  },
+  {
+    id: 'F',
+    name: 'Full halo behind word',
+    file: '/logo/iterations/F-halo-full.svg',
+    note: 'Halo obklopuje celé slovo — saint emblem. Reference: ikony, medailony.',
+    pros: 'Max emblem feel. Holy Socks doslova. Skvělé pro circle aplikace (profilovka, sticker).',
+    cons: 'Velký footprint. Halo dominuje, wordmark sekundární. Méně versatile.',
+  },
+];
+---
+<Layout title="Logo Iterations" section="07 · LOGO">
+  <SectionTitle
+    number="07B · LOGO ITERATIONS"
+    title="eLDee · 6 variant"
+    subtitle="Iterativní průchod — všechny bez italic skew (0°), různé typy accent detailů. Vyber, dolaďujeme."
+  />
+
+  <section class="mb-12">
+    <div class="bg-blood/10 border border-blood/30 rounded-lg p-5 max-w-3xl">
+      <div class="font-mono text-caption text-blood mb-2">JAK VYBÍRAT</div>
+      <ul class="text-body text-bone/85 space-y-1">
+        <li>· Otevři každou v plné velikosti (klik na SVG) — zkontroluj detail</li>
+        <li>· Představ si na vizitce, na hangtag, na IG profilovce (16×16 px), v podcast coveru</li>
+        <li>· Halo varianty: vyzkoušej si je v kruhu (sticker) i v rectangle (vizitka)</li>
+        <li>· Vyber 1-2 favority a řekni — udělám 2. kolo iterací s mikro-úpravami</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    {variants.map((v) => (
+      <div class="bg-ink/60 border border-bone/10 rounded-lg overflow-hidden">
+        <div class="bg-[#0A0A0A] p-10 flex items-center justify-center min-h-[200px]">
+          <img src={v.file} alt={v.name} class="max-w-full max-h-[120px]" />
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline gap-3 mb-3">
+            <span class="font-mono text-caption text-blood">VARIANTA {v.id}</span>
+            <h3 class="font-display text-h3 italic text-bone">{v.name}</h3>
+          </div>
+          <p class="text-body text-bone/80 mb-4">{v.note}</p>
+          <div class="grid grid-cols-2 gap-3 text-body">
+            <div class="border-l-2 border-emerald-500 pl-3">
+              <div class="font-mono text-caption text-emerald-500 mb-1">+ PROS</div>
+              <p class="text-bone/75">{v.pros}</p>
+            </div>
+            <div class="border-l-2 border-blood pl-3">
+              <div class="font-mono text-caption text-blood mb-1">− CONS</div>
+              <p class="text-bone/75">{v.cons}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <section class="mt-12 max-w-3xl">
+    <h2 class="font-display text-h2 text-bone mb-4">Co dál</h2>
+    <ol class="space-y-2 text-body-lg text-bone/85 list-decimal pl-6">
+      <li>Vyber 1-2 varianty, které tě baví nejvíc</li>
+      <li>Řekni mi, co bys na nich ještě upravil (síla halo, velikost díry, pozice tečky, atd.)</li>
+      <li>Vyrobím 2. kolo iterací — mikro-úpravy na zúženém setu</li>
+      <li>Až bude vítěz, zafixujem jako finální wordmark a postavím profi logo manual kolem něj</li>
+    </ol>
+  </section>
+</Layout>

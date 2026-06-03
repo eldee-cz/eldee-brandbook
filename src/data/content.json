@@ -3,47 +3,47 @@
     "headline": "Holy Socks.",
     "subhead": "No, just socks with holes.",
     "paragraphs": [
-      "Eldee jsou české fotbalové štulpny s dvěma chráněnými průmyslovými vzory: oválné díry na lýtku a vnitřní kapsa na chránič.",
-      "Děláme je pro hráče 13-19 let, kteří odmítají vypadat jako všichni ostatní. Pro trenéry, kteří vědí, že detail dělá rozdíl. Pro fanoušky streetwear estetiky, která se nestydí za sport.",
-      "Pravidlo eldee: prémiový produkt, irreverentní marketing. Žádné kompromisy na kvalitě, žádné kompromisy na originalitě.",
+      "Eldee. České fotbalové štulpny. Originální můžeš být ze dvou důvodů: díry na lýtku, kapsa na chránič.",
+      "Nebojíš se odlišit. Miluješ fotbal do posledního detailu. Vítej v eldee.",
+      "Pravidlo eldee: pořádně, nebo vůbec. Žádné kompromisy na kvalitě. Žádné na originalitě.",
       "Wear them like a sin."
     ]
   },
   "story": {
-    "origin": "Eldee vzniklo z frustrace. Lukáš Hledík — vedoucí logistiky v Iveco, trenér mládeže — viděl, jak hráči stříhají díry do levných štulpen, aby vypadali jako jejich idoly. Amatérsky, asymetricky, deset minut před zápasem v šatně.",
-    "moment": "V roce 2025 se rozhodl, že to udělá pořádně. Najal českého výrobce. Nechal si chránit dva designy: oválné díry, které drží symetrii, a vnitřní kapsu na chránič, která řeší klasický problém všech amatérských fotbalistů.",
-    "promise": "Eldee je premium produkt vyrobený v Česku, s irreverentním marketingem, který nebere vážně sám sebe. Holy Socks. No, just socks with holes.",
+    "origin": "Lukáš — trenér mládeže — viděl v televizi trend, co nikdo neuměl pojmout. Hráči po celém světě si stříhají díry do štulpen. Amatérsky, asymetricky, pět minut před zápasem v šatně. Trh měl díru. Doslova.",
+    "moment": "Místo dalšího TikToku vzal trh do ruky. Najal českého výrobce. Nechal si chránit dva designy: oválné díry, co drží symetrii, a vnitřní kapsu na chránič. Konec stříhání. Začátek eldee.",
+    "promise": "Premium štulpny z ČR. Drzý marketing, co se nebere vážně. Holy Socks. No, just socks with holes.",
     "milestones": [
-      { "date": "2024 Q3", "event": "První skica designu na papíru." },
-      { "date": "2025 Q1", "event": "Registrace dvou průmyslových vzorů u ÚPV." },
-      { "date": "2025 Q4", "event": "Smlouva s českým výrobcem (MOQ 100 párů)." },
-      { "date": "2026 Q2", "event": "První fyzické vzorky. Brand book launch." },
-      { "date": "2026 Q4", "event": "Veřejný launch eldee.cz s první edicí." }
+      { "date": "2025 Q2", "event": "Zápas Premier League v televizi. Hráč u střídačky stahuje štulpny — rozstříhané na lýtku, schválně. Další týden to samé u jiného. A dalšího. Trend, který si nikdo neclaimuje." },
+      { "date": "2025 Q4", "event": "Po měsících přemýšlení padá rozhodnutí: pokud to nikdo neudělá, udělám to já. Ne jako další amatérské stříhání v šatně. Pořádně, premium, vyrobené v ČR." },
+      { "date": "2026 Q1", "event": "Eldee je oficiálně značka. Dva designy podány k ochraně u ÚPV: oválné díry, co drží symetrii, a vnitřní kapsa na chránič. Konec amatérského stříhání." },
+      { "date": "2026 Q3", "event": "Drop 001. eldee.cz jde online. To, co jsem viděl v televizi, je teď v krabičkách u prvních hráčů — premium materiál, český výrobce, dva chráněné designy." },
+      { "date": "2027 Q4", "event": "Eldee má svoje místo na českém trhu. Kluby, ambasadoři, opakovaní zákazníci. Přípravy na další krok — Slovensko, Polsko, dál." }
     ]
   },
   "audience": {
     "primary": {
-      "name": "Mladý fotbalista 13-19 let",
-      "age": "13-19",
+      "name": "Mladý fotbalista",
+      "age": "",
       "geography": "ČR — Praha, Brno, Ostrava, regionální okresní města",
-      "income": "Kapesné rodičů 1-3k Kč/měs + brigády (15-19 let)",
+      "income": "Kapesné rodičů 1-3k Kč/měs + brigády",
       "lifestyle": [
-        "Trénuje 3-5×/týden v amatérském/dorostencém klubu",
+        "Trénuje 2-3×/týden v amatérském klubu",
         "Sleduje fotbalové TikToky, IG hráčských kont, YouTube highlight reels",
         "Estetika důležitější než cena (do limitu kapesného)",
         "Sociální status — co nosíš v šatně je signál"
       ],
-      "pain": "Levné štulpny vypadají jako levné. Drahé štulpny vypadají generické. Není mezi tím nic, co by mělo charakter a bylo zároveň cenově OK.",
-      "motivation": "Vypadat jako ten, kdo má vlastní styl. Ne jako klon Real Madridu z Decathlonu."
+      "pain": "Pro ostatní jsou štulpny doplněk. Pro nás středobod. Žádný brand to nechápe.",
+      "motivation": "Napodobit idoly z TV — ale neamatérsky. Místo stříhání nových štulpen před každým zápasem má pár, který vydrží celou sezónu."
     },
     "secondary": {
       "name": "Amatérský fotbalový klub (B2B)",
-      "type": "Mládežnické kluby U13-U19, krajský přebor, okresní soutěž",
+      "type": "Mládežnické kluby",
       "geography": "Celá ČR, ~940 klubů v databázi",
       "decisionMaker": "Trenér, vedoucí mládeže, předseda klubu",
       "lifestyle": [
         "Rozpočet limitovaný, závislý na sponzorech",
-        "Hledá způsob, jak odlišit hráče od konkurence",
+        "Hledá způsob, jak získat pro klub další prostředky — eldee dává 10 % z prodejů zpět klubu",
         "Komunikuje přes e-mail, FB Messenger, telefon"
       ],
       "pain": "Stejní výrobci sportovní výbavy (Decathlon, Sportisimo), žádná diferenciace. Klubový obchod vypadá jako klubový obchod konkurence.",
@@ -51,8 +51,8 @@
     }
   },
   "positioning": {
-    "statement": "Pro mladé fotbalisty 13-19 let, kteří odmítají vypadat jako klon — eldee je české streetwear-sport brand štulpen se dvěma chráněnými průmyslovými vzory, který kombinuje prémiovou kvalitu s irreverentním marketingem.",
-    "promise": "Holy Socks. No, just socks with holes. — Premium produkt, který se nebere vážně. Český výrobce, dva chráněné designy, ceník 599 Kč.",
+    "statement": "Čistý originál pro ty, kdo se nebojí vyjít z davu. České fotbalové štulpny, dva chráněné designy.",
+    "promise": "Pro ty, kterým záleží na detailu. Pro ty, kteří se nebojí vystoupit z řady. Originální design, prémiový materiál. Někdo tvrdí, že prostřižení na lýtkách dává větší ránu. Jiný, že nebudeš mít křeče. Ať už je pravda cokoliv — chceš to riskovat?",
     "competitors": [
       { "name": "Nike / Adidas",        "axis": "premium-mainstream", "differentiator": "Žádná originalita — všichni mají stejné." },
       { "name": "Sondico / Decathlon",  "axis": "budget-mainstream",  "differentiator": "Žádná kvalita ani charakter." },
@@ -69,10 +69,10 @@
   },
   "dna": {
     "personality": [
-      { "trait": "Drzý",        "description": "Bere si trochu prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní." },
-      { "trait": "Sebevědomý",  "description": "Ví, že produkt je dobrý. Nemusí se ospravedlňovat." },
-      { "trait": "Premium",     "description": "Český výrobce, dva chráněné designy, žádné kompromisy na kvalitě nití nebo úpletu." },
-      { "trait": "Self-aware",  "description": "Slogan „Holy Socks. No, just socks with holes.\" je vtip o vlastní jednoduchosti." }
+      { "trait": "Drzý",        "description": "Dělá si prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní." },
+      { "trait": "Sebevědomý",  "description": "Ví, že produkt je dobrý. Nemusí to dokazovat křikem." },
+      { "trait": "Pořádný",     "description": "Když to děláme, děláme to pořádně. Žádné kompromisy." },
+      { "trait": "Lidský",      "description": "Za eldee stojí hráč, ne korporát. Patříš mezi své." }
     ],
     "values": [
       { "value": "Kvalita",     "description": "Top materiály, český výrobce, dlouholetá životnost." },
