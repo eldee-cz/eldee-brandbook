@@ -1,6 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <g transform="skewX(-12)">
-    <path d="M 40 20 L 40 180 L 100 180 L 100 150 L 70 150 L 70 20 Z" fill="#F5F5F0"/>
-    <path d="M 110 20 L 110 180 L 155 180 Q 190 180 190 130 L 190 70 Q 190 20 155 20 Z M 140 50 L 155 50 Q 165 50 165 65 L 165 135 Q 165 150 155 150 L 140 150 Z" fill="#F5F5F0" fill-rule="evenodd"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3.2 46.0 301.5 301.5" fill="none" color="#F5F5F0">
+  <!-- eldee LD monogram v2.0 — BRAND (kompozice N2, Claude Design 2026-06-03). Path-based (Big Shoulders Display Black, fs 258). -->
+  <!-- Interlock: L proniká D, knockout spára 20 j. = PRŮHLEDNÁ (mask) — čitelné na světlém i tmavém. Písmena currentColor. -->
+  <!-- Svatozář: zlatý prsten, spodní okraj 0,5 V nad hranou D (cy 79,5 · rx 66 · ry 12,5 · tah 7). -->
+  <defs>
+    <mask id="ld-knockout-brand" maskUnits="userSpaceOnUse" x="3.2" y="46" width="301.5" height="301.5">
+      <rect x="3.2" y="46" width="301.5" height="301.5" fill="white"/>
+      <path d="M66.32 285.00V78.60H105.02V250.94H155.85V285.00Z" fill="black" stroke="black" stroke-width="20" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <path d="M128.32 318.00V111.60H180.69Q209.72 111.60 222.68 123.92Q235.65 136.24 236.16 164.49Q236.55 182.42 236.68 198.55Q236.81 214.67 236.68 230.80Q236.55 246.92 236.16 264.85Q235.65 293.23 222.68 305.62Q209.72 318.00 180.69 318.00ZM167.02 283.94H180.69Q188.82 283.94 193.08 280.20Q197.34 276.46 197.46 269.50Q197.85 255.69 198.04 242.02Q198.24 228.34 198.24 214.67Q198.24 201.00 198.04 187.26Q197.85 173.52 197.46 159.85Q197.34 153.01 193.08 149.33Q188.82 145.66 180.69 145.66H167.02Z" fill="currentColor" mask="url(#ld-knockout-brand)"/>
+  <path d="M66.32 285.00V78.60H105.02V250.94H155.85V285.00Z" fill="currentColor"/>
+  <ellipse cx="182.3" cy="79.5" rx="66" ry="12.5" stroke="#C9A227" stroke-width="7"/>
 </svg>

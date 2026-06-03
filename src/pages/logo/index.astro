@@ -13,7 +13,7 @@ import AssetDownload from '../../components/AssetDownload.astro';
 
   <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-2">Vrstva 1 — Wordmark</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Hlavní logo eldee se dvěma kruhovými dírami v písmenech „e". Pro web, IG, krabičky, vizitky, podcast cover.</p>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Hlavní logo eldee psané jako <strong>eLDee</strong> — kapitálky „LD" uprostřed odhalují monogram ukrytý uvnitř slova. Italic skew, Big Shoulders Display Black. Pro web, IG, krabičky, vizitky, podcast cover.</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
       <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on black" bg="ink"   caption="Na tmavém pozadí" />
       <LogoVariant src="/logo/wordmark-dark.svg"  alt="eldee wordmark on bone"  bg="bone"  caption="Na světlém pozadí" />
@@ -24,10 +24,16 @@ import AssetDownload from '../../components/AssetDownload.astro';
 
   <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-2">Vrstva 2 — LD Monogram</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Geometrický italic monogram pro vyšívání, wax seal, malé aplikace. Embroidery digitalizace přes Fiverr (PES/DST formát).</p>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Monogram <strong>LD v2.0</strong> z fontu Big Shoulders Display Black — <strong>interlock</strong>: „L" proniká skrz „D" a obě písmena tvoří <strong>jedno srostlé těleso</strong> (eldee rodina drží pohromadě). „D" je dominantní, „L" posazené mírně výš. Nad „D" se vznáší <strong>zlatá svatozář</strong> (odkaz na Holy Socks) — spodní okraj přesně <strong>½ výšky prstenu nad hranou „D"</strong> (kompozice N2). V průniku písmen je průhledná knockout spára, takže monogram je čitelný na světlém i tmavém pozadí.</p>
     <div class="grid md:grid-cols-2 gap-4">
       <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on black" bg="ink" showSafeZone={true} caption={'Clear space = výška „L“'} />
-      <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on blood" bg="blood" caption="Embroidery target" />
+      <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on blood" bg="blood" caption="Na blood red" />
+    </div>
+    <h3 class="font-display text-h3 text-bone mt-10 mb-2">Embroidery verze</h3>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Brand verze monogramu <strong>nikdy nejde přímo do vyšívárny</strong> — spára (1,45 mm) a prsten svatozáře (1,0 mm) jsou při nášivce 35 mm pod technickým limitem. Embroidery verze: „L" posunuté o 10 j. doleva, <strong>spára 1,8 mm</strong>, svatozář plochý prsten s tahem <strong>1,6 mm</strong> a vnitřním otvorem 2,2 mm. Digitalizace přes digitizéra (PES/DST) + vždy <strong>sew-out vzorek na úpletu</strong> před sérií.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram embroidery on black" bg="ink" caption="Embroidery / mono — currentColor" />
+      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram embroidery on blood" bg="blood" caption="Embroidery target — nášivka 35 mm" />
     </div>
   </section>
 
@@ -46,13 +52,16 @@ import AssetDownload from '../../components/AssetDownload.astro';
   <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-6">Pravidla</h2>
     <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
-      <li>· <strong>Clear space</strong> = minimálně výška „L" v monogramu, nebo výška dvou kroužků ve wordmarku</li>
+      <li>· <strong>Clear space</strong> = minimálně výška „L" — v monogramu i wordmarku</li>
       <li>· <strong>Minimum size</strong> = wordmark 24 px / 8 mm, monogram 16 px / 5 mm, hole pattern 40 px / 14 mm</li>
       <li>· <strong>Nikdy</strong> neměnit poměr stran, neflipovat, nezbarvit jinak než brand colors</li>
-      <li>· <strong>Vyšívání</strong> = jen monogram + hole pattern (wordmark NE — kruhy v „e" se rozpustí)</li>
+      <li>· <strong>Vyšívání</strong> = výhradně <strong>embroidery verze monogramu</strong> + hole pattern; brand verze do vyšívárny nikdy (spára a prsten pod limitem). Vždy sew-out vzorek na úpletu.</li>
       <li>· <strong>Foil tisk</strong> = wordmark v gold (Holy edice na krabičkách)</li>
     </ul>
-    <a href="/logo/misuse" class="inline-block mt-6 font-mono text-caption text-blood hover:text-blood-light transition">→ VIZ TAKÉ: LOGO MISUSE</a>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
+      <a href="/logo/iterations" class="font-mono text-caption text-gold hover:text-bone transition">→ ITERATIONS · 6 variant eLDee (work in progress)</a>
+      <a href="/logo/misuse" class="font-mono text-caption text-blood hover:text-blood-light transition">→ LOGO MISUSE</a>
+    </div>
   </section>
 
   <section>
@@ -60,7 +69,8 @@ import AssetDownload from '../../components/AssetDownload.astro';
     <div class="grid md:grid-cols-2 gap-3">
       <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark — light variant" format="SVG" />
       <AssetDownload href="/logo/wordmark-dark.svg"  label="Wordmark — dark variant"  format="SVG" />
-      <AssetDownload href="/logo/monogram-ld.svg"    label="LD Monogram"               format="SVG" />
+      <AssetDownload href="/logo/monogram-ld.svg"    label="LD Monogram v2 — brand"    format="SVG" />
+      <AssetDownload href="/logo/monogram-mono.svg"  label="LD Monogram v2 — embroidery/mono" format="SVG" />
       <AssetDownload href="/logo/hole-pattern.svg"   label="Hole Pattern"              format="SVG" />
       <AssetDownload href="/logo/halo.svg"           label="Halo"                      format="SVG" />
     </div>
