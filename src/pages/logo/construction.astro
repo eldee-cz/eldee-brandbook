@@ -1,0 +1,63 @@
+---
+import Layout from '../../components/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+---
+<Layout title="Construction Grid" section="07 · LOGO · CONSTRUCTION">
+  <SectionTitle
+    number="07 · CONSTRUCTION GRID"
+    title="Logo není nakreslené. Je zkonstruované."
+    subtitle="Přesná geometrie jednotného masteru v2 — jednotky, proporce, osy, clear space."
+  />
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Princip</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Celý logo systém žije v jednom souřadnicovém systému (<strong>jednotky fs-258</strong> — velikost fontu Big Shoulders Display Black, ze kterého písmena vychází). Každý rozměr je zafixované číslo, žádné „od oka". A protože master je <strong>embroidery-first</strong>, klíčové tloušťky jsou definované i v milimetrech při referenční nášivce 35 mm: tahy písmen 5,6 mm · knockout spára 1,8 mm · prsten svatozáře 1,6 mm (vnitřní otvor 2,2 mm).</p>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Monogram — konstrukční mřížka</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">L a D mají identickou velikost i tloušťku tahu (společný font-size). L je zvednuté o <strong>33 j.</strong>, origin D leží <strong>72 j.</strong> za originem L — z toho vzniká interlock. Kolem celého obrysu L běží průhledná knockout spára <strong>25 j.</strong> Svatozář je elipsa rx 66 · ry 13 s tahem 11, posazená nad D.</p>
+    <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+      <img src="/logo/construction/monogram-grid.svg" alt="Konstrukční mřížka LD monogramu" class="w-full" />
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Wordmark — osová konstrukce</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Wordmark = malá „e" + vnořený monogram (1:1 geometrie, jen posunutá). Klíčové pravidlo: <strong>blok LD + svatozář je vycentrovaný na horizontální osu malých „e"</strong> (y 322,6) — proto D podsedá <strong>52,4 j. pod baseline</strong>. Slovo tak drží těžiště v ose a interlock „visí" v jeho středu.</p>
+    <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+      <img src="/logo/construction/wordmark-grid.svg" alt="Osová konstrukce wordmarku" class="w-full" />
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Clear space</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Ochranná zóna = minimálně <strong>výška verzálky „L"</strong> na všech čtyřech stranách. Platí pro wordmark i samostatný monogram, na webu, tisku i výšivce.</p>
+    <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+      <img src="/logo/construction/clearspace.svg" alt="Clear space wordmarku" class="w-full" />
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-6">Minimální velikosti</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-body text-bone/85">
+        <thead>
+          <tr class="border-b border-bone/20 text-left font-mono text-caption text-gold">
+            <th class="py-3 pr-6">APLIKACE</th><th class="py-3 pr-6">WORDMARK</th><th class="py-3 pr-6">MONOGRAM</th><th class="py-3">POZNÁMKA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-bone/10"><td class="py-3 pr-6">Web / digitál</td><td class="py-3 pr-6">min. výška 24 px</td><td class="py-3 pr-6">min. 16 px</td><td class="py-3">pod limitem použij monogram (favicon je monogram vždy)</td></tr>
+          <tr class="border-b border-bone/10"><td class="py-3 pr-6">Tisk</td><td class="py-3 pr-6">min. výška 8 mm</td><td class="py-3 pr-6">min. 5 mm</td><td class="py-3">tah svatozáře nesmí klesnout pod 0,25 pt</td></tr>
+          <tr class="border-b border-bone/10"><td class="py-3 pr-6">Výšivka</td><td class="py-3 pr-6">min. 30 mm</td><td class="py-3 pr-6">referenčně 35 mm</td><td class="py-3">vždy přes digitizéra (PES/DST) + sew-out vzorek na úpletu</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8">
+      <a href="/logo" class="font-mono text-caption text-gold hover:text-bone transition">← LOGO SYSTEM</a>
+      <a href="/logo/misuse" class="font-mono text-caption text-blood hover:text-blood-light transition">→ LOGO MISUSE</a>
+    </div>
+  </section>
+
+</Layout>
