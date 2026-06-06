@@ -14,11 +14,26 @@
     "moment": "Místo dalšího TikToku vzal trh do ruky. Najal českého výrobce. Nechal si chránit dva designy: oválné díry, co drží symetrii, a vnitřní kapsu na chránič. Konec stříhání. Začátek eldee.",
     "promise": "Premium štulpny z ČR. Drzý marketing, co se nebere vážně. Holy Socks. No, just socks with holes.",
     "milestones": [
-      { "date": "2025 Q2", "event": "Zápas Premier League v televizi. Hráč u střídačky stahuje štulpny — rozstříhané na lýtku, schválně. Další týden to samé u jiného. A dalšího. Trend, který si nikdo neclaimuje." },
-      { "date": "2025 Q4", "event": "Po měsících přemýšlení padá rozhodnutí: pokud to nikdo neudělá, udělám to já. Ne jako další amatérské stříhání v šatně. Pořádně, premium, vyrobené v ČR." },
-      { "date": "2026 Q1", "event": "Eldee je oficiálně značka. Dva designy podány k ochraně u ÚPV: oválné díry, co drží symetrii, a vnitřní kapsa na chránič. Konec amatérského stříhání." },
-      { "date": "2026 Q3", "event": "Drop 001. eldee.cz jde online. To, co jsem viděl v televizi, je teď v krabičkách u prvních hráčů — premium materiál, český výrobce, dva chráněné designy." },
-      { "date": "2027 Q4", "event": "Eldee má svoje místo na českém trhu. Kluby, ambasadoři, opakovaní zákazníci. Přípravy na další krok — Slovensko, Polsko, dál." }
+      {
+        "date": "2025 Q2",
+        "event": "Zápas Premier League v televizi. Hráč u střídačky stahuje štulpny — rozstříhané na lýtku, schválně. Další týden to samé u jiného. A dalšího. Trend, který si nikdo neclaimuje."
+      },
+      {
+        "date": "2025 Q4",
+        "event": "Po měsících přemýšlení padá rozhodnutí: pokud to nikdo neudělá, udělám to já. Ne jako další amatérské stříhání v šatně. Pořádně, premium, vyrobené v ČR."
+      },
+      {
+        "date": "2026 Q1",
+        "event": "Eldee je oficiálně značka. Dva designy podány k ochraně u ÚPV: oválné díry, co drží symetrii, a vnitřní kapsa na chránič. Konec amatérského stříhání."
+      },
+      {
+        "date": "2026 Q3",
+        "event": "Drop 001. eldee.cz jde online. To, co jsem viděl v televizi, je teď v krabičkách u prvních hráčů — premium materiál, český výrobce, dva chráněné designy."
+      },
+      {
+        "date": "2027 Q4",
+        "event": "Eldee má svoje místo na českém trhu. Kluby, ambasadoři, opakovaní zákazníci. Přípravy na další krok — Slovensko, Polsko, dál."
+      }
     ]
   },
   "audience": {
@@ -28,7 +43,8 @@
       "geography": "ČR — Praha, Brno, Ostrava, regionální okresní města",
       "income": "Kapesné rodičů 1-3k Kč/měs + brigády",
       "lifestyle": [
-        "Trénuje 2-3×/týden v amatérském klubu",
+        "Trénuje 4×+ týdně, hraje soutěžně (průzkum 6/2026)",
+        "Na zápas nosí tube návlek + vlastní ponožky (93 % hráčů z průzkumu) — klasické štulpny stříhá nebo obchází",
         "Sleduje fotbalové TikToky, IG hráčských kont, YouTube highlight reels",
         "Estetika důležitější než cena (do limitu kapesného)",
         "Sociální status — co nosíš v šatně je signál"
@@ -54,36 +70,110 @@
     "statement": "Čistý originál pro ty, kdo se nebojí vyjít z davu. České fotbalové štulpny, dva chráněné designy.",
     "promise": "Pro ty, kterým záleží na detailu. Pro ty, kteří se nebojí vystoupit z řady. Originální design, prémiový materiál. Někdo tvrdí, že prostřižení na lýtkách dává větší ránu. Jiný, že nebudeš mít křeče. Ať už je pravda cokoliv — chceš to riskovat?",
     "competitors": [
-      { "name": "Nike / Adidas",        "axis": "premium-mainstream", "differentiator": "Žádná originalita — všichni mají stejné." },
-      { "name": "Sondico / Decathlon",  "axis": "budget-mainstream",  "differentiator": "Žádná kvalita ani charakter." },
-      { "name": "Trusox",               "axis": "premium-niche",      "differentiator": "Funkční (anti-slip), ale vizuálně neviditelné." },
-      { "name": "Soccergrip / TruSocks","axis": "premium-niche",      "differentiator": "Funkční, ale není to streetwear." },
-      { "name": "MORO Streetwear (CZ)", "axis": "streetwear-fashion", "differentiator": "Streetwear, ale není sport. Nemá štulpny." }
+      {
+        "name": "Nike / Adidas",
+        "axis": "premium-mainstream",
+        "differentiator": "Žádná originalita — všichni mají stejné."
+      },
+      {
+        "name": "Sondico / Decathlon",
+        "axis": "budget-mainstream",
+        "differentiator": "Žádná kvalita ani charakter."
+      },
+      {
+        "name": "Trusox",
+        "axis": "premium-niche",
+        "differentiator": "Funkční (anti-slip), ale vizuálně neviditelné."
+      },
+      {
+        "name": "Soccergrip / TruSocks",
+        "axis": "premium-niche",
+        "differentiator": "Funkční, ale není to streetwear."
+      },
+      {
+        "name": "MORO Streetwear (CZ)",
+        "axis": "streetwear-fashion",
+        "differentiator": "Streetwear, ale není sport. Nemá štulpny."
+      }
     ],
     "usp": [
       "Dva CHRÁNĚNÉ průmyslové vzory (oválné díry, kapsa na chránič)",
       "Vyrobeno v ČR (ne čínský dropship)",
       "Streetwear estetika v sport produktu (ne sport v streetwearu)",
       "599 Kč MSRP — premium, ale dosažitelné"
+    ],
+    "productLine": [
+      {
+        "name": "Návlek / tube",
+        "role": "Zápasové jádro. Bez chodidla — tvoje ponožka zůstává. Vnitřní kapsa na chránič, Signature varianta s dírami na lýtku."
+      },
+      {
+        "name": "Tréninková ponožka",
+        "role": "Protiskluz, který drží nohu v kopačce. Produkt na všední dny — hráč trénuje 4×+ týdně."
+      },
+      {
+        "name": "Nízká štulpna",
+        "role": "Klasika v nízkém střihu, který preferuje většina hráčů. Kapsa na chránič."
+      },
+      {
+        "name": "Vysoká štulpna",
+        "role": "Plná výška pro tradicionalisty. Mateřský střih celé řady. Kapsa na chránič."
+      }
     ]
   },
   "dna": {
     "personality": [
-      { "trait": "Drzý",        "description": "Dělá si prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní." },
-      { "trait": "Sebevědomý",  "description": "Ví, že produkt je dobrý. Nemusí to dokazovat křikem." },
-      { "trait": "Pořádný",     "description": "Když to děláme, děláme to pořádně. Žádné kompromisy." },
-      { "trait": "Lidský",      "description": "Za eldee stojí hráč, ne korporát. Patříš mezi své." }
+      {
+        "trait": "Drzý",
+        "description": "Dělá si prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní."
+      },
+      {
+        "trait": "Sebevědomý",
+        "description": "Ví, že produkt je dobrý. Nemusí to dokazovat křikem."
+      },
+      {
+        "trait": "Pořádný",
+        "description": "Když to děláme, děláme to pořádně. Žádné kompromisy."
+      },
+      {
+        "trait": "Lidský",
+        "description": "Za eldee stojí hráč, ne korporát. Patříš mezi své."
+      }
     ],
     "values": [
-      { "value": "Kvalita",     "description": "Top materiály, český výrobce, dlouholetá životnost." },
-      { "value": "Originalita", "description": "Dva chráněné průmyslové vzory. Žádné kopírování." },
-      { "value": "Komunita",    "description": "Mladí fotbalisti, kluby, ambasadoři. Spolupráce > transakce." },
-      { "value": "Férovost",    "description": "Komise ambasadorům 10 %, slevy klubům, transparentní ceník." }
+      {
+        "value": "Kvalita",
+        "description": "Top materiály, český výrobce, dlouholetá životnost."
+      },
+      {
+        "value": "Originalita",
+        "description": "Dva chráněné průmyslové vzory. Žádné kopírování."
+      },
+      {
+        "value": "Komunita",
+        "description": "Mladí fotbalisti, kluby, ambasadoři. Spolupráce > transakce."
+      },
+      {
+        "value": "Férovost",
+        "description": "Komise ambasadorům 10 %, slevy klubům, transparentní ceník."
+      }
     ],
     "archetypes": [
-      { "primary": true, "name": "Rebel", "description": "Eldee je revolt proti uniformitě. Hráč v eldee říká: nejsem jako ostatní." },
-      { "primary": false, "name": "Hero",  "description": "Eldee je nástroj, který hráče posouvá. Lepší produkt = lepší výkon = více sebevědomí." },
-      { "primary": false, "name": "Creator", "description": "Dva chráněné designy = originální tvorba. Eldee přidává něco nového do fotbalového šatníku." }
+      {
+        "primary": true,
+        "name": "Rebel",
+        "description": "Eldee je revolt proti uniformitě. Hráč v eldee říká: nejsem jako ostatní."
+      },
+      {
+        "primary": false,
+        "name": "Hero",
+        "description": "Eldee je nástroj, který hráče posouvá. Lepší produkt = lepší výkon = více sebevědomí."
+      },
+      {
+        "primary": false,
+        "name": "Creator",
+        "description": "Dva chráněné designy = originální tvorba. Eldee přidává něco nového do fotbalového šatníku."
+      }
     ]
   }
 }

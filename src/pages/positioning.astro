@@ -23,6 +23,20 @@ import content from '../data/content.json';
   </section>
 
   <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Produktová řada</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      {content.positioning.productLine.map((p, i) => (
+        <div class="bg-ink/60 border border-bone/10 rounded-lg p-5">
+          <div class="font-mono text-caption text-gold mb-2">{`0${i + 1}`}</div>
+          <div class="font-display text-h3 italic text-bone mb-2">{p.name}</div>
+          <p class="text-body text-bone/70">{p.role}</p>
+        </div>
+      ))}
+    </div>
+    <p class="text-body text-bone/60 mt-4 max-w-2xl">Zápas i trénink — eldee na noze každý den, ne jen o víkendu.</p>
+  </section>
+
+  <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-6">Konkurence</h2>
     <div class="space-y-3">
       {content.positioning.competitors.map((c) => (
