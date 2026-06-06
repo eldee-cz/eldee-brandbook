@@ -24,16 +24,16 @@ import AssetDownload from '../../components/AssetDownload.astro';
 
   <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-2">Vrstva 2 — LD Monogram</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Monogram <strong>LD v2.0</strong> z fontu Big Shoulders Display Black — <strong>interlock</strong>: „L" proniká skrz „D" a obě písmena tvoří <strong>jedno srostlé těleso</strong> (eldee rodina drží pohromadě). „D" je dominantní, „L" posazené mírně výš. Nad „D" se vznáší <strong>zlatá svatozář</strong> (odkaz na Holy Socks) — spodní okraj přesně <strong>½ výšky prstenu nad hranou „D"</strong> (kompozice N2). V průniku písmen je průhledná knockout spára, takže monogram je čitelný na světlém i tmavém pozadí.</p>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Monogram <strong>LD v2.1</strong> z fontu Big Shoulders Display Black — <strong>interlock</strong>: „L" proniká skrz „D" a obě písmena tvoří <strong>jedno srostlé těleso</strong> (eldee rodina drží pohromadě). „D" je dominantní, „L" posazené mírně výš. Nad „D" se vznáší <strong>zlatá svatozář</strong> (odkaz na Holy Socks) — kompozice N2. V průniku písmen je průhledná knockout spára, takže monogram je čitelný na světlém i tmavém pozadí. <strong>Logo je navržené jehlou:</strong> každý tah, spára i prsten svatozáře drží minimální tloušťky pro vyšití při nášivce 35 mm. Existuje proto <strong>jediná podoba monogramu</strong> — co vidíš na štulpně, vidíš i na webu, vizitce a krabičce.</p>
     <div class="grid md:grid-cols-2 gap-4">
       <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on black" bg="ink" showSafeZone={true} caption={'Clear space = výška „L“'} />
       <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on blood" bg="blood" caption="Na blood red" />
     </div>
-    <h3 class="font-display text-h3 text-bone mt-10 mb-2">Embroidery verze</h3>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Brand verze monogramu <strong>nikdy nejde přímo do vyšívárny</strong> — spára (1,45 mm) a prsten svatozáře (1,0 mm) jsou při nášivce 35 mm pod technickým limitem. Embroidery verze: „L" posunuté o 10 j. doleva, <strong>spára 1,8 mm</strong>, svatozář plochý prsten s tahem <strong>1,6 mm</strong> a vnitřním otvorem 2,2 mm. Digitalizace přes digitizéra (PES/DST) + vždy <strong>sew-out vzorek na úpletu</strong> před sérií.</p>
+    <h3 class="font-display text-h3 text-bone mt-10 mb-2">Vyšívání (embroidery-first parametry)</h3>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Master monogram je <strong>přímo vyšitelný</strong> — při nášivce 35 mm: tahy písmen 5,6 mm, <strong>spára 1,8 mm</strong>, prsten svatozáře <strong>1,6 mm</strong> s vnitřním otvorem 2,2 mm. Do vyšívárny nikdy neposílat SVG napřímo — vždy digitalizace přes digitizéra (PES/DST) + <strong>sew-out vzorek na úpletu</strong> před sérií. Mono varianta (currentColor) slouží pro jednobarevné aplikace.</p>
     <div class="grid md:grid-cols-2 gap-4">
-      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram embroidery on black" bg="ink" caption="Embroidery / mono — currentColor" />
-      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram embroidery on blood" bg="blood" caption="Embroidery target — nášivka 35 mm" />
+      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram mono on black" bg="ink" caption="Mono — currentColor" />
+      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram mono on blood" bg="blood" caption="Embroidery target — nášivka 35 mm" />
     </div>
   </section>
 
@@ -55,7 +55,8 @@ import AssetDownload from '../../components/AssetDownload.astro';
       <li>· <strong>Clear space</strong> = minimálně výška „L" — v monogramu i wordmarku</li>
       <li>· <strong>Minimum size</strong> = wordmark 24 px / 8 mm, monogram 16 px / 5 mm, hole pattern 40 px / 14 mm</li>
       <li>· <strong>Nikdy</strong> neměnit poměr stran, neflipovat, nezbarvit jinak než brand colors</li>
-      <li>· <strong>Vyšívání</strong> = výhradně <strong>embroidery verze monogramu</strong> + hole pattern; brand verze do vyšívárny nikdy (spára a prsten pod limitem). Vždy sew-out vzorek na úpletu.</li>
+      <li>· <strong>Jedno logo</strong> — jediné povolené odvozeniny jsou barevné (primary / mono), nikdy tvarové. Žádné „web verze" ani „jemné varianty".</li>
+      <li>· <strong>Vyšívání</strong> = master monogram + hole pattern, přes digitizéra (PES/DST). Vždy sew-out vzorek na úpletu.</li>
       <li>· <strong>Foil tisk</strong> = wordmark v gold (Holy edice na krabičkách)</li>
     </ul>
     <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
@@ -69,8 +70,8 @@ import AssetDownload from '../../components/AssetDownload.astro';
     <div class="grid md:grid-cols-2 gap-3">
       <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark — light variant" format="SVG" />
       <AssetDownload href="/logo/wordmark-dark.svg"  label="Wordmark — dark variant"  format="SVG" />
-      <AssetDownload href="/logo/monogram-ld.svg"    label="LD Monogram v2 — brand"    format="SVG" />
-      <AssetDownload href="/logo/monogram-mono.svg"  label="LD Monogram v2 — embroidery/mono" format="SVG" />
+      <AssetDownload href="/logo/monogram-ld.svg"    label="LD Monogram v2.1 — master"    format="SVG" />
+      <AssetDownload href="/logo/monogram-mono.svg"  label="LD Monogram v2.1 — mono (currentColor)" format="SVG" />
       <AssetDownload href="/logo/hole-pattern.svg"   label="Hole Pattern"              format="SVG" />
       <AssetDownload href="/logo/halo.svg"           label="Halo"                      format="SVG" />
     </div>
