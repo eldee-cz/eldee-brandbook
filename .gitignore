@@ -29,3 +29,4 @@ playwright/.cache/
 
 # Lighthouse
 lighthouse-report.json
+.vercel
