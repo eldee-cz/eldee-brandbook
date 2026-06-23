@@ -1,0 +1,174 @@
+---
+import Layout from '../components/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import AssetDownload from '../components/AssetDownload.astro';
+
+const poses = [
+  {
+    src: '/mascot/eldee-prodejce.png',
+    name: 'Svatý prodejce',
+    tag: 'HERO',
+    use: 'Hlavní póza. Otevírá krabičku s eldee štulpnami a nabízí ti je — „tady to máš". Web hero, úvodní vizuál, balení.',
+  },
+  {
+    src: '/mascot/eldee-fotbalista.png',
+    name: 'Fotbalista',
+    tag: 'KOMUNITA',
+    use: 'Eldee v plném eldee kitu (dres, kraťasy, štulpny, kopačky). Komunitní obsah, Holy Squad, fotbalová témata.',
+  },
+  {
+    src: '/mascot/eldee-srdicko.png',
+    name: 'Srdíčko',
+    tag: 'DÍKY',
+    use: 'Tlapy spojené v srdce z drápů — láska a poděkování. Děkovačka po objednávce, díky komunitě, Valentýn.',
+  },
+];
+
+const palette = [
+  { name: 'Off-white', hex: '#F5F5F0', note: 'srst světlá (břicho, obličej)', light: true },
+  { name: 'Espresso',  hex: '#5A3A2A', note: 'žíhání srsti', light: false },
+  { name: 'Carbon',    hex: '#0A0A0A', note: 'brýle, krabice, lemy', light: false },
+  { name: 'Gold',      hex: '#C9A227', note: 'svatozář, LD logo', light: false },
+  { name: 'Blood Red', hex: '#B91C1C', note: 'linka + lem děr', light: false },
+];
+---
+<Layout title="Mascot" section="09 · MASCOT" description="Eldee — maskot značky eldee. Kdo to je, jak přesně vypadá a jak ho používat.">
+  <SectionTitle
+    number="09 · MASCOT"
+    title="Eldee"
+    subtitle="Maskot značky eldee. Lenochod se svatozáří, co ti otevírá krabičku. Jmenuje se stejně jako značka — protože maskot JE značka."
+  />
+
+  <!-- 1. HERO -->
+  <section class="mb-16">
+    <div class="rounded-lg overflow-hidden border border-bone/10 bg-ink">
+      <div class="aspect-[16/9] flex items-center justify-center p-8" style="background:radial-gradient(circle at 50% 45%, rgba(201,162,39,0.18), #0A0A0A 70%)">
+        <img src="/mascot/eldee-prodejce.png" alt="Eldee — maskot značky eldee, svatý prodejce" class="max-h-full max-w-full" />
+      </div>
+    </div>
+    <p class="text-body-lg text-bone/70 mt-6 max-w-2xl">Příběh sedí na claim <strong>„Holy Socks."</strong> — štulpny mají díry, tak jsou z nich „svaté ponožky", a Eldee k nim dostal <strong>svatozář</strong>. Je to lenochod: pohodový, cool, drzý ale milý. Jede si svoje, nikam nespěchá, ale ví, co má.</p>
+  </section>
+
+  <!-- 2. KDO JE ELDEE -->
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-4">Kdo je Eldee</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-ink/60 border border-bone/10 rounded-lg p-5">
+        <div class="font-mono text-caption text-gold mb-2">POVAHA</div>
+        <p class="text-body text-bone/85">Chill, cool, sebevědomý, sympatický. Drzý, ale nikdy agresivní. „Jede si svoje, ale ví, co má."</p>
+      </div>
+      <div class="bg-ink/60 border border-bone/10 rounded-lg p-5">
+        <div class="font-mono text-caption text-gold mb-2">JMÉNO = ZNAČKA</div>
+        <p class="text-body text-bone/85">Maskot se jmenuje <strong>Eldee</strong> — stejně jako značka. Každé jeho použití pumpuje název firmy do podvědomí. V komunikaci jméno říkej nahlas: „Tohle je Eldee."</p>
+      </div>
+      <div class="bg-ink/60 border border-bone/10 rounded-lg p-5">
+        <div class="font-mono text-caption text-gold mb-2">POHYB (pro video)</div>
+        <p class="text-body text-bone/85">Pomalý, líný, úsporný v gestech — je to lenochod. Pohodové kývnutí, líné mávnutí, spokojený úsměv. Žádné hektické pohyby.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. GALERIE PÓZ -->
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Pózy</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Pořád ten samý lenochod, jen v jiné situaci. Tři veřejné pózy:</p>
+    <div class="grid md:grid-cols-3 gap-4">
+      {poses.map((p) => (
+        <div class="rounded-lg overflow-hidden border border-bone/10">
+          <div class="aspect-square flex items-center justify-center p-8 bg-ink relative">
+            <span class="absolute top-3 left-3 font-mono text-caption text-gold">{p.tag}</span>
+            <img src={p.src} alt={`Eldee — ${p.name}`} class="max-h-full max-w-full" />
+          </div>
+          <div class="bg-ink/60 p-4">
+            <div class="font-display text-h3 text-bone mb-1">{p.name}</div>
+            <p class="text-caption text-bone/70">{p.use}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="text-caption text-bone/40 mt-4 max-w-2xl">Pravidlo: když má Eldee pokrývku hlavy (klobouk, čepice), svatozář je <strong>nad</strong> ní, ne přes ni. Sezónní pózy existují, ale patří do tajné drop série — proto tu nejsou.</p>
+  </section>
+
+  <!-- 4. KANONICKÁ PODOBA -->
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Kanonická podoba</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Závazný popis odshora dolů — aby Eldee vypadal vždycky stejně, na webu, merchi i v AI videu.</p>
+    <ul class="space-y-3 text-body text-bone/85 max-w-2xl">
+      <li>· <strong>Svatozář</strong> — zlatý <strong>plochý prstenec</strong> (vodorovná elipsa, dutá), vznáší se nad hlavou. ⚠️ Jiný tvar než díry ve štulpně.</li>
+      <li>· <strong>Hlava</strong> — kulatá, krémová; tmavá maska kolem očí, <strong>černé sluneční brýle</strong>, klidný spokojený úsměv (zavřená pusa i zubatý — obě on-brand).</li>
+      <li>· <strong>Žíhání srsti</strong> — <strong>tmavě hnědé (espresso/kaštan)</strong> na pažích, zádech a masce očí. ⚠️ NE zrzavé, NE světle béžové. Břicho světlé.</li>
+      <li>· <strong>Tělo</strong> — štíhlé, pohodové. Nikdy svalnaté.</li>
+      <li>· <strong>Ruce</strong> — dlouhé paže, tlapy se <strong>třemi drápy</strong>. Jedna rozpažená (swagger), druhá drží otevřenou krabičku.</li>
+      <li>· <strong>Krabička</strong> — matně černá, zlaté „eldee" logo, uvnitř <strong>eldee štulpny</strong> (nic jiného).</li>
+      <li>· <strong>Štulpny eldee</strong> — bílé tělo, černý lem/pata/špička, tenká červená linka, zlaté <strong>LD logo</strong> na lýtku, <strong>tři půlměsícové díry s červeným lemem</strong> (prosvítá krémová noha).</li>
+    </ul>
+  </section>
+
+  <!-- 5. PALETA -->
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-2">Barvy maskota</h2>
+    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Stejná brand paleta jako zbytek značky + jeden vlastní odstín srsti (espresso).</p>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+      {palette.map((c) => (
+        <div class="rounded-lg overflow-hidden border border-bone/10">
+          <div class="h-20" style={`background:${c.hex}`}></div>
+          <div class="bg-ink/60 p-3">
+            <div class="text-body text-bone">{c.name}</div>
+            <div class="font-mono text-caption text-bone/50">{c.hex}</div>
+            <div class="text-caption text-bone/40 mt-1">{c.note}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 6. DO / DON'T -->
+  <section class="mb-16">
+    <h2 class="font-display text-h2 text-bone mb-6">Do / Don't</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+        <div class="font-mono text-caption text-gold mb-3">✓ DODRŽUJ</div>
+        <ul class="space-y-2 text-body text-bone/85">
+          <li>· Štíhlý, pohodový lenochod</li>
+          <li>· Svatozář = plochý vodorovný prstenec</li>
+          <li>· Žíhání tmavě hnědé (espresso)</li>
+          <li>· Tři drápy, tři půlměsícové díry</li>
+          <li>· Jen brandové barvy</li>
+          <li>· Chill a milý výraz</li>
+        </ul>
+      </div>
+      <div class="bg-blood/10 border border-blood/40 rounded-lg p-6">
+        <div class="font-mono text-caption text-blood mb-3">✗ NIKDY</div>
+        <ul class="space-y-2 text-body text-bone/85">
+          <li>· Svalnatý / atletický lenochod</li>
+          <li>· Svatozář jako svislý kruh nebo plný disk</li>
+          <li>· Žíhání zrzavé / rezavé / béžové</li>
+          <li>· Kulaté díry nebo nahoře na štulpně</li>
+          <li>· Cizí barvy mimo paletu</li>
+          <li>· Naštvaný výraz · v krabici cokoli jiného než štulpny</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PRO TÝM / PRODUKCI -->
+  <section>
+    <h2 class="font-display text-h2 text-bone mb-4">Pro tým / produkci</h2>
+    <div class="bg-ink/60 border border-bone/10 rounded-lg p-5 mb-4">
+      <p class="text-body text-bone/70"><strong class="text-bone">Status:</strong> ilustrace = pracovní AI verze. Finální čistý vektor (na výšivku, velký tisk, merch) je v přípravě — brief pro grafika existuje. Pro web a obrazovku je PNG správný formát.</p>
+    </div>
+    <details class="bg-ink/60 border border-bone/10 rounded-lg p-5 mb-6">
+      <summary class="font-mono text-caption text-gold cursor-pointer">▸ AI generování — character reference + kotvy</summary>
+      <p class="text-body text-bone/70 mt-4 mb-2">Konzistenční kotvy (co musí sedět vždy): zlatá plochá svatozář · černé brýle + chill úsměv · krémová srst + <strong>tmavě hnědé</strong> žíhání · tři drápy · eldee štulpny (LD logo, červená linka, tři půlměsícové díry) · štíhlý, nikdy svalnatý. Vždy generuj s referenčním obrázkem.</p>
+      <p class="text-body text-bone/70 mt-3 mb-2">EN prompt do AI nástrojů:</p>
+      <pre class="text-caption text-bone/60 bg-ink p-4 rounded overflow-x-auto whitespace-pre-wrap">A chill cartoon sloth mascot, slim (not muscular), standing upright. Cream/off-white fur on belly, face and legs; DARK BROWN (espresso/chestnut, NOT orange) fur streaks on arms, back and as an eye mask. Black rounded sunglasses, happy smile. Flat horizontal GOLD halo ring above head. Three-clawed hands. Tall white "eldee" football socks: black ribbed cuff, black heel/toe, thin red outline, small gold "LD" logo on shin, three crescent holes with red edges showing cream skin. Clean flat vector streetwear illustration, bold outlines. Colors: off-white #F5F5F0, gold #C9A227, blood red #B91C1C, carbon black #0A0A0A.</pre>
+    </details>
+    <h3 class="font-display text-h3 text-bone mb-3">Stáhnout pózy</h3>
+    <div class="grid md:grid-cols-2 gap-3">
+      <AssetDownload href="/mascot/eldee-prodejce.png" label="Eldee — svatý prodejce (hero)" format="PNG" />
+      <AssetDownload href="/mascot/eldee-fotbalista.png" label="Eldee — fotbalista" format="PNG" />
+      <AssetDownload href="/mascot/eldee-srdicko.png" label="Eldee — srdíčko" format="PNG" />
+    </div>
+  </section>
+
+</Layout>
