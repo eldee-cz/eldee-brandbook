@@ -1,5 +1,5 @@
 // Generuje single-file PDF z brand book webu.
-// Spouští Astro preview server, navštíví všech 16 stránek, vygeneruje per-page PDF,
+// Spouští Astro preview server, navštíví všech 17 stránek, vygeneruje per-page PDF,
 // spojí přes pdf-lib do public/eldee-brandbook.pdf.
 
 import { chromium } from 'playwright';
@@ -16,6 +16,7 @@ const PAGES = [
   '/voice',
   '/logo',
   '/logo/misuse',
+  '/mascot',
   '/colors',
   '/typography',
   '/photography',
