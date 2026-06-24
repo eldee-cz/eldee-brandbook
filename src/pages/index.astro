@@ -3,33 +3,80 @@ import Layout from '../components/Layout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import PrintBreak from '../components/PrintBreak.astro';
 import content from '../data/content.json';
+import { isHQ } from '../buildMode';
+
+// Rozcestník pro veřejný Logomanual (jen public sekce)
+const logomanualSections = [
+  { num: '01', title: 'Logo System',     href: '/logo',         desc: 'Logo, varianty, monogram, wordmark.' },
+  { num: '02', title: 'Logo — co ne',    href: '/logo/misuse',  desc: 'Zakázané úpravy loga.' },
+  { num: '03', title: 'Barvy',           href: '/colors',       desc: 'Color systém — HEX, RGB, CMYK, Pantone.' },
+  { num: '04', title: 'Typografie',      href: '/typography',   desc: 'Fonty a jejich použití.' },
+  { num: '05', title: 'Vzor',            href: '/patterns',     desc: 'Hole pattern — vzor děr.' },
+  { num: '06', title: 'Maskot',          href: '/mascot',       desc: 'Eldee — lenochod.' },
+  { num: '07', title: 'Tisk',            href: '/print',        desc: 'Aplikace pro tisk a výrobu.' },
+  { num: '08', title: 'Digitál',         href: '/digital',      desc: 'Digitální aplikace.' },
+  { num: '09', title: 'Co-branding',     href: '/co-branding',  desc: 'Pravidla pro spolupráce.' },
+  { num: '—',  title: 'Assety ke stažení', href: '/assets',     desc: 'Loga, fonty, podklady.' },
+];
 ---
-<Layout title="Manifesto" section="01 · MANIFESTO" description="eldee brand book — Holy Socks. No, just socks with holes.">
+{isHQ ? (
+  <Layout title="Manifesto" section="01 · MANIFESTO" description="eldee brand book — Holy Socks. No, just socks with holes.">
+    <!-- Cover -->
+    <div class="min-h-[80vh] flex flex-col justify-center">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-2 h-12 bg-blood"></div>
+        <div class="font-mono text-caption text-gold">eldee · brand book · v2.0 · 2026</div>
+      </div>
 
-  <!-- Cover -->
-  <div class="min-h-[80vh] flex flex-col justify-center">
-    <div class="flex items-center gap-4 mb-12">
-      <div class="w-2 h-12 bg-blood"></div>
-      <div class="font-mono text-caption text-gold">eldee · brand book · v2.0 · 2026</div>
+      <h1 class="font-display italic text-bone text-[clamp(64px,12vw,180px)] leading-[0.9] tracking-tight">
+        {content.manifesto.headline}
+      </h1>
+      <div class="font-brush text-gold text-[clamp(32px,6vw,80px)] leading-none mt-4 -rotate-2 inline-block">
+        {content.manifesto.subhead}
+      </div>
+
+      <div class="mt-16 max-w-2xl space-y-4">
+        {content.manifesto.paragraphs.map((p) => (
+          <p class="text-body-lg text-bone/80">{p}</p>
+        ))}
+      </div>
     </div>
 
-    <h1 class="font-display italic text-bone text-[clamp(64px,12vw,180px)] leading-[0.9] tracking-tight">
-      {content.manifesto.headline}
-    </h1>
-    <div class="font-brush text-gold text-[clamp(32px,6vw,80px)] leading-none mt-4 -rotate-2 inline-block">
-      {content.manifesto.subhead}
+    <PrintBreak />
+
+    <!-- TOC -->
+    <TableOfContents />
+  </Layout>
+) : (
+  <Layout title="Logomanual" section="LOGOMANUAL" description="eldee Logomanual — vizuální identita pro partnery a dodavatele.">
+    <div class="min-h-[60vh] flex flex-col justify-center">
+      <div class="flex items-center gap-4 mb-10">
+        <div class="w-2 h-12 bg-blood"></div>
+        <div class="font-mono text-caption text-gold">eldee · logomanual · 2026</div>
+      </div>
+
+      <h1 class="font-display italic text-bone text-[clamp(56px,11vw,150px)] leading-[0.9] tracking-tight">
+        Logomanual
+      </h1>
+      <p class="mt-8 max-w-2xl text-body-lg text-bone/80">
+        Jak správně pracovat s vizuální identitou eldee — logo, barvy, fonty a aplikace.
+        Tahle příručka je určená partnerům, dodavatelům a všem, kdo pro eldee něco vyrábí nebo tvoří.
+      </p>
     </div>
 
-    <div class="mt-16 max-w-2xl space-y-4">
-      {content.manifesto.paragraphs.map((p) => (
-        <p class="text-body-lg text-bone/80">{p}</p>
+    <div class="grid sm:grid-cols-2 gap-4 mt-8">
+      {logomanualSections.map((s) => (
+        <a
+          href={s.href}
+          class="block border border-bone/15 hover:border-gold rounded p-5 transition group"
+        >
+          <div class="flex items-baseline gap-3">
+            <span class="font-mono text-caption text-gold w-6 shrink-0">{s.num}</span>
+            <span class="font-display text-h3 text-bone group-hover:text-gold transition">{s.title}</span>
+          </div>
+          <p class="text-body text-bone/55 mt-2 pl-9">{s.desc}</p>
+        </a>
       ))}
     </div>
-  </div>
-
-  <PrintBreak />
-
-  <!-- TOC -->
-  <TableOfContents />
-
-</Layout>
+  </Layout>
+)}

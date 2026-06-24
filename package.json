@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:hq": "PUBLIC_HQ_BUILD=1 astro build",
     "preview": "astro preview",
     "astro": "astro",
     "generate-pdf": "npm run build && node scripts/generate-pdf.mjs",
