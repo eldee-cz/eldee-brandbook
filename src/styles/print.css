@@ -36,8 +36,18 @@
     break-before: avoid;
   }
   /* Color tweaks for print (still readable) */
-  .text-bone, .text-bone\/80, .text-bone\/60, .text-bone\/70 {
+  /* Pokrývá VŠECHNY varianty text-bone/NN. Dřív tu byl ruční výčet
+     (/60 /70 /80), který se rozešel s obsahem — /85, /40, /50 a /55
+     zůstávaly kostně bílé na bílém papíře = ~třetina textu neviditelná. */
+  .text-bone,
+  [class*="text-bone/"] {
     color: #0A0A0A !important;
+  }
+  /* Slabší varianty drží vizuální hierarchii, ale musí zůstat čitelné */
+  [class*="text-bone/40"],
+  [class*="text-bone/50"],
+  [class*="text-bone/55"] {
+    color: #555555 !important;
   }
   .bg-ink, .bg-ink\/60, .bg-ink\/95 {
     background: #FFFFFF !important;
