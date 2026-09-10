@@ -1,13 +1,13 @@
 ---
 import Layout from '../components/Layout.astro';
 import { isHQ } from '../buildMode';
-if (!isHQ) return Astro.redirect('/');
+import { skryvatVeVerejnem } from '../data/sekce';
+if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
 import content from '../data/content.json';
 ---
-<Layout title="Brand DNA" section="03 · DNA">
+<Layout title="Brand DNA">
   <SectionTitle
-    number="03 · BRAND DNA"
     title="Personality, hodnoty, archetypy"
     subtitle="Kdo je eldee jako značka. Pravidla pro chování, hlas, rozhodování."
   />
@@ -36,7 +36,7 @@ import content from '../data/content.json';
     </div>
   </section>
 
-  <section>
+  <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-6">Archetypy</h2>
     <p class="text-body-lg text-bone/70 mb-8 max-w-2xl">Jungian brand archetypy — pomáhají rozhodovat se v hraničních případech (campaign, content, sponsorship).</p>
     <div class="space-y-4">
@@ -50,6 +50,13 @@ import content from '../data/content.json';
         </div>
       ))}
     </div>
+  </section>
+
+  <!-- Rebel vs. patřičnost: bez tohohle odstavce si brand book protiřečí -->
+  <section class="bg-ink/60 border border-bone/13 border-l-[3px] border-l-gold px-8 py-7">
+    <h2 class="font-display text-h2 italic text-bone mb-3">{content.dna.napeti.nadpis}</h2>
+    <p class="text-body-lg text-bone/85 max-w-3xl">{content.dna.napeti.text}</p>
+    <p class="font-display text-h3 italic text-gold mt-5">{content.dna.napeti.veta}</p>
   </section>
 
 </Layout>

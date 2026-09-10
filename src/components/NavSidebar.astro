@@ -1,62 +1,51 @@
 ---
 import { isHQ } from '../buildMode';
+import { BLOKY, VERZE, sekceProBuild, type BlokId } from '../data/sekce';
 
-// audience: 'public' = je i ve veřejném Logomanualu; 'internal' = jen plný brand book (HQ build)
-const sections = [
-  { num: '01', title: 'Manifesto',         href: '/',                  audience: 'internal' },
-  { num: '02', title: 'Brand Story',       href: '/story',             audience: 'internal' },
-  { num: '03', title: 'Brand DNA',         href: '/dna',               audience: 'internal' },
-  { num: '04', title: 'Target Audience',   href: '/audience',          audience: 'internal' },
-  { num: '05', title: 'Positioning',       href: '/positioning',       audience: 'internal' },
-  { num: '06', title: 'Voice & Tone',      href: '/voice',             audience: 'internal' },
-  { num: '07', title: 'Logo System',       href: '/logo',              audience: 'public' },
-  { num: '08', title: 'Logo Misuse',       href: '/logo/misuse',       audience: 'public' },
-  { num: '09', title: 'Mascot',            href: '/mascot',            audience: 'public' },
-  { num: '10', title: 'Color System',      href: '/colors',            audience: 'public' },
-  { num: '11', title: 'Typography',        href: '/typography',        audience: 'public' },
-  { num: '12', title: 'Photography',       href: '/photography',       audience: 'internal' },
-  { num: '13', title: 'Patterns',          href: '/patterns',          audience: 'public' },
-  { num: '14', title: 'Print',             href: '/print',             audience: 'public' },
-  { num: '15', title: 'Digital',           href: '/digital',           audience: 'public' },
-  { num: '16', title: 'Co-branding',       href: '/co-branding',       audience: 'public' },
-  { num: '—',  title: 'Asset Index',       href: '/assets',            audience: 'public' },
-];
+const sekce = sekceProBuild(isHQ);
 
-// Logomanual = jen public stránky; plný brand book = vše. V Logomanualu přečíslujeme.
-const visible = sections.filter((s) => isHQ || s.audience === 'public');
-const items = visible.map((s, i) => ({
-  ...s,
-  num: isHQ ? s.num : (s.href === '/assets' ? '—' : String(i + 1).padStart(2, '0')),
-}));
+// Seskupení podle bloků, aby bylo na první pohled vidět, kde v knize jsi.
+const poradiBloku: BlokId[] = ['I', 'II', 'III'];
+const skupiny = poradiBloku
+  .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
+  .filter((g) => g.polozky.length > 0);
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
-const label = isHQ ? 'BRAND BOOK · v2.0' : 'LOGOMANUAL';
+const label = isHQ ? `BRAND BOOK · ${VERZE}` : 'LOGOMANUAL';
 ---
 <nav aria-label="eldee sections" class="w-64 shrink-0 border-r border-ink/40 bg-ink/95 p-6 sticky top-0 h-screen overflow-y-auto print:hidden">
   <a href="/" class="block mb-8">
     <div class="font-display text-h2 italic text-bone">eldee</div>
     <div class="font-mono text-caption text-bone/50">{label}</div>
   </a>
-  <ul class="space-y-1">
-    {items.map((s) => {
-      const isActive = currentPath === s.href.replace(/\/$/, '');
-      return (
-        <li>
-          <a
-            href={s.href}
-            aria-current={isActive ? 'page' : undefined}
-            class:list={[
-              'flex items-baseline gap-3 px-3 py-2 rounded text-body transition',
-              isActive
-                ? 'bg-blood/20 text-bone'
-                : 'text-bone/60 hover:text-bone hover:bg-bone/5',
-            ]}
-          >
-            <span class="font-mono text-caption text-gold w-6 shrink-0">{s.num}</span>
-            <span>{s.title}</span>
-          </a>
-        </li>
-      );
-    })}
-  </ul>
+
+  {skupiny.map((g, gi) => (
+    <div class:list={['mb-6', gi > 0 && 'pt-5 border-t border-bone/10']}>
+      <div class="font-mono text-caption text-bone/35 px-3 mb-2">
+        {isHQ ? `BLOK ${g.blok.id} · ${g.blok.nazev.toUpperCase()}` : g.blok.nazev.toUpperCase()}
+      </div>
+      <ul class="space-y-1">
+        {g.polozky.map((s) => {
+          const isActive = currentPath === s.href.replace(/\/$/, '');
+          return (
+            <li>
+              <a
+                href={s.href}
+                aria-current={isActive ? 'page' : undefined}
+                class:list={[
+                  'flex items-baseline gap-3 px-3 py-2 rounded text-body transition',
+                  isActive
+                    ? 'bg-blood/20 text-bone'
+                    : 'text-bone/60 hover:text-bone hover:bg-bone/5',
+                ]}
+              >
+                <span class="font-mono text-caption text-gold w-6 shrink-0">{s.cislo}</span>
+                <span>{s.nazev}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ))}
 </nav>

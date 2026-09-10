@@ -1,32 +1,42 @@
 ---
-const sections = [
-  { num: '01', title: 'Manifesto',          page: 1 },
-  { num: '02', title: 'Brand Story',        page: 4 },
-  { num: '03', title: 'Brand DNA',          page: 8 },
-  { num: '04', title: 'Target Audience',    page: 12 },
-  { num: '05', title: 'Positioning',        page: 15 },
-  { num: '06', title: 'Voice & Tone',       page: 18 },
-  { num: '07', title: 'Logo System',        page: 23 },
-  { num: '08', title: 'Logo Misuse',        page: 29 },
-  { num: '09', title: 'Color System',       page: 32 },
-  { num: '10', title: 'Typography',         page: 39 },
-  { num: '11', title: 'Photography',        page: 45 },
-  { num: '12', title: 'Patterns',           page: 49 },
-  { num: '13', title: 'Print Applications', page: 53 },
-  { num: '14', title: 'Digital Applications', page: 59 },
-  { num: '15', title: 'Co-branding & Merch', page: 65 },
-  { num: '—',  title: 'Asset Index',        page: 69 },
-];
+import { isHQ } from '../buildMode';
+import { BLOKY, sekceProBuild, type BlokId } from '../data/sekce';
+
+const sekce = sekceProBuild(isHQ);
+const poradiBloku: BlokId[] = ['I', 'II', 'III'];
+const skupiny = poradiBloku
+  .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
+  .filter((g) => g.polozky.length > 0);
+
+// Čísla stránek tu dřív byla ručně dopsaná a nikdo je neudržoval — obsah tvrdil
+// „str. 69“, zatímco PDF mělo 100 stran. Na webu je to navíc odkaz, ne kniha,
+// takže čísla stránek řeší až PDF export.
 ---
-<nav class="my-12 max-w-2xl">
-  <div class="font-mono text-caption text-gold mb-6">OBSAH</div>
-  <ul class="space-y-3">
-    {sections.map((s) => (
-      <li class="flex items-baseline gap-4">
-        <span class="font-mono text-caption text-bone/40 w-8">{s.num}</span>
-        <span class="font-display text-h3 text-bone flex-1">{s.title}</span>
-        <span class="font-mono text-caption text-bone/40">str. {s.page}</span>
-      </li>
-    ))}
-  </ul>
+<nav class="my-12">
+  <div class="font-mono text-caption text-gold mb-8">OBSAH</div>
+
+  {skupiny.map((g) => (
+    <section class="mb-10">
+      <div class="flex items-baseline gap-4 pb-3 mb-4 border-b border-bone/15">
+        <span class="font-mono text-caption text-bone/40">BLOK {g.blok.id}</span>
+        <span class="font-display text-h3 italic text-bone">{g.blok.nazev}</span>
+        <span class="text-body text-bone/45 ml-auto hidden sm:block">{g.blok.otazka}</span>
+      </div>
+
+      <ul class="space-y-1">
+        {g.polozky.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              class="grid grid-cols-[2rem_1fr] sm:grid-cols-[2rem_14rem_1fr] gap-x-4 items-baseline py-2.5 px-2 -mx-2 rounded hover:bg-bone/5 transition group"
+            >
+              <span class="font-mono text-caption text-gold">{s.cislo}</span>
+              <span class="font-display text-h3 text-bone group-hover:text-gold transition">{s.nazev}</span>
+              <span class="col-start-2 sm:col-start-3 text-body text-bone/45">{s.popis}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </nav>

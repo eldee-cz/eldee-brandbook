@@ -1,18 +1,71 @@
 {
-  "manifesto": {
-    "headline": "Holy Socks.",
-    "subhead": "No, just socks with holes.",
-    "paragraphs": [
-      "Eldee. České fotbalové štulpny. Originální můžeš být ze dvou důvodů: díry na lýtku, kapsa na chránič.",
-      "Nebojíš se odlišit. Miluješ fotbal do posledního detailu. Vítej v eldee.",
-      "Pravidlo eldee: pořádně, nebo vůbec. Žádné kompromisy na kvalitě. Žádné na originalitě.",
-      "Wear them like a sin."
-    ]
+  "jadro": {
+    "claim": "One of Us.",
+    "claimCz": "jeden z nás.",
+    "emoce": "Ten moment, kdy přestaneš být nováček a začneš patřit.",
+    "emoceDetail": "Kdy už znáš nepsaná pravidla. Kdy nikomu nic nevysvětluješ. Kdy ti kluk v šatně jen kývne.",
+    "kicker": "Tohle eldee prodává. Štulpny jsou k tomu.",
+    "proc": [
+      "Zná ji každý — nová škola, nová práce, nová parta. Nemusíš hrát fotbal, abys věděl, o čem to je.",
+      "Přežije růst: až přijde další produkt, emoce zůstane stejná.",
+      "Konkurent okopíruje díry. Partu nezkopíruje."
+    ],
+    "hierarchie": [
+      { "uroven": "Značka", "text": "One of Us.", "proc": "proč ti na tom má záležet" },
+      { "uroven": "Štulpny", "text": "Holy Socks.", "proc": "co to je" },
+      { "uroven": "Další produkt", "text": "vlastní kampaň", "proc": "vždycky pod One of Us." }
+    ],
+    "hierarchieOtazka": "Když si nejsi jistý, které použít, zeptej se: mluvím teď o značce, nebo o štulpnách?",
+    "razitko": {
+      "veta": "„One of Us.“ není nápis na plakát. Je to razítko, kterým značka někoho přijme.",
+      "ukazka": {
+        "hrac": "tyhle mám od roku 2019, ustřižený doma nůžkama 😅",
+        "fotka": "FOTKA STARÝCH ŠTULPEN",
+        "odpoved": "One of us."
+      },
+      "kroky": [
+        "Hráč pošle důkaz, že to zná.",
+        "eldee odpoví razítkem.",
+        "Hráč to screenshotne do stories.",
+        "Ostatní chtějí razítko taky."
+      ],
+      "pravidlo": "Razítko se dává za důkaz, že to znáš — nikdy za nákup.",
+      "pravidloDetail": "Nedá se koupit. Kdo si ho koupí, nemá ho."
+    },
+    "kdeZije": {
+      "uvod": "Anglická verze je hlavní — míříme evropsky. Česká „Jeden z nás.“ jde na Facebook a do oslovení klubů.",
+      "mista": [
+        { "kde": "Hangtag / krabička", "jak": "„One of us.“ — nic víc" },
+        { "kde": "Konec videa", "jak": "poslední snímek" },
+        { "kde": "Instagram bio", "jak": "první řádek" },
+        { "kde": "Komentář pod UGC", "jak": "odpověď značky = razítko" },
+        { "kde": "Merch", "jak": "tričko, samolepka" },
+        { "kde": "Ambasadoři", "jak": "„The Holy Squad. One of us.“" }
+      ]
+    },
+    "neni": [
+      { "co": "Není to o vyčnívání", "proc": "„Chci být někdo“ míří na sólo ambici. To je opak patřičnosti — a uráží 99 % hráčů, co nikdy nebudou profíci." },
+      { "co": "Není to exkluzivita", "proc": "Nikoho nevyháníme. Kdo to chce znát, může." },
+      { "co": "Není to náboženství", "proc": "„Holy“ a svatozář jsou vtip, ne víra. Žádné kříže, růžence, ikony svatých." },
+      { "co": "Není to vzpoura proti trenérům a klubům", "proc": "Ti jsou zákazník, ne protivník." },
+      { "co": "Není to pohrdání amatéry", "proc": "Amatérský fotbal je jádro publika. Nikdy neučíme, nekáráme, neopravujeme." },
+      { "co": "Není to nálepka na produkt", "proc": "Claim nepatří na obal jako dekorace. Patří tam, kde někoho přijímáme." }
+    ],
+    "hranice": {
+      "uvod": "Fráze „One of Us“ je v Evropě obsazená — pod stejným jménem funguje pro-life federace. Ve třídě 25 (oděvy) je rejstřík volný, takže claim používat můžeme. Drží se ale tři pravidla, aby si nás nikdo nespletl.",
+      "pravidla": [
+        { "pravidlo": "Claim nikdy vedle hodnotového, náboženského nebo politického jazyka.", "detail": "Zakázané sousedství: life, dignity, human, values, defend, protect." },
+        { "pravidlo": "Claim vždycky ukotvený ve fotbale.", "detail": "Nikdy nestojí sám na bílé ploše — doprovází ho šatna, hřiště, hráč, štulpny nebo logo." },
+        { "pravidlo": "Svatozář a „One of Us.“ nikdy jako hlavní motiv v jednom záběru.", "detail": "Každé zvlášť ano. Spolu vzniká náboženské čtení, které nechceme." }
+      ],
+      "znamka": "Vlastní ochrannou známku na claim neregistrujeme — není potřeba a ve třídě 25 by pozvala námitku od NBCUniversal („One of Us Is Lying“). Slogan se dá používat bez zápisu, stejně jako OKTAGON „Face Your Fear“."
+    }
   },
+
   "story": {
     "origin": "Lukáš — trenér mládeže — viděl v televizi trend, co nikdo neuměl pojmout. Hráči po celém světě si stříhají díry do štulpen. Amatérsky, asymetricky, pět minut před zápasem v šatně. Trh měl díru. Doslova.",
-    "moment": "Místo dalšího TikToku vzal trh do ruky. Najal českého výrobce. Nechal si chránit dva designy: oválné díry, co drží symetrii, a vnitřní kapsu na chránič. Konec stříhání. Začátek eldee.",
-    "promise": "Štulpny z Česka. Dva designy, co si nikdo jiný nedovolil. Holy Socks. No, just socks with holes.",
+    "moment": "Místo dalšího TikToku vzal trh do ruky. Našel českého výrobce. Nechal si chránit dva designy: oválné díry, co drží symetrii, a vnitřní kapsu na chránič. Konec stříhání. Začátek eldee.",
+    "promise": "Štulpny z Česka. Dva designy, co si nikdo jiný nedovolil. A parta, do které se dá patřit.",
     "milestones": [
       {
         "date": "2025 Q2",
@@ -24,27 +77,33 @@
       },
       {
         "date": "2026 Q1",
-        "event": "Eldee je oficiálně značka. Dva designy podány k ochraně u ÚPV: oválné díry, co drží symetrii, a vnitřní kapsa na chránič. Konec amatérského stříhání."
+        "event": "eldee je oficiálně značka. Dva designy podány k ochraně u ÚPV: oválné díry, co drží symetrii, a vnitřní kapsa na chránič. Konec amatérského stříhání."
+      },
+      {
+        "date": "2026 Q2",
+        "event": "Vizuální identita stojí: jedno logo pro všechno, navržené jehlou — co je na štulpně, je i na webu. Průzkum u 27 hráčů z cílovky potvrzuje, na čem stavět: 93 % nosí návlek, nejžádanější je kapsa na chránič."
       },
       {
         "date": "2026 Q3",
-        "event": "Drop 001. eldee.cz jde online. To, co jsem viděl v televizi, je teď v krabičkách u prvních hráčů — pořádný materiál, český výrobce, dva chráněné designy."
+        "event": "Značka dostává jádro: „One of Us.“ Patřičnost místo produktu. Souběžně běží vzorkování u výrobce a měření nohou hráčů, ze kterého vzniká velikostní tabulka postavená na skutečných lýtkách, ne na odhadu."
       },
       {
-        "date": "2027 Q4",
-        "event": "Eldee má svoje místo na českém trhu. Kluby, ambasadoři, opakovaní zákazníci. Přípravy na další krok — Slovensko, Polsko, dál."
+        "date": "Další krok",
+        "event": "Drop 001. Až budou vzorky hotové a otestované na nohách hráčů — ne dřív. Pravidlo eldee: pořádně, nebo vůbec."
       }
     ]
   },
+
   "audience": {
     "primary": {
       "name": "Mladý fotbalista",
-      "age": "",
+      "age": "10–19 let, těžiště žáci a dorost",
       "geography": "ČR — Praha, Brno, Ostrava, regionální okresní města",
-      "income": "Kapesné rodičů 1-3k Kč/měs + brigády",
+      "income": "Kapesné rodičů 1–3k Kč/měs + brigády",
       "lifestyle": [
-        "Trénuje 4×+ týdně, hraje soutěžně (průzkum 6/2026)",
-        "Na zápas nosí tube návlek + vlastní ponožky (93 % hráčů z průzkumu) — klasické štulpny stříhá nebo obchází",
+        "Trénuje 4×+ týdně, hraje soutěžně (průzkum 6/2026, 27 hráčů)",
+        "Na zápas nosí tube návlek + vlastní ponožky — 93 % hráčů z průzkumu",
+        "Kapsa na chránič je nejžádanější vlastnost (63 %), preferuje nízký střih",
         "Sleduje fotbalové TikToky, IG hráčských kont, YouTube highlight reels",
         "Estetika důležitější než cena (do limitu kapesného)",
         "Sociální status — co nosíš v šatně je signál"
@@ -63,12 +122,18 @@
         "Komunikuje přes e-mail, FB Messenger, telefon"
       ],
       "pain": "Stejní výrobci sportovní výbavy (Decathlon, Sportisimo), žádná diferenciace. Klubový obchod vypadá jako klubový obchod konkurence.",
-      "motivation": "Najít originální dodavatel, který nabídne kvalitu + slevu klubu + příběh."
+      "motivation": "Najít originálního dodavatele, který nabídne kvalitu + slevu klubu + příběh."
     }
   },
+
   "positioning": {
     "statement": "Čistý originál pro ty, kdo se nebojí vyjít z davu. České fotbalové štulpny, dva chráněné designy.",
     "promise": "Pro ty, kterým záleží na detailu. Pro ty, kteří se nebojí vystoupit z řady. Originální design, prémiový materiál. Někdo tvrdí, že prostřižení na lýtkách dává větší ránu. Jiný, že nebudeš mít křeče. Ať už je pravda cokoliv — chceš to riskovat?",
+    "smer": {
+      "nadpis": "Streetwear, který se dá hrát",
+      "text": "eldee není sportovní značka, která si hraje na street. Je to streetwearová značka, která umí fotbal. Štulpny jsou začátek, ne strop — proto se značka nesmí zavřít do jedné kategorie.",
+      "dusledek": "Praktický dopad: názvosloví, obrazový jazyk i partnerství se vybírají tak, aby unesly další produkt. Nic se nepojmenovává „ponožkově“."
+    },
     "competitors": [
       {
         "name": "Nike / Adidas",
@@ -79,6 +144,11 @@
         "name": "Sondico / Decathlon",
         "axis": "budget-mainstream",
         "differentiator": "Žádná kvalita ani charakter."
+      },
+      {
+        "name": "FOUL (CZ)",
+        "axis": "cz-eshop",
+        "differentiator": "Jediný český hráč, se kterým se reálně potkáváme. Slušný e-shop s dobrým výkonem, ale bez značky — prodává zboží, nestaví kmen. Naše místo je přesně tam, kde on nic nemá."
       },
       {
         "name": "Trusox",
@@ -100,27 +170,57 @@
       "Dva CHRÁNĚNÉ průmyslové vzory (oválné díry, kapsa na chránič)",
       "Vyrobeno v ČR (ne čínský dropship)",
       "Streetwear estetika v sport produktu (ne sport v streetwearu)",
+      "Parta, ne katalog — „One of Us.“ je to, co konkurent nezkopíruje",
       "Dostupné mladému hráči — bez slevy z kvality"
-    ],
-    "productLine": [
+    ]
+  },
+
+  "produkt": {
+    "uvod": "Čtyři střihy na stejném principu: díry na lýtku a kapsa na chránič. Co je na štulpně, drží dva zapsané průmyslové vzory.",
+    "rada": [
       {
         "name": "Návlek / tube",
-        "role": "Zápasové jádro. Bez chodidla — tvoje ponožka zůstává. Vnitřní kapsa na chránič, Signature varianta s dírami na lýtku."
+        "role": "Zápasové jádro. Bez chodidla — tvoje ponožka zůstává. Vnitřní kapsa na chránič, Signature varianta s dírami na lýtku.",
+        "pozn": "93 % hráčů z průzkumu nosí na zápas právě tohle."
       },
       {
         "name": "Tréninková ponožka",
-        "role": "Protiskluz, který drží nohu v kopačce. Produkt na všední dny — hráč trénuje 4×+ týdně."
+        "role": "Protiskluz, který drží nohu v kopačce. Produkt na všední dny — hráč trénuje 4×+ týdně.",
+        "pozn": ""
       },
       {
         "name": "Nízká štulpna",
-        "role": "Klasika v nízkém střihu, který preferuje většina hráčů. Kapsa na chránič."
+        "role": "Klasika v nízkém střihu, který preferuje většina hráčů. Kapsa na chránič.",
+        "pozn": "Nízký střih vyšel z průzkumu jako preferovaný."
       },
       {
         "name": "Vysoká štulpna",
-        "role": "Plná výška pro tradicionalisty. Mateřský střih celé řady. Kapsa na chránič."
+        "role": "Plná výška pro tradicionalisty. Mateřský střih celé řady. Kapsa na chránič.",
+        "pozn": ""
       }
-    ]
+    ],
+    "vzory": [
+      {
+        "nazev": "Díry na lýtku",
+        "text": "Oválné otvory, které drží symetrii — to je celý rozdíl proti stříhání nůžkami v šatně. Zapsaný průmyslový vzor, platí v celé EU."
+      },
+      {
+        "nazev": "Kapsa na chránič",
+        "text": "Vnitřní kapsa, ze které chránič nevyleze. Nejžádanější vlastnost z průzkumu (63 %). Zapsaný průmyslový vzor, platí v celé EU."
+      }
+    ],
+    "velikosti": {
+      "uvod": "Velikostní tabulka stojí na skutečných měřeních lýtek hráčů, ne na přepočtu z velikosti boty. Sbírá se dál — každé měření tabulku zpřesňuje.",
+      "rady": ["XS", "M", "L"],
+      "pozn": "Konkrétní naměřené rozměry jsou interní podklad pro výrobce a do brand booku nepatří."
+    },
+    "vyroba": {
+      "nadpis": "Český výrobce",
+      "text": "Vyrábí se v Česku, ne přeprodává z Asie. Běží vzorkování — každá sada se testuje na nohách hráčů a připomínky jdou zpět do další.",
+      "pravidlo": "Pravidlo eldee: pořádně, nebo vůbec. Žádné kompromisy na kvalitě. Žádné na originalitě."
+    }
   },
+
   "dna": {
     "personality": [
       {
@@ -142,8 +242,12 @@
     ],
     "values": [
       {
+        "value": "Patřičnost",
+        "description": "Nadřazená hodnota. Značka stojí uvnitř party, ne naproti ní — mluvíme „my“, nikdy „vy“."
+      },
+      {
         "value": "Kvalita",
-        "description": "Top materiály, český výrobce, dlouholetá životnost."
+        "description": "Top materiály, český výrobce, dlouhá životnost. Pořádně, nebo vůbec."
       },
       {
         "value": "Originalita",
@@ -155,25 +259,30 @@
       },
       {
         "value": "Férovost",
-        "description": "Komise ambasadorům 10 %, slevy klubům, transparentní ceník."
+        "description": "Komise ambasadorům, slevy klubům, transparentní ceník."
       }
     ],
     "archetypes": [
       {
         "primary": true,
         "name": "Rebel",
-        "description": "Eldee je revolt proti uniformitě. Hráč v eldee říká: nejsem jako ostatní."
+        "description": "Eldee je revolt proti uniformitě. Ale pozor na čtení: rebelie tu neznamená „nejsem jako ostatní“, znamená „nejsme parta jako ostatní“. Vzpírá se dav, ne kamarád vedle tebe."
       },
       {
         "primary": false,
-        "name": "Hero",
-        "description": "Eldee je nástroj, který hráče posouvá. Lepší produkt = lepší výkon = více sebevědomí."
+        "name": "Everyman",
+        "description": "Značka stojí uvnitř šatny, ne nad ní. Nikoho neučí a nikým nepohrdá — amatérský fotbal je jádro publika, ne terč vtipu."
       },
       {
         "primary": false,
         "name": "Creator",
         "description": "Dva chráněné designy = originální tvorba. Eldee přidává něco nového do fotbalového šatníku."
       }
-    ]
+    ],
+    "napeti": {
+      "nadpis": "Rebel a patřičnost si neodporují",
+      "text": "Rebel bez party je sólista a to je přesně to, co eldee neprodává. Patřičnost bez rebelie je klubový obchod. Dohromady dávají větu, která drží obojí:",
+      "veta": "Nejsme parta jako ostatní. A uvnitř té party držíme spolu."
+    }
   }
 }

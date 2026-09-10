@@ -3,9 +3,8 @@ import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import Mockup from '../components/Mockup.astro';
 ---
-<Layout title="Patterns & Graphics" section="13 · PATTERNS">
+<Layout title="Patterns & Graphics">
   <SectionTitle
-    number="13 · PATTERNS & GRAPHICS"
     title="Hole pattern, halo, brush"
     subtitle="Sekundární vizuální elementy, které doplňují loga."
   />
@@ -30,11 +29,17 @@ import Mockup from '../components/Mockup.astro';
   <section class="mb-16">
     <h2 class="font-display text-h2 text-bone mb-2">Halo (Svatozář)</h2>
     <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Sekundární symbol — odkazuje na Holy Socks narrative. Vždy v gold.</p>
+
+    <div class="bg-blood/12 border-l-[3px] border-blood px-5 py-4 mb-6 max-w-3xl">
+      <div class="font-mono text-caption text-blood font-bold mb-1.5">✕ NIKDY</div>
+      <p class="text-[17px] text-bone font-medium">Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru.</p>
+      <p class="text-body text-bone/70 mt-1.5">Každé zvlášť ano. Spolu vzniká náboženské čtení, které nechceme — fráze je v EU obsazená pro-life federací. Podrobně v sekci 01.</p>
+    </div>
     <div class="grid md:grid-cols-2 gap-4">
       <Mockup title="Standard halo" caption="Šířka = 1.5× šířky wordmarku">
         <img src="/logo/halo.svg" alt="Halo" class="max-w-full" />
       </Mockup>
-      <Mockup title="Halo + wordmark" caption="Použití nad logem v Holy momentech">
+      <Mockup title="Halo + wordmark" caption="Nad logem v Holy momentech — nikdy vedle claimu">
         <div class="flex flex-col items-center gap-1">
           <img src="/logo/halo.svg" alt="Halo" class="w-32" />
           <img src="/logo/wordmark-light.svg" alt="" class="w-40" />

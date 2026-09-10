@@ -1,60 +1,58 @@
 ---
 import Layout from '../components/Layout.astro';
 import { isHQ } from '../buildMode';
-if (!isHQ) return Astro.redirect('/');
+import { skryvatVeVerejnem } from '../data/sekce';
+if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
 import content from '../data/content.json';
+
+const p = content.positioning;
 ---
-<Layout title="Positioning" section="05 · POSITIONING">
+<Layout title="Positioning">
   <SectionTitle
-    number="05 · POSITIONING"
-    title="Where eldee stands"
+    title="Kde eldee stojí"
     subtitle="Jak se eldee liší od všeho ostatního na trhu."
   />
 
   <section class="mb-16">
     <div class="font-mono text-caption text-gold mb-3">POSITIONING STATEMENT</div>
     <p class="font-display text-h3 italic text-bone leading-relaxed border-l-4 border-blood pl-6">
-      {content.positioning.statement}
+      {p.statement}
     </p>
   </section>
 
   <section class="mb-16">
     <div class="font-mono text-caption text-gold mb-3">BRAND PROMISE</div>
-    <p class="text-body-lg text-bone/85 max-w-2xl">{content.positioning.promise}</p>
+    <p class="text-body-lg text-bone/85 max-w-2xl">{p.promise}</p>
+  </section>
+
+  <!-- Směr značky — rozhodnuto 2. 9. 2026 spolu s doménou eldeeworld.com -->
+  <section class="mb-16 bg-ink/60 border border-bone/13 border-l-[3px] border-l-gold px-8 py-7">
+    <h2 class="font-display text-h2 italic text-bone mb-3">{p.smer.nadpis}</h2>
+    <p class="text-body-lg text-bone/85 max-w-3xl">{p.smer.text}</p>
+    <p class="text-body text-bone/65 max-w-3xl mt-4">{p.smer.dusledek}</p>
   </section>
 
   <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Produktová řada</h2>
-    <div class="grid md:grid-cols-2 gap-4">
-      {content.positioning.productLine.map((p, i) => (
-        <div class="bg-ink/60 border border-bone/10 rounded-lg p-5">
-          <div class="font-mono text-caption text-gold mb-2">{`0${i + 1}`}</div>
-          <div class="font-display text-h3 italic text-bone mb-2">{p.name}</div>
-          <p class="text-body text-bone/70">{p.role}</p>
-        </div>
-      ))}
-    </div>
-    <p class="text-body text-bone/60 mt-4 max-w-2xl">Zápas i trénink — eldee na noze každý den, ne jen o víkendu.</p>
-  </section>
-
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Konkurence</h2>
+    <h2 class="font-display text-h2 italic text-bone mb-2">Konkurence</h2>
+    <p class="text-body-lg text-bone/70 max-w-2xl mb-6">
+      Jediný, se kterým se reálně potkáváme na českém trhu, je FOUL. Zbytek je kontext.
+    </p>
     <div class="space-y-3">
-      {content.positioning.competitors.map((c) => (
-        <div class="grid grid-cols-[1fr_auto_2fr] gap-6 items-baseline pb-3 border-b border-bone/10">
+      {p.competitors.map((c) => (
+        <div class="grid grid-cols-[1fr_auto] sm:grid-cols-[13rem_auto_1fr] gap-x-6 gap-y-1 items-baseline pb-3 border-b border-bone/10">
           <div class="font-display text-h3 italic text-bone">{c.name}</div>
           <div class="font-mono text-caption text-gold">{c.axis.toUpperCase()}</div>
-          <div class="text-body text-bone/70">{c.differentiator}</div>
+          <div class="col-span-2 sm:col-span-1 text-body text-bone/70">{c.differentiator}</div>
         </div>
       ))}
     </div>
   </section>
 
   <section>
-    <h2 class="font-display text-h2 text-bone mb-6">USP — co eldee má, jiní ne</h2>
+    <h2 class="font-display text-h2 italic text-bone mb-6">USP — co eldee má, jiní ne</h2>
     <ol class="space-y-4">
-      {content.positioning.usp.map((u, i) => (
+      {p.usp.map((u, i) => (
         <li class="flex gap-6">
           <div class="font-display text-h2 italic text-blood w-12 shrink-0">{i + 1}.</div>
           <div class="text-body-lg text-bone/85 pt-2">{u}</div>
@@ -62,5 +60,4 @@ import content from '../data/content.json';
       ))}
     </ol>
   </section>
-
 </Layout>

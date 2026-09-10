@@ -2,14 +2,14 @@
 import '../styles/globals.css';
 import NavSidebar from './NavSidebar.astro';
 import { isHQ } from '../buildMode';
+import { VERZE } from '../data/sekce';
 
 interface Props {
   title: string;
-  section?: string;
   description?: string;
 }
 
-const { title, section, description } = Astro.props;
+const { title, description } = Astro.props;
 const siteName = isHQ ? 'Brand Book' : 'Logomanual';
 const fullTitle = `${title} — eldee ${siteName}`;
 ---
@@ -25,13 +25,12 @@ const fullTitle = `${title} — eldee ${siteName}`;
   </head>
   <body class="min-h-screen flex">
     <NavSidebar />
-    <main class="flex-1 max-w-4xl mx-auto px-8 py-12 lg:px-16">
-      {section && (
-        <div class="font-mono text-caption text-gold mb-4">{section}</div>
-      )}
+    <main class="flex-1 max-w-5xl mx-auto px-8 py-12 lg:px-16">
+      <!-- Štítek sekce vypisuje SectionTitle. Layout ho vypisoval taky,
+           takže na každé stránce stál dvakrát pod sebou. -->
       <slot />
       <footer class="mt-32 pt-8 border-t border-bone/10 text-caption text-bone/40 print:hidden">
-        eldee.cz · {isHQ ? 'brand book v2.0' : 'logomanual'} · © 2026 Lukáš Doležal
+        eldee · {isHQ ? `brand book ${VERZE}` : 'logomanual'} · © 2026 eldee
       </footer>
     </main>
   </body>

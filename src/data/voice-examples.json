@@ -1,20 +1,98 @@
 {
+  "pravidla": {
+    "uvod": "Filtr na každý post, video i story. Když kus neprojde všemi třemi, přepiš ho nebo zahoď.",
+    "seznam": [
+      {
+        "cislo": "01",
+        "nazev": "Hrdina je hráč, ne produkt",
+        "text": "Produkt je rekvizita v příběhu člověka. Zboží bez člověka, bez šatny a bez hřiště není eldee post — je to katalog.",
+        "vyjimka": "Výjimka: čistě produktové fotky patří na e-shop, ne do obsahu."
+      },
+      {
+        "cislo": "02",
+        "nazev": "Mluvíme „my“, nikdy „vy“",
+        "text": "Značka stojí uvnitř party, ne naproti ní. Nikdy neučí, nekárá, neopravuje.",
+        "vyjimka": "✓ „Všichni jsme je ustřihli.“ ✕ „Děláte to špatně.“ ✕ „Nebuď amatér.“"
+      },
+      {
+        "cislo": "03",
+        "nazev": "Insider test",
+        "text": "Pozná se v tom jen ten, kdo hraje? Kdo fotbal nehraje, může nechápat — a to je v pořádku.",
+        "vyjimka": "Post, který musí všechno vysvětlit, není o patřičnosti."
+      }
+    ],
+    "claim": "„One of Us.“ se do postu nepíše jako nápis. Je to odpověď hráči, který přinesl důkaz — viz sekce 01."
+  },
   "principles": [
-    { "do": "Mluv konkrétně.",      "dont": "Žvaň obecnosti.",         "exampleDo": "Český výrobce. Dva chráněné designy. MOQ 100 párů.", "exampleDont": "Kvalitní produkt za dobrou cenu." },
-    { "do": "Bavit > prodávat.",    "dont": "Násilný sales pitch.",    "exampleDo": "Holy Socks. Tvůj další pár.",               "exampleDont": "Kupte teď a získáte slevu 10 %!" },
-    { "do": "Self-aware humor.",    "dont": "Sebechválí seriózně.",    "exampleDo": "No, just socks with holes.",                  "exampleDont": "Revoluční inovace v sportovní módě." },
-    { "do": "Krátké, ostré věty.",   "dont": "Dlouhé souvětí.",         "exampleDo": "Český výrobce. Dva chráněné designy. Hotovo.","exampleDont": "Eldee je značka, která se snaží o vyhledávání originálního designu v rámci českého trhu sportovních doplňků..." },
-    { "do": "Mluv jako mladý hráč.","dont": "Mluv jako PR agentura.",  "exampleDo": "Tyhle ti změní šatnu.",                       "exampleDont": "Naše produkty osloví Vaši cílovou skupinu." }
+    {
+      "do": "Mluv konkrétně.",
+      "dont": "Žvaň obecnosti.",
+      "exampleDo": "Český výrobce. Dva chráněné designy. MOQ 100 párů.",
+      "exampleDont": "Kvalitní produkt za dobrou cenu."
+    },
+    {
+      "do": "Bavit > prodávat.",
+      "dont": "Násilný sales pitch.",
+      "exampleDo": "Holy Socks. Tvůj další pár.",
+      "exampleDont": "Kupte teď a získáte slevu 10 %!"
+    },
+    {
+      "do": "Self-aware humor.",
+      "dont": "Sebechválí seriózně.",
+      "exampleDo": "No, just socks with holes.",
+      "exampleDont": "Revoluční inovace v sportovní módě."
+    },
+    {
+      "do": "Krátké, ostré věty.",
+      "dont": "Dlouhé souvětí.",
+      "exampleDo": "Český výrobce. Dva chráněné designy. Hotovo.",
+      "exampleDont": "Eldee je značka, která se snaží o vyhledávání originálního designu v rámci českého trhu sportovních doplňků..."
+    },
+    {
+      "do": "Mluv jako mladý hráč.",
+      "dont": "Mluv jako PR agentura.",
+      "exampleDo": "Tyhle ti změní šatnu.",
+      "exampleDont": "Naše produkty osloví Vaši cílovou skupinu."
+    }
   ],
   "vocabulary": {
-    "use": ["štulpny", "holy", "drop", "edice", "díry", "kapsa", "hráč", "šatna", "klub", "chráněné", "český", "originál", "claim", "pořádně"],
-    "dont": ["ponožky", "fanoušci", "revoluce", "exkluzivní", "nejlepší na trhu", "číslo jedna", "100% kvalita", "stylový", "trendový", "must-have", "lifestyle značka", "levné", "inovativní"]
+    "use": [
+      "štulpny",
+      "holy",
+      "drop",
+      "edice",
+      "díry",
+      "kapsa",
+      "hráč",
+      "šatna",
+      "klub",
+      "chráněné",
+      "český",
+      "originál",
+      "claim",
+      "pořádně"
+    ],
+    "dont": [
+      "ponožky",
+      "fanoušci",
+      "revoluce",
+      "exkluzivní",
+      "nejlepší na trhu",
+      "číslo jedna",
+      "100% kvalita",
+      "stylový",
+      "trendový",
+      "must-have",
+      "lifestyle značka",
+      "levné",
+      "inovativní"
+    ]
   },
   "templates": {
-    "igCaptionLaunch":  "Drop 001. Holy Socks dropped.\nCzech-made. Two design patents.\nLink in bio. ↗",
-    "igCaptionMeme":    "POV: trénink za 5 min, štulpny jsou ještě v krabičce.\n\n@eldee.cz · #HolySocks",
-    "emailClubOpener":  "Ahoj [jméno trenéra],\nčetl jsem, že [klub] hraje [soutěž]. Mám pro vás něco, co se ještě nikde v ČR nedá koupit — eldee štulpny.\nDva chráněné designy, český výrobce. Kluby dostávají 10 % zpět.\nMrkneš na vzorek? Pošlu zdarma.\nLukáš",
-    "podcastIntro":     "Vítej u eldee podcastu. Já jsem Lukáš, zakladatel značky. Dneska budeme řešit [téma]. Pojďme na to.",
+    "igCaptionLaunch": "Drop 001. Holy Socks dropped.\nCzech-made. Two design patents.\nLink in bio. ↗",
+    "igCaptionMeme": "POV: trénink za 5 min, štulpny jsou ještě v krabičce.\n\n@eldee.cz · #HolySocks",
+    "emailClubOpener": "Ahoj [jméno trenéra],\nčetl jsem, že [klub] hraje [soutěž]. Mám pro vás něco, co se ještě nikde v ČR nedá koupit — eldee štulpny.\nDva chráněné designy, český výrobce. Kluby dostávají 10 % zpět.\nMrkneš na vzorek? Pošlu zdarma.\nLukáš",
+    "podcastIntro": "Vítej u eldee podcastu. Já jsem Lukáš, zakladatel značky. Dneska budeme řešit [téma]. Pojďme na to.",
     "pressReleaseHead": "Česká značka eldee uvádí štulpny s dvěma chráněnými průmyslovými vzory."
   },
   "taboo": [

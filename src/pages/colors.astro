@@ -4,9 +4,8 @@ import SectionTitle from '../components/SectionTitle.astro';
 import ColorGroup from '../components/ColorGroup.astro';
 import colorsData from '../data/colors.json';
 ---
-<Layout title="Color System" section="10 · COLORS">
+<Layout title="Color System">
   <SectionTitle
-    number="10 · COLOR SYSTEM"
     title="11 barev, 4 vrstvy"
     subtitle="Plný color systém s HEX, RGB, CMYK, Pantone a WCAG ratios."
   />
@@ -21,6 +20,8 @@ import colorsData from '../data/colors.json';
       <li>· <strong>Burnished Gold</strong> = premium moments. Holy edice, hangtag foil, ambasador certifikát.</li>
       <li>· <strong>Drop accents</strong> = sezónní, jen pro konkrétní drop kampaň. Nikdy nesměšuj 2 drop colors v jednom designu.</li>
       <li>· <strong>WCAG 4.5:1</strong> minimum pro běžný text, 3:1 pro velký text (h1/h2). Vždy ověř kontrast.</li>
+      <li>· <strong>Blood Red na černé má kontrast 4.7</strong> — projde o vlásek. Používej ji na velké nápisy, tlačítka a akcenty, <strong>nikdy na drobný text</strong>. Blood Red Light (#DC2626) má jen 4.0 a na běžný text nesmí vůbec.</li>
+      <li>· <strong>Zlatá (7.6) je bezpečná</strong> — když si nejsi jistý čitelností na černé, sáhni po ní.</li>
     </ul>
   </section>
 

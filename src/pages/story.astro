@@ -1,13 +1,13 @@
 ---
 import Layout from '../components/Layout.astro';
 import { isHQ } from '../buildMode';
-if (!isHQ) return Astro.redirect('/');
+import { skryvatVeVerejnem } from '../data/sekce';
+if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
 import content from '../data/content.json';
 ---
-<Layout title="Brand Story" section="02 · STORY">
+<Layout title="Brand Story">
   <SectionTitle
-    number="02 · BRAND STORY"
     title="Origin"
     subtitle="Jak vzniklo eldee — z frustrace, designu a českého řemesla."
   />

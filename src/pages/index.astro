@@ -4,54 +4,178 @@ import TableOfContents from '../components/TableOfContents.astro';
 import PrintBreak from '../components/PrintBreak.astro';
 import content from '../data/content.json';
 import { isHQ } from '../buildMode';
+import { BLOKY, sekceProBuild, type BlokId } from '../data/sekce';
 
-// Rozcestník pro veřejný Logomanual (jen public sekce)
-const logomanualSections = [
-  { num: '01', title: 'Logo System',     href: '/logo',         desc: 'Logo, varianty, monogram, wordmark.' },
-  { num: '02', title: 'Logo — co ne',    href: '/logo/misuse',  desc: 'Zakázané úpravy loga.' },
-  { num: '03', title: 'Barvy',           href: '/colors',       desc: 'Color systém — HEX, RGB, CMYK, Pantone.' },
-  { num: '04', title: 'Typografie',      href: '/typography',   desc: 'Fonty a jejich použití.' },
-  { num: '05', title: 'Vzor',            href: '/patterns',     desc: 'Hole pattern — vzor děr.' },
-  { num: '06', title: 'Maskot',          href: '/mascot',       desc: 'Eldee — lenochod.' },
-  { num: '07', title: 'Tisk',            href: '/print',        desc: 'Aplikace pro tisk a výrobu.' },
-  { num: '08', title: 'Digitál',         href: '/digital',      desc: 'Digitální aplikace.' },
-  { num: '09', title: 'Co-branding',     href: '/co-branding',  desc: 'Pravidla pro spolupráce.' },
-  { num: '—',  title: 'Assety ke stažení', href: '/assets',     desc: 'Loga, fonty, podklady.' },
-];
+const j = content.jadro;
+
+// Rozcestník veřejného logomanuálu se bere ze stejného seznamu jako sidebar
+// a obsah — dřív byl vypsaný ručně a rozešel se s nimi.
+const rozcestnik = sekceProBuild(false);
+const poradiBloku: BlokId[] = ['II', 'III'];
+const skupinyLM = poradiBloku
+  .map((id) => ({ blok: BLOKY[id], polozky: rozcestnik.filter((s) => s.blok === id) }))
+  .filter((g) => g.polozky.length > 0);
 ---
 {isHQ ? (
-  <Layout title="Manifesto" section="01 · MANIFESTO" description="eldee brand book — Holy Socks. No, just socks with holes.">
+  <Layout title="One of Us." description="eldee brand book — jádro značky.">
     <!-- Cover -->
-    <div class="min-h-[80vh] flex flex-col justify-center">
-      <div class="flex items-center gap-4 mb-12">
-        <div class="w-2 h-12 bg-blood"></div>
-        <div class="font-mono text-caption text-gold">eldee · brand book · v2.0 · 2026</div>
+    <div class="min-h-[62vh] flex flex-col justify-center pb-8">
+      <div class="flex items-center gap-4 mb-10">
+        <div class="w-1.5 h-8 bg-blood shrink-0"></div>
+        <div class="font-mono text-caption text-gold">Blok I · kdo jsme / 01 · jádro značky</div>
       </div>
 
-      <h1 class="font-display italic text-bone text-[clamp(64px,12vw,180px)] leading-[0.9] tracking-tight">
-        {content.manifesto.headline}
+      <h1 class="font-display italic text-bone text-[clamp(64px,11vw,148px)] leading-[0.88] tracking-tight">
+        {j.claim}
       </h1>
-      <div class="font-brush text-gold text-[clamp(32px,6vw,80px)] leading-none mt-4 -rotate-2 inline-block">
-        {content.manifesto.subhead}
+      <div class="font-brush text-gold text-[clamp(30px,5vw,60px)] leading-none mt-2 -rotate-2 inline-block">
+        {j.claimCz}
       </div>
 
-      <div class="mt-16 max-w-2xl space-y-4">
-        {content.manifesto.paragraphs.map((p) => (
-          <p class="text-body-lg text-bone/80">{p}</p>
-        ))}
-      </div>
+      <p class="text-bone text-[26px] leading-[1.4] font-medium max-w-2xl mt-10">{j.emoce}</p>
+      <p class="text-body-lg text-bone/70 max-w-xl mt-4">{j.emoceDetail}</p>
+      <p class="text-gold text-[19px] font-medium mt-6">{j.kicker}</p>
     </div>
 
     <PrintBreak />
 
-    <!-- TOC -->
+    <!-- Proč zrovna tahle emoce -->
+    <section class="mt-14 pt-9 border-t border-bone/12">
+      <h2 class="font-display text-h2 italic text-bone mb-6">Proč zrovna tahle emoce</h2>
+      <div class="grid md:grid-cols-2 gap-11">
+        <p class="text-body-lg text-bone/85">{j.proc[0]}</p>
+        <div>
+          <p class="text-body-lg text-bone/85">{j.proc[1]}</p>
+          <p class="text-[21px] leading-snug text-bone font-medium mt-4">{j.proc[2]}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hierarchie -->
+    <section class="mt-14 pt-9 border-t border-bone/12">
+      <h2 class="font-display text-h2 italic text-bone mb-3">Co stojí nad čím</h2>
+      <p class="text-body-lg text-bone/70 max-w-xl">Dvě roviny, dvě různé otázky. Nekonkurují si.</p>
+
+      <div class="bg-ink/60 border border-bone/13 mt-6 px-8 py-7">
+        <div class="font-display text-h2 italic text-bone mb-4">eldee</div>
+        {j.hierarchie.map((h) => (
+          <div class="grid grid-cols-[1.5rem_8rem_1fr] sm:grid-cols-[1.5rem_9rem_1fr_auto] gap-4 items-baseline py-3 border-t border-bone/10">
+            <span class="text-bone/30">↳</span>
+            <span class="font-mono text-caption text-gold">{h.uroven}</span>
+            <span class="font-display text-h3 italic text-bone">{h.text}</span>
+            <span class="col-start-2 sm:col-start-4 text-body text-bone/55 sm:text-right">{h.proc}</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-5 pl-4 border-l-[3px] border-gold text-[17px] text-bone">{j.hierarchieOtazka}</p>
+    </section>
+
+    <PrintBreak />
+
+    <!-- Razítko -->
+    <section class="mt-14 pt-9 border-t border-bone/12">
+      <h2 class="font-display text-h2 italic text-bone mb-3">Razítko, ne nápis</h2>
+      <p class="text-body-lg text-bone/85 max-w-2xl">{j.razitko.veta}</p>
+
+      <div class="grid md:grid-cols-2 gap-10 mt-7 items-start">
+        <!-- Mock komentářů: mechanika se ukazuje, ne popisuje -->
+        <div class="bg-ink/60 border border-bone/13 px-7 py-6">
+          <div class="flex gap-3 py-3">
+            <div class="w-9 h-9 rounded-full bg-bone/12 text-bone/75 font-mono text-caption flex items-center justify-center shrink-0">JK</div>
+            <div>
+              <div class="font-mono text-caption text-bone/40 mb-1">@jakub_k9 · komentář</div>
+              <div class="text-body text-bone/90">{j.razitko.ukazka.hrac}</div>
+              <div class="mt-2 h-[74px] bg-bone/5 border border-bone/10 flex items-center justify-center font-mono text-caption text-bone/35">
+                {j.razitko.ukazka.fotka}
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3 py-3">
+            <div class="w-9 h-9 rounded-full bg-blood text-bone font-mono text-caption flex items-center justify-center shrink-0">e</div>
+            <div>
+              <div class="font-mono text-caption text-bone/40 mb-1">eldee · odpověď</div>
+              <div class="font-display text-h3 italic text-bone">{j.razitko.ukazka.odpoved}</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <ol class="space-y-3.5">
+            {j.razitko.kroky.map((k, i) => (
+              <li class="flex gap-3.5 items-baseline">
+                <span class="font-mono text-caption text-gold w-5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-[16px] text-bone/85">{k}</span>
+              </li>
+            ))}
+          </ol>
+
+          <div class="mt-7 bg-blood/12 border-l-[3px] border-blood px-5 py-4">
+            <div class="font-mono text-caption text-blood font-bold mb-1.5">✕ NIKDY</div>
+            <p class="text-[18px] text-bone font-medium">{j.razitko.pravidlo}</p>
+            <p class="text-body text-bone/70 mt-1.5">{j.razitko.pravidloDetail}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kde claim žije -->
+    <section class="mt-14 pt-9 border-t border-bone/12">
+      <h2 class="font-display text-h2 italic text-bone mb-3">Kde claim žije</h2>
+      <p class="text-body-lg text-bone/70 max-w-2xl">{j.kdeZije.uvod}</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/12 border border-bone/12 mt-6">
+        {j.kdeZije.mista.map((m) => (
+          <div class="bg-ink px-5 py-4">
+            <div class="font-mono text-caption text-gold mb-2">{m.kde}</div>
+            <div class="text-body text-bone/85">{m.jak}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <PrintBreak />
+
+    <!-- Co to není -->
+    <section class="mt-14 pt-9 border-t border-bone/12">
+      <h2 class="font-display text-h2 italic text-bone mb-6">Co to není</h2>
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-5">
+        {j.neni.map((n) => (
+          <div class="border-l-[3px] border-blood pl-4 py-1">
+            <div class="text-[18px] text-bone font-medium mb-1">{n.co}</div>
+            <p class="text-body text-bone/68">{n.proc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Tři hranice -->
+    <section class="mt-14 pt-9 border-t border-bone/12">
+      <h2 class="font-display text-h2 italic text-bone mb-3">Tři hranice claimu</h2>
+      <p class="text-body-lg text-bone/80 max-w-3xl">{j.hranice.uvod}</p>
+
+      <div class="grid md:grid-cols-3 gap-5 mt-6">
+        {j.hranice.pravidla.map((p, i) => (
+          <div class="bg-ink/60 border border-bone/13 border-t-[3px] border-t-gold px-6 py-5">
+            <div class="font-display italic text-gold text-[34px] leading-none mb-2.5">{String(i + 1).padStart(2, '0')}</div>
+            <p class="text-[15px] text-bone/85 leading-relaxed">{p.pravidlo}</p>
+            <small class="block mt-2.5 text-[13px] text-bone/50">{p.detail}</small>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-6 pl-4 border-l-2 border-bone/20 text-body text-bone/60 max-w-3xl">{j.hranice.znamka}</p>
+    </section>
+
+    <PrintBreak />
+
     <TableOfContents />
   </Layout>
 ) : (
-  <Layout title="Logomanual" section="LOGOMANUAL" description="eldee Logomanual — vizuální identita pro partnery a dodavatele.">
-    <div class="min-h-[60vh] flex flex-col justify-center">
+  <Layout title="Logomanual" description="eldee Logomanual — vizuální identita pro partnery a dodavatele.">
+    <div class="min-h-[58vh] flex flex-col justify-center">
       <div class="flex items-center gap-4 mb-10">
-        <div class="w-2 h-12 bg-blood"></div>
+        <div class="w-1.5 h-8 bg-blood shrink-0"></div>
         <div class="font-mono text-caption text-gold">eldee · logomanual · 2026</div>
       </div>
 
@@ -64,19 +188,24 @@ const logomanualSections = [
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-2 gap-4 mt-8">
-      {logomanualSections.map((s) => (
-        <a
-          href={s.href}
-          class="block border border-bone/15 hover:border-gold rounded p-5 transition group"
-        >
-          <div class="flex items-baseline gap-3">
-            <span class="font-mono text-caption text-gold w-6 shrink-0">{s.num}</span>
-            <span class="font-display text-h3 text-bone group-hover:text-gold transition">{s.title}</span>
-          </div>
-          <p class="text-body text-bone/55 mt-2 pl-9">{s.desc}</p>
-        </a>
-      ))}
-    </div>
+    {skupinyLM.map((g) => (
+      <section class="mt-12">
+        <div class="flex items-baseline gap-4 pb-3 mb-4 border-b border-bone/15">
+          <span class="font-display text-h3 italic text-bone">{g.blok.nazev}</span>
+          <span class="text-body text-bone/45 ml-auto hidden sm:block">{g.blok.otazka}</span>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {g.polozky.map((s) => (
+            <a href={s.href} class="block border border-bone/15 hover:border-gold rounded p-5 transition group">
+              <div class="flex items-baseline gap-3">
+                <span class="font-mono text-caption text-gold w-6 shrink-0">{s.cislo}</span>
+                <span class="font-display text-h3 text-bone group-hover:text-gold transition">{s.nazev}</span>
+              </div>
+              <p class="text-body text-bone/55 mt-2 pl-9">{s.popis}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
   </Layout>
 )}

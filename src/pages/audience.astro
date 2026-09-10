@@ -1,7 +1,8 @@
 ---
 import Layout from '../components/Layout.astro';
 import { isHQ } from '../buildMode';
-if (!isHQ) return Astro.redirect('/');
+import { skryvatVeVerejnem } from '../data/sekce';
+if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
 import content from '../data/content.json';
 
@@ -10,9 +11,8 @@ const personas = [
   { key: 'secondary', p: content.audience.secondary, label: 'SECONDARY · B2B' },
 ];
 ---
-<Layout title="Target Audience" section="04 · AUDIENCE">
+<Layout title="Target Audience">
   <SectionTitle
-    number="04 · TARGET AUDIENCE"
     title="Kdo nosí eldee"
     subtitle="Dvě cílovky — primárně mladí fotbalisti, sekundárně amatérské kluby."
   />

@@ -1,0 +1,73 @@
+---
+import Layout from '../components/Layout.astro';
+import { isHQ } from '../buildMode';
+import { skryvatVeVerejnem } from '../data/sekce';
+if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
+import SectionTitle from '../components/SectionTitle.astro';
+import content from '../data/content.json';
+
+const pr = content.produkt;
+---
+<Layout title="Produkt">
+  <SectionTitle
+    title="Co eldee vyrábí"
+    subtitle={pr.uvod}
+  />
+
+  <!-- Dva chráněné vzory — to, co konkurence nesmí okopírovat -->
+  <section class="mb-16">
+    <h2 class="font-display text-h2 italic text-bone mb-6">Dva chráněné vzory</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      {pr.vzory.map((v) => (
+        <div class="bg-ink/60 border border-bone/13 border-t-[3px] border-t-blood px-7 py-6">
+          <div class="font-display text-h3 italic text-bone mb-2">{v.nazev}</div>
+          <p class="text-body text-bone/80 leading-relaxed">{v.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 italic text-bone mb-2">Řada</h2>
+    <p class="text-body-lg text-bone/70 max-w-2xl mb-6">
+      Zápas i trénink — eldee na noze každý den, ne jen o víkendu.
+    </p>
+    <div class="grid md:grid-cols-2 gap-4">
+      {pr.rada.map((r, i) => (
+        <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
+          <div class="font-mono text-caption text-gold mb-2">{String(i + 1).padStart(2, '0')}</div>
+          <div class="font-display text-h3 italic text-bone mb-2">{r.name}</div>
+          <p class="text-body text-bone/75">{r.role}</p>
+          {r.pozn && (
+            <p class="text-body text-gold/85 mt-3 pl-3 border-l-2 border-gold/40">{r.pozn}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="font-display text-h2 italic text-bone mb-2">Velikosti</h2>
+    <p class="text-body-lg text-bone/80 max-w-2xl">{pr.velikosti.uvod}</p>
+
+    <div class="flex flex-wrap gap-3 mt-6">
+      {pr.velikosti.rady.map((v) => (
+        <div class="border border-bone/20 px-8 py-5 font-display text-h2 italic text-bone">{v}</div>
+      ))}
+    </div>
+
+    <div class="mt-5 pl-4 border-l-2 border-bone/20 text-body text-bone/60 max-w-2xl">
+      {pr.velikosti.pozn}
+    </div>
+  </section>
+
+  <section>
+    <div class="bg-ink/60 border border-bone/13 px-8 py-7">
+      <h2 class="font-display text-h2 italic text-bone mb-3">{pr.vyroba.nadpis}</h2>
+      <p class="text-body-lg text-bone/85 max-w-3xl">{pr.vyroba.text}</p>
+      <p class="mt-5 pl-4 border-l-[3px] border-gold text-[18px] text-bone font-medium">
+        {pr.vyroba.pravidlo}
+      </p>
+    </div>
+  </section>
+</Layout>
