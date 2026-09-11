@@ -1,84 +1,106 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import Mockup from '../components/Mockup.astro';
-import DosDonts from '../components/DosDonts.astro';
+import Ukazka from '../components/Ukazka.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
+import Zakaz from '../components/Zakaz.astro';
+
+// Velikosti uvnitř ukázek jsou v `cqw` = procento šířky rámečku. Viz Ukazka.astro.
 ---
-<Layout title="Co-branding & Merch">
+<Layout title="Spojení s partnery">
   <SectionTitle
     title="Spojení s partnery"
-    subtitle="Pravidla pro logo eldee × klub × ambasador × sponzor."
+    subtitle="Pravidla pro spojení eldee s klubem, ambasadorem a sponzorskou pozicí."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Klub lockup</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Když eldee uzavře smlouvu s klubem, lze používat lockup „eldee × KLUB".</p>
-    <Mockup title="eldee × FK Praha Pankrác" variant="digital">
-      <div class="flex items-center gap-6 px-8 py-4">
-        <span class="font-display italic text-h2 text-bone">eldee</span>
-        <span class="font-mono text-h3 text-gold">×</span>
-        <span class="font-display text-h2 text-bone">FK PANKRÁC</span>
-      </div>
-    </Mockup>
-    <div class="mt-4 text-body text-bone/70 max-w-2xl">
-      Pravidla: stejná výška obou log, mezera = výška „e", křížek (×) v gold mezi nimi. Pořadí vždy „eldee × KLUB".
+  <!-- ── Klub ───────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Klub — lockup" meta={['pořadí eldee × KLUB', 'mezera = výška „e“']} prvni />
+
+  <Ukazka format="pruh" plocha="ink" popis="eldee × FK Pankrác">
+    <div class="flex items-center justify-center gap-[4cqw]">
+      <span class="font-display italic text-[11cqw] text-bone leading-none">eldee</span>
+      <span class="font-mono text-[7cqw] text-gold leading-none">×</span>
+      <span class="font-display text-[8.2cqw] text-bone leading-none">FK PANKRÁC</span>
     </div>
-  </section>
+  </Ukazka>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Ambasador kit</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Pro hráče-ambasadora — personalizovaná certifikace s osobním kódem. Podmínky spolupráce (provize, plnění) nejsou součástí brand booku, řeší je smlouva.</p>
-    <Mockup title="Ambasador certifikát" variant="print">
-      <div class="bg-ink w-80 h-52 rounded p-6 flex flex-col justify-between border-2 border-gold/40">
-        <div class="flex justify-between items-start">
-          <div class="font-mono text-caption text-gold">AMBASSADOR · 2026</div>
-          <div class="font-display italic text-2xl text-bone">eldee</div>
-        </div>
-        <div>
-          <div class="font-mono text-caption text-bone/60 mb-1">CERTIFIED</div>
-          <div class="font-display italic text-h2 text-bone">JAKUB NOVÁK</div>
-          <div class="font-mono text-caption text-blood mt-2">CODE: JAKUB10</div>
-        </div>
+  <Pravidla>
+    <Pravidlo typ="ok">Obě loga mají stejnou optickou výšku. Křížek je zlatý a stojí mezi nimi.</Pravidlo>
+    <Pravidlo typ="ok">Pořadí je vždy „eldee × KLUB“, nikdy obráceně.</Pravidlo>
+    <Pravidlo typ="rozmer">Mezera mezi logy = výška písmene „e“ ve wordmarku eldee.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Ambasador ──────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Ambasador — certifikát" meta={['osobní kód', 'podmínky řeší smlouva']} />
+
+  <Zakaz>Do brand booku nepatří odměny ani plnění pro ambasadory. Ta čísla žijí ve smlouvě, ne ve veřejné příručce.</Zakaz>
+
+  <div class="grid lg:grid-cols-[1.5fr_1fr] gap-4 items-start">
+    <Ukazka format="krabice" plocha="ink" popis="Certifikát ambasadora">
+      <div class="absolute inset-[4cqw] border-2 border-gold/40 pointer-events-none"></div>
+      <div class="w-full flex justify-between items-start">
+        <div class="font-mono text-[2.8cqw] tracking-[0.18em] uppercase text-gold">Ambassador · 2026</div>
+        <div class="font-display italic text-[7cqw] text-bone leading-none">eldee</div>
       </div>
-    </Mockup>
-  </section>
-
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Sponzor lockup</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Když eldee figuruje jako sponzor klubu/turnaje.</p>
-    <Mockup title="Sponzor podpis na klubovém materiálu" variant="digital">
-      <div class="bg-bone/5 w-full max-w-md p-5 rounded flex items-center justify-between">
-        <div class="font-mono text-caption text-bone/60">OFICIÁLNÍ PARTNER</div>
-        <div class="font-display italic text-h3 text-bone">eldee</div>
+      <div class="w-full text-left mt-auto">
+        <div class="font-mono text-[2.6cqw] tracking-[0.18em] uppercase text-bone/60 mb-[1cqw]">Certified</div>
+        <div class="font-display italic text-[11cqw] text-bone leading-none">JAKUB NOVÁK</div>
+        <div class="font-mono text-[2.8cqw] tracking-[0.15em] uppercase text-blood mt-[2cqw]">Code: JAKUB10</div>
       </div>
-    </Mockup>
-  </section>
+    </Ukazka>
 
-  <section class="mb-16">
-    <DosDonts
-      doTitle="Min. clear space"
-      doDesc="Mezi eldee a klubovým logem výška písmene e v eldee wordmarku."
-      dontTitle="Logo nakreslen příliš blízko"
-      dontDesc="Bez safe space působí logo eldee přilepené na partnera."
-    />
-  </section>
+    <Ukazka format="ctverec" plocha="podklad" popis="Co v kitu je">
+      <div class="font-mono text-[3.4cqw] tracking-[0.18em] uppercase text-gold mb-[5cqw]">Kit</div>
+      <div class="font-display italic text-[8.5cqw] text-bone leading-tight">Certifikát<br/>+ pár štulpen<br/>+ samolepky</div>
+    </Ukazka>
+  </div>
 
-  <section>
-    <h2 class="font-display text-h2 text-bone mb-2">Merch — jersey patch + banner</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Pro budoucí kolaborace s kluby — patch na dres, banner na stadion.</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      <Mockup title="Jersey patch (~8×3 cm)" variant="product">
-        <div class="bg-blood text-bone px-4 py-1 rounded">
-          <span class="font-display italic text-h3">eldee</span>
-        </div>
-      </Mockup>
-      <Mockup title="Stadion banner (3×0.5 m)" variant="digital">
-        <div class="bg-ink text-bone w-full py-4 px-6 rounded flex items-center justify-between">
-          <span class="font-display italic text-h2">eldee</span>
-          <span class="font-brush text-gold text-h3" style="transform:rotate(-2deg)">holy socks.</span>
-        </div>
-      </Mockup>
+  <Pravidla>
+    <Pravidlo typ="ok">Jméno ambasadora je na certifikátu největší prvek. Hrdina je hráč, ne značka.</Pravidlo>
+    <Pravidlo typ="ok">Kód se skládá ze jména a čísla, vždy verzálkami.</Pravidlo>
+    <Pravidlo typ="rozmer">Zlatý rámeček 2 px, odsazený od hrany o šířku písmene „e“.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Sponzor ────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Sponzor — podpis" meta={['na klubovém materiálu', 'výška wordmarku max 1/6 šířky']} />
+
+  <Ukazka format="pruh" plocha="podklad" popis="Podpis na klubovém materiálu">
+    <div class="flex items-center justify-between w-full">
+      <span class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-bone/60">Oficiální partner</span>
+      <span class="font-display italic text-[8cqw] text-bone leading-none">eldee</span>
     </div>
-  </section>
+  </Ukazka>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Na cizím materiálu drží eldee roli podpisu — malé, vpravo, bez claimu.</Pravidlo>
+    <Pravidlo typ="ne">Claim „One of Us.“ na klubovém materiálu. Ten patří jen na vlastní plochu.</Pravidlo>
+    <Pravidlo typ="ne">Svatozář v partnerském spojení. Nikdy.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Merch ──────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Merch pro kolaborace" meta={['nášivka ~8 × 3 cm', 'banner 3 × 0,5 m']} />
+
+  <div class="grid gap-4">
+    <Ukazka format="pruh" plocha="blood" popis="Nášivka na dres (~8 × 3 cm)">
+      <div class="text-center">
+        <span class="font-display italic text-[20cqw] text-bone leading-none">eldee</span>
+      </div>
+    </Ukazka>
+
+    <Ukazka format="banner" plocha="ink" popis="Banner na stadion (3 × 0,5 m)">
+      <div class="flex items-center justify-between w-full">
+        <span class="font-display italic text-[11cqw] text-bone leading-none">eldee</span>
+        <span class="font-brush text-gold text-[7cqw] -rotate-2">holy socks.</span>
+      </div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Nášivka jde vyšívat — žádné tenké linky ani drobné vnitřní tvary.</Pravidlo>
+    <Pravidlo typ="rozmer">Nejtenčí tah ve výšivce nejméně 4 mm v hotové velikosti.</Pravidlo>
+    <Pravidlo typ="ne">Zmenšovat wordmark na banneru pod výšku, kde se přestane číst ze třiceti metrů.</Pravidlo>
+  </Pravidla>
 
 </Layout>

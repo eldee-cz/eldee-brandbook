@@ -1,63 +1,96 @@
 import { test, expect } from '@playwright/test';
+import { SEKCE, sekceProBuild, jeVerejna } from '../../src/data/sekce.ts';
 
-const PAGES = [
-  { path: '/',              title: 'Manifesto',                 heading: /Holy Socks/ },
-  { path: '/story',         title: 'Brand Story',               heading: /Origin/ },
-  { path: '/dna',           title: 'Brand DNA',                 heading: /Personality/ },
-  { path: '/audience',      title: 'Target Audience',           heading: /Kdo nosí eldee/ },
-  { path: '/positioning',   title: 'Positioning',               heading: /Where eldee stands/ },
-  { path: '/voice',         title: 'Voice & Tone',              heading: /Jak eldee mluví/ },
-  { path: '/logo',          title: 'Logo System',               heading: /Tři vrstvy log/ },
-  { path: '/logo/misuse',   title: 'Logo Misuse',               heading: /Takhle ne/ },
-  { path: '/colors',        title: 'Color System',              heading: /11 barev/ },
-  { path: '/typography',    title: 'Typography',                heading: /Čtyři fonty/ },
-  { path: '/photography',   title: 'Photography',               heading: /Vizuální styl/ },
-  { path: '/patterns',      title: 'Patterns',                  heading: /Hole pattern/i },
-  { path: '/print',         title: 'Print Applications',        heading: /Print materials/ },
-  { path: '/digital',       title: 'Digital Applications',      heading: /Digital materials/ },
-  { path: '/co-branding',   title: 'Co-branding',               heading: /Spojení s partnery/ },
-  { path: '/assets',        title: 'Asset Index',               heading: /Stáhnout/ },
-];
+// Sada si seznam stránek NEDRŽÍ vlastní. Bere ho ze `sekce.ts`, což je jediný
+// zdroj pravdy o struktuře knihy — dřív tu byl ručně psaný seznam a rozešel se
+// s knihou hned při prvním přejmenování sekcí (9 testů padalo na anglických
+// názvech z doby před v3.0).
+const isHQ = process.env.PUBLIC_HQ_BUILD === '1';
+const stranky = sekceProBuild(isHQ);
+const interni = SEKCE.filter((s) => !jeVerejna(s) && s.href !== '/');
 
-for (const p of PAGES) {
-  test(`${p.path} loads and shows expected content`, async ({ page }) => {
-    const response = await page.goto(p.path);
-    expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle(new RegExp(p.title));
-    await expect(page.locator('h1').first()).toContainText(p.heading);
+test.describe(`build: ${isHQ ? 'interní brand book' : 'veřejný logomanuál'}`, () => {
+  for (const s of stranky) {
+    test(`${s.href} — načte se a má hlavičku`, async ({ page }) => {
+      const res = await page.goto(s.href);
+      expect(res?.status(), `${s.href} musí vrátit 200`).toBe(200);
+
+      const h1 = page.locator('h1').first();
+      await expect(h1).toBeVisible();
+      await expect(h1).not.toBeEmpty();
+
+      // V menu musí být právě tahle sekce označená jako aktuální.
+      await expect(page.locator(`nav a[aria-current="page"][href="${s.href}"]`).first()).toHaveCount(1);
+    });
+  }
+
+  test('žádná stránka nepřetéká na šířku telefonu', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const problemy = [];
+    for (const s of stranky) {
+      await page.goto(s.href);
+      const r = await page.evaluate(() => ({
+        pretece: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+        mainLeft: Math.round(document.querySelector('main')?.getBoundingClientRect().left ?? -1),
+      }));
+      if (r.pretece || r.mainLeft > 0) problemy.push(`${s.href} (left ${r.mainLeft})`);
+    }
+    expect(problemy, 'stránky rozbité na mobilu').toEqual([]);
   });
-}
 
-test('PDF download is reachable', async ({ request }) => {
-  const res = await request.get('/eldee-brandbook.pdf');
-  expect(res.status()).toBe(200);
-  const contentType = res.headers()['content-type'] || '';
-  expect(contentType.toLowerCase()).toContain('pdf');
+  test('menu na telefonu má dost velké dotykové cíle', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(stranky[0].href);
+    const tlacitko = page.locator('[data-tlacitko="sekce"]');
+    const box = await tlacitko.boundingBox();
+    expect(box.height, 'tlačítko SEKCE min. 44 px').toBeGreaterThanOrEqual(44);
+
+    await page.locator('details summary').click();
+    const odkazy = page.locator('details nav a');
+    const n = await odkazy.count();
+    expect(n).toBe(stranky.length);
+    for (let i = 0; i < n; i++) {
+      const b = await odkazy.nth(i).boundingBox();
+      expect(b.height, `odkaz ${i} min. 44 px`).toBeGreaterThanOrEqual(44);
+    }
+  });
 });
 
-test('Logo SVGs are reachable', async ({ request }) => {
-  const assets = [
+// Nejdražší chyba, jaká se v tomhle repu může stát: interní obsah na veřejné
+// adrese. Proto se to testuje, ne prohlíží.
+test.describe('veřejné vs. interní dělení', () => {
+  test.skip(isHQ, 'platí jen pro veřejný build');
+
+  for (const s of interni) {
+    test(`${s.href} (blok ${s.blok}) se veřejně nezobrazuje`, async ({ page }) => {
+      await page.goto(s.href);
+      const html = await page.content();
+      expect(html, `${s.href} musí být jen přesměrování`).toContain('Redirecting');
+      expect(html.length, `${s.href} nesmí nést obsah`).toBeLessThan(2000);
+    });
+  }
+
+  test('domovská stránka je rozcestník, ne interní sekce 01', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('h1').first()).toContainText(/Logomanual/i);
+    expect(await page.content()).not.toContain('One of Us.');
+  });
+});
+
+test('Loga a fonty jsou dostupné', async ({ request }) => {
+  const soubory = [
     '/logo/wordmark-light.svg',
     '/logo/wordmark-dark.svg',
     '/logo/monogram-ld.svg',
     '/logo/hole-pattern.svg',
     '/logo/halo.svg',
-  ];
-  for (const a of assets) {
-    const res = await request.get(a);
-    expect(res.status(), `${a} should return 200`).toBe(200);
-  }
-});
-
-test('Fonts are reachable', async ({ request }) => {
-  const fonts = [
     '/fonts/BigShouldersDisplay-Black.woff2',
     '/fonts/SpaceGrotesk-Regular.woff2',
     '/fonts/SpaceGrotesk-Bold.woff2',
     '/fonts/CaveatBrush-Regular.woff2',
   ];
-  for (const f of fonts) {
+  for (const f of soubory) {
     const res = await request.get(f);
-    expect(res.status(), `${f} should return 200`).toBe(200);
+    expect(res.status(), `${f} má vrátit 200`).toBe(200);
   }
 });

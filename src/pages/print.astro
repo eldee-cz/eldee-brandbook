@@ -1,100 +1,128 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import Mockup from '../components/Mockup.astro';
+import Ukazka from '../components/Ukazka.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
+import Zakaz from '../components/Zakaz.astro';
+
+// Velikosti uvnitř ukázek jsou v `cqw` = procento šířky rámečku. Viz Ukazka.astro.
 ---
-<Layout title="Print Applications">
+<Layout title="Tiskoviny">
   <SectionTitle
-    title="Print materials"
-    subtitle="Vizitka, krabička, hangtag, sticker, etiketa. Fyzické projevy značky."
+    title="Tiskoviny"
+    subtitle="Vizitka, krabička, hangtag, samolepky. Fyzické projevy značky — každý s rozměrem, materiálem a pravidly."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Vizitka (85×55 mm, matte black 350 g)</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Die-cut oválné díry skrz papír. Matte black s gold foil v premium edici.</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      <Mockup title="Vizitka — přední" variant="print">
-        <div class="bg-ink text-bone w-72 h-44 rounded p-6 flex flex-col justify-between" style="aspect-ratio:85/55">
-          <div class="flex items-center gap-2">
-            <span class="font-display text-2xl italic">eldee</span>
-            <span class="flex gap-1">
-              <span class="w-3 h-4 border border-bone rounded-full"></span>
-              <span class="w-3 h-4 border border-bone rounded-full"></span>
-            </span>
-          </div>
-          <div>
-            <div class="font-mono text-caption text-gold mb-1">CEO</div>
-            <div class="font-display text-h3 italic">LUKÁŠ HLEDÍK</div>
-          </div>
-        </div>
-      </Mockup>
-      <Mockup title="Vizitka — zadní" variant="print">
-        <div class="bg-ink text-bone w-72 h-44 rounded p-6 flex flex-col justify-center items-center text-center gap-2" style="aspect-ratio:85/55">
-          <div class="font-mono text-caption text-bone/80">lukas@eldee.cz</div>
-          <div class="font-mono text-caption text-bone/80">+420 ...</div>
-          <div class="font-mono text-caption text-bone/80">eldeeworld.com · @eldee.cz</div>
-          <div class="text-gold mt-1">
-            <span class="font-display italic text-h3">LD</span>
-          </div>
-        </div>
-      </Mockup>
-    </div>
-    
-  </section>
+  <!-- ── Vizitka ────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Vizitka" meta={['85 × 55 mm', 'matte black 350 g']} prvni />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Krabička (18×12×5 cm)</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Matte black premium varianta s gold foil wordmarkem. Vnitřek: hedvábný papír + UGC karta.</p>
-    <Mockup title="Krabička eldee" variant="print">
-      <div class="bg-ink text-bone w-80 h-52 rounded p-8 flex flex-col items-center justify-center gap-3 border border-gold/30">
-        <div class="w-24 h-4 border-2 border-gold rounded-full"></div>
-        <div class="font-display text-3xl italic">eldee</div>
-        <div class="font-brush text-gold text-xl" style="transform:rotate(-3deg)">holy socks.</div>
-        <div class="font-mono text-caption text-bone/60 mt-2">DROP 001 · XS · M · L</div>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <Ukazka format="vizitka" plocha="ink" popis="Přední strana">
+      <div class="flex items-center justify-between gap-[6cqw]">
+        <span class="font-display italic text-[9cqw] text-bone leading-none">eldee</span>
+        <span class="flex gap-[2.2cqw]">
+          <span class="w-[4cqw] h-[6.5cqw] rounded-full bg-black border border-bone/70 shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)]"></span>
+          <span class="w-[4cqw] h-[6.5cqw] rounded-full bg-black border border-bone/70 shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)]"></span>
+        </span>
       </div>
-    </Mockup>
-    
-  </section>
-
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Hangtag (5×8 cm, kraft 300g)</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Hangtag s LD monogramem + drop info + QR na product page.</p>
-    <Mockup title="Hangtag" variant="print">
-      <div class="bg-bone text-ink w-32 h-48 rounded p-4 flex flex-col items-center justify-between">
-        <div class="text-gold">
-          <span class="font-display italic text-h3">LD</span>
-        </div>
-        <div class="text-center">
-          <div class="font-display text-h3 italic">DROP 001</div>
-          <div class="font-mono text-caption text-blood mt-1">HOLY SOCKS</div>
-        </div>
-        <div class="w-12 h-12 bg-ink rounded grid grid-cols-3 gap-px p-1">
-          {Array.from({ length: 9 }).map(() => <div class="bg-bone"></div>)}
-        </div>
+      <div>
+        <div class="font-mono text-[2.6cqw] tracking-[0.18em] uppercase text-gold mb-[1cqw]">CEO</div>
+        <div class="font-display italic text-[7cqw] text-bone leading-none">LUKÁŠ HLEDÍK</div>
       </div>
-    </Mockup>
-  </section>
+    </Ukazka>
 
-  <section>
-    <h2 class="font-display text-h2 text-bone mb-2">Stickers (3 designy × 100 ks)</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Free pack v každé krabičce. Stickers slep + Holy Red + Gold.</p>
-    <div class="grid md:grid-cols-3 gap-4">
-      <Mockup title="LD monogram sticker" variant="print">
-        <div class="w-24 h-24 bg-blood rounded-full flex items-center justify-center">
-          <span class="font-display italic text-3xl text-ink">LD</span>
-        </div>
-      </Mockup>
-      <Mockup title="Wordmark sticker" variant="print">
-        <div class="w-40 h-12 bg-ink flex items-center justify-center rounded">
-          <span class="font-display italic text-2xl text-bone">eldee</span>
-        </div>
-      </Mockup>
-      <Mockup title="Brush sticker" variant="print">
-        <div class="bg-gold w-32 h-12 rounded flex items-center justify-center" style="transform:rotate(-3deg)">
-          <span class="font-brush text-2xl text-ink">holy socks.</span>
-        </div>
-      </Mockup>
-    </div>
-  </section>
+    <Ukazka format="vizitka" plocha="ink" popis="Zadní strana">
+      <div class="m-auto text-center space-y-[1.6cqw]">
+        <div class="font-mono text-[2.8cqw] tracking-[0.15em] text-bone/80">lukas@eldee.cz</div>
+        <div class="font-mono text-[2.8cqw] tracking-[0.15em] text-bone/80">+420 ...</div>
+        <div class="font-mono text-[2.8cqw] tracking-[0.15em] text-bone/80">eldeeworld.com · @eldee.cz</div>
+        <div class="font-display italic text-[7cqw] text-gold leading-none pt-[1cqw]">LD</div>
+      </div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Oválné díry jsou vyseknuté skrz papír, ne natištěné. Karta je ukázka produktu.</Pravidlo>
+    <Pravidlo typ="ne">Zlatá ražba na běžné edici. Gold foil patří jen na premium.</Pravidlo>
+    <Pravidlo typ="rozmer">85 × 55 mm, matný černý karton 350 g.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Krabička ───────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Krabička" meta={['18 × 12 × 5 cm', 'matte black + gold foil']} />
+
+  <div class="grid lg:grid-cols-[1.5fr_1fr] gap-4 items-start">
+    <Ukazka format="krabice" plocha="ink" popis="Víko krabičky">
+      <div class="w-[26cqw] h-[4cqw] border-2 border-gold rounded-full mb-[4cqw]"></div>
+      <div class="font-display italic text-[13cqw] text-bone leading-none">eldee</div>
+      <div class="font-brush text-gold text-[7cqw] -rotate-3 mt-[2cqw]">holy socks.</div>
+      <div class="font-mono text-[2.8cqw] tracking-[0.18em] uppercase text-bone/60 mt-[5cqw]">Drop 001 · XS · M · L</div>
+    </Ukazka>
+
+    <Ukazka format="ctverec" plocha="podklad" popis="Vnitřek">
+      <div class="font-mono text-[3.4cqw] tracking-[0.18em] uppercase text-gold mb-[5cqw]">Uvnitř</div>
+      <div class="font-display italic text-[9cqw] text-bone leading-tight">Hedvábný papír<br/>+ UGC karta</div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Wordmark na víku vždy vodorovně a na střed. Svatozář nad ním být nesmí.</Pravidlo>
+    <Pravidlo typ="ok">Velikosti na boku krabičky: XS · M · L. Žádné číselné rozpětí EU.</Pravidlo>
+    <Pravidlo typ="rozmer">18 × 12 × 5 cm, matná černá, zlatá ražba na wordmarku.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Hangtag ────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Hangtag" meta={['5 × 8 cm', 'kraft 300 g']} />
+
+  <div class="max-w-[220px]">
+    <Ukazka format="hangtag" plocha="bone" popis="Přední strana">
+      <div class="font-display italic text-[16cqw] text-gold leading-none">LD</div>
+      <div>
+        <div class="font-display italic text-[13cqw] text-ink leading-none">DROP 001</div>
+        <div class="font-mono text-[4.5cqw] tracking-[0.15em] uppercase text-blood mt-[2cqw]">Holy Socks</div>
+      </div>
+      <div class="w-[26cqw] h-[26cqw] bg-ink grid grid-cols-3 gap-px p-[1.5cqw]">
+        {Array.from({ length: 9 }).map(() => <div class="bg-bone"></div>)}
+      </div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">QR kód vede na stránku konkrétního dropu, ne na domovskou stránku.</Pravidlo>
+    <Pravidlo typ="ne">Tisknout hangtag na křídový papír. Kraft je součást hmatového dojmu.</Pravidlo>
+    <Pravidlo typ="rozmer">5 × 8 cm, kraft 300 g, otvor 5 mm od horní hrany.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Samolepky ──────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Samolepky" meta={['3 designy × 100 ks', 'zdarma v každé krabičce']} />
+
+  <Zakaz>Samolepka se nikdy nelepí na produkt ani na krabičku zvenku. Je to dárek, ne etiketa.</Zakaz>
+
+  <div class="grid sm:grid-cols-3 gap-4">
+    <Ukazka format="ctverec" plocha="podklad" popis="LD monogram">
+      <div class="w-[46cqw] h-[46cqw] bg-blood rounded-full flex items-center justify-center">
+        <span class="font-display italic text-[20cqw] text-ink leading-none">LD</span>
+      </div>
+    </Ukazka>
+
+    <Ukazka format="ctverec" plocha="podklad" popis="Wordmark">
+      <div class="w-[66cqw] h-[22cqw] bg-ink flex items-center justify-center">
+        <span class="font-display italic text-[14cqw] text-bone leading-none">eldee</span>
+      </div>
+    </Ukazka>
+
+    <Ukazka format="ctverec" plocha="podklad" popis="Brush">
+      <div class="w-[62cqw] h-[22cqw] bg-gold flex items-center justify-center -rotate-3">
+        <span class="font-brush text-[13cqw] text-ink leading-none">holy socks.</span>
+      </div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Tři designy v každém balení. Nikdy jen jeden — sbírka je součást zážitku.</Pravidlo>
+    <Pravidlo typ="ok">Brush varianta se sází nakřivo. Rovně vypadá jako cenovka.</Pravidlo>
+    <Pravidlo typ="rozmer">Monogram ⌀ 5 cm · wordmark 7 × 2,5 cm · brush 7 × 2,5 cm.</Pravidlo>
+  </Pravidla>
 
 </Layout>

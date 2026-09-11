@@ -27,7 +27,7 @@ const label = isHQ ? `BRAND BOOK · ${VERZE}` : 'LOGOMANUAL';
       <div class="font-display text-h3 italic text-bone leading-none">eldee</div>
       <div class="font-mono text-caption text-bone/50 mt-1 truncate">{label}</div>
     </a>
-    <span class="flex items-center gap-2.5 shrink-0 min-h-[48px] px-5 rounded border border-bone/25 text-bone">
+    <span data-tlacitko="sekce" class="flex items-center gap-2.5 shrink-0 min-h-[48px] px-5 rounded border border-bone/25 text-bone">
       <span class="font-mono text-caption">SEKCE</span>
       <svg class="w-3.5 h-3.5 transition-transform group-open:rotate-180" viewBox="0 0 12 8" fill="none" aria-hidden="true">
         <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -44,7 +44,7 @@ const label = isHQ ? `BRAND BOOK · ${VERZE}` : 'LOGOMANUAL';
   aria-label="Sekce brand booku"
   class="hidden lg:block w-64 shrink-0 border-r border-ink/40 bg-ink/95 p-6 sticky top-0 h-screen overflow-y-auto print:hidden"
 >
-  <a href="/" class="block mb-8">
+  <a href="/" class="block mb-6">
     <div class="font-display text-h2 italic text-bone">eldee</div>
     <div class="font-mono text-caption text-bone/50">{label}</div>
   </a>

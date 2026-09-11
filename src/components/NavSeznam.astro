@@ -19,18 +19,23 @@ const skupiny = poradiBloku
   .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
   .filter((g) => g.polozky.length > 0);
 
+// `/`.replace(/\/$/, '') je prázdný řetězec, kdežto aktuální cesta se
+// normalizuje na `/` — sekce 01 se proto v menu nikdy neoznačila jako
+// otevřená. Obě strany musí projít stejnou normalizací.
+const norm = (h: string) => h.replace(/\/$/, '') || '/';
+
 const radek = velke
   ? 'flex items-baseline gap-4 px-4 min-h-[48px] py-3 rounded text-body-lg'
-  : 'flex items-baseline gap-3 px-3 py-2 rounded text-body transition';
+  : 'flex items-baseline gap-3 px-3 py-1.5 rounded text-body leading-tight transition';
 ---
 {skupiny.map((g, gi) => (
-  <div class:list={[velke ? 'mb-7' : 'mb-6', gi > 0 && (velke ? 'pt-6 border-t border-bone/10' : 'pt-5 border-t border-bone/10')]}>
+  <div class:list={[velke ? 'mb-7' : 'mb-4', gi > 0 && (velke ? 'pt-6 border-t border-bone/10' : 'pt-4 border-t border-bone/10')]}>
     <div class:list={['font-mono text-caption text-bone/35 mb-2', velke ? 'px-4' : 'px-3']}>
       {isHQ ? `BLOK ${g.blok.id} · ${g.blok.nazev.toUpperCase()}` : g.blok.nazev.toUpperCase()}
     </div>
-    <ul class={velke ? 'space-y-1.5' : 'space-y-1'}>
+    <ul class={velke ? 'space-y-1.5' : 'space-y-0.5'}>
       {g.polozky.map((s) => {
-        const isActive = aktualni === s.href.replace(/\/$/, '');
+        const isActive = aktualni === norm(s.href);
         return (
           <li>
             <a

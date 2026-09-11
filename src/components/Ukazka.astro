@@ -17,7 +17,7 @@
 // u svislých formátů rovnou 0).
 interface Props {
   /** Poměr stran artboardu. */
-  format?: 'hero' | 'web' | 'ctverec' | 'svisle' | 'volny';
+  format?: 'hero' | 'web' | 'ctverec' | 'svisle' | 'vizitka' | 'hangtag' | 'krabice' | 'pruh' | 'banner' | 'volny';
   /** Popisek pod ukázkou. */
   popis?: string;
   /** Bezpečná zóna TikToku/Reels — 12 % nahoře i dole. Kreslí se do obrázku,
@@ -26,7 +26,7 @@ interface Props {
   /** Okótovat zónu procentem. Stačí u první ukázky v řadě. */
   zonaStitek?: boolean;
   /** Barva plochy artboardu. */
-  plocha?: 'ink' | 'uhel' | 'bone' | 'blood';
+  plocha?: 'ink' | 'uhel' | 'bone' | 'blood' | 'podklad';
 }
 
 const {
@@ -43,6 +43,12 @@ const POMER: Record<string, string> = {
   web:     'aspect-video',
   ctverec: 'aspect-square',
   svisle:  'aspect-[9/16]',
+  // Tiskové formáty mají poměr skutečného výrobku, ne obrázku o něm.
+  vizitka: 'aspect-[85/55]',
+  hangtag: 'aspect-[5/8]',
+  krabice: 'aspect-[3/2]',
+  pruh:    'aspect-[3/1]',
+  banner:  'aspect-[6/1]',
   volny:   '',
 };
 
@@ -52,6 +58,11 @@ const PLOCHA_LAYOUT: Record<string, string> = {
   web:     'absolute inset-0 px-[6cqw] justify-center',
   ctverec: 'absolute inset-0 p-[9cqw] justify-center items-center text-center',
   svisle:  'absolute inset-0 p-[12cqw] justify-center items-center text-center',
+  vizitka: 'absolute inset-0 p-[8cqw] justify-between',
+  hangtag: 'absolute inset-0 p-[9cqw] justify-between items-center text-center',
+  krabice: 'absolute inset-0 p-[8cqw] justify-center items-center text-center',
+  pruh:    'absolute inset-0 px-[5cqw] justify-center',
+  banner:  'absolute inset-0 px-[3cqw] justify-center',
   volny:   'p-8 md:p-10 justify-center',
 };
 
@@ -60,6 +71,8 @@ const BARVA: Record<string, string> = {
   uhel:  'bg-[#141414] text-bone',
   bone:  'bg-bone text-ink',
   blood: 'bg-blood text-bone',
+  // Neutrální podklad pro předmět, který se fotí NA něčem (samolepka, nášivka).
+  podklad: 'bg-bone/5 text-bone',
 };
 ---
 <figure class="min-w-0">
