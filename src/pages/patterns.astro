@@ -1,59 +1,82 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import Mockup from '../components/Mockup.astro';
+import Ukazka from '../components/Ukazka.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
+import Zakaz from '../components/Zakaz.astro';
+
+// Velikosti uvnitř ukázek jsou v `cqw` = procento šířky rámečku. Viz Ukazka.astro.
 ---
-<Layout title="Patterns & Graphics">
+<Layout title="Vzor">
   <SectionTitle
-    title="Hole pattern, halo, brush"
-    subtitle="Sekundární vizuální elementy, které doplňují loga."
+    title="Vzor a doplňkové prvky"
+    subtitle="Hole pattern, svatozář a brush. Doplňují logo — nikdy ho nenahrazují."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Hole Pattern</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Chráněný průmyslový vzor — 5×2 oválných děr. Geometrie pro vyšívání i pro grafiku.</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      <Mockup title="Standard 5×2" caption="Velikost ovál: 12×16 mm">
-        <img src="/logo/hole-pattern.svg" alt="Hole pattern" class="max-w-full" />
-      </Mockup>
-      <Mockup title="Repetitivní (wallpaper)" caption="Tile horizontálně i vertikálně">
-        <div class="grid grid-cols-3 gap-2 opacity-80">
-          <img src="/logo/hole-pattern.svg" alt="" />
-          <img src="/logo/hole-pattern.svg" alt="" />
-          <img src="/logo/hole-pattern.svg" alt="" />
-        </div>
-      </Mockup>
-    </div>
-  </section>
+  <!-- ── Hole pattern ───────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Hole pattern" meta={['ovál 12 × 16 mm', 'chráněný průmyslový vzor']} prvni />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Halo (Svatozář)</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Sekundární symbol — odkazuje na Holy Socks narrative. Vždy v gold.</p>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <Ukazka format="krabice" plocha="podklad" popis="Základní sestava 5 × 2">
+      <img src="/logo/hole-pattern.svg" alt="Hole pattern — pět krát dva oválné otvory" class="w-[72cqw] h-auto" />
+    </Ukazka>
 
-    <div class="bg-blood/12 border-l-[3px] border-blood px-5 py-4 mb-6 max-w-3xl">
-      <div class="font-mono text-caption text-blood font-bold mb-1.5">✕ NIKDY</div>
-      <p class="text-[17px] text-bone font-medium">Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru.</p>
-      <p class="text-body text-bone/70 mt-1.5">Každé zvlášť ano. Spolu vzniká náboženské čtení, které nechceme — fráze je v EU obsazená pro-life federací. Podrobně v sekci 01.</p>
-    </div>
-    <div class="grid md:grid-cols-2 gap-4">
-      <Mockup title="Standard halo" caption="Šířka = 1.5× šířky wordmarku">
-        <img src="/logo/halo.svg" alt="Halo" class="max-w-full" />
-      </Mockup>
-      <Mockup title="Halo + wordmark" caption="Nad logem v Holy momentech — nikdy vedle claimu">
-        <div class="flex flex-col items-center gap-1">
-          <img src="/logo/halo.svg" alt="Halo" class="w-32" />
-          <img src="/logo/wordmark-light.svg" alt="" class="w-40" />
-        </div>
-      </Mockup>
-    </div>
-  </section>
+    <Ukazka format="krabice" plocha="podklad" popis="Opakovaný jako plocha">
+      <div class="grid grid-cols-3 gap-[3cqw] opacity-80 w-full">
+        <img src="/logo/hole-pattern.svg" alt="" class="w-full h-auto" />
+        <img src="/logo/hole-pattern.svg" alt="" class="w-full h-auto" />
+        <img src="/logo/hole-pattern.svg" alt="" class="w-full h-auto" />
+      </div>
+    </Ukazka>
+  </div>
 
-  <section>
-    <h2 class="font-display text-h2 text-bone mb-2">Brush element</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Caveat Brush font používaný pro „holy socks" tagline. Nikdy jako hlavní wordmark.</p>
-    <Mockup title="Tagline brush" caption="V gold nebo blood red, max 1× per design">
-      <div class="font-brush text-[80px] text-gold" style="transform:rotate(-3deg)">holy socks.</div>
-    </Mockup>
-  </section>
+  <Pravidla>
+    <Pravidlo typ="ok">Vzor je chráněný průmyslový vzor. Geometrie se nepřekresluje, používá se dodaný soubor.</Pravidlo>
+    <Pravidlo typ="ok">Jako plocha se dlaždicuje vodorovně i svisle, vždy se stejnou roztečí.</Pravidlo>
+    <Pravidlo typ="rozmer">Jeden ovál 12 × 16 mm ve skutečné velikosti. Ve výšivce nikdy menší.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Svatozář ───────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Svatozář" meta={['poměr os 66 : 13', 'vždy zlatá #C9A227']} />
+
+  <Zakaz>Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru. Každé zvlášť ano — spolu vzniká náboženské čtení, které nechceme.</Zakaz>
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    <Ukazka format="krabice" plocha="podklad" popis="Samotná svatozář">
+      <img src="/logo/halo.svg" alt="Svatozář" class="w-[60cqw] h-auto" />
+    </Ukazka>
+
+    <Ukazka format="krabice" plocha="podklad" popis="Kde svatozář ve znaku žije">
+      <img src="/logo/wordmark-light.svg" alt="Wordmark eldee se svatozáří nad monogramem" class="w-[72cqw] h-auto" />
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Ve znaku svatozář už je — sedí nad monogramem LD. Samostatně se používá na produktu a obalu.</Pravidlo>
+    <Pravidlo typ="ne">Svatozář vedle hodnotového nebo náboženského textu. Ani jako vtip.</Pravidlo>
+    <Pravidlo typ="ne">Přidávat svatozář nad wordmark. Ten už jednu nese a vzniknou dvě.</Pravidlo>
+    <Pravidlo typ="rozmer">Samostatná svatozář: poměr os 66 : 13, tloušťka tahu 11 dílků. Vždy zlatá <code>#C9A227</code>.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Brush ──────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Brush" meta={['Caveat Brush', 'max 1× na design']} />
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    <Ukazka format="krabice" plocha="podklad" popis="Tagline — zlatá">
+      <div class="font-brush text-[22cqw] text-gold -rotate-3 leading-none">holy socks.</div>
+    </Ukazka>
+
+    <Ukazka format="krabice" plocha="podklad" popis="Tagline — krvavá červená">
+      <div class="font-brush text-[22cqw] text-blood-light -rotate-3 leading-none">holy socks.</div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Brush nese produktovou linku „holy socks.“, nikdy claim značky.</Pravidlo>
+    <Pravidlo typ="ne">Brush jako hlavní wordmark nebo jako nadpis. Je to podpis, ne logo.</Pravidlo>
+    <Pravidlo typ="rozmer">Nejvýš jednou na návrh, vždy nakřivo o 2–3°.</Pravidlo>
+  </Pravidla>
 
 </Layout>
