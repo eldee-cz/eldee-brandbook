@@ -3,6 +3,17 @@
     size: A4;
     margin: 16mm 14mm;
   }
+  /* Předěl bloku je plnobarevná stránka od kraje ke kraji, takže potřebuje
+     vlastní stránku bez okrajů. Okraje diktuje tahle @page deklarace, ne
+     `margin` předaný do page.pdf() v generate-pdf.mjs — ověřeno měřením:
+     s okraji i bez nich vycházel předěl na dvě stránky, dokud tady byly. */
+  @page predel {
+    size: A4;
+    margin: 0;
+  }
+  body.stranka-predel {
+    page: predel;
+  }
   html, body {
     background: white !important;
     color: #0A0A0A !important;
@@ -59,6 +70,64 @@
   .text-gold {
     color: #C9A227 !important;
   }
+  /* ── Předěl bloku ──────────────────────────────────────────────────────
+     Jediná plnobarevná stránka v celé tištěné knize. Kniha se na papíře
+     převrací do bílé (nahoře), ale předěl musí zůstat tmavý — v tištěném
+     brand booku je barevný list to, co při listování oddělí kapitolu.
+     Bílý předěl s nadpisem uprostřed je zbytečná stránka.
+
+     Okraje @page se pro tyhle stránky ruší v `scripts/generate-pdf.mjs`
+     (vykresluje je s margin 0), takže se plocha kreslí od kraje ke kraji.
+     Kdyby se okraje nechaly, byl by kolem tmavé plochy bílý rám a vypadalo
+     by to jako chyba tisku. */
+  /* Pozadí stránky pod předělem. Bez něj by případný milimetr rozdílu mezi
+     výškou plochy a A4 svítil bíle. `break-after` tu nesmí být: každá stránka
+     se do PDF vykresluje zvlášť, takže by jen přidal prázdný list (naměřeno
+     — předěl vycházel na 2 stránky). */
+  body.stranka-predel,
+  body.stranka-predel html {
+    background: #0A0A0A !important;
+  }
+  .predel {
+    background: #0A0A0A !important;
+    min-height: 297mm;          /* celá A4: stránka předělu nemá okraje (@page predel) */
+    padding: 30mm 24mm !important;
+    margin: 0 !important;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Globální převod „všechen text na černou“ musí uvnitř předělu neplatit.
+     Selektor s .predel má vyšší specificitu než ten globální, proto vyhrává. */
+  .predel,
+  .predel [class*="text-bone"],
+  .predel [class*="text-bone/"] {
+    color: #F5F5F0 !important;
+  }
+  .predel .text-bone\/35,
+  .predel .text-bone\/50,
+  .predel .text-bone\/55 {
+    color: #A8A8A0 !important;
+  }
+  /* Pruh a linky se tisknou, ne mizí. */
+  .predel .bg-blood { background: #B91C1C !important; }
+  .predel .bg-gold  { background: #C9A227 !important; }
+  .predel .bg-bone  { background: #F5F5F0 !important; }
+  .predel .border-bone\/15 { border-color: rgba(245, 245, 240, 0.25) !important; }
+  /* Tiskové velikosti: clamp() na obrazovce počítá z šířky okna, v PDF
+     z šířky stránky — bez pevných hodnot by nadpis na A4 zdrobněl. */
+  .predel .predel-nazev { font-size: 54pt !important; line-height: 0.92 !important; }
+  .predel .predel-veta  { font-size: 17pt !important; line-height: 1.35 !important; }
+  /* h1 má globálně `break-before: page`, což by před předělem nechalo
+     prázdnou stránku. Předěl už stránkou je. */
+  .predel h1 { break-before: avoid !important; }
+  /* Odkazy na sekce jsou na papíře obsah bloku, ne odkazy — podtržení
+     a vypsané URL z nich dělají technický blok textu. */
+  .predel a {
+    text-decoration: none !important;
+  }
+  .predel a::after { content: none !important; }
+
   /* Print typography */
   body {
     font-family: 'Space Grotesk', sans-serif;

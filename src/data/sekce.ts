@@ -16,6 +16,19 @@ export interface Blok {
   nazev: string;
   otazka: string;
   verejny: boolean;
+  /** Adresa předělové stránky bloku. */
+  href: string;
+  /**
+   * Věta, proč blok existuje — nese ji předělová stránka.
+   * Hlas značky, ne popis manuálu: `veta` je úder, `dovetek` ho doříká.
+   */
+  manifest: { veta: string; dovetek: string };
+  /**
+   * Akcentní barva bloku. Nese ji svislý pruh na předělu, ne drobný text —
+   * `#B91C1C` má na černé kontrast 4.7 a podle vlastního pravidla knihy
+   * (sekce Barvy) smí nést jen velké nápisy.
+   */
+  akcent: 'blood' | 'gold' | 'bone';
 }
 
 export const BLOKY: Record<BlokId, Blok> = {
@@ -24,20 +37,41 @@ export const BLOKY: Record<BlokId, Blok> = {
     nazev: 'Kdo jsme',
     otazka: 'Proč nám na tom záleží',
     verejny: false,
+    href: '/blok/kdo-jsme',
+    manifest: {
+      veta: 'Tuhle část zvenku nevidíš.',
+      dovetek: 'A přitom je jediný důvod, proč všechno ostatní dává smysl.',
+    },
+    akcent: 'blood',
   },
   II: {
     id: 'II',
     nazev: 'Jak vypadáme',
     otazka: 'Jak značka vypadá a zní',
     verejny: true,
+    href: '/blok/jak-vypadame',
+    manifest: {
+      veta: 'Značku poznáš dřív, než si přečteš jméno.',
+      dovetek: 'Tohle je všechno, podle čeho nás poznáš — a co se nemění podle nálady.',
+    },
+    akcent: 'gold',
   },
   III: {
     id: 'III',
     nazev: 'Jak to používáme',
     otazka: 'Co s tím smím dělat',
     verejny: true,
+    href: '/blok/jak-to-pouzivame',
+    manifest: {
+      veta: 'Značka nežije v manuálu.',
+      dovetek: 'Žije na krabičce, na profilu a na dresu klubu, co si nás vybral.',
+    },
+    akcent: 'bone',
   },
 };
+
+/** Pořadí bloků v knize. Na jednom místě, ať ho nikdo nepíše ručně podruhé. */
+export const PORADI_BLOKU: BlokId[] = ['I', 'II', 'III'];
 
 export interface Sekce {
   cislo: string;
@@ -45,6 +79,11 @@ export interface Sekce {
   href: string;
   blok: BlokId;
   popis: string;
+  /**
+   * Podstránky, které nejsou samostatnou sekcí, ale do PDF patří hned za ni
+   * (v menu se neukazují). Dřív žily jen v ručním seznamu v generate-pdf.mjs.
+   */
+  podstranky?: string[];
 }
 
 export const SEKCE: Sekce[] = [
@@ -58,7 +97,7 @@ export const SEKCE: Sekce[] = [
   { cislo: '07', nazev: 'Hlas a tón',    href: '/voice',       blok: 'I',   popis: 'Jak eldee mluví.' },
 
   // II — Jak vypadáme (veřejné)
-  { cislo: '08', nazev: 'Logo',          href: '/logo',        blok: 'II',  popis: 'Logo, varianty, monogram, wordmark.' },
+  { cislo: '08', nazev: 'Logo',          href: '/logo',        blok: 'II',  popis: 'Logo, varianty, monogram, wordmark.', podstranky: ['/logo/construction'] },
   { cislo: '09', nazev: 'Logo — co ne',  href: '/logo/misuse', blok: 'II',  popis: 'Zakázané úpravy loga.' },
   { cislo: '10', nazev: 'Barvy',         href: '/colors',      blok: 'II',  popis: 'HEX, RGB, CMYK, Pantone, kontrasty.' },
   { cislo: '11', nazev: 'Typografie',    href: '/typography',  blok: 'II',  popis: 'Fonty a jejich použití.' },
@@ -110,9 +149,41 @@ export function stitekSekce(sekce: Sekce): string {
  * Má se stránka ve veřejném logomanuálu schovat? Rozhoduje blok sekce,
  * takže se to nemusí hlídat stránku po stránce — nová sekce se schová
  * nebo zveřejní automaticky podle toho, do kterého bloku ji zařadíš.
+ * Platí i pro předělové stránky bloků.
  */
 export function skryvatVeVerejnem(path: string): boolean {
   const cista = path.replace(/\/$/, '') || '/';
+  const blok = Object.values(BLOKY).find((b) => b.href === cista);
+  if (blok) return !blok.verejny;
   const sekce = SEKCE.find((s) => s.href === cista);
   return sekce ? !jeVerejna(sekce) : false;
+}
+
+/** Bloky, které v daném buildu existují. Veřejný logomanuál nemá blok I. */
+export function blokyProBuild(hq: boolean): Blok[] {
+  return PORADI_BLOKU.map((id) => BLOKY[id]).filter((b) => hq || b.verejny);
+}
+
+/** Blok podle adresy jeho předělové stránky. */
+export function najdiBlok(href: string): Blok | undefined {
+  const cista = href.replace(/\/$/, '') || '/';
+  return Object.values(BLOKY).find((b) => b.href === cista);
+}
+
+/**
+ * Pořadí stránek, jak jdou v knize za sebou: předěl bloku, jeho sekce,
+ * podstránky sekcí. Odsud si bere pořadí PDF — dřív měl vlastní ručně psaný
+ * seznam, který zapomněl na novou sekci /produkt.
+ */
+export function poradiStranek(hq: boolean): string[] {
+  const sekce = sekceProBuild(hq);
+  const out: string[] = [];
+  for (const blok of blokyProBuild(hq)) {
+    out.push(blok.href);
+    for (const s of sekce.filter((x) => x.blok === blok.id)) {
+      out.push(s.href);
+      for (const p of s.podstranky ?? []) out.push(p);
+    }
+  }
+  return out;
 }

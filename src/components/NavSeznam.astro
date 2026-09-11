@@ -3,7 +3,7 @@
 // potřebuje boční menu na monitoru i vysouvací panel na telefonu — a dvě
 // kopie seznamu už se v téhle knize jednou rozešly (viz sekce.ts).
 import { isHQ } from '../buildMode';
-import { BLOKY, sekceProBuild, type BlokId } from '../data/sekce';
+import { blokyProBuild, sekceProBuild } from '../data/sekce';
 
 interface Props {
   /** Velké dotykové cíle pro telefon (min. 48 px na řádek). */
@@ -14,9 +14,8 @@ interface Props {
 const { velke = false, aktualni } = Astro.props;
 
 const sekce = sekceProBuild(isHQ);
-const poradiBloku: BlokId[] = ['I', 'II', 'III'];
-const skupiny = poradiBloku
-  .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
+const skupiny = blokyProBuild(isHQ)
+  .map((blok) => ({ blok, polozky: sekce.filter((s) => s.blok === blok.id) }))
   .filter((g) => g.polozky.length > 0);
 
 // `/`.replace(/\/$/, '') je prázdný řetězec, kdežto aktuální cesta se
@@ -30,9 +29,21 @@ const radek = velke
 ---
 {skupiny.map((g, gi) => (
   <div class:list={[velke ? 'mb-7' : 'mb-4', gi > 0 && (velke ? 'pt-6 border-t border-bone/10' : 'pt-4 border-t border-bone/10')]}>
-    <div class:list={['font-mono text-caption text-bone/35 mb-2', velke ? 'px-4' : 'px-3']}>
+    {/* Hlavička bloku vede na jeho předěl — jinak by byla předělová stránka
+        dostupná jen tím, že na ni člověk narazí při listování. */}
+    <a
+      href={g.blok.href}
+      aria-current={aktualni === norm(g.blok.href) ? 'page' : undefined}
+      class:list={[
+        'block font-mono text-caption rounded transition',
+        velke ? 'px-4 py-3 min-h-[44px] flex items-center mb-1' : 'px-3 py-1.5 mb-1',
+        aktualni === norm(g.blok.href)
+          ? 'bg-blood/20 text-bone'
+          : 'text-bone/35 hover:text-bone hover:bg-bone/5',
+      ]}
+    >
       {isHQ ? `BLOK ${g.blok.id} · ${g.blok.nazev.toUpperCase()}` : g.blok.nazev.toUpperCase()}
-    </div>
+    </a>
     <ul class={velke ? 'space-y-1.5' : 'space-y-0.5'}>
       {g.polozky.map((s) => {
         const isActive = aktualni === norm(s.href);

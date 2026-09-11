@@ -1,0 +1,77 @@
+---
+// Předěl bloku — celostránkový vstup do bloku knihy (v3.0, varianta „Manifest“).
+//
+// Proč manifest a ne jen číslo s názvem: brand book, který na předělu mlčí, je
+// katalog. Těžiště stránky je jedna věta, proč ten blok existuje — hlasem
+// značky. Sekce zůstávají dole jako tenký pruh: odkaz tam je, ale nesoutěží
+// s bočním menu.
+//
+// ⚠️ Stránka je stejně důležitá na papíře jako na webu. Tisková pravidla jsou
+// v `print.css` pod `.predel` — tam se tmavá plocha roztahuje přes okraje
+// @page a přebíjí globální převod „všechno na bílou“. Když se tady mění
+// struktura, projdi i tamto.
+import { isHQ } from '../buildMode';
+import { sekceProBuild, type Blok } from '../data/sekce';
+
+interface Props {
+  blok: Blok;
+}
+const { blok } = Astro.props;
+
+const sekce = sekceProBuild(isHQ).filter((s) => s.blok === blok.id);
+
+// Barvu bloku nese pruh, ne drobný text: #B91C1C má na černé kontrast 4.7
+// a vlastní pravidlo knihy (sekce Barvy) ho pouští jen na velké nápisy.
+const PRUH: Record<Blok['akcent'], string> = {
+  blood: 'bg-blood',
+  gold: 'bg-gold',
+  bone: 'bg-bone',
+};
+
+// Ve veřejném logomanuálu blok I chybí, takže by kniha začínala „Blokem II“.
+// Číslo bloku se tam proto nepíše — stejně jako ho dnes nepíše boční menu.
+const stitek = isHQ ? `Blok ${blok.id}` : null;
+---
+<section
+  class="predel relative flex flex-col justify-between gap-10
+         min-h-[calc(100svh-4.5rem)] lg:min-h-screen
+         px-6 py-12 sm:px-10 sm:py-16 lg:px-20 lg:py-20"
+>
+  <!-- Svislý pruh = jediný nositel barvy bloku. Po dvou stránkách víš,
+       kde v knize jsi, i když název nečteš. -->
+  <div class={`predel-pruh absolute left-0 top-0 bottom-0 w-1.5 lg:w-2 ${PRUH[blok.akcent]}`} aria-hidden="true"></div>
+
+  <header class="font-mono text-caption text-bone/55 flex flex-wrap gap-x-5 gap-y-1">
+    {stitek && <span>{stitek}</span>}
+    <span class="text-bone/35">{blok.otazka}</span>
+  </header>
+
+  <div class="max-w-4xl">
+    <h1 class="predel-nazev font-display italic text-bone leading-[0.92] text-[clamp(3rem,11vw,7rem)]">
+      {blok.nazev}
+    </h1>
+    <p class="predel-veta mt-7 text-[clamp(1.25rem,3.4vw,2rem)] leading-[1.35] font-medium text-bone">
+      {blok.manifest.veta}
+      <span class="text-bone/55 block">{blok.manifest.dovetek}</span>
+    </p>
+  </div>
+
+  <!-- Dotykové cíle 44 px: pruh vypadá jako řádek textu, ale na telefonu
+       se do každé položky dá trefit. -->
+  <nav aria-label={`Sekce bloku ${blok.nazev}`} class="border-t border-bone/15 pt-3">
+    <ul class="flex flex-wrap gap-x-1 gap-y-0 -ml-2.5">
+      {sekce.map((s) => (
+        <li>
+          <a
+            href={s.href}
+            class="inline-flex items-baseline gap-2 min-h-[44px] py-3 px-2.5 rounded
+                   font-mono text-caption text-bone/50 hover:text-bone hover:bg-bone/5 transition"
+          >
+            {s.cislo !== '—' && <span class="text-bone/35">{s.cislo}</span>}
+            <span>{s.nazev}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</section>

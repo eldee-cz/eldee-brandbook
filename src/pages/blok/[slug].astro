@@ -1,0 +1,28 @@
+---
+// Předělové stránky bloků. Nepíšou se ručně — generují se z `BLOKY`,
+// takže nový blok dostane předěl sám a nemůže se rozejít s menu ani s PDF.
+//
+// Veřejný logomanuál blok I vůbec nepostaví (`blokyProBuild`), takže interní
+// předěl nevznikne ani jako soubor v `dist/`. To je bezpečnější než redirect.
+import Layout from '../../components/Layout.astro';
+import PredelBloku from '../../components/PredelBloku.astro';
+import { isHQ } from '../../buildMode';
+import { blokyProBuild } from '../../data/sekce';
+
+export function getStaticPaths() {
+  const hq = import.meta.env.PUBLIC_HQ_BUILD === '1';
+  return blokyProBuild(hq).map((blok) => ({
+    params: { slug: blok.href.replace('/blok/', '') },
+    props: { blok },
+  }));
+}
+
+const { blok } = Astro.props;
+---
+<Layout
+  title={blok.nazev}
+  description={`${isHQ ? `Blok ${blok.id} — ` : ''}${blok.otazka}`}
+  plnaPlocha
+>
+  <PredelBloku blok={blok} />
+</Layout>

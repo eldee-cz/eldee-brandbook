@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { SEKCE, sekceProBuild, jeVerejna } from '../../src/data/sekce.ts';
+import { SEKCE, BLOKY, sekceProBuild, blokyProBuild, jeVerejna } from '../../src/data/sekce.ts';
 
 // Sada si seznam stránek NEDRŽÍ vlastní. Bere ho ze `sekce.ts`, což je jediný
 // zdroj pravdy o struktuře knihy — dřív tu byl ručně psaný seznam a rozešel se
@@ -7,6 +7,7 @@ import { SEKCE, sekceProBuild, jeVerejna } from '../../src/data/sekce.ts';
 // názvech z doby před v3.0).
 const isHQ = process.env.PUBLIC_HQ_BUILD === '1';
 const stranky = sekceProBuild(isHQ);
+const bloky = blokyProBuild(isHQ);
 const interni = SEKCE.filter((s) => !jeVerejna(s) && s.href !== '/');
 
 test.describe(`build: ${isHQ ? 'interní brand book' : 'veřejný logomanuál'}`, () => {
@@ -48,12 +49,62 @@ test.describe(`build: ${isHQ ? 'interní brand book' : 'veřejný logomanuál'}`
     await page.locator('details summary').click();
     const odkazy = page.locator('details nav a');
     const n = await odkazy.count();
-    expect(n).toBe(stranky.length);
+    // Sekce + hlavička každého bloku, která vede na jeho předěl.
+    expect(n).toBe(stranky.length + bloky.length);
     for (let i = 0; i < n; i++) {
       const b = await odkazy.nth(i).boundingBox();
       expect(b.height, `odkaz ${i} min. 44 px`).toBeGreaterThanOrEqual(44);
     }
   });
+});
+
+// Předěl bloku je jediná stránka knihy, která musí být stejně dobrá na papíře
+// jako na webu — proto se tiskové chování testuje, ne prohlíží.
+test.describe('předěly bloků', () => {
+  for (const b of bloky) {
+    test(`${b.href} — manifest, sekce bloku a barevný pruh`, async ({ page }) => {
+      const res = await page.goto(b.href);
+      expect(res?.status(), `${b.href} musí vrátit 200`).toBe(200);
+
+      await expect(page.locator('h1')).toHaveText(b.nazev);
+      await expect(page.locator('.predel-veta')).toContainText(b.manifest.veta);
+      await expect(page.locator('.predel-veta')).toContainText(b.manifest.dovetek);
+
+      // Odkazy na všechny sekce bloku, každý s dotykovým cílem 44 px.
+      const sekceBloku = stranky.filter((s) => s.blok === b.id);
+      const odkazy = page.locator('.predel nav a');
+      await expect(odkazy).toHaveCount(sekceBloku.length);
+      for (let i = 0; i < sekceBloku.length; i++) {
+        const box = await odkazy.nth(i).boundingBox();
+        expect(box.height, `odkaz ${i} na ${b.href} min. 44 px`).toBeGreaterThanOrEqual(44);
+      }
+
+      await expect(page.locator('.predel-pruh')).toBeVisible();
+    });
+
+    test(`${b.href} — na papíře zůstává tmavý a vejde se na jednu stránku`, async ({ page }) => {
+      await page.goto(b.href);
+      await page.emulateMedia({ media: 'print' });
+
+      const r = await page.evaluate(() => {
+        const el = document.querySelector('.predel');
+        const cs = getComputedStyle(el);
+        const nazev = document.querySelector('.predel-nazev');
+        return {
+          pozadi: cs.backgroundColor,
+          barvaTextu: getComputedStyle(nazev).color,
+          vyskaMM: el.getBoundingClientRect().height / 3.779527559,
+        };
+      });
+
+      // Zbytek knihy se na papíře převrací do bílé. Předěl ne — jinak je
+      // z barevného listu, který odděluje kapitolu, prázdná bílá stránka.
+      expect(r.pozadi, 'plocha předělu musí zůstat tmavá').toBe('rgb(10, 10, 10)');
+      expect(r.barvaTextu, 'název musí zůstat světlý').toBe('rgb(245, 245, 240)');
+      expect(r.vyskaMM, 'předěl se musí vejít na A4 (297 mm)').toBeLessThan(297);
+      expect(r.vyskaMM, 'předěl musí vyplnit stránku, ne být proužek').toBeGreaterThan(270);
+    });
+  }
 });
 
 // Nejdražší chyba, jaká se v tomhle repu může stát: interní obsah na veřejné

@@ -7,9 +7,15 @@ import { VERZE } from '../data/sekce';
 interface Props {
   title: string;
   description?: string;
+  /**
+   * Stránka si sází vlastní plochu od kraje ke kraji (předěl bloku).
+   * Bez tohohle by tmavá plocha předělu seděla v odsazeném sloupci jako
+   * karta uprostřed stránky, místo aby byla stránkou.
+   */
+  plnaPlocha?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, plnaPlocha = false } = Astro.props;
 const siteName = isHQ ? 'Brand Book' : 'Logomanual';
 const fullTitle = `${title} — eldee ${siteName}`;
 ---
@@ -24,15 +30,20 @@ const fullTitle = `${title} — eldee ${siteName}`;
     <link rel="icon" href="/favicon.svg" />
   </head>
   <!-- Na telefonu lišta nad obsahem, na monitoru menu vedle obsahu. -->
-  <body class="min-h-screen flex flex-col lg:flex-row">
+  <!-- `stranka-predel` drží při tisku tmavé pozadí i pod plochou předělu:
+       kdyby ta vyšla o milimetr nižší než A4, zůstal by dole bílý pruh
+       a vypadalo by to jako chyba tisku. -->
+  <body class:list={['min-h-screen flex flex-col lg:flex-row', plnaPlocha && 'stranka-predel']}>
     <NavSidebar />
-    <main class="flex-1 w-full max-w-5xl mx-auto px-5 sm:px-8 py-12 lg:px-16">
+    <main class:list={['flex-1 w-full min-w-0', plnaPlocha ? '' : 'max-w-5xl mx-auto px-5 sm:px-8 py-12 lg:px-16']}>
       <!-- Štítek sekce vypisuje SectionTitle. Layout ho vypisoval taky,
            takže na každé stránce stál dvakrát pod sebou. -->
       <slot />
-      <footer class="mt-32 pt-8 border-t border-bone/10 text-caption text-bone/40 print:hidden">
-        eldee · {isHQ ? `brand book ${VERZE}` : 'logomanual'} · © 2026 eldee
-      </footer>
+      {!plnaPlocha && (
+        <footer class="mt-32 pt-8 border-t border-bone/10 text-caption text-bone/40 print:hidden">
+          eldee · {isHQ ? `brand book ${VERZE}` : 'logomanual'} · © 2026 eldee
+        </footer>
+      )}
     </main>
   </body>
 </html>

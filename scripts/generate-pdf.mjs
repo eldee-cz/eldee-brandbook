@@ -1,32 +1,26 @@
 // Generuje single-file PDF z brand book webu.
-// Spouští Astro preview server, navštíví všech 18 stránek, vygeneruje per-page PDF,
-// spojí přes pdf-lib do public/eldee-brandbook.pdf.
+// Spouští Astro preview server, projde stránky v pořadí knihy, vygeneruje
+// per-page PDF a spojí je přes pdf-lib do public/eldee-brandbook.pdf.
+//
+// ⚠️ Seznam stránek se sem NEPÍŠE ručně. Bere se ze `src/data/sekce.ts`, což je
+// jediný zdroj pravdy o struktuře knihy — ručně psaný seznam tady zapomněl na
+// novou sekci /produkt a v PDF by chyběla.
 
 import { chromium } from 'playwright';
 import { PDFDocument } from 'pdf-lib';
 import { writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
+import { poradiStranek, blokyProBuild } from '../src/data/sekce.ts';
 
-const PAGES = [
-  '/',
-  '/story',
-  '/dna',
-  '/audience',
-  '/positioning',
-  '/voice',
-  '/logo',
-  '/logo/misuse',
-  '/logo/construction',
-  '/mascot',
-  '/colors',
-  '/typography',
-  '/photography',
-  '/patterns',
-  '/print',
-  '/digital',
-  '/co-branding',
-  '/assets',
-];
+// PDF se dělá z interního buildu — má celou knihu včetně bloku I.
+const HQ = true;
+const PAGES = poradiStranek(HQ);
+const PREDELY = new Set(blokyProBuild(HQ).map((b) => b.href));
+
+const OKRAJE = { top: '16mm', bottom: '16mm', left: '14mm', right: '14mm' };
+// Předěl bloku je plnobarevná stránka od kraje ke kraji. S okraji by kolem
+// tmavé plochy zůstal bílý rám a vypadalo by to jako chyba tisku.
+const BEZ_OKRAJU = { top: '0', bottom: '0', left: '0', right: '0' };
 
 const PORT = 4322;
 const BASE = `http://localhost:${PORT}`;
@@ -51,6 +45,16 @@ try {
   await waitForServer(BASE);
   console.log('Server up. Launching Chromium...');
 
+  // PDF je plná kniha, takže `dist/` musí být interní build. Z veřejného
+  // logomanuálu by celý blok I chyběl a v PDF by zůstaly stránky s
+  // přesměrováním. Spouštět přes `npm run generate-pdf`, který staví build:hq.
+  const kontrola = await fetch(`${BASE}${PAGES[0]}`);
+  if (!kontrola.ok) {
+    throw new Error(
+      `V dist/ není interní build — ${PAGES[0]} vrací ${kontrola.status}. Spusť "npm run generate-pdf".`,
+    );
+  }
+
   const browser = await chromium.launch();
   const ctx = await browser.newContext();
   const page = await ctx.newPage();
@@ -58,15 +62,22 @@ try {
   const merged = await PDFDocument.create();
 
   for (const path of PAGES) {
-    console.log(`Rendering ${path}...`);
+    const jePredel = PREDELY.has(path);
     await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
     await page.emulateMedia({ media: 'print' });
     const pdfBytes = await page.pdf({
       format: 'A4',
-      margin: { top: '16mm', bottom: '16mm', left: '14mm', right: '14mm' },
+      margin: jePredel ? BEZ_OKRAJU : OKRAJE,
       printBackground: true,
     });
     const src = await PDFDocument.load(pdfBytes);
+    const pocet = src.getPageCount();
+    console.log(`${path} → ${pocet} str.${jePredel ? ' (předěl, bez okrajů)' : ''}`);
+    // Předěl musí být právě jedna stránka. Když se rozteče na dvě, je v knize
+    // prázdný list a je lepší se to dozvědět tady než z tiskárny.
+    if (jePredel && pocet !== 1) {
+      throw new Error(`Předěl ${path} má ${pocet} stránek místo jedné — zkontroluj min-height v print.css`);
+    }
     const copied = await merged.copyPages(src, src.getPageIndices());
     copied.forEach((p) => merged.addPage(p));
   }
