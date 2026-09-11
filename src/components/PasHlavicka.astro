@@ -1,0 +1,21 @@
+---
+// Hlavička pásu uvnitř sekce (B2): název vlevo, technická data vpravo.
+// Rozměr a adresa patří k ukázce, ne do odstavce pod ní — když je čte oko
+// v jednom řádku s nadpisem, nemusí se pro ně nikam vracet.
+interface Props {
+  nazev: string;
+  /** Řádky technických dat vpravo (rozměr, doména, kadence). */
+  meta?: string[];
+  /** První pás v sekci nemá nad sebou co odsadit. */
+  prvni?: boolean;
+}
+const { nazev, meta = [], prvni = false } = Astro.props;
+---
+<div class={`flex items-baseline justify-between gap-6 mb-4 ${prvni ? 'mt-0' : 'mt-16'}`}>
+  <h2 class="font-display text-h2 text-bone">{nazev}</h2>
+  {meta.length > 0 && (
+    <div class="font-mono text-caption text-bone/45 text-right leading-[1.9] shrink-0">
+      {meta.map((r) => <div>{r}</div>)}
+    </div>
+  )}
+</div>

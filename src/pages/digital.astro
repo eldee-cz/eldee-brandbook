@@ -1,106 +1,135 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import Mockup from '../components/Mockup.astro';
+import Ukazka from '../components/Ukazka.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
+import Zakaz from '../components/Zakaz.astro';
+
+// Velikosti uvnitř ukázek jsou v `cqw` = procento šířky rámečku, ne obrazovky.
+// Ukázka je zmenšený artboard: na telefonu má být stejná kompozice, jen menší.
+// S `vw` nebo pevnými px se obsah z rámečku vylil a `overflow-hidden` ho ořízl.
 ---
-<Layout title="Digital Applications">
+<Layout title="Digitální aplikace">
   <SectionTitle
-    title="Digital materials"
-    subtitle="Web hero, IG post, TikTok cover, email signature, podcast cover."
+    title="Digitální aplikace"
+    subtitle="Web, Instagram, TikTok, e-mail, podcast. Každý formát má rozměr, pravidla a hotovou ukázku."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Web hero</h2>
-    <Mockup title="eldee.cz — hero" variant="digital">
-      <div class="bg-ink w-full max-w-md aspect-video rounded p-6 flex flex-col justify-between">
-        <div class="font-mono text-caption text-gold">DROP 001 · LIVE</div>
-        <div>
-          <div class="font-display italic text-h2 text-bone">Holy Socks.</div>
-          <div class="font-brush text-gold text-h3 inline-block" style="transform:rotate(-2deg)">no, just socks with holes.</div>
-        </div>
-        <div class="flex gap-2">
-          <div class="bg-blood text-bone px-4 py-2 rounded font-mono text-caption">SHOP NOW</div>
-          <div class="border border-bone/20 text-bone/80 px-4 py-2 rounded font-mono text-caption">PŘÍBĚH</div>
-        </div>
-      </div>
-    </Mockup>
-  </section>
+  <!-- ── Web ────────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Web — hero" meta={['21:9 · min 1920×1080', 'eldeeworld.com']} prvni />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Instagram post (1080×1080)</h2>
-    <div class="grid md:grid-cols-3 gap-4">
-      <Mockup title="Drop announcement" variant="digital">
-        <div class="bg-ink w-full aspect-square rounded p-6 flex flex-col justify-between">
-          <div class="font-mono text-caption text-gold">DROP 001</div>
-          <div class="font-display italic text-h2 text-blood">Holy<br/>Socks.</div>
-          <div class="font-mono text-caption text-bone/60">@ELDEE.CZ</div>
-        </div>
-      </Mockup>
-      <Mockup title="Meme post" variant="digital">
-        <div class="bg-bone w-full aspect-square rounded p-6 flex flex-col items-center justify-center text-center text-ink">
-          <div class="font-display italic text-h3 leading-tight">POV: trénink za 5 min,<br/>štulpny jsou ještě<br/>v krabičce.</div>
-          <div class="font-mono text-caption text-blood mt-4">@ELDEE.CZ · #HOLYSOCKS</div>
-        </div>
-      </Mockup>
-      <Mockup title="UGC repost" variant="digital">
-        <div class="bg-gradient-to-br from-blood to-blood-dark w-full aspect-square rounded p-6 flex flex-col justify-between text-bone">
-          <div class="font-mono text-caption">REPOST FROM @username</div>
-          <div class="font-display italic text-h2">„Tyhle jsou jiný."</div>
-          <div class="flex items-center gap-2">
-            <span class="font-display italic text-h3">eldee</span>
-            <span class="flex gap-0.5">
-              <span class="w-2 h-3 border border-bone rounded-full"></span>
-              <span class="w-2 h-3 border border-bone rounded-full"></span>
-            </span>
-          </div>
-        </div>
-      </Mockup>
+  <Zakaz>Svatozář se nesmí objevit v jednom záběru s claimem „One of Us.“</Zakaz>
+
+  <Ukazka format="hero" plocha="ink">
+    <div class="font-mono text-[1.25cqw] tracking-[0.18em] uppercase text-gold mb-[2.2cqw]">Drop 001 · live</div>
+    <div class="font-display italic text-[8.5cqw] leading-[0.95] text-bone">One of Us.</div>
+    <div class="font-brush text-gold text-[3.8cqw] -rotate-2 origin-left mt-[1cqw] mb-[3.1cqw]">
+      holy socks. no, just socks with holes.
     </div>
-  </section>
+    <div class="flex gap-[1.3cqw]">
+      <span class="bg-blood text-bone font-mono text-[1.35cqw] tracking-[0.1em] uppercase font-bold px-[2.2cqw] py-[1.1cqw]">Koupit</span>
+      <span class="border border-bone/40 text-bone/85 font-mono text-[1.35cqw] tracking-[0.1em] uppercase px-[2.2cqw] py-[1.1cqw]">Příběh</span>
+    </div>
+  </Ukazka>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">TikTok / Reels cover (1080×1920)</h2>
-    <Mockup title="TikTok cover" variant="digital">
-      <div class="bg-ink w-48 aspect-[9/16] rounded p-4 flex flex-col justify-between">
-        <div class="font-mono text-caption text-gold">DROP 001</div>
-        <div class="space-y-2">
-          <div class="font-display italic text-h2 text-bone leading-none">HOLY<br/>SOCKS.</div>
-          <div class="font-brush text-gold text-h3" style="transform:rotate(-3deg)">drop incoming.</div>
-        </div>
-        <div class="font-mono text-caption text-bone/60">@eldee.cz</div>
-      </div>
-    </Mockup>
-  </section>
+  <Pravidla>
+    <Pravidlo typ="ok">Claim značky nahoře, produktová linka pod ním. Nikdy obráceně.</Pravidlo>
+    <Pravidlo typ="ok">Jedno hlavní tlačítko v Blood Red, druhé jen obrys.</Pravidlo>
+    <Pravidlo typ="rozmer">Poměr 21:9, nejméně 1920×1080 px.</Pravidlo>
+  </Pravidla>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Email signature</h2>
-    <Mockup title="Lukáš signature" variant="digital">
-      <div class="bg-bone/5 border border-bone/10 rounded p-5 w-full max-w-md text-bone/80">
-        <div class="flex items-baseline gap-3 mb-2">
-          <span class="font-display italic text-h3 text-bone">Lukáš Hledík</span>
-          <span class="font-mono text-caption text-bone/40">CEO</span>
-        </div>
-        <div class="font-display italic text-h3 text-blood">eldee</div>
-        <div class="font-mono text-caption text-bone/60 mt-3 space-y-0.5">
-          <div>lukas@eldee.cz</div>
-          <div>eldee.cz · @eldee.cz</div>
-        </div>
-      </div>
-    </Mockup>
-  </section>
+  <!-- ── Instagram ──────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Instagram" meta={['1080×1080', 'rytmus 1 video týdně']} />
 
-  <section>
-    <h2 class="font-display text-h2 text-bone mb-2">Podcast cover (3000×3000)</h2>
-    <Mockup title="eldee podcast cover" variant="digital">
-      <div class="bg-ink w-64 aspect-square rounded p-6 flex flex-col justify-between border border-gold/40">
-        <div class="font-mono text-caption text-gold">EPIZODA 01</div>
-        <div class="space-y-2">
-          <div class="font-display italic text-h1 text-bone leading-none">HOLY<br/>SOCKS.</div>
-          <div class="font-brush text-gold text-h3" style="transform:rotate(-2deg)">podcast.</div>
-        </div>
-        <div class="font-mono text-caption text-bone/60">LUKÁŠ HLEDÍK</div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <Ukazka format="ctverec" plocha="ink" popis="Drop announcement">
+      <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-gold mb-[4.5cqw]">Drop 001</div>
+      <div class="font-display italic text-[14.5cqw] leading-[0.95] text-blood">Holy<br/>Socks.</div>
+      <div class="font-mono text-[3.2cqw] tracking-[0.18em] text-bone/40 mt-[5cqw]">@eldee.cz</div>
+    </Ukazka>
+
+    <Ukazka format="ctverec" plocha="bone" popis="Meme — pilíř comedy">
+      <div class="font-display italic text-[10.5cqw] leading-tight text-ink">
+        POV: trénink za 5 minut, štulpny ještě v krabičce.
       </div>
-    </Mockup>
-  </section>
+      <div class="font-mono text-[3.2cqw] tracking-[0.18em] text-blood mt-[6cqw]">#holysocks</div>
+    </Ukazka>
+
+    <Ukazka format="ctverec" plocha="blood" popis="UGC repost — razítko">
+      <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-bone/70 mb-[4.5cqw]">Repost</div>
+      <div class="font-display italic text-[12.5cqw] leading-[1.05] text-bone">„Tyhle<br/>jsou<br/>jiný.“</div>
+      <div class="font-brush text-[8.5cqw] text-bone mt-[5cqw]">one of us.</div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Hrdina je vždycky hráč, nikdy produkt.</Pravidlo>
+    <Pravidlo typ="ok">Mluvíme „my“, ne „oni“.</Pravidlo>
+    <Pravidlo typ="ne">„One of Us.“ není nápis na obrázku. Je to odpověď hráči, který přinesl důkaz.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── TikTok / Reels ─────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="TikTok / Reels" meta={['1080×1920', 'bezpečná zóna 12 %']} />
+
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <Ukazka format="svisle" plocha="ink" zona zonaStitek popis="Drop">
+      <div class="font-mono text-[4.6cqw] tracking-[0.15em] uppercase text-gold mb-[5cqw]">Drop 001</div>
+      <div class="font-display italic text-[16.5cqw] leading-[0.95] text-bone">ONE OF<br/>US.</div>
+      <div class="font-brush text-[10cqw] text-gold mt-[4cqw]">drop incoming.</div>
+    </Ukazka>
+
+    <Ukazka format="svisle" plocha="uhel" zona popis="Comedy">
+      <div class="font-display italic text-[15.5cqw] leading-[0.95] text-bone">STŘÍHAT<br/>NEBO<br/>NOSIT?</div>
+      <div class="font-mono text-[4.6cqw] tracking-[0.15em] text-bone/40 mt-[5cqw]">@eldee.cz</div>
+    </Ukazka>
+
+    <Ukazka format="svisle" plocha="bone" zona popis="Player hype">
+      <div class="font-display italic text-[16cqw] leading-[0.95] text-ink">PRVNÍ<br/>ZÁPAS</div>
+      <div class="font-mono text-[4.6cqw] tracking-[0.15em] text-blood mt-[5cqw]">holy socks</div>
+    </Ukazka>
+
+    <Ukazka format="svisle" plocha="blood" zona popis="Founder / návod">
+      <div class="font-display italic text-[14.5cqw] leading-[0.95] text-bone">JAK SE<br/>MĚŘÍ<br/>LÝTKO</div>
+      <div class="font-brush text-[9.5cqw] text-bone mt-[4cqw]">návod.</div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ne">Text do zlatě vyznačené zóny. Překryje ho rozhraní aplikace.</Pravidlo>
+    <Pravidlo typ="ok">Titulek do tří slov. Zbytek řekne obraz.</Pravidlo>
+    <Pravidlo typ="ok">Obálka patří k pilíři obsahu, ne k náhodné estetice.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── E-mail a podcast ───────────────────────────────────────────────── -->
+  <PasHlavicka nazev="E-mail a podcast" meta={['podpis 480 px', 'obálka 3000×3000']} />
+
+  <div class="grid lg:grid-cols-[1.4fr_1fr] gap-4 items-start">
+    <!-- Podpis je jediná ukázka v reálné velikosti — čte se, neprohlíží. -->
+    <Ukazka format="volny" plocha="ink" popis="Podpis do e-mailu">
+      <div class="flex items-baseline gap-3 flex-wrap">
+        <span class="font-display italic text-h2 text-bone">Lukáš Hledík</span>
+        <span class="font-mono text-caption text-bone/45">CEO</span>
+      </div>
+      <div class="font-display italic text-h3 text-blood mt-3 mb-3.5">eldee</div>
+      <div class="font-mono text-caption text-bone/55 leading-[2.1]">
+        <div>lukas@eldee.cz</div>
+        <div>eldeeworld.com · @eldee.cz</div>
+      </div>
+    </Ukazka>
+
+    <Ukazka format="ctverec" plocha="ink" popis="Obálka podcastu">
+      <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-gold mb-[4.5cqw]">Epizoda 01</div>
+      <div class="font-display italic text-[14cqw] leading-[0.95] text-bone">HOLY<br/>SOCKS.</div>
+      <div class="font-brush text-[8.7cqw] text-gold mt-[4cqw]">podcast.</div>
+    </Ukazka>
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Podpis: jméno, role, značka, kontakt. Nic víc.</Pravidlo>
+    <Pravidlo typ="ok">Role se píše česky, jak je ve firmě.</Pravidlo>
+    <Pravidlo typ="ne">Claim značky na obálce podcastu. Ta drží produktovou linku.</Pravidlo>
+  </Pravidla>
 
 </Layout>

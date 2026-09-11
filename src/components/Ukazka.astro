@@ -1,0 +1,82 @@
+---
+// Ukázka = artboard (B2).
+//
+// Čím se to liší od Mockup.astro: tam měl rámeček natvrdo poměr 4:3 a obsah
+// v něm seděl jako menší krabička uvnitř větší. Svislá obálka TikToku (9:16)
+// tak plavala uprostřed prázdna a čtverec IG měl prázdno po stranách.
+// Tady má rámeček poměr toho formátu, který ukazuje — ukázka je ta plocha.
+//
+// Velikosti uvnitř se počítají v `cqw` = procento šířky rámečku, aby ukázka
+// byla na telefonu stejná kompozice, jen menší.
+//
+// ⚠️ Proto jsou tady DVĚ vnořené vrstvy, ne jedna:
+//    vnější = kontejner (drží poměr, měří šířku) — nesmí mít odsazení v cqw
+//    vnitřní = plocha s odsazením v cqw
+// Když odsazení v cqw sedí na kontejneru samotném, jeho šířka závisí sama na
+// sobě a prohlížeč to vyřeší nesmyslem (naměřeno: písmo 3,9 px místo 41,8 px,
+// u svislých formátů rovnou 0).
+interface Props {
+  /** Poměr stran artboardu. */
+  format?: 'hero' | 'web' | 'ctverec' | 'svisle' | 'volny';
+  /** Popisek pod ukázkou. */
+  popis?: string;
+  /** Bezpečná zóna TikToku/Reels — 12 % nahoře i dole. Kreslí se do obrázku,
+      protože „nedávej text do krajů" jako věta si nikdo nepřeměří. */
+  zona?: boolean;
+  /** Okótovat zónu procentem. Stačí u první ukázky v řadě. */
+  zonaStitek?: boolean;
+  /** Barva plochy artboardu. */
+  plocha?: 'ink' | 'uhel' | 'bone' | 'blood';
+}
+
+const {
+  format = 'volny',
+  popis,
+  zona = false,
+  zonaStitek = false,
+  plocha = 'ink',
+} = Astro.props;
+
+/** Poměr stran — na kontejneru. */
+const POMER: Record<string, string> = {
+  hero:    'aspect-[21/9]',
+  web:     'aspect-video',
+  ctverec: 'aspect-square',
+  svisle:  'aspect-[9/16]',
+  volny:   '',
+};
+
+/** Odsazení a zarovnání — na vnitřní ploše, v cqw. */
+const PLOCHA_LAYOUT: Record<string, string> = {
+  hero:    'absolute inset-0 px-[7cqw] justify-center',
+  web:     'absolute inset-0 px-[6cqw] justify-center',
+  ctverec: 'absolute inset-0 p-[9cqw] justify-center items-center text-center',
+  svisle:  'absolute inset-0 p-[12cqw] justify-center items-center text-center',
+  volny:   'p-8 md:p-10 justify-center',
+};
+
+const BARVA: Record<string, string> = {
+  ink:   'bg-ink text-bone',
+  uhel:  'bg-[#141414] text-bone',
+  bone:  'bg-bone text-ink',
+  blood: 'bg-blood text-bone',
+};
+---
+<figure class="min-w-0">
+  <div class={`@container relative overflow-hidden border border-bone/10 ${POMER[format]} ${BARVA[plocha]}`}>
+    <div class={`flex flex-col ${PLOCHA_LAYOUT[format]}`}>
+      <slot />
+    </div>
+    {zona && (
+      <>
+        <div class="absolute inset-x-0 top-0 h-[12%] border-b border-dashed border-gold/55 bg-gold/[0.07] pointer-events-none">
+          {zonaStitek && <span class="absolute right-1.5 bottom-1 font-mono text-[7px] tracking-[0.1em] text-gold/90">12 %</span>}
+        </div>
+        <div class="absolute inset-x-0 bottom-0 h-[12%] border-t border-dashed border-gold/55 bg-gold/[0.07] pointer-events-none">
+          {zonaStitek && <span class="absolute right-1.5 bottom-1 font-mono text-[7px] tracking-[0.1em] text-gold/90">12 %</span>}
+        </div>
+      </>
+    )}
+  </div>
+  {popis && <figcaption class="font-mono text-caption text-bone/45 mt-2.5">{popis}</figcaption>}
+</figure>
