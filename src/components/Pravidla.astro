@@ -1,7 +1,15 @@
 ---
 // Pruh karet pod ukázkou. Na mobilu (95 % návštěv) se sesype do jednoho sloupce,
 // takže rozhoduje pořadí: nejdřív co dělat, pak co nikdy.
+interface Props {
+  /**
+   * Karty pod sebou místo do mřížky — pro úzký levý sloupec varianty A,
+   * kde by třísloupcová mřížka nechala v každé kartě dvě slova na řádek.
+   */
+  sloupec?: boolean;
+}
+const { sloupec = false } = Astro.props;
 ---
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mt-4">
+<div class:list={[sloupec ? 'flex flex-col gap-3.5 mt-5' : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mt-4']}>
   <slot />
 </div>

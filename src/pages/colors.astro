@@ -1,28 +1,92 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import ColorGroup from '../components/ColorGroup.astro';
+import PasA from '../components/PasA.astro';
+import TabulkaBarev from '../components/TabulkaBarev.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
+import Zakaz from '../components/Zakaz.astro';
 import colorsData from '../data/colors.json';
+import { pomer, INK } from '../data/kontrast';
+
+// Varianta A (pravidlo vede): HEX/RGB/CMYK/Pantone je tabulka, ne galerie,
+// a pravidlo patří ke své skupině barev — ne do seznamu na konci stránky,
+// kam se člověk hledající CMYK zlaté nikdy nedostane.
+const skupina = (id: string) => colorsData.groups.find((g) => g.id === id)!;
+
+// Čísla v textu se počítají ze stejného zdroje jako tabulka, ať se nemůžou
+// rozejít. Dřív byla vypsaná ručně a nesouhlasila.
+const k = (hex: string) => pomer(hex, INK).toFixed(1);
 ---
-<Layout title="Color System">
+<Layout title="Barvy">
   <SectionTitle
     title="11 barev, 4 vrstvy"
-    subtitle="Plný color systém s HEX, RGB, CMYK, Pantone a WCAG ratios."
+    subtitle="Černá nese plochu, červená značku, zlatá výjimečné momenty. Drop barvy se mění, zbytek ne."
   />
 
-  {colorsData.groups.map((g) => <ColorGroup {...g} />)}
+  <PasA
+    nazev="Canvas"
+    popis="Neutrální vrstva. Tvoří 90 % vizuálního pole — všechno ostatní je akcent na ní."
+    spec={['Podíl · ~90 % plochy', 'Podklad · Carbon Black']}
+    prvni
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Canvas drží plochu vždycky. Barevná plocha je výjimka, ne výchozí stav.</Pravidlo>
+      <Pravidlo typ="ok">Off-white je jediná světlá plocha značky. Čistě bílou nepoužíváme.</Pravidlo>
+    </Pravidla>
+    <TabulkaBarev barvy={skupina('canvas').colors} legenda />
+  </PasA>
 
-  <section class="mt-16 bg-ink/60 border border-bone/10 rounded-lg p-8">
-    <h2 class="font-display text-h2 text-bone mb-4">Pravidla použití</h2>
-    <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
-      <li>· <strong>Canvas</strong> tvoří 90 % vizuálního pole. Vždy.</li>
-      <li>· <strong>Blood Red</strong> = signature accent. Hlavní wordmark, CTA tlačítka, hero akcenty.</li>
-      <li>· <strong>Burnished Gold</strong> = premium moments. Holy edice, hangtag foil, ambasador certifikát.</li>
-      <li>· <strong>Drop accents</strong> = sezónní, jen pro konkrétní drop kampaň. Nikdy nesměšuj 2 drop colors v jednom designu.</li>
-      <li>· <strong>WCAG 4.5:1</strong> minimum pro běžný text, 3:1 pro velký text (h1/h2). Vždy ověř kontrast.</li>
-      <li>· <strong>Blood Red na černé má kontrast 4.7</strong> — projde o vlásek. Používej ji na velké nápisy, tlačítka a akcenty, <strong>nikdy na drobný text</strong>. Blood Red Light (#DC2626) má jen 4.0 a na běžný text nesmí vůbec.</li>
-      <li>· <strong>Zlatá (7.6) je bezpečná</strong> — když si nejsi jistý čitelností na černé, sáhni po ní.</li>
-    </ul>
-  </section>
+  <PasA
+    nazev="Signature"
+    popis="Blood Red je barva značky. Nese wordmark, hlavní tlačítko a akcent — a nic víc."
+    spec={[`Blood Red na černé · ${k('#B91C1C')}`, 'Stálost · 5+ let']}
+  >
+    <Fragment slot="pravidla">
+      <Zakaz>
+        Blood Red nikdy na drobný text na černé. Kontrast {k('#B91C1C')} stačí jen na nápisy
+        od 24 px, nebo od 19 px tučně.
+      </Zakaz>
+      <Pravidla sloupec>
+        <Pravidlo typ="ok">Jedno hlavní tlačítko v Blood Red na obrazovku. Druhé jen obrys.</Pravidlo>
+        <Pravidlo typ="ne">
+          Blood Red Dark má na černé kontrast {k('#7F1D1D')} — jako text neprojde nikde.
+          Zbývá mu plocha, pruh a ikona.
+        </Pravidlo>
+        <Pravidlo typ="ok">
+          Když si nejsi jistý čitelností na černé, sáhni po zlaté ({k('#C9A227')}) nebo po Off-white.
+        </Pravidlo>
+      </Pravidla>
+    </Fragment>
+    <TabulkaBarev barvy={skupina('signature').colors} />
+  </PasA>
 
+  <PasA
+    nazev="Premium Accent"
+    popis="Zlatá je výjimka, ne druhá značková barva. Holy edice, foil na hangtagu, certifikát ambasadora."
+    spec={[`Burnished Gold na černé · ${k('#C9A227')}`, 'Tisk · foil, ne CMYK']}
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Zlatá je bezpečná i na drobný text — je to nejčitelnější akcent značky.</Pravidlo>
+      <Pravidlo typ="ne">Zlatá a Blood Red vedle sebe jako dva akcenty v jednom záběru. Jeden vede.</Pravidlo>
+      <Pravidlo typ="rozmer">V tisku foil, ne CMYK — zlatá namíchaná ze čtyř barev je špinavě žlutá.</Pravidlo>
+    </Pravidla>
+    <TabulkaBarev barvy={skupina('premium').colors} />
+  </PasA>
+
+  <PasA
+    nazev="Drop Accents"
+    popis="Sezónní barvy jednoho dropu. Nepatří do identity — mění se a zase odejdou."
+    spec={['Platnost · jeden drop', 'Počet · jedna na kampaň']}
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ne">Dvě drop barvy v jednom designu. Vždycky jen jedna.</Pravidlo>
+      <Pravidlo typ="ne">Drop barva na logu, wordmarku nebo v podpisu. Zůstává v kampani.</Pravidlo>
+      <Pravidlo typ="ne">
+        Electric Blue na drobný text na černé — má jen {k('#2563EB')}, stejně jako Blood Red
+        unese pouze velké nápisy.
+      </Pravidlo>
+    </Pravidla>
+    <TabulkaBarev barvy={skupina('drop').colors} />
+  </PasA>
 </Layout>

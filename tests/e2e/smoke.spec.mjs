@@ -145,3 +145,53 @@ test('Loga a fonty jsou dostupné', async ({ request }) => {
     expect(res.status(), `${f} má vrátit 200`).toBe(200);
   }
 });
+
+// Kontrasty v sekci Barvy se počítají z HEX, ne opisují z dat — dřív byly
+// vypsané ručně a sedm z jedenácti hodnot nesedělo. Tohle to hlídá.
+test.describe('kontrasty v sekci Barvy', () => {
+  test('čísla v tabulce sedí na skutečný kontrast barvy', async ({ page }) => {
+    await page.goto('/colors');
+
+    const radky = await page.locator('.tabulka-barev tbody tr').evaluateAll((trs) =>
+      trs.map((tr) => {
+        const bunky = tr.querySelectorAll('td');
+        return {
+          hex: bunky[2].textContent.trim(),
+          naInk: parseFloat(bunky[5].textContent),
+          naBone: parseFloat(bunky[6].textContent),
+        };
+      }),
+    );
+
+    const kanal = (v) => {
+      const c = v / 255;
+      return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    };
+    const jas = (hex) => {
+      const h = hex.replace('#', '');
+      return (
+        0.2126 * kanal(parseInt(h.slice(0, 2), 16)) +
+        0.7152 * kanal(parseInt(h.slice(2, 4), 16)) +
+        0.0722 * kanal(parseInt(h.slice(4, 6), 16))
+      );
+    };
+    const pomer = (a, b) => {
+      const l1 = Math.max(jas(a), jas(b));
+      const l2 = Math.min(jas(a), jas(b));
+      return (l1 + 0.05) / (l2 + 0.05);
+    };
+
+    expect(radky.length, 'tabulka musí mít řádky').toBeGreaterThan(0);
+    for (const r of radky) {
+      expect(r.naInk, `${r.hex} na černé`).toBeCloseTo(pomer(r.hex, '#0A0A0A'), 1);
+      expect(r.naBone, `${r.hex} na světlé`).toBeCloseTo(pomer(r.hex, '#F5F5F0'), 1);
+    }
+  });
+
+  test('Blood Red je označená jako nevhodná pro drobný text na černé', async ({ page }) => {
+    await page.goto('/colors');
+    const bunka = page.locator('.tabulka-barev tbody tr', { hasText: 'Blood Red' }).first().locator('td').nth(5);
+    await expect(bunka).toHaveText('3.1');
+    await expect(bunka).toHaveClass(/text-gold/);
+  });
+});

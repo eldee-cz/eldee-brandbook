@@ -1,0 +1,39 @@
+---
+// Vzorek písma do pravého sloupce varianty A.
+//
+// Ukázka musí být dost velká, aby se na ní dal poznat tvar písmen — proto
+// jeden velký řádek, ne odstavec. Technická data (řezy, licence, zdroj)
+// jsou pod ním v monu, protože se čtou jinak než se dívá na tvar.
+interface Props {
+  fontId: 'display' | 'body' | 'brush' | 'mono';
+  nazev: string;
+  ukazka: string;
+  rezy: string;
+  licence: string;
+  zdroj: string;
+  odkaz?: string;
+}
+const { fontId, nazev, ukazka, rezy, licence, zdroj, odkaz } = Astro.props;
+
+const TRIDA = {
+  display: 'font-display italic text-[clamp(2.5rem,7vw,4.25rem)] leading-[0.95]',
+  body: 'font-body text-[clamp(1.35rem,3.4vw,2rem)] leading-tight',
+  brush: 'font-brush text-[clamp(2.25rem,6vw,3.5rem)] leading-tight',
+  mono: 'font-mono text-[clamp(1.35rem,3.4vw,2.25rem)] leading-tight',
+} as const;
+---
+<figure class="border border-bone/10 rounded-lg overflow-hidden">
+  <div class="px-6 py-9 sm:px-8 sm:py-11">
+    <div class={`${TRIDA[fontId]} text-bone break-words`}>{ukazka}</div>
+  </div>
+  <figcaption class="border-t border-bone/10 bg-bone/[0.02] px-6 py-3 sm:px-8 flex flex-wrap gap-x-6 gap-y-1 font-mono text-[10px] tracking-[0.12em] uppercase text-bone/45">
+    <span class="text-bone/70">{nazev}</span>
+    <span>Řezy · {rezy}</span>
+    <span>{licence}</span>
+    {odkaz ? (
+      <a href={odkaz} target="_blank" rel="noopener" class="text-gold hover:text-bone transition">{zdroj} ↗</a>
+    ) : (
+      <span>{zdroj}</span>
+    )}
+  </figcaption>
+</figure>

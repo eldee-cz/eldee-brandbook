@@ -128,6 +128,45 @@
   }
   .predel a::after { content: none !important; }
 
+  /* ── Tabulka barev ─────────────────────────────────────────────────────
+     Na obrazovce se vodorovně posouvá, na papíře se posunout nedá — tam by
+     `overflow: auto` uřízl pravé sloupce (a zrovna v nich jsou kontrasty).
+     Na A4 je místa víc než v pravém sloupci varianty A, takže stačí
+     omezení pustit. */
+  .tabulka-barev {
+    overflow: visible !important;
+    border-color: #ddd !important;
+  }
+  .tabulka-barev table {
+    min-width: 0 !important;
+  }
+  .tabulka-barev tr {
+    break-inside: avoid;
+  }
+  .tabulka-barev th,
+  .tabulka-barev td {
+    border-color: #e5e5e5 !important;
+  }
+  /* Vzorky barev mají barvu v inline stylu, takže je převod na bílou mine —
+     ale bez tohohle by prošly jen s `printBackground`. */
+  .tabulka-barev td span[style*='background'] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    border-color: #ccc !important;
+  }
+  /* Verdikt nese barva čísla, takže ta barva musí být čitelná i na papíře.
+     Značkové odstíny jsou dělané na černou plochu: zlatá #C9A227 má na bílé
+     kontrast 2.0 a zelená #10B981 2.5 — na papíře by zmizely. Tiskové
+     varianty drží stejný význam v tmavším odstínu. */
+  .tabulka-barev .text-gold,
+  .tabulka-barev-legenda .text-gold {
+    color: #7A5E0A !important;
+  }
+  .tabulka-barev .text-\[\#10B981\],
+  .tabulka-barev-legenda .text-\[\#10B981\] {
+    color: #06693F !important;
+  }
+
   /* Print typography */
   body {
     font-family: 'Space Grotesk', sans-serif;

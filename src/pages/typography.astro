@@ -1,36 +1,104 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import TypeSpecimen from '../components/TypeSpecimen.astro';
+import PasA from '../components/PasA.astro';
+import VzorekPisma from '../components/VzorekPisma.astro';
 import TypeScale from '../components/TypeScale.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
 import typoData from '../data/typography.json';
+
+// Varianta A (pravidlo vede): vzorek písma potřebuje popisek vedle sebe.
+// Pravidlo „display nikdy na odstavec“ dává smysl jen u toho konkrétního
+// písma — v seznamu na konci stránky se ztratilo.
+const font = (id: string) => typoData.fonts.find((f) => f.id === id)!;
+
+const UKAZKA: Record<string, string> = {
+  display: 'HOLY SOCKS.',
+  body: 'Štulpny s dírami na lýtku a kapsou na chránič.',
+  brush: 'one of us.',
+  mono: '#B91C1C · 3.1',
+};
+
+function data(id: string) {
+  const f = font(id);
+  return {
+    fontId: id as 'display' | 'body' | 'brush' | 'mono',
+    nazev: f.name,
+    ukazka: UKAZKA[id],
+    rezy: f.weights.join(', '),
+    licence: f.license.replace(' (commercial OK)', ''),
+    zdroj: f.source,
+    odkaz: f.downloadUrl,
+  };
+}
 ---
-<Layout title="Typography">
+<Layout title="Typografie">
   <SectionTitle
-    title="Čtyři fonty, osm levelů"
-    subtitle="Big Shoulders Display pro hlavičky, Space Grotesk pro tělo, Caveat Brush pro brush taglines, JetBrains Mono pro data."
+    title="Čtyři písma, osm úrovní"
+    subtitle="Každé má jednu práci. Když se použije na cizí práci, značka přestane vypadat jako jedna věc."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Fonty</h2>
-    {typoData.fonts.map((f) => <TypeSpecimen {...f} />)}
-  </section>
+  <PasA
+    nazev="Display"
+    popis="Big Shoulders Black Italic. Nese wordmark, nadpisy a slogany — všechno, co má křičet."
+    spec={['Řez · 900 Black', 'Sklon · vždy italic']}
+    prvni
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Jen H1, H2, slogan a wordmark.</Pravidlo>
+      <Pravidlo typ="ne">Display na běžný odstavec. Po třech řádcích se nedá číst.</Pravidlo>
+      <Pravidlo typ="ok">Italic je součást písma značky, ne zvýraznění. Neitalický display nepoužíváme.</Pravidlo>
+    </Pravidla>
+    <VzorekPisma {...data('display')} />
+  </PasA>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Type scale</h2>
+  <PasA
+    nazev="Body"
+    popis="Space Grotesk. Všechen souvislý text — odstavce, popisy produktů, tlačítka, navigace."
+    spec={['Řezy · 400, 500, 700', 'Sklon · nikdy']}
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Výchozí písmo všude, kde se čtou věty.</Pravidlo>
+      <Pravidlo typ="ne">Body italic. Sklon patří jen display písmu.</Pravidlo>
+      <Pravidlo typ="ok">Zvýrazňuje se tučným řezem (700), ne barvou ani podtržením.</Pravidlo>
+    </Pravidla>
+    <VzorekPisma {...data('body')} />
+  </PasA>
+
+  <PasA
+    nazev="Brush"
+    popis="Caveat Brush. Ruka v jinak strojové sazbě — tagline, razítko, repost od hráče."
+    spec={['Řez · 400', 'Dávka · max. 1× na obrazovku']}
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Jeden brush prvek na obrazovku. Druhý z něj udělá dekoraci.</Pravidlo>
+      <Pravidlo typ="ne">Brush na informaci, kterou si musí někdo přečíst přesně — cenu, rozměr, adresu.</Pravidlo>
+    </Pravidla>
+    <VzorekPisma {...data('brush')} />
+  </PasA>
+
+  <PasA
+    nazev="Mono"
+    popis="JetBrains Mono. Technická data — HEX, rozměry, štítky sekcí, popisky pod ukázkami."
+    spec={['Řezy · 400, 500', 'Štítky · verzálky, prostrkání 0.18em']}
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Čísla, kódy a štítky. Mono říká „tohle je hodnota, ne věta“.</Pravidlo>
+      <Pravidlo typ="rozmer">Štítky vždy verzálkami s prostrkáním 0.18em. Konzistentně napříč knihou.</Pravidlo>
+    </Pravidla>
+    <VzorekPisma {...data('mono')} />
+  </PasA>
+
+  <PasA
+    nazev="Velikosti"
+    popis="Osm úrovní. Mezi nimi se nevymýšlí devátá — když nesedí, je špatně vybraná úroveň."
+    spec={['Úrovní · 8', 'Základ · 14 px body']}
+  >
+    <Pravidla slot="pravidla" sloupec>
+      <Pravidlo typ="ok">Velikost se bere ze škály, nesází se od oka.</Pravidlo>
+      <Pravidlo typ="ne">Text pod 11 px. Na telefonu se nepřečte a v tisku zmizí.</Pravidlo>
+    </Pravidla>
     <TypeScale />
-  </section>
-
-  <section class="bg-ink/60 border border-bone/10 rounded-lg p-8">
-    <h2 class="font-display text-h2 text-bone mb-4">Pravidla použití</h2>
-    <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
-      <li>· <strong>Display (Big Shoulders Black Italic)</strong> jen pro H1/H2, sloganový text a wordmark. NIKDY pro běžný odstavec.</li>
-      <li>· <strong>Body (Space Grotesk)</strong> pro všechen souvislý text — odstavce, popisy, tlačítka, navigace.</li>
-      <li>· <strong>Brush (Caveat Brush)</strong> jen pro tagline akcent a UGC vibe. Maximálně 1× per stránka.</li>
-      <li>· <strong>Mono (JetBrains Mono)</strong> pro HEX hodnoty, kód, captions, labels.</li>
-      <li>· <strong>Italic</strong> jen v display fontu (Big Shoulders). Body italic NEPOUŽÍVAT.</li>
-      <li>· <strong>UPPER + LS:0.18em</strong> = caption styling. Vždy konzistentně.</li>
-    </ul>
-  </section>
-
+  </PasA>
 </Layout>

@@ -1,93 +1,100 @@
 ---
 import Layout from '../../components/Layout.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
+import Pravidlo from '../../components/Pravidlo.astro';
 
-// 8 misuse příkladů s reálnými vizuály (logo v2, jednotný master).
-// Vizuály: wordmark-light/dark.svg + odvozené assety v /logo/misuse/ (generuje scripts/generate-misuse-assets.mjs).
+// Rozvržení: mřížka karet, ne dvousloupcová varianta A.
+//
+// Zadání v3.0 posílá tuhle sekci do varianty A s odůvodněním „zákaz musí
+// zůstat přilepený ke svému obrázku“. Poměr je tu ale 1:1 — osm zákazů,
+// osm obrázků — takže vlastní argument pro A (pravidel je víc než obrázků)
+// neplatí a osm pásů přes celou šířku by ze sekce udělalo nekonečný sloupec.
+// Karta drží zákaz u svého obrázku těsněji než pás. Co se převzalo z v3.0,
+// je jazyk pravidel: červená hrana a štítek místo šedého drobného textu,
+// který Lukáš označil za přehlédnutelný.
 const misuses = [
   {
     title: 'Nestlačuj proporce',
-    dont: 'Žádný squash/stretch — roztažený nebo zploštělý wordmark.',
-    fix: 'Drž originální poměr stran. Vždy škáluj rovnoměrně.',
+    dont: 'Žádné roztažení ani zploštění wordmarku.',
+    fix: 'Drž původní poměr stran — zvětšuj vždy rovnoměrně.',
   },
   {
     title: 'Nepoužívej cizí barvy',
-    dont: 'Písmena jen v bone/ink, svatozář jen gold. Drop accenty (toxic green…) na logo nikdy.',
-    fix: 'Brand colors: #F5F5F0 / #0A0A0A + svatozář #C9A227. Mono = vše jednou barvou.',
+    dont: 'Písmena jen v Off-white nebo Carbon Black, svatozář jen zlatá. Drop barvy na logo nikdy.',
+    fix: '#F5F5F0 / #0A0A0A + svatozář #C9A227. Monochromatická verze = všechno jednou barvou.',
   },
   {
-    title: 'Neaplikuj na low-contrast pozadí',
-    dont: 'Tmavé logo na tmavé fotce nebo šedém podkladu.',
-    fix: 'Vždy min. kontrast WCAG 4.5:1. Na fotky používej overlay.',
+    title: 'Nedávej logo na plochu bez kontrastu',
+    dont: 'Tmavé logo na tmavé fotce nebo na šedém podkladu.',
+    fix: 'Nejméně 4.5 : 1. Na fotky patří ztmavovací vrstva, ne naděje.',
   },
   {
     title: 'Nerotuj logo',
-    dont: 'Nakloněný nebo otočený wordmark. Logo v2 je vzpřímené — žádný sklon neexistuje.',
+    dont: 'Nakloněný nebo otočený wordmark. Logo v2 je vzpřímené, sklon neexistuje.',
     fix: 'Vždy 0°. Dynamiku dělá interlock a podsazené D, ne rotace.',
   },
   {
-    title: 'Nepřidávej stíny ani gradienty',
-    dont: 'Drop shadow, glow, gradient, 3D efekty.',
-    fix: 'Flat, ostré logo v jedné barvě + zlatá svatozář. Nic víc.',
+    title: 'Nepřidávej stíny ani přechody',
+    dont: 'Vržený stín, záře, gradient, 3D efekty.',
+    fix: 'Plochý ostrý tvar v jedné barvě a zlatá svatozář. Nic víc.',
   },
   {
     title: 'Nepoužívej staré logo',
-    dont: 'Italic eLDee v1 (do 6/2026), verze s kroužky v „e" ani starší LD monogramy.',
-    fix: 'Jediné platné logo = v2 (vzpřímené, vnořený interlock LD). Viz /logo.',
+    dont: 'Skloněné eLDee v1 (do 6/2026), verze s kroužky v „e“ ani starší monogramy LD.',
+    fix: 'Platí jediné logo — v2, vzpřímené, s vnořeným interlockem LD. Viz sekce Logo.',
   },
   {
-    title: 'Nezavírej knockout spáru',
+    title: 'Nezalívej spáru interlocku',
     dont: 'Vyplnit spáru mezi L a D barvou písmen — interlock splyne v nečitelný slitek.',
-    fix: 'Spára je součást loga. Vždy průhledná (prosvítá pozadí).',
+    fix: 'Spára je součást loga. Zůstává průhledná, prosvítá jí pozadí.',
   },
   {
-    title: 'Nekombinuj s jinými logy bez pravidel',
-    dont: 'Logo klubu nebo partnera nalepené těsně vedle wordmarku.',
-    fix: 'Min. clear space = výška „L". Pod 30 mm výšivky / 24 px webu použij LD monogram.',
+    title: 'Nelep k logu cizí značky',
+    dont: 'Logo klubu nebo partnera natěsno vedle wordmarku.',
+    fix: 'Ochranná zóna = výška „L“. Pod 30 mm ve výšivce a 24 px na webu použij monogram LD.',
   },
 ];
 ---
-<Layout title="Logo Misuse">
+<Layout title="Logo — co ne">
   <SectionTitle
     title="Takhle ne"
-    subtitle="Osm příkladů, co s logem nedělat — a co dělat místo toho."
+    subtitle="Osm věcí, které logo rozbijí — a co udělat místo toho. Každý zákaz u svého obrázku."
   />
 
   <div class="grid md:grid-cols-2 gap-6">
     {misuses.map((m, i) => (
-      <div class="bg-ink/60 border border-bone/10 rounded-lg overflow-hidden">
+      <div class="border border-bone/10 rounded-lg overflow-hidden flex flex-col">
         <div class={`aspect-[4/3] relative flex items-center justify-center p-10 overflow-hidden ${i === 2 ? 'bg-[#2e2e2e]' : 'bg-gradient-to-br from-blood/15 to-ink'}`}>
-          <div class="absolute top-3 left-3 font-mono text-caption text-blood z-10">{`✗ DON'T #${String(i+1).padStart(2, '0')}`}</div>
+          <div class="absolute top-3 left-3 font-mono text-[9.5px] tracking-[0.18em] font-bold uppercase text-blood z-10">
+            Nikdy {String(i + 1).padStart(2, '0')}
+          </div>
 
           {i === 0 && <img src="/logo/wordmark-light.svg" alt="Roztažený wordmark" class="w-3/4" style="transform: scaleX(1.55) scaleY(0.72);" />}
           {i === 1 && <img src="/logo/misuse/wrong-colors.svg" alt="Wordmark ve špatných barvách" class="w-3/4" />}
           {i === 2 && <img src="/logo/wordmark-dark.svg" alt="Tmavý wordmark na tmavém pozadí" class="w-3/4" />}
           {i === 3 && <img src="/logo/wordmark-light.svg" alt="Otočený wordmark" class="w-3/4" style="transform: rotate(-14deg);" />}
           {i === 4 && <img src="/logo/wordmark-light.svg" alt="Wordmark se stínem" class="w-3/4" style="filter: drop-shadow(0 8px 10px rgba(201,162,39,0.85)) drop-shadow(0 2px 18px rgba(185,28,28,0.6));" />}
-          {i === 5 && <img src="/logo/misuse/old-wordmark-v1.svg" alt="Staré logo eLDee v1 (italika)" class="w-3/4" />}
+          {i === 5 && <img src="/logo/misuse/old-wordmark-v1.svg" alt="Staré logo eLDee v1" class="w-3/4" />}
           {i === 6 && <img src="/logo/misuse/filled-spara.svg" alt="Wordmark se zalitou spárou" class="w-3/4" />}
           {i === 7 && (
             <div class="relative w-3/4">
-              <img src="/logo/wordmark-light.svg" alt="Wordmark bez clear space" class="w-full" />
+              <img src="/logo/wordmark-light.svg" alt="Wordmark bez ochranné zóny" class="w-full" />
               <div class="absolute -right-4 top-1/2 -translate-y-1/2 bg-bone text-ink font-display text-h3 px-3 py-1 rotate-3">FC&nbsp;KLUB&nbsp;★</div>
             </div>
           )}
         </div>
-        <div class="p-5">
-          <div class="font-display text-h3 italic text-blood mb-2">{m.title}</div>
-          <p class="text-body text-bone/80 mb-3">{m.dont}</p>
-          <div class="border-t border-bone/10 pt-3">
-            <div class="font-mono text-caption text-emerald-500 mb-1">✓ FIX</div>
-            <p class="text-body text-bone/80">{m.fix}</p>
-          </div>
+
+        <div class="p-5 flex flex-col gap-3.5 flex-1">
+          <div class="font-display text-h3 italic text-bone">{m.title}</div>
+          <Pravidlo typ="ne">{m.dont}</Pravidlo>
+          <Pravidlo typ="ok">{m.fix}</Pravidlo>
         </div>
       </div>
     ))}
   </div>
 
-  <p class="mt-12 text-body text-bone/60 max-w-2xl">
-    Pravidlo nad pravidla: existuje <strong class="text-bone">jediné logo</strong> — jednotný master v2.
-    Povolené odvozeniny jsou jen barevné (primary / mono), nikdy tvarové.
+  <p class="mt-12 text-body-lg text-bone/70 max-w-2xl">
+    Pravidlo nad pravidla: existuje <strong class="text-bone">jediné logo</strong> — master v2.
+    Povolené odvozeniny jsou jen barevné, nikdy tvarové.
   </p>
-
 </Layout>

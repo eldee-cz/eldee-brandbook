@@ -1,0 +1,47 @@
+---
+// Pás ve variantě A — „pravidlo vede“.
+//
+// Výchozí rytmus knihy je B2 (ukázka přes celou šířku, pravidla pod ní).
+// Tři sekce ale mají víc pravidel než obrázků a tam by B2 znamenala velký
+// obrázek a pod ním zeď textu: 09 Logo — co ne (zákaz musí zůstat přilepený
+// ke svému obrázku), 10 Barvy (HEX/RGB/CMYK/Pantone je tabulka, ne galerie)
+// a 11 Typografie (vzorek potřebuje popisek vedle sebe).
+//
+// Vlevo pravidlo a technická data, vpravo ukázka. Na telefonu se sloupce
+// složí pod sebe a pravidlo zůstane první — to je celý smysl téhle varianty.
+interface Props {
+  nazev: string;
+  /** Podtitulek pod názvem — jedna věta, k čemu ta věc je. */
+  popis?: string;
+  /** Technická data se zlatou linkou: „Rozměr · 1080×1920“. */
+  spec?: string[];
+  /** První pás v sekci nemá nad sebou co odsazovat. */
+  prvni?: boolean;
+}
+const { nazev, popis, spec = [], prvni = false } = Astro.props;
+---
+<section
+  class:list={[
+    'grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]',
+    prvni ? 'pt-0' : 'mt-12 pt-12 border-t border-bone/10',
+  ]}
+>
+  <div class="min-w-0">
+    <h2 class="font-display text-h2 text-bone">{nazev}</h2>
+    {popis && <p class="text-body text-bone/60 mt-2 leading-relaxed">{popis}</p>}
+
+    {spec.length > 0 && (
+      <div class="mt-5 pl-3.5 border-l-2 border-gold flex flex-col gap-1.5">
+        {spec.map((r) => (
+          <div class="font-mono text-[10px] tracking-[0.11em] uppercase text-bone/60">{r}</div>
+        ))}
+      </div>
+    )}
+
+    <slot name="pravidla" />
+  </div>
+
+  <div class="min-w-0">
+    <slot />
+  </div>
+</section>

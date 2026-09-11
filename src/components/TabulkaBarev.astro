@@ -1,0 +1,108 @@
+---
+// Barvy jako tabulka, ne galerie.
+//
+// Do sekce Barvy se chodí s konkrétní otázkou („jaký je CMYK zlaté?“) a
+// odpovědí je hodnota. Galerie karet 3×4 nutila tu hodnotu hledat po ploše;
+// tabulka ji dá na řádek a čísla pod sebou jdou porovnat.
+//
+// Kontrast se počítá z HEX (`kontrast.ts`), nepíše se do dat — dřív byl
+// vypsaný ručně a sedm z jedenácti hodnot nesedělo.
+//
+// Měří se proti oběma plochám značky, ne jen proti černé: Carbon Black sám
+// je plocha, takže „kontrast na černé 1.0“ by u něj byl nesmysl. Verdikt
+// (co barva unese) nese barva čísla, ne slovo — na slovo ve dvou sloupcích
+// není v šířce místo.
+import { pomer, verdikt, POPIS_VERDIKTU, INK, BONE } from '../data/kontrast';
+
+interface Barva {
+  id: string;
+  name: string;
+  hex: string;
+  rgb: string;
+  cmyk: string;
+  pantone?: string;
+  primary?: boolean;
+  drop?: string;
+}
+interface Props {
+  barvy: Barva[];
+  /** Vysvětlivka k barvám čísel. Stačí u první tabulky v sekci. */
+  legenda?: boolean;
+}
+const { barvy, legenda = false } = Astro.props;
+
+const BARVA_VERDIKTU = {
+  bezny: 'text-[#10B981]',
+  velky: 'text-gold',
+  zadny: 'text-blood',
+} as const;
+
+const radky = barvy.map((b) => {
+  const naInk = pomer(b.hex, INK);
+  const naBone = pomer(b.hex, BONE);
+  return {
+    ...b,
+    naInk: { hodnota: naInk, verdikt: verdikt(naInk) },
+    naBone: { hodnota: naBone, verdikt: verdikt(naBone) },
+  };
+});
+---
+<div class="tabulka-barev overflow-x-auto border border-bone/10 rounded-lg">
+  <table class="w-full min-w-[30rem] border-collapse text-left">
+    <thead>
+      <tr class="font-mono text-[9px] tracking-[0.14em] uppercase text-bone/40 border-b border-bone/10">
+        <th class="font-normal py-2.5 px-2.5 w-10"><span class="sr-only">Vzorek</span></th>
+        <th class="font-normal py-2.5 px-2.5">Barva</th>
+        <th class="font-normal py-2.5 px-2.5">HEX</th>
+        <th class="font-normal py-2.5 px-2.5">RGB / CMYK</th>
+        <th class="font-normal py-2.5 px-2.5">PMS</th>
+        <th class="font-normal py-2.5 px-2.5 text-right">Na černé</th>
+        <th class="font-normal py-2.5 px-2.5 text-right">Na světlé</th>
+      </tr>
+    </thead>
+    <tbody>
+      {radky.map((b) => (
+        <tr class="border-b border-bone/5 last:border-0 align-middle">
+          <td class="py-2.5 px-2.5">
+            <span
+              class="block w-7 h-7 rounded border border-bone/15"
+              style={`background:${b.hex}`}
+              aria-hidden="true"
+            ></span>
+          </td>
+          <td class="py-2.5 px-2.5">
+            <span class="text-[13.5px] text-bone whitespace-nowrap">{b.name}</span>
+            {b.primary && <span class="block font-mono text-[9px] tracking-[0.14em] uppercase text-gold">primární</span>}
+            {b.drop && <span class="block font-mono text-[9px] tracking-[0.14em] uppercase text-bone/40">drop</span>}
+          </td>
+          <td class="py-2.5 px-2.5 font-mono text-[10px] text-bone/80 whitespace-nowrap">{b.hex.toUpperCase()}</td>
+          <td class="py-2.5 px-2.5 font-mono text-[10px] text-bone/60 whitespace-nowrap leading-[1.7]">
+            <span class="block">{b.rgb}</span>
+            <span class="block text-bone/45">{b.cmyk}</span>
+          </td>
+          <td class="py-2.5 px-2.5 font-mono text-[10px] text-bone/60 whitespace-nowrap">{b.pantone ?? '—'}</td>
+          <td
+            class={`py-2.5 px-2.5 font-mono text-[11px] text-right whitespace-nowrap ${BARVA_VERDIKTU[b.naInk.verdikt]}`}
+            title={POPIS_VERDIKTU[b.naInk.verdikt]}
+          >
+            {b.naInk.hodnota.toFixed(1)}
+          </td>
+          <td
+            class={`py-2.5 px-2.5 font-mono text-[11px] text-right whitespace-nowrap ${BARVA_VERDIKTU[b.naBone.verdikt]}`}
+            title={POPIS_VERDIKTU[b.naBone.verdikt]}
+          >
+            {b.naBone.hodnota.toFixed(1)}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+{legenda && (
+  <p class="tabulka-barev-legenda flex flex-wrap gap-x-5 gap-y-1 mt-2.5 font-mono text-[9px] tracking-[0.14em] uppercase text-bone/40">
+    <span><span class="text-[#10B981]">4.5+</span> i drobný text</span>
+    <span><span class="text-gold">3.0+</span> jen nápisy od 24 px</span>
+    <span><span class="text-blood">pod 3.0</span> jako text ne</span>
+  </p>
+)}
