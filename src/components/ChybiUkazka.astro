@@ -1,0 +1,30 @@
+---
+// Místo, kde ukázka bude — a zatím není.
+//
+// Sekce Vizuální styl mluví o fotkách, které značka nemá: vzorkování běží.
+// Brand book má dvě možnosti — buď to místo zaplnit stockem a lhát, nebo
+// říct nahlas, co sem přijde a kdy. Tohle je ta druhá. Čárkovaný rámeček
+// se čte jako „tady chybí“, ne jako „tady nic nebude“.
+interface Props {
+  /** Poměr stran, který bude mít skutečný záběr. */
+  format?: 'web' | 'ctverec' | 'svisle';
+  /** Co sem přijde. */
+  popis: string;
+  /** Kdy — podmínka, ne datum. */
+  kdy?: string;
+}
+const { format = 'web', popis, kdy } = Astro.props;
+
+const POMER = {
+  web: 'aspect-video',
+  ctverec: 'aspect-square',
+  svisle: 'aspect-[9/16]',
+} as const;
+---
+<figure class="min-w-0">
+  <div class={`${POMER[format]} border border-dashed border-bone/25 rounded-lg flex flex-col items-center justify-center text-center gap-2 px-6 py-8 bg-bone/[0.015]`}>
+    <span class="font-mono text-[9.5px] tracking-[0.18em] uppercase text-bone/35">Zatím chybí</span>
+    <p class="text-body text-bone/60 max-w-xs">{popis}</p>
+  </div>
+  {kdy && <figcaption class="font-mono text-caption text-bone/35 mt-2.5">{kdy}</figcaption>}
+</figure>

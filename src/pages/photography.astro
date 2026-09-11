@@ -4,58 +4,35 @@ import { isHQ } from '../buildMode';
 import { skryvatVeVerejnem } from '../data/sekce';
 if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
-import DosDonts from '../components/DosDonts.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
+import Zakaz from '../components/Zakaz.astro';
+import ChybiUkazka from '../components/ChybiUkazka.astro';
 
-const styles = [
-  {
-    context: 'Produktové fotky',
-    do: 'High-contrast B&W',
-    dont: 'Stock photos / AI generated produkt',
-    doDesc: 'Sluneční světlo skrz oválné díry, ostrý stín, makro detail úpletu.',
-    dontDesc: 'Vyhni se generickým stock fotkám — okamžitě prozradí, že nemáš vlastní content.'
-  },
-  {
-    context: 'Athlete action',
-    do: 'Color, slow-mo, golden hour',
-    dont: 'Instagram vintage filtry',
-    doDesc: 'Hráč v eldee, golden hour, pohyb, low angle. Vibe Off-White × Adidas × KITH.',
-    dontDesc: '90s Instagram filtry, oranžové LUTy, mood presety.'
-  },
-  {
-    context: 'Founder / community',
-    do: 'Authentic, B&W preferred',
-    dont: 'Studio gym selfies',
-    doDesc: 'Lukáš v šatně, na hřišti, s ambasadorem. B&W, natural light, bez ego pozic.',
-    dontDesc: 'Bez gym selfies, bez CEO pose, bez stock-look fotek.'
-  },
-  {
-    context: 'Memy / comedy',
-    do: 'Pestré, kontrastní, TikTok native',
-    dont: 'Generický humor',
-    doDesc: 'Specifický fotbalový humor — POV šatny, reactions, satira amatérského fotbalu.',
-    dontDesc: 'Generický rage face content. Lukáš to nikdy nepoužívá.'
-  },
-];
+// Rozvržení B2. Zvláštnost téhle sekce: ukázka, která má vést, zatím
+// neexistuje — značka nemá jedinou vlastní fotku produktu. Místo stocku,
+// který by to zakryl, drží místo čárkovaný rámeček s tím, co sem přijde.
+// Sekce tak staví na tom, co skutečně je: rendery maskota a vzor děr.
 ---
-<Layout title="Photography">
+<Layout title="Vizuální styl">
   <SectionTitle
     title="Vizuální styl"
-    subtitle="Co fotit, co nefotit. High-contrast, authentic, žádný stock."
+    subtitle="Co fotit a co ne. Tvrdý kontrast, vlastní materiál, žádný stock."
   />
 
-  <!-- Poctivé přiznání stavu: sekce o fotkách zatím žádnou fotku produktu nemá,
-       protože žádná neexistuje. Pravidla platí od chvíle, kdy budou vzorky. -->
-  <section class="mb-14 bg-ink/60 border border-bone/13 border-l-[3px] border-l-gold px-8 py-7">
-    <div class="font-mono text-caption text-gold mb-3">KDE JSME TEĎ</div>
+  <!-- ── Stav ───────────────────────────────────────────────────────────── -->
+  <div class="border border-bone/13 border-l-[3px] border-l-gold px-6 py-6 sm:px-8 sm:py-7">
+    <div class="font-mono text-caption text-gold mb-3">Kde jsme teď</div>
     <h2 class="font-display text-h2 italic text-bone mb-3">Fotky produktu zatím neexistují</h2>
     <p class="text-body-lg text-bone/85 max-w-3xl">
-      Vzorkování běží, prototyp čeká na výrobci. Do té doby značka nemá jedinou vlastní fotku
-      produktu — a nepředstírá, že má. Pravidla níž jsou závazná od chvíle, kdy se bude fotit.
+      Vzorkování běží, prototyp je u výrobce. Do té doby značka nemá vlastní fotku produktu —
+      a nepředstírá, že má. Pravidla níž platí od chvíle, kdy se poprvé zmáčkne spoušť.
     </p>
     <div class="grid sm:grid-cols-3 gap-4 mt-6">
       <div class="border-l-2 border-bone/25 pl-4">
         <div class="text-[16px] text-bone font-medium mb-1">Čím se to zatím nahrazuje</div>
-        <p class="text-body text-bone/65">Rendery maskota a schéma prostřižení. Ilustrace, ne fotka — a říká se to nahlas.</p>
+        <p class="text-body text-bone/65">Rendery maskota a vzor děr. Ilustrace, ne fotka — a říká se to nahlas.</p>
       </div>
       <div class="border-l-2 border-bone/25 pl-4">
         <div class="text-[16px] text-bone font-medium mb-1">Co se nesmí</div>
@@ -66,31 +43,99 @@ const styles = [
         <p class="text-body text-bone/65">Až dorazí schválená sada vzorků. Hráč v záběru, ne zboží na stole.</p>
       </div>
     </div>
-  </section>
-
-  <div class="space-y-12">
-    {styles.map((s) => (
-      <section>
-        <div class="font-mono text-caption text-gold mb-4">{s.context.toUpperCase()}</div>
-        <DosDonts
-          doTitle={s.do}
-          doDesc={s.doDesc}
-          dontTitle={s.dont}
-          dontDesc={s.dontDesc}
-        />
-      </section>
-    ))}
   </div>
 
-  <section class="mt-16 bg-ink/60 border border-bone/10 rounded-lg p-8">
-    <h2 class="font-display text-h2 text-bone mb-4">Tabu</h2>
-    <ul class="space-y-2 text-body-lg text-bone/85">
-      <li class="flex gap-3"><span class="text-blood">✗</span> Stock photos</li>
-      <li class="flex gap-3"><span class="text-blood">✗</span> AI-generated produkt na noze (jen jako wireframe ref, nikdy public)</li>
-      <li class="flex gap-3"><span class="text-blood">✗</span> Instagram vintage filtry (Mayfair, Sutro, etc.)</li>
-      <li class="flex gap-3"><span class="text-blood">✗</span> Gym selfies bez kontextu</li>
-      <li class="flex gap-3"><span class="text-blood">✗</span> Generický lifestyle stock</li>
-    </ul>
-  </section>
+  <!-- ── Co existuje ────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="S čím se pracuje dnes" meta={['Rendery maskota · PNG', 'Vzor děr · SVG']} />
 
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <figure class="min-w-0">
+      <div class="aspect-square border border-bone/10 rounded-lg flex items-center justify-center p-8 bg-ink">
+        <img src="/mascot/eldee-fotbalista.png" alt="Render maskota ve štulpnách eldee" class="max-h-full max-w-full" />
+      </div>
+      <figcaption class="font-mono text-caption text-bone/45 mt-2.5">Render maskota — nese produkt, dokud produkt není</figcaption>
+    </figure>
+
+    <figure class="min-w-0">
+      <div class="aspect-square border border-bone/10 rounded-lg flex items-center justify-center p-10 bg-ink">
+        <img src="/logo/hole-pattern.svg" alt="Vzor děr 5×2" class="max-h-full max-w-full" />
+      </div>
+      <figcaption class="font-mono text-caption text-bone/45 mt-2.5">Vzor děr — jediná podoba chráněného vzoru</figcaption>
+    </figure>
+
+    <ChybiUkazka format="ctverec" popis="Makro detail úpletu a prostřižení na skutečném vzorku." kdy="Až dorazí vzorky od výrobce" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Render maskota se popisuje jako ilustrace, ne jako produkt. Vždycky.</Pravidlo>
+    <Pravidlo typ="ne">Vydávat render nebo AI obrázek za fotku skutečné štulpny.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Produkt ────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Produkt" meta={['Tvrdý kontrast, černobíle', 'Denní světlo']} />
+
+  <Zakaz>Stock fotka ani AI vygenerovaný produkt. Prozradí okamžitě, že značka nemá vlastní materiál.</Zakaz>
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    <ChybiUkazka popis="Sluneční světlo skrz oválné díry, ostrý stín na úpletu." kdy="Hlavní produktový záběr" />
+    <ChybiUkazka popis="Makro detail: hrana prostřižení, kapsa na chránič, logo LD na lýtku." kdy="Detailní záběry" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Tvrdý kontrast, černobíle. Světlo dělá tvar, ne filtr.</Pravidlo>
+    <Pravidlo typ="ok">Díry se fotí proti světlu — je to hlavní rozpoznávací znak produktu.</Pravidlo>
+    <Pravidlo typ="rozmer">Detail úpletu vždy ostře na hraně prostřižení, ne na ploše.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Hráč v akci ────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Hráč v akci" meta={['Barevně, podvečerní světlo', 'Nízký úhel']} />
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ChybiUkazka format="svisle" popis="Hráč v eldee, pohyb, podvečerní světlo, nízký úhel." kdy="Hlavní obsah pro Reels" />
+    <ChybiUkazka format="svisle" popis="Zpomalený záběr na nohy při běhu — díry v pohybu." kdy="Produktový detail v akci" />
+    <ChybiUkazka format="svisle" popis="Šatna před zápasem, štulpny ještě v krabičce." kdy="Vyprávěcí záběr" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Hrdina je hráč, ne produkt. Produkt je na něm, ne místo něj.</Pravidlo>
+    <Pravidlo typ="ne">Filtry a přednastavené nálady. Barva se ladí, neplácne přes ni preset.</Pravidlo>
+    <Pravidlo typ="ok">Podvečerní světlo a nízký úhel. Hráč má vypadat větší, než se cítí.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Zakladatel a komunita ──────────────────────────────────────────── -->
+  <PasHlavicka nazev="Zakladatel a komunita" meta={['Černobíle', 'Přirozené světlo']} />
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    <ChybiUkazka popis="Lukáš v šatně nebo na hřišti — při práci, ne v póze." kdy="Obsah o značce zevnitř" />
+    <ChybiUkazka popis="Ambasador s vlastními štulpnami, vlastní prostředí." kdy="Až poběží ambasadorský program" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Černobíle, přirozené světlo, situace z práce.</Pravidlo>
+    <Pravidlo typ="ne">Selfíčka z posilovny, pózy šéfa, cokoliv se stock nádechem.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Memy ───────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Memy a humor" meta={['Barevně, kontrastně', 'Nativní pro TikTok']} />
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    <ChybiUkazka format="ctverec" popis="POV ze šatny — situace, kterou pozná jen kdo hraje." kdy="Pilíř comedy" />
+    <ChybiUkazka format="ctverec" popis="Satira amatérského fotbalu: hlína, rozbité kopačky, zápas v osm ráno." kdy="Pilíř comedy" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Humor je fotbalový a konkrétní. Vtip pozná ten, kdo v tom žije.</Pravidlo>
+    <Pravidlo typ="ne">Obecné memy a rage face obsah. To může udělat kdokoliv.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Tabu ───────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Tabu" meta={['Platí bez výjimky']} />
+
+  <Pravidla>
+    <Pravidlo typ="ne">Stock fotky. Jakékoliv.</Pravidlo>
+    <Pravidlo typ="ne">AI produkt na noze. Jako pracovní náčrt ano, ven nikdy.</Pravidlo>
+    <Pravidlo typ="ne">Instagramové vintage filtry a oranžové nálady.</Pravidlo>
+    <Pravidlo typ="ne">Selfíčka z posilovny bez souvislosti se značkou.</Pravidlo>
+    <Pravidlo typ="ne">Obecná lifestyle fotka, která by mohla patřit komukoliv.</Pravidlo>
+  </Pravidla>
 </Layout>

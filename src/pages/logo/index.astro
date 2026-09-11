@@ -1,90 +1,179 @@
 ---
 import Layout from '../../components/Layout.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
+import PasHlavicka from '../../components/PasHlavicka.astro';
+import Pravidla from '../../components/Pravidla.astro';
+import Pravidlo from '../../components/Pravidlo.astro';
+import Zakaz from '../../components/Zakaz.astro';
 import LogoVariant from '../../components/LogoVariant.astro';
 import AssetDownload from '../../components/AssetDownload.astro';
+
+// Rozvržení B2: ukázka vede, pravidla v kartách pod ní.
+//
+// Obsah je stejný jako ve v2.0, jen rozložený. Dřív stál nad každou mřížkou
+// odstavec na šest řádků, ve kterém byla schovaná pravidla („nikdy neposílat
+// SVG do vyšívárny“) i rozměry („spára 1,8 mm“) — mezi souvětími o tom, jak
+// logo vzniklo. Teď: popis je jedna věta, rozměry jsou v hlavičce pásu,
+// pravidla v kartách pod ukázkou.
 ---
-<Layout title="Logo System">
+<Layout title="Logo">
   <SectionTitle
     title="Tři vrstvy log"
-    subtitle="Wordmark pro marketing, LD monogram pro vyšívání, hole pattern pro produkt."
+    subtitle="Wordmark pro marketing, monogram LD pro výšivku, vzor děr na produkt. Jedno logo ve třech velikostech použití — ne tři různá loga."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Vrstva 1 — Wordmark</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Hlavní logo eldee — wordmark <strong>v2 (lockup L3)</strong>: slovo „eldee" s <strong>vnořeným interlock monogramem LD</strong> a zlatou svatozáří. Monogram není vedle slova, je doslova <strong>vyříznutý z něj</strong> — sub-mark a wordmark jsou jedna rodina. Blok LD + svatozář je vycentrovaný na osu malých „e", D podsedá pod baseline. Big Shoulders Display Black, bez sklonu. Pro web, IG, krabičky, vizitky, podcast cover.</p>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on black" bg="ink"   caption="Na tmavém pozadí" />
-      <LogoVariant src="/logo/wordmark-dark.svg"  alt="eldee wordmark on bone"  bg="bone"  caption="Na světlém pozadí" />
-      <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on blood" bg="blood" caption="Na blood red" />
-      <LogoVariant src="/logo/wordmark-light.svg" alt="eldee wordmark on gold"  bg="gold"  caption="Na gold (Holy edice)" />
-    </div>
+  <!-- ── Wordmark ───────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Wordmark" meta={['Nejmenší velikost · 24 px / 8 mm', 'Big Shoulders Display Black']} prvni />
 
-    <h3 class="font-display text-h3 text-bone mt-10 mb-2">Vertikální lockup</h3>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Svislá varianta wordmarku — totéž logo poskládané pod sebe <strong>e – LD – e – e</strong>, monogram vystředěný na osu dvojpísmene LD (L a D symetricky). Svislé rozestupy odpovídají mezerám mezi písmeny ve vodorovném nápisu. Pro úzké formáty: bočnice, svislé bannery, záložky, label na štulpně, watermark. Platí stejná pravidla jako pro vodorovný wordmark.</p>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      <LogoVariant src="/logo/wordmark-vertical-light.svg" alt="eldee vertical on black" bg="ink"   caption="Na tmavém pozadí" />
-      <LogoVariant src="/logo/wordmark-vertical-dark.svg"  alt="eldee vertical on bone"  bg="bone"  caption="Na světlém pozadí" />
-      <LogoVariant src="/logo/wordmark-vertical-light.svg" alt="eldee vertical on gold"  bg="gold"  caption="Na gold (Holy edice)" />
-    </div>
-  </section>
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    Hlavní logo značky: slovo „eldee“ s monogramem LD <strong class="text-bone">vyříznutým přímo z něj</strong>,
+    ne přilepeným vedle. Blok LD se svatozáří stojí na ose malých „e“, D podsedá pod účaří.
+    Pro web, Instagram, krabičky, vizitky a obálku podcastu.
+  </p>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Vrstva 2 — LD Monogram</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Monogram <strong>LD v2.1</strong> z fontu Big Shoulders Display Black — <strong>interlock</strong>: „L" proniká skrz „D" a obě písmena tvoří <strong>jedno srostlé těleso</strong> (eldee rodina drží pohromadě). „D" je dominantní, „L" posazené mírně výš. Nad „D" se vznáší <strong>zlatá svatozář</strong> (odkaz na Holy Socks) — kompozice N2. V průniku písmen je průhledná knockout spára, takže monogram je čitelný na světlém i tmavém pozadí. <strong>Logo je navržené jehlou:</strong> každý tah, spára i prsten svatozáře drží minimální tloušťky pro vyšití při nášivce 35 mm. Existuje proto <strong>jediná podoba monogramu</strong> — co vidíš na štulpně, vidíš i na webu, vizitce a krabičce.</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on black" bg="ink" showSafeZone={true} caption={'Clear space = výška „L“'} />
-      <LogoVariant src="/logo/monogram-ld.svg" alt="LD monogram on blood" bg="blood" caption="Na blood red" />
-    </div>
-    <h3 class="font-display text-h3 text-bone mt-10 mb-2">Vyšívání (embroidery-first parametry)</h3>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Master monogram je <strong>přímo vyšitelný</strong> — při nášivce 35 mm: tahy písmen 5,6 mm, <strong>spára 1,8 mm</strong>, prsten svatozáře <strong>1,6 mm</strong> s vnitřním otvorem 2,2 mm. Do vyšívárny nikdy neposílat SVG napřímo — vždy digitalizace přes digitizéra (PES/DST) + <strong>sew-out vzorek na úpletu</strong> před sérií. Mono varianta (currentColor) slouží pro jednobarevné aplikace.</p>
-    <div class="grid md:grid-cols-2 gap-4">
-      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram mono on black" bg="ink" caption="Mono — currentColor" />
-      <LogoVariant src="/logo/monogram-mono.svg" alt="LD monogram mono on blood" bg="blood" caption="Embroidery target — nášivka 35 mm" />
-    </div>
-  </section>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <LogoVariant src="/logo/wordmark-light.svg" alt="Wordmark eldee na černé" bg="ink" caption="Na tmavém podkladu" />
+    <LogoVariant src="/logo/wordmark-dark.svg" alt="Wordmark eldee na světlé" bg="bone" caption="Na světlém podkladu" />
+    <LogoVariant src="/logo/wordmark-light.svg" alt="Wordmark eldee na červené" bg="blood" caption="Na Blood Red" />
+    <!-- Na zlaté patří TMAVÁ verze: světlá má na #C9A227 kontrast 2.2 a
+         neprojde ani minimem 3:1 pro grafiku. Tmavá má 8.2. -->
+    <LogoVariant src="/logo/wordmark-dark.svg" alt="Wordmark eldee na zlaté" bg="gold" caption="Na zlaté — Holy edice" />
+  </div>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Vrstva 3 — Hole Pattern</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Chráněný průmyslový vzor — 5×2 oválných děr. Primární vyšívaný motiv na lýtku.</p>
-    <LogoVariant src="/logo/hole-pattern.svg" alt="Hole pattern" bg="ink" caption="5×2 grid, ovály 12×16 mm" />
-  </section>
+  <Pravidla>
+    <Pravidlo typ="ok">Wordmark je bez sklonu. Skloněná verze je logo v1 a to se od 6/2026 nepoužívá.</Pravidlo>
+    <Pravidlo typ="ne">Přidávat k wordmarku svatozář. Už ji obsahuje — druhá by nad ní visela jako chyba.</Pravidlo>
+    <Pravidlo typ="ne">Světlá verze na zlaté. Má kontrast 2.2, což neprojde ani minimem 3 : 1 pro grafiku — na zlatou patří tmavá.</Pravidlo>
+    <Pravidlo typ="rozmer">Nejmenší velikost 24 px na webu, 8 mm v tisku. Pod to jde monogram, ne zmenšený wordmark.</Pravidlo>
+  </Pravidla>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-2">Halo — sekundární symbol</h2>
-    <p class="text-body-lg text-bone/70 mb-6 max-w-2xl">Svatozář v gold — alternativa k „koruně" z streetwear estetiky. Odkazuje na Holy Socks.</p>
-    <LogoVariant src="/logo/halo.svg" alt="Halo gold" bg="ink" caption="Burnished Gold #C9A227" />
-  </section>
+  <!-- ── Vertikální lockup ──────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Svislá varianta" meta={['Pořadí · e – LD – e – e', 'Úzké formáty']} />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Pravidla</h2>
-    <ul class="space-y-3 text-body-lg text-bone/85 max-w-2xl">
-      <li>· <strong>Clear space</strong> = minimálně výška „L" — v monogramu i wordmarku</li>
-      <li>· <strong>Minimum size</strong> = wordmark 24 px / 8 mm, monogram 16 px / 5 mm, hole pattern 40 px / 14 mm</li>
-      <li>· <strong>Nikdy</strong> neměnit poměr stran, neflipovat, nezbarvit jinak než brand colors</li>
-      <li>· <strong>Jedno logo</strong> — jediné povolené odvozeniny jsou barevné (primary / mono), nikdy tvarové. Žádné „web verze" ani „jemné varianty".</li>
-      <li>· <strong>Vyšívání</strong> = master monogram + hole pattern, přes digitizéra (PES/DST). Vždy sew-out vzorek na úpletu.</li>
-      <li>· <strong>Foil tisk</strong> = wordmark v gold (Holy edice na krabičkách)</li>
-    </ul>
-    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
-      <a href="/logo/construction" class="font-mono text-caption text-gold hover:text-bone transition">→ CONSTRUCTION GRID</a>
-      <a href="/logo/misuse" class="font-mono text-caption text-blood hover:text-blood-light transition">→ LOGO MISUSE</a>
-    </div>
-  </section>
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    Totéž logo poskládané pod sebe. Monogram stojí na ose dvojpísmene LD, svislé rozestupy
+    odpovídají mezerám mezi písmeny ve vodorovném nápisu. Pro bočnice, svislé bannery,
+    záložky, štítek na štulpně a vodoznak.
+  </p>
 
-  <section>
-    <h2 class="font-display text-h2 text-bone mb-6">Stáhnout</h2>
-    <div class="grid md:grid-cols-2 gap-3">
-      <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark — light variant" format="SVG" />
-      <AssetDownload href="/logo/wordmark-dark.svg"  label="Wordmark — dark variant"  format="SVG" />
-      <AssetDownload href="/logo/wordmark-vertical-light.svg" label="Wordmark vertikál — light" format="SVG" />
-      <AssetDownload href="/logo/wordmark-vertical-dark.svg"  label="Wordmark vertikál — dark"  format="SVG" />
-      <AssetDownload href="/logo/wordmark-vertical-mono.svg"  label="Wordmark vertikál — mono (currentColor)" format="SVG" />
-      <AssetDownload href="/logo/monogram-ld.svg"    label="LD Monogram v2.1 — master"    format="SVG" />
-      <AssetDownload href="/logo/monogram-mono.svg"  label="LD Monogram v2.1 — mono (currentColor)" format="SVG" />
-      <AssetDownload href="/logo/hole-pattern.svg"   label="Hole Pattern"              format="SVG" />
-      <AssetDownload href="/logo/halo.svg"           label="Halo"                      format="SVG" />
-    </div>
-  </section>
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <LogoVariant src="/logo/wordmark-vertical-light.svg" alt="Svislý wordmark na černé" bg="ink" caption="Na tmavém podkladu" />
+    <LogoVariant src="/logo/wordmark-vertical-dark.svg" alt="Svislý wordmark na světlé" bg="bone" caption="Na světlém podkladu" />
+    <LogoVariant src="/logo/wordmark-vertical-dark.svg" alt="Svislý wordmark na zlaté" bg="gold" caption="Na zlaté — Holy edice" />
+  </div>
 
+  <Pravidla>
+    <Pravidlo typ="ok">Platí pro ni všechna pravidla vodorovného wordmarku. Není to jiné logo.</Pravidlo>
+    <Pravidlo typ="ok">Použij ji jen tam, kde se vodorovný nápis nevejde — ne pro změnu.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Monogram ───────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Monogram LD" meta={['Nejmenší velikost · 16 px / 5 mm', 'Ochranná zóna · výška „L“']} />
+
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    L proniká skrz D a obě písmena tvoří <strong class="text-bone">jedno srostlé těleso</strong>.
+    V průniku zůstává průhledná spára, takže monogram drží čitelnost na světlém i tmavém podkladu.
+    Nad D se vznáší zlatá svatozář — odkaz na Holy Socks.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <LogoVariant src="/logo/monogram-ld.svg" alt="Monogram LD s vyznačenou ochrannou zónou" bg="ink" showSafeZone={true} caption={'Ochranná zóna = výška „L“'} />
+    <LogoVariant src="/logo/monogram-ld.svg" alt="Monogram LD na červené" bg="blood" caption="Na Blood Red" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ne">Zalít spáru mezi L a D. Interlock pak splyne v nečitelný slitek.</Pravidlo>
+    <Pravidlo typ="ok">Monogram je jediná povolená zkratka loga. Zkratky typu „e“ neexistují.</Pravidlo>
+    <Pravidlo typ="rozmer">Kolem monogramu vždy volno nejméně na výšku „L“ — i vedle loga klubu.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Výšivka ────────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Výšivka" meta={['Nášivka · 35 mm', 'Tahy 5,6 · spára 1,8 · prsten 1,6 mm']} />
+
+  <Zakaz>Do vyšívárny nikdy neposílej SVG. Vždy přes digitizéra (PES/DST) a nejdřív zkušební výšivku na úpletu.</Zakaz>
+
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    Logo je navržené jehlou, ne obtažené po návrhu: každý tah, spára i prsten svatozáře drží
+    tloušťky, které jehla unese při nášivce 35 mm. Proto existuje
+    <strong class="text-bone">jediná podoba monogramu</strong> — co je na štulpně, je i na webu.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <LogoVariant src="/logo/monogram-mono.svg" alt="Monogram v jedné barvě" bg="ink" caption="Jednobarevná verze" />
+    <LogoVariant src="/logo/monogram-mono.svg" alt="Monogram na červené" bg="blood" caption="Cíl výšivky — nášivka 35 mm" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="rozmer">Při 35 mm: tahy písmen 5,6 mm, spára 1,8 mm, prsten svatozáře 1,6 mm, otvor 2,2 mm.</Pravidlo>
+    <Pravidlo typ="ok">Před sérií vždy zkušební výšivka na tom úpletu, ze kterého se bude vyrábět.</Pravidlo>
+    <Pravidlo typ="ok">Na jednobarevné aplikace je připravená mono verze, ne ručně odbarvený master.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Vzor děr ───────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Vzor děr" meta={['Mřížka · 5×2', 'Ovál 12×16 mm', 'Chráněný průmyslový vzor']} />
+
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    Chráněný průmyslový vzor a hlavní vyšívaný motiv na lýtku. Není to dekorace —
+    je to ta část značky, kterou má konkurence zakázanou.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <LogoVariant src="/logo/hole-pattern.svg" alt="Vzor děr 5×2" bg="ink" caption="Mřížka 5×2, ovály 12×16 mm" />
+    <LogoVariant src="/logo/hole-pattern.svg" alt="Vzor děr na světlém podkladu" bg="bone" caption="Na světlém podkladu" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ne">Měnit počet, rozteč ani tvar děr. Je to zapsaný vzor, ne grafický nápad.</Pravidlo>
+    <Pravidlo typ="rozmer">Nejmenší velikost 40 px na webu, 14 mm v tisku.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Svatozář ───────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Svatozář" meta={['Burnished Gold #C9A227', 'Druhotný symbol']} />
+
+  <Zakaz>Svatozář se nesmí objevit v jednom záběru s claimem „One of Us.“</Zakaz>
+
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    Náš protějšek streetwearové korunky. Odkazuje na Holy Socks — tedy na produkt,
+    ne na hodnoty. Proto se nepotkává s claimem značky ani s hodnotovým a náboženským jazykem.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <LogoVariant src="/logo/halo.svg" alt="Svatozář ve zlaté" bg="ink" caption="Burnished Gold #C9A227" />
+    <LogoVariant src="/logo/halo-rays.svg" alt="Svatozář s paprsky" bg="ink" caption="Varianta s paprsky" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ne">Přidávat svatozář nad wordmark nebo monogram. Oba ji už mají v sobě.</Pravidlo>
+    <Pravidlo typ="ok">Samostatně jen v produktovém kontextu — na krabičce, štítku, obalu.</Pravidlo>
+  </Pravidla>
+
+  <!-- ── Společná pravidla ──────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Platí na všechno" meta={['Jedno logo', 'Odvozeniny jen barevné']} />
+
+  <Pravidla>
+    <Pravidlo typ="ne">Měnit poměr stran, překlápět, rotovat nebo barvit mimo barvy značky.</Pravidlo>
+    <Pravidlo typ="ne">Vyrábět „webovou verzi“ nebo „jemnější variantu“. Tvarové odvozeniny neexistují.</Pravidlo>
+    <Pravidlo typ="ok">Povolené odvozeniny jsou jen barevné: základní a jednobarevná.</Pravidlo>
+    <Pravidlo typ="rozmer">Foil tisk ve zlaté je vyhrazený Holy edici na krabičkách.</Pravidlo>
+  </Pravidla>
+
+  <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6">
+    <a href="/logo/construction" class="font-mono text-caption text-gold hover:text-bone transition">→ Konstrukční mřížka</a>
+    <a href="/logo/misuse" class="font-mono text-caption text-blood hover:text-blood-light transition">→ Logo — co ne</a>
+  </div>
+
+  <!-- ── Ke stažení ─────────────────────────────────────────────────────── -->
+  <PasHlavicka nazev="Ke stažení" meta={['Formát · SVG']} />
+
+  <div class="grid md:grid-cols-2 gap-3">
+    <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark — světlá verze" format="SVG" />
+    <AssetDownload href="/logo/wordmark-dark.svg" label="Wordmark — tmavá verze" format="SVG" />
+    <AssetDownload href="/logo/wordmark-vertical-light.svg" label="Svislý wordmark — světlá verze" format="SVG" />
+    <AssetDownload href="/logo/wordmark-vertical-dark.svg" label="Svislý wordmark — tmavá verze" format="SVG" />
+    <AssetDownload href="/logo/wordmark-vertical-mono.svg" label="Svislý wordmark — jednobarevný" format="SVG" />
+    <AssetDownload href="/logo/monogram-ld.svg" label="Monogram LD — master" format="SVG" />
+    <AssetDownload href="/logo/monogram-mono.svg" label="Monogram LD — jednobarevný" format="SVG" />
+    <AssetDownload href="/logo/hole-pattern.svg" label="Vzor děr" format="SVG" />
+    <AssetDownload href="/logo/halo.svg" label="Svatozář" format="SVG" />
+  </div>
 </Layout>
