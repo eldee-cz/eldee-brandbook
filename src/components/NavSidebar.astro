@@ -1,51 +1,52 @@
 ---
+// Navigace ve dvou podobách ze stejného seznamu:
+//   monitor (lg+) — boční menu vlevo, jako dosud
+//   telefon       — lišta nahoře s velkým tlačítkem „Sekce“, panel přes celou šířku
+//
+// Proč vůbec: do 11. 9. mělo menu natvrdo 256 px a shrink-0 bez mobilní
+// varianty. Na displeji 390 px začínal obsah až na souřadnici 256, takže
+// se stránka četla z poloviny mimo obrazovku — na všech stránkách knihy.
+// Projekt má přitom 95 % návštěv z mobilu.
+//
+// Panel je <details>, ne skript: funguje bez JS, umí ho klávesnice i odečítač
+// a po prokliku se stránka načte znovu, takže se zavře sám.
+// Pravidlo projektu „nehidovat navigaci pod malý hamburger“ drží popsané
+// tlačítko 48 px vysoké, ne ikonka.
 import { isHQ } from '../buildMode';
-import { BLOKY, VERZE, sekceProBuild, type BlokId } from '../data/sekce';
-
-const sekce = sekceProBuild(isHQ);
-
-// Seskupení podle bloků, aby bylo na první pohled vidět, kde v knize jsi.
-const poradiBloku: BlokId[] = ['I', 'II', 'III'];
-const skupiny = poradiBloku
-  .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
-  .filter((g) => g.polozky.length > 0);
+import { VERZE } from '../data/sekce';
+import NavSeznam from './NavSeznam.astro';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const label = isHQ ? `BRAND BOOK · ${VERZE}` : 'LOGOMANUAL';
 ---
-<nav aria-label="eldee sections" class="w-64 shrink-0 border-r border-ink/40 bg-ink/95 p-6 sticky top-0 h-screen overflow-y-auto print:hidden">
+
+<!-- ── Telefon a tablet ──────────────────────────────────────────────────── -->
+<details class="lg:hidden sticky top-0 z-50 bg-ink/95 backdrop-blur border-b border-bone/10 print:hidden group">
+  <summary class="flex items-center justify-between gap-4 px-5 py-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+    <a href="/" class="block min-w-0">
+      <div class="font-display text-h3 italic text-bone leading-none">eldee</div>
+      <div class="font-mono text-caption text-bone/50 mt-1 truncate">{label}</div>
+    </a>
+    <span class="flex items-center gap-2.5 shrink-0 min-h-[48px] px-5 rounded border border-bone/25 text-bone">
+      <span class="font-mono text-caption">SEKCE</span>
+      <svg class="w-3.5 h-3.5 transition-transform group-open:rotate-180" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+        <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </summary>
+  <nav aria-label="Sekce brand booku" class="px-3 pt-2 pb-6 max-h-[70vh] overflow-y-auto border-t border-bone/10">
+    <NavSeznam velke aktualni={currentPath} />
+  </nav>
+</details>
+
+<!-- ── Monitor ───────────────────────────────────────────────────────────── -->
+<nav
+  aria-label="Sekce brand booku"
+  class="hidden lg:block w-64 shrink-0 border-r border-ink/40 bg-ink/95 p-6 sticky top-0 h-screen overflow-y-auto print:hidden"
+>
   <a href="/" class="block mb-8">
     <div class="font-display text-h2 italic text-bone">eldee</div>
     <div class="font-mono text-caption text-bone/50">{label}</div>
   </a>
-
-  {skupiny.map((g, gi) => (
-    <div class:list={['mb-6', gi > 0 && 'pt-5 border-t border-bone/10']}>
-      <div class="font-mono text-caption text-bone/35 px-3 mb-2">
-        {isHQ ? `BLOK ${g.blok.id} · ${g.blok.nazev.toUpperCase()}` : g.blok.nazev.toUpperCase()}
-      </div>
-      <ul class="space-y-1">
-        {g.polozky.map((s) => {
-          const isActive = currentPath === s.href.replace(/\/$/, '');
-          return (
-            <li>
-              <a
-                href={s.href}
-                aria-current={isActive ? 'page' : undefined}
-                class:list={[
-                  'flex items-baseline gap-3 px-3 py-2 rounded text-body transition',
-                  isActive
-                    ? 'bg-blood/20 text-bone'
-                    : 'text-bone/60 hover:text-bone hover:bg-bone/5',
-                ]}
-              >
-                <span class="font-mono text-caption text-gold w-6 shrink-0">{s.cislo}</span>
-                <span>{s.nazev}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  ))}
+  <NavSeznam aktualni={currentPath} />
 </nav>

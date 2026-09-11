@@ -1,0 +1,52 @@
+---
+// Seznam sekcí seskupený po blocích. Žije na jednom místě, protože ho
+// potřebuje boční menu na monitoru i vysouvací panel na telefonu — a dvě
+// kopie seznamu už se v téhle knize jednou rozešly (viz sekce.ts).
+import { isHQ } from '../buildMode';
+import { BLOKY, sekceProBuild, type BlokId } from '../data/sekce';
+
+interface Props {
+  /** Velké dotykové cíle pro telefon (min. 48 px na řádek). */
+  velke?: boolean;
+  /** Cesta aktuální stránky — pro zvýraznění. */
+  aktualni: string;
+}
+const { velke = false, aktualni } = Astro.props;
+
+const sekce = sekceProBuild(isHQ);
+const poradiBloku: BlokId[] = ['I', 'II', 'III'];
+const skupiny = poradiBloku
+  .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
+  .filter((g) => g.polozky.length > 0);
+
+const radek = velke
+  ? 'flex items-baseline gap-4 px-4 min-h-[48px] py-3 rounded text-body-lg'
+  : 'flex items-baseline gap-3 px-3 py-2 rounded text-body transition';
+---
+{skupiny.map((g, gi) => (
+  <div class:list={[velke ? 'mb-7' : 'mb-6', gi > 0 && (velke ? 'pt-6 border-t border-bone/10' : 'pt-5 border-t border-bone/10')]}>
+    <div class:list={['font-mono text-caption text-bone/35 mb-2', velke ? 'px-4' : 'px-3']}>
+      {isHQ ? `BLOK ${g.blok.id} · ${g.blok.nazev.toUpperCase()}` : g.blok.nazev.toUpperCase()}
+    </div>
+    <ul class={velke ? 'space-y-1.5' : 'space-y-1'}>
+      {g.polozky.map((s) => {
+        const isActive = aktualni === s.href.replace(/\/$/, '');
+        return (
+          <li>
+            <a
+              href={s.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                radek,
+                isActive ? 'bg-blood/20 text-bone' : 'text-bone/60 hover:text-bone hover:bg-bone/5',
+              ]}
+            >
+              <span class:list={['font-mono text-caption text-gold shrink-0', velke ? 'w-7' : 'w-6']}>{s.cislo}</span>
+              <span>{s.nazev}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+))}

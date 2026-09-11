@@ -23,9 +23,10 @@ const fullTitle = `${title} — eldee ${siteName}`;
     {description && <meta name="description" content={description} />}
     <link rel="icon" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen flex">
+  <!-- Na telefonu lišta nad obsahem, na monitoru menu vedle obsahu. -->
+  <body class="min-h-screen flex flex-col lg:flex-row">
     <NavSidebar />
-    <main class="flex-1 max-w-5xl mx-auto px-8 py-12 lg:px-16">
+    <main class="flex-1 w-full max-w-5xl mx-auto px-5 sm:px-8 py-12 lg:px-16">
       <!-- Štítek sekce vypisuje SectionTitle. Layout ho vypisoval taky,
            takže na každé stránce stál dvakrát pod sebou. -->
       <slot />
