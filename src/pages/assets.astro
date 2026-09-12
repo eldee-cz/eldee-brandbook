@@ -1,7 +1,14 @@
 ---
 import Layout from '../components/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
 import AssetDownload from '../components/AssetDownload.astro';
+import { VERZE } from '../data/sekce';
+
+// Assety jsou v knize zvláštní případ: patří do bloku III, který INSTRUUJE
+// (nadpisy roman, ne kurzívou jako mluvící blok I), ale jako jediná sekce
+// bloku nemá ukázky. Pásy tady proto dělí vodorovná linka — stejné kritérium
+// jako v bloku I: linka tam, kde pás neoddělí obrázek.
 ---
 
 <Layout title="Asset Index">
@@ -10,53 +17,48 @@ import AssetDownload from '../components/AssetDownload.astro';
     subtitle="Loga, fonty, brand book PDF, licence, kontakty."
   />
 
-  <section class="mb-12">
-    <h2 class="font-display text-h2 text-bone mb-6">Loga (SVG)</h2>
-    <div class="grid md:grid-cols-2 gap-3">
-      <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark light" format="SVG" />
-      <AssetDownload href="/logo/wordmark-dark.svg" label="Wordmark dark" format="SVG" />
-      <AssetDownload href="/logo/monogram-ld.svg" label="LD Monogram" format="SVG" />
-      <AssetDownload href="/logo/hole-pattern.svg" label="Hole Pattern" format="SVG" />
-      <AssetDownload href="/logo/halo.svg" label="Halo" format="SVG" />
-    </div>
-  </section>
+  <PasHlavicka nazev="Loga (SVG)" prvni />
+  <div class="grid md:grid-cols-2 gap-3">
+    <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark light" format="SVG" />
+    <AssetDownload href="/logo/wordmark-dark.svg" label="Wordmark dark" format="SVG" />
+    <AssetDownload href="/logo/monogram-ld.svg" label="LD Monogram" format="SVG" />
+    <AssetDownload href="/logo/hole-pattern.svg" label="Hole Pattern" format="SVG" />
+    <AssetDownload href="/logo/halo.svg" label="Halo" format="SVG" />
+  </div>
 
-  <section class="mb-12">
-    <h2 class="font-display text-h2 text-bone mb-6">PDF</h2>
-    <div class="grid md:grid-cols-2 gap-3">
-      <AssetDownload href="/eldee-brandbook.pdf" label="Brand Book v3.0 — kompletní" format="PDF" size="~5 MB" />
-    </div>
-  </section>
+  <PasHlavicka nazev="PDF" linka />
+  <div class="grid md:grid-cols-2 gap-3">
+    <!-- Verze se bere z `sekce.ts`, ne z ručně psaného textu. Dřív tu stálo
+         „v3.0" natvrdo a při vydání v3.1 by se to rozešlo se sidebarem. -->
+    <AssetDownload href="/eldee-brandbook.pdf" label={`Brand Book ${VERZE} — kompletní`} format="PDF" size="~5 MB" />
+  </div>
 
-  <section class="mb-12">
-    <h2 class="font-display text-h2 text-bone mb-6">Fonty</h2>
-    <p class="text-body text-bone/70 mb-4">Všechny fonty z Google Fonts, OFL licence (commercial OK).</p>
-    <ul class="space-y-2 font-mono text-caption text-bone/80">
-      <li>· <a href="https://fonts.google.com/specimen/Big+Shoulders+Display" target="_blank" rel="noopener" class="text-gold hover:text-bone">Big Shoulders Display</a></li>
-      <li>· <a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank" rel="noopener" class="text-gold hover:text-bone">Space Grotesk</a></li>
-      <li>· <a href="https://fonts.google.com/specimen/Caveat+Brush" target="_blank" rel="noopener" class="text-gold hover:text-bone">Caveat Brush</a></li>
-      <li>· <a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank" rel="noopener" class="text-gold hover:text-bone">JetBrains Mono</a></li>
-    </ul>
-  </section>
+  <PasHlavicka
+    nazev="Fonty"
+    linka
+    popis="Všechny fonty z Google Fonts, OFL licence (commercial OK)."
+  />
+  <ul class="space-y-2.5 font-mono text-caption text-bone/80">
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><a href="https://fonts.google.com/specimen/Big+Shoulders+Display" target="_blank" rel="noopener" class="text-gold hover:text-bone">Big Shoulders Display</a></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank" rel="noopener" class="text-gold hover:text-bone">Space Grotesk</a></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><a href="https://fonts.google.com/specimen/Caveat+Brush" target="_blank" rel="noopener" class="text-gold hover:text-bone">Caveat Brush</a></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank" rel="noopener" class="text-gold hover:text-bone">JetBrains Mono</a></li>
+  </ul>
 
-  <section class="mb-12">
-    <h2 class="font-display text-h2 text-bone mb-6">Licence</h2>
-    <ul class="space-y-2 text-body text-bone/80 max-w-2xl">
-      <li>· <strong>Loga eldee:</strong> © 2026 eldee. Použití jen s písemným svolením.</li>
-      <li>· <strong>Wordmark dírky + Hole Pattern:</strong> chráněné průmyslové vzory (ÚPV, 2025).</li>
-      <li>· <strong>Fonty:</strong> Open Font License (OFL), free commercial use.</li>
-      <li>· <strong>Brand book obsah:</strong> CC BY-NC-ND 4.0 — sdílení OK s atribucí, žádné komerční použití, žádné modifikace.</li>
-    </ul>
-  </section>
+  <PasHlavicka nazev="Licence" linka />
+  <ul class="space-y-3 text-body text-bone/80 max-w-2xl">
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span><strong class="text-bone">Loga eldee:</strong> © 2026 eldee. Použití jen s písemným svolením.</span></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span><strong class="text-bone">Wordmark dírky + Hole Pattern:</strong> chráněné průmyslové vzory (ÚPV, 2025).</span></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span><strong class="text-bone">Fonty:</strong> Open Font License (OFL), free commercial use.</span></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span><strong class="text-bone">Brand book obsah:</strong> CC BY-NC-ND 4.0 — sdílení OK s atribucí, žádné komerční použití, žádné modifikace.</span></li>
+  </ul>
 
-  <section>
-    <h2 class="font-display text-h2 text-bone mb-6">Kontakt</h2>
-    <ul class="space-y-2 text-body text-bone/80">
-      <li>· E-mail: <a href="mailto:lukas@eldee.cz" class="text-gold hover:text-bone">lukas@eldee.cz</a></li>
-      <li>· Web: <a href="https://eldeeworld.com" class="text-gold hover:text-bone">eldeeworld.com</a></li>
-      <li>· Instagram: <a href="https://instagram.com/eldee.cz" class="text-gold hover:text-bone">@eldee.cz</a></li>
-      <li>· Logomanuál: <a href="https://eldee-logomanual.vercel.app" class="text-gold hover:text-bone">eldee-logomanual.vercel.app</a></li>
-    </ul>
-  </section>
+  <PasHlavicka nazev="Kontakt" linka />
+  <ul class="space-y-2.5 text-body text-bone/80">
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span>E-mail: <a href="mailto:lukas@eldee.cz" class="text-gold hover:text-bone">lukas@eldee.cz</a></span></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span>Web: <a href="https://eldeeworld.com" class="text-gold hover:text-bone">eldeeworld.com</a></span></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span>Instagram: <a href="https://instagram.com/eldee.cz" class="text-gold hover:text-bone">@eldee.cz</a></span></li>
+    <li class="flex gap-2.5"><span class="text-bone/30 shrink-0">·</span><span>Logomanuál: <a href="https://eldee-logomanual.vercel.app" class="text-gold hover:text-bone">eldee-logomanual.vercel.app</a></span></li>
+  </ul>
 
 </Layout>
