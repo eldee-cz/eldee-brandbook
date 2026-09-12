@@ -7,8 +7,10 @@
 // novou sekci /produkt a v PDF by chyběla.
 
 import { chromium } from 'playwright';
-import { PDFDocument } from 'pdf-lib';
-import { writeFile } from 'node:fs/promises';
+import { PDFDocument, rgb } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit';
+import wawoff from 'wawoff2';
+import { writeFile, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { poradiStranek, blokyProBuild } from '../src/data/sekce.ts';
 
@@ -24,6 +26,26 @@ const BEZ_OKRAJU = { top: '0', bottom: '0', left: '0', right: '0' };
 
 const PORT = 4322;
 const BASE = `http://localhost:${PORT}`;
+
+// ── Čísla stránek ──────────────────────────────────────────────────────────
+// Chrome je do PDF nakreslit neumí (`--no-pdf-header-footer` je všechno, co
+// nabízí) a CSS `@page` countery v něm nefungují. U smluv to eldee řeší
+// druhým průchodem Chromem přes overlay HTML (smlouvy/build-pdf.py), tady to
+// není potřeba: pdf-lib text kreslit umí, takže se čísla dopisují do hotového
+// dokumentu jedním průchodem.
+//
+// Font je JetBrains Mono z knihy, ne Courier ze standardní sady — brand book
+// je o typografické disciplíně a číslo v cizím fontu je přesně ta nekonzistence,
+// kterou sám zakazuje. Kvůli tomu se woff2 dekomprimuje na TTF (stejně jako
+// v generate-wordmark.mjs) a embeduje přes fontkit.
+const MONO_WOFF2 = 'public/fonts/JetBrainsMono-Regular.woff2';
+const CISLO = {
+  velikost: 8,
+  // #555555 — stejný tlumený odstín, jaký print.css používá pro drobný text
+  // na papíře. Světlejší by na 80g papíře zmizel.
+  barva: rgb(0x55 / 255, 0x55 / 255, 0x55 / 255),
+  odKrajeDole: 20, // pt, uvnitř 16mm dolního okraje
+};
 
 async function waitForServer(url, retries = 60) {
   for (let i = 0; i < retries; i++) {
@@ -60,6 +82,8 @@ try {
   const page = await ctx.newPage();
 
   const merged = await PDFDocument.create();
+  // Indexy stránek, které jsou předělem bloku — čísla se na ně netisknou.
+  const predelIndexy = new Set();
 
   for (const path of PAGES) {
     const jePredel = PREDELY.has(path);
@@ -79,8 +103,38 @@ try {
       throw new Error(`Předěl ${path} má ${pocet} stránek místo jedné — zkontroluj min-height v print.css`);
     }
     const copied = await merged.copyPages(src, src.getPageIndices());
-    copied.forEach((p) => merged.addPage(p));
+    copied.forEach((p) => {
+      if (jePredel) predelIndexy.add(merged.getPageCount());
+      merged.addPage(p);
+    });
   }
+
+  // ── Čísla stránek na hotový dokument ────────────────────────────────────
+  // Předěly bloků se POČÍTAJÍ, ale číslo se na ně netiskne: je to dělící list
+  // a navíc jediná plnobarevná stránka v knize, kde by tmavé číslo zmizelo.
+  // Stejně to dělá sazba tištěných knih u vakátů a mezititulů.
+  merged.registerFontkit(fontkit);
+  const monoWoff2 = await readFile(MONO_WOFF2);
+  const monoTtf = Buffer.from(await wawoff.decompress(new Uint8Array(monoWoff2)));
+  const mono = await merged.embedFont(monoTtf, { subset: true });
+
+  const strany = merged.getPages();
+  let vytisteno = 0;
+  for (const [i, str] of strany.entries()) {
+    const cislo = String(i + 1);
+    if (predelIndexy.has(i)) continue;
+    const sirkaTextu = mono.widthOfTextAtSize(cislo, CISLO.velikost);
+    const { width } = str.getSize();
+    str.drawText(cislo, {
+      x: (width - sirkaTextu) / 2,
+      y: CISLO.odKrajeDole,
+      size: CISLO.velikost,
+      font: mono,
+      color: CISLO.barva,
+    });
+    vytisteno += 1;
+  }
+  console.log(`Čísla stránek: ${vytisteno} z ${strany.length} (předěly bloků se nečíslují)`);
 
   const out = await merged.save();
   const outPath = 'public/eldee-brandbook.pdf';
