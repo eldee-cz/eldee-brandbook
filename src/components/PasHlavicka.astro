@@ -1,23 +1,44 @@
 ---
-// Hlavička pásu uvnitř sekce (B2): název vlevo, technická data vpravo.
+// Hlavička pásu uvnitř sekce. Název vlevo, technická data vpravo.
 // Rozměr a adresa patří k ukázce, ne do odstavce pod ní — když je čte oko
 // v jednom řádku s nadpisem, nemusí se pro ně nikam vracet.
+//
+// Dva rytmy knihy se potkávají tady:
+//   · bloky II a III INSTRUUJÍ — nadpis roman, technická data vpravo (B2)
+//   · blok I MLUVÍ — nadpis italic (`hlas`), pásy dělí vodorovná linka
+//     (`linka`) a pod nadpisem stojí věta, ne rozměr (`popis`)
+// Italic proto není ozdoba: odlišuje hlas značky od technického pokynu.
 interface Props {
   nazev: string;
   /** Řádky technických dat vpravo (rozměr, doména, kadence). */
   meta?: string[];
+  /** Věta pod nadpisem — uvozuje pás v bloku I. */
+  popis?: string;
+  /** Hlas značky: nadpis kurzívou. Blok I ano, bloky II a III ne. */
+  hlas?: boolean;
+  /** Vodorovná linka nad pásem. Rytmus bloku I, kde pásy nedělí obrázek. */
+  linka?: boolean;
   /** První pás v sekci nemá nad sebou co odsadit. */
   prvni?: boolean;
 }
-const { nazev, meta = [], prvni = false } = Astro.props;
+const { nazev, meta = [], popis, hlas = false, linka = false, prvni = false } = Astro.props;
+
+const odsazeni = prvni ? 'mt-0' : 'mt-14 sm:mt-16';
+const linkaStyl = linka && !prvni ? 'pt-9 border-t border-bone/12' : '';
 ---
-<!-- Na telefonu pod sebou: vedle nadpisu se delší technický popisek nevejde
-     a vytlačil by stránku ze šířky obrazovky (naměřeno na 390 px). -->
-<div class={`flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6 mb-4 ${prvni ? 'mt-0' : 'mt-14 sm:mt-16'}`}>
-  <h2 class="font-display text-h2 text-bone">{nazev}</h2>
-  {meta.length > 0 && (
-    <div class="font-mono text-caption text-bone/45 leading-[1.9] sm:text-right min-w-0">
-      {meta.map((r) => <div class="break-words">{r}</div>)}
-    </div>
-  )}
+<div class:list={[odsazeni, linkaStyl]}>
+  <!-- Na telefonu pod sebou: vedle nadpisu se delší technický popisek nevejde
+       a vytlačil by stránku ze šířky obrazovky (naměřeno na 390 px). -->
+  <div class:list={[
+    'flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6',
+    popis ? 'mb-3' : 'mb-4',
+  ]}>
+    <h2 class:list={['font-display text-h2 text-bone', hlas && 'italic']}>{nazev}</h2>
+    {meta.length > 0 && (
+      <div class="font-mono text-caption text-bone/45 leading-[1.9] sm:text-right min-w-0">
+        {meta.map((r) => <div class="break-words">{r}</div>)}
+      </div>
+    )}
+  </div>
+  {popis && <p class="text-body-lg text-bone/70 max-w-2xl mb-6">{popis}</p>}
 </div>

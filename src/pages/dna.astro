@@ -4,6 +4,9 @@ import { isHQ } from '../buildMode';
 import { skryvatVeVerejnem } from '../data/sekce';
 if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Karta from '../components/Karta.astro';
+import Panel from '../components/Panel.astro';
 import content from '../data/content.json';
 ---
 <Layout title="Brand DNA">
@@ -12,51 +15,45 @@ import content from '../data/content.json';
     subtitle="Kdo je eldee jako značka. Pravidla pro chování, hlas, rozhodování."
   />
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Personality</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      {content.dna.personality.map((p) => (
-        <div class="bg-ink/60 border border-bone/10 rounded-lg p-6">
-          <div class="font-display text-h3 italic text-blood mb-2">{p.trait}</div>
-          <p class="text-body text-bone/80">{p.description}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+  <PasHlavicka nazev="Personality" hlas prvni />
+  <div class="grid md:grid-cols-2 gap-5">
+    {content.dna.personality.map((p) => (
+      <Karta nadpis={p.trait} hrana="blood">{p.description}</Karta>
+    ))}
+  </div>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Hodnoty</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      {content.dna.values.map((v) => (
-        <div class="border-l-4 border-gold pl-6 py-2">
-          <div class="font-display text-h3 italic text-gold mb-1">{v.value}</div>
-          <p class="text-body text-bone/80">{v.description}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+  <PasHlavicka nazev="Hodnoty" hlas linka />
+  <div class="grid md:grid-cols-2 gap-5">
+    {content.dna.values.map((v) => (
+      <Karta nadpis={v.value} hrana="gold">{v.description}</Karta>
+    ))}
+  </div>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 text-bone mb-6">Archetypy</h2>
-    <p class="text-body-lg text-bone/70 mb-8 max-w-2xl">Jungian brand archetypy — pomáhají rozhodovat se v hraničních případech (campaign, content, sponsorship).</p>
-    <div class="space-y-4">
-      {content.dna.archetypes.map((a) => (
-        <div class:list={['bg-ink/60 border rounded-lg p-6', a.primary ? 'border-blood' : 'border-bone/10']}>
-          <div class="flex items-baseline gap-3 mb-2">
-            <div class="font-display text-h3 italic text-bone">{a.name}</div>
-            {a.primary && <span class="font-mono text-caption text-blood">PRIMARY</span>}
-          </div>
-          <p class="text-body text-bone/80">{a.description}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+  <PasHlavicka
+    nazev="Archetypy"
+    hlas
+    linka
+    popis="Jungian brand archetypy — pomáhají rozhodovat se v hraničních případech (campaign, content, sponsorship)."
+  />
+  <div class="grid md:grid-cols-3 gap-5">
+    {content.dna.archetypes.map((a) => (
+      <Karta
+        nadpis={a.name}
+        hrana={a.primary ? 'blood' : 'zadna'}
+        stitek={a.primary ? 'PRIMARY' : undefined}
+      >
+        {a.description}
+      </Karta>
+    ))}
+  </div>
 
-  <!-- Rebel vs. patřičnost: bez tohohle odstavce si brand book protiřečí -->
-  <section class="bg-ink/60 border border-bone/13 border-l-[3px] border-l-gold px-8 py-7">
-    <h2 class="font-display text-h2 italic text-bone mb-3">{content.dna.napeti.nadpis}</h2>
+  <!-- Rebel vs. patřičnost: bez tohohle panelu si brand book protiřečí -->
+  <PasHlavicka nazev={content.dna.napeti.nadpis} hlas linka />
+  <Panel>
     <p class="text-body-lg text-bone/85 max-w-3xl">{content.dna.napeti.text}</p>
+    <!-- Pointa celé sekce, ne doraz pásu — proto drží hlas značky
+         (display italic zlatá), a ne 17px jako běžný Doraz. -->
     <p class="font-display text-h3 italic text-gold mt-5">{content.dna.napeti.veta}</p>
-  </section>
+  </Panel>
 
 </Layout>

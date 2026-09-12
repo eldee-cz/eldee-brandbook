@@ -4,6 +4,10 @@ import TableOfContents from '../components/TableOfContents.astro';
 import PrintBreak from '../components/PrintBreak.astro';
 import content from '../data/content.json';
 import { isHQ } from '../buildMode';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Karta from '../components/Karta.astro';
+import Panel from '../components/Panel.astro';
+import Doraz from '../components/Doraz.astro';
 import { BLOKY, sekceProBuild, type BlokId } from '../data/sekce';
 
 const j = content.jadro;
@@ -40,8 +44,8 @@ const skupinyLM = poradiBloku
     <PrintBreak />
 
     <!-- Proč zrovna tahle emoce -->
-    <section class="mt-14 pt-9 border-t border-bone/12">
-      <h2 class="font-display text-h2 italic text-bone mb-6">Proč zrovna tahle emoce</h2>
+    <section>
+      <PasHlavicka nazev="Proč zrovna tahle emoce" hlas linka />
       <div class="grid md:grid-cols-2 gap-11">
         <p class="text-body-lg text-bone/85">{j.proc[0]}</p>
         <div>
@@ -52,11 +56,15 @@ const skupinyLM = poradiBloku
     </section>
 
     <!-- Hierarchie -->
-    <section class="mt-14 pt-9 border-t border-bone/12">
-      <h2 class="font-display text-h2 italic text-bone mb-3">Co stojí nad čím</h2>
-      <p class="text-body-lg text-bone/70 max-w-xl">Dvě roviny, dvě různé otázky. Nekonkurují si.</p>
+    <section>
+      <PasHlavicka
+        nazev="Co stojí nad čím"
+        hlas
+        linka
+        popis="Dvě roviny, dvě různé otázky. Nekonkurují si."
+      />
 
-      <div class="bg-ink/60 border border-bone/13 mt-6 px-8 py-7">
+      <Panel hrana="zadna">
         <div class="font-display text-h2 italic text-bone mb-4">eldee</div>
         {j.hierarchie.map((h) => (
           <div class="grid grid-cols-[1.5rem_8rem_1fr] sm:grid-cols-[1.5rem_9rem_1fr_auto] gap-4 items-baseline py-3 border-t border-bone/10">
@@ -66,16 +74,16 @@ const skupinyLM = poradiBloku
             <span class="col-start-2 sm:col-start-4 text-body text-bone/55 sm:text-right">{h.proc}</span>
           </div>
         ))}
-      </div>
+      </Panel>
 
-      <p class="mt-5 pl-4 border-l-[3px] border-gold text-[17px] text-bone">{j.hierarchieOtazka}</p>
+      <Doraz>{j.hierarchieOtazka}</Doraz>
     </section>
 
     <PrintBreak />
 
     <!-- Razítko -->
-    <section class="mt-14 pt-9 border-t border-bone/12">
-      <h2 class="font-display text-h2 italic text-bone mb-3">Razítko, ne nápis</h2>
+    <section>
+      <PasHlavicka nazev="Razítko, ne nápis" hlas linka />
       <p class="text-body-lg text-bone/85 max-w-2xl">{j.razitko.veta}</p>
 
       <div class="grid md:grid-cols-2 gap-10 mt-7 items-start">
@@ -120,11 +128,10 @@ const skupinyLM = poradiBloku
     </section>
 
     <!-- Kde claim žije -->
-    <section class="mt-14 pt-9 border-t border-bone/12">
-      <h2 class="font-display text-h2 italic text-bone mb-3">Kde claim žije</h2>
-      <p class="text-body-lg text-bone/70 max-w-2xl">{j.kdeZije.uvod}</p>
+    <section>
+      <PasHlavicka nazev="Kde claim žije" hlas linka popis={j.kdeZije.uvod} />
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/12 border border-bone/12 mt-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/12 border border-bone/12">
         {j.kdeZije.mista.map((m) => (
           <div class="bg-ink px-5 py-4">
             <div class="font-mono text-caption text-gold mb-2">{m.kde}</div>
@@ -137,8 +144,8 @@ const skupinyLM = poradiBloku
     <PrintBreak />
 
     <!-- Co to není -->
-    <section class="mt-14 pt-9 border-t border-bone/12">
-      <h2 class="font-display text-h2 italic text-bone mb-6">Co to není</h2>
+    <section>
+      <PasHlavicka nazev="Co to není" hlas linka />
       <div class="grid md:grid-cols-2 gap-x-8 gap-y-5">
         {j.neni.map((n) => (
           <div class="border-l-[3px] border-blood pl-4 py-1">
@@ -150,21 +157,18 @@ const skupinyLM = poradiBloku
     </section>
 
     <!-- Tři hranice -->
-    <section class="mt-14 pt-9 border-t border-bone/12">
-      <h2 class="font-display text-h2 italic text-bone mb-3">Tři hranice claimu</h2>
-      <p class="text-body-lg text-bone/80 max-w-3xl">{j.hranice.uvod}</p>
+    <section>
+      <PasHlavicka nazev="Tři hranice claimu" hlas linka popis={j.hranice.uvod} />
 
-      <div class="grid md:grid-cols-3 gap-5 mt-6">
+      <div class="grid md:grid-cols-3 gap-5">
         {j.hranice.pravidla.map((p, i) => (
-          <div class="bg-ink/60 border border-bone/13 border-t-[3px] border-t-gold px-6 py-5">
-            <div class="font-display italic text-gold text-[34px] leading-none mb-2.5">{String(i + 1).padStart(2, '0')}</div>
-            <p class="text-[15px] text-bone/85 leading-relaxed">{p.pravidlo}</p>
-            <small class="block mt-2.5 text-[13px] text-bone/50">{p.detail}</small>
-          </div>
+          <Karta cislo={String(i + 1).padStart(2, '0')} detail={p.detail} hrana="gold">
+            {p.pravidlo}
+          </Karta>
         ))}
       </div>
 
-      <p class="mt-6 pl-4 border-l-2 border-bone/20 text-body text-bone/60 max-w-3xl">{j.hranice.znamka}</p>
+      <Doraz barva="tlumena">{j.hranice.znamka}</Doraz>
     </section>
 
     <PrintBreak />

@@ -1,0 +1,21 @@
+---
+// Doraz — poslední věta pásu, ta, kterou si má čtenář odnést.
+// Šest výskytů v bloku I bylo opsaných inline (01 dvakrát, 06 dvakrát, 07)
+// a lišily se stupněm písma i šířkou svislice, přestože mají stejnou roli.
+//
+// Rozdíl mezi `gold`/`blood` a `tlumena` není dekorace: první dvě jsou
+// tvrzení a nesou plnou barvu textu, `tlumena` je poznámka pod čarou
+// a musí být na první pohled slabší, aby s tvrzením nesoutěžila.
+interface Props {
+  /** Zlatá = to si odnes · krvavá = varování · tlumená = poznámka pod čarou. */
+  barva?: 'gold' | 'blood' | 'tlumena';
+}
+const { barva = 'gold' } = Astro.props;
+
+const STYL = {
+  gold:    'border-l-[3px] border-gold text-[17px] text-bone',
+  blood:   'border-l-[3px] border-blood text-[17px] text-bone',
+  tlumena: 'border-l-2 border-bone/20 text-body text-bone/60',
+} as const;
+---
+<p class:list={['mt-5 pl-4 max-w-3xl', STYL[barva]]}><slot /></p>

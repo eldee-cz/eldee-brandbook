@@ -4,11 +4,28 @@ import { isHQ } from '../buildMode';
 import { skryvatVeVerejnem } from '../data/sekce';
 if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Karta from '../components/Karta.astro';
 import content from '../data/content.json';
 
+// Parametry persony se staví z dat, ne ručně v šabloně: primární persona má
+// věk a příjem, sekundární typ a rozhodovatele. Dřív to řešilo pět podmínek
+// vepsaných do značek a prázdné pole `age` po sobě nechávalo mezeru.
+type Persona = (typeof content.audience)['primary' | 'secondary'] & Record<string, unknown>;
+
+function parametry(p: Persona) {
+  return [
+    ['VĚK', p.age],
+    ['TYP', p.type],
+    ['GEOGRAFIE', p.geography],
+    ['PŘÍJEM', p.income],
+    ['DECISION MAKER', p.decisionMaker],
+  ].filter(([, v]) => typeof v === 'string' && v.trim() !== '') as [string, string][];
+}
+
 const personas = [
-  { key: 'primary',   p: content.audience.primary,   label: 'PRIMARY · B2C' },
-  { key: 'secondary', p: content.audience.secondary, label: 'SECONDARY · B2B' },
+  { key: 'primary',   p: content.audience.primary   as Persona, label: 'PRIMARY · B2C' },
+  { key: 'secondary', p: content.audience.secondary as Persona, label: 'SECONDARY · B2B' },
 ];
 ---
 <Layout title="Target Audience">
@@ -17,50 +34,32 @@ const personas = [
     subtitle="Dvě cílovky — primárně mladí fotbalisti, sekundárně amatérské kluby."
   />
 
-  {personas.map(({ key, p, label }) => (
-    <section class="mb-16" id={key}>
-      <div class="bg-ink/60 border border-bone/10 rounded-lg p-8">
-        <div class="font-mono text-caption text-blood mb-3">{label}</div>
-        <h2 class="font-display text-h2 italic text-bone mb-6">{p.name}</h2>
+  {personas.map(({ key, p, label }, i) => (
+    <section id={key}>
+      <PasHlavicka nazev={p.name} hlas prvni={i === 0} linka={i > 0} meta={[label]} />
 
-        <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-8">
-          {p.age && (<>
-            <dt class="font-mono text-caption text-gold">VĚK</dt>
-            <dd class="text-body text-bone">{p.age}</dd>
-          </>)}
-          {p.type && (<>
-            <dt class="font-mono text-caption text-gold">TYP</dt>
-            <dd class="text-body text-bone">{p.type}</dd>
-          </>)}
-          <dt class="font-mono text-caption text-gold">GEOGRAFIE</dt>
-          <dd class="text-body text-bone">{p.geography}</dd>
-          {p.income && (<>
-            <dt class="font-mono text-caption text-gold">PŘÍJEM</dt>
-            <dd class="text-body text-bone">{p.income}</dd>
-          </>)}
-          {p.decisionMaker && (<>
-            <dt class="font-mono text-caption text-gold">DECISION MAKER</dt>
-            <dd class="text-body text-bone">{p.decisionMaker}</dd>
-          </>)}
-        </dl>
+      <dl class="grid sm:grid-cols-[10rem_1fr] gap-x-8 gap-y-3 mb-9">
+        {parametry(p).map(([k, v]) => (
+          <>
+            <dt class="font-mono text-caption text-gold sm:text-right">{k}</dt>
+            <dd class="text-body text-bone">{v}</dd>
+          </>
+        ))}
+      </dl>
 
-        <div class="mb-6">
-          <div class="font-mono text-caption text-gold mb-2">LIFESTYLE</div>
-          <ul class="text-body text-bone/80 space-y-1">
-            {p.lifestyle.map((l) => <li>· {l}</li>)}
-          </ul>
-        </div>
+      <div class="font-mono text-caption text-gold mb-3">LIFESTYLE</div>
+      <ul class="text-body text-bone/80 space-y-1.5 max-w-2xl">
+        {p.lifestyle.map((l) => (
+          <li class="flex gap-2.5">
+            <span class="text-bone/30 shrink-0">·</span>
+            <span>{l}</span>
+          </li>
+        ))}
+      </ul>
 
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="border-l-4 border-blood pl-4">
-            <div class="font-mono text-caption text-blood mb-1">PAIN</div>
-            <p class="text-body text-bone/85">{p.pain}</p>
-          </div>
-          <div class="border-l-4 border-gold pl-4">
-            <div class="font-mono text-caption text-gold mb-1">MOTIVATION</div>
-            <p class="text-body text-bone/85">{p.motivation}</p>
-          </div>
-        </div>
+      <div class="grid md:grid-cols-2 gap-5 mt-8">
+        <Karta nadpis="Pain" hrana="blood">{p.pain}</Karta>
+        <Karta nadpis="Motivation" hrana="gold">{p.motivation}</Karta>
       </div>
     </section>
   ))}

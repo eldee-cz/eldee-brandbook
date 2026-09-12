@@ -1,0 +1,27 @@
+---
+// Panel — velká plocha s vlastním nadpisem uvnitř pásu. Nese věc, která
+// v sekci váží víc než ostatní: sladění rebela s patřičností (03), směr
+// značky (05), pravidlo výroby (06), hierarchie značka → produkt (01).
+//
+// Čtyři výskyty byly opsané inline a tři z nich se lišily jen tím, že
+// jeden zapomněl zlatou hranu. Panel je proto jedna plocha se dvěma
+// stavy, ne čtyři podobné krabice.
+interface Props {
+  nadpis?: string;
+  /** Věta pod nadpisem, uvnitř panelu. */
+  popis?: string;
+  /** Zlatá levá hrana = „tohle je v sekci nejtěžší". `zadna` = neutrální plocha. */
+  hrana?: 'gold' | 'zadna';
+}
+const { nadpis, popis, hrana = 'gold' } = Astro.props;
+
+const HRANA = {
+  gold: 'border-l-[3px] border-l-gold',
+  zadna: '',
+} as const;
+---
+<div class:list={['bg-ink/60 border border-bone/13 px-6 py-6 sm:px-8 sm:py-7', HRANA[hrana]]}>
+  {nadpis && <h3 class="font-display text-h2 italic text-bone mb-3">{nadpis}</h3>}
+  {popis && <p class="text-body-lg text-bone/70 max-w-2xl mb-5">{popis}</p>}
+  <slot />
+</div>

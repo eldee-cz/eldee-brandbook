@@ -4,6 +4,8 @@ import { isHQ } from '../buildMode';
 import { skryvatVeVerejnem } from '../data/sekce';
 if (!isHQ && skryvatVeVerejnem(Astro.url.pathname)) return Astro.redirect('/');
 import SectionTitle from '../components/SectionTitle.astro';
+import PasHlavicka from '../components/PasHlavicka.astro';
+import Panel from '../components/Panel.astro';
 import content from '../data/content.json';
 
 const p = content.positioning;
@@ -14,50 +16,52 @@ const p = content.positioning;
     subtitle="Jak se eldee liší od všeho ostatního na trhu."
   />
 
-  <section class="mb-16">
-    <div class="font-mono text-caption text-gold mb-3">POSITIONING STATEMENT</div>
-    <p class="font-display text-h3 italic text-bone leading-relaxed border-l-4 border-blood pl-6">
-      {p.statement}
-    </p>
-  </section>
+  <!-- Statement a promise jsou úvod sekce, ne dva pásy: drží se u sebe
+       ve čtecí šířce a dělí je štítek, stejně jako vyprávění v Příběhu. -->
+  <div class="space-y-10 max-w-3xl">
+    <section>
+      <div class="font-mono text-caption text-gold mb-3">POSITIONING STATEMENT</div>
+      <p class="font-display text-h3 italic text-bone leading-relaxed border-l-[3px] border-blood pl-6">
+        {p.statement}
+      </p>
+    </section>
 
-  <section class="mb-16">
-    <div class="font-mono text-caption text-gold mb-3">BRAND PROMISE</div>
-    <p class="text-body-lg text-bone/85 max-w-2xl">{p.promise}</p>
-  </section>
+    <section>
+      <div class="font-mono text-caption text-gold mb-3">BRAND PROMISE</div>
+      <p class="text-body-lg text-bone/85 max-w-2xl">{p.promise}</p>
+    </section>
+  </div>
 
   <!-- Směr značky — rozhodnuto 2. 9. 2026 spolu s doménou eldeeworld.com -->
-  <section class="mb-16 bg-ink/60 border border-bone/13 border-l-[3px] border-l-gold px-8 py-7">
-    <h2 class="font-display text-h2 italic text-bone mb-3">{p.smer.nadpis}</h2>
+  <PasHlavicka nazev={p.smer.nadpis} hlas linka />
+  <Panel>
     <p class="text-body-lg text-bone/85 max-w-3xl">{p.smer.text}</p>
     <p class="text-body text-bone/65 max-w-3xl mt-4">{p.smer.dusledek}</p>
-  </section>
+  </Panel>
 
-  <section class="mb-16">
-    <h2 class="font-display text-h2 italic text-bone mb-2">Konkurence</h2>
-    <p class="text-body-lg text-bone/70 max-w-2xl mb-6">
-      Jediný, se kterým se reálně potkáváme na českém trhu, je FOUL. Zbytek je kontext.
-    </p>
-    <div class="space-y-3">
-      {p.competitors.map((c) => (
-        <div class="grid grid-cols-[1fr_auto] sm:grid-cols-[13rem_auto_1fr] gap-x-6 gap-y-1 items-baseline pb-3 border-b border-bone/10">
-          <div class="font-display text-h3 italic text-bone">{c.name}</div>
-          <div class="font-mono text-caption text-gold">{c.axis.toUpperCase()}</div>
-          <div class="col-span-2 sm:col-span-1 text-body text-bone/70">{c.differentiator}</div>
-        </div>
-      ))}
-    </div>
-  </section>
+  <PasHlavicka
+    nazev="Konkurence"
+    hlas
+    linka
+    popis="Jediný, se kterým se reálně potkáváme na českém trhu, je FOUL. Zbytek je kontext."
+  />
+  <div>
+    {p.competitors.map((c) => (
+      <div class="grid sm:grid-cols-[13rem_7rem_1fr] gap-x-6 gap-y-1 items-baseline py-4 border-t border-bone/12 first:border-t-0">
+        <div class="font-display text-h3 italic text-bone">{c.name}</div>
+        <div class="font-mono text-caption text-gold">{c.axis.toUpperCase()}</div>
+        <div class="text-body text-bone/70">{c.differentiator}</div>
+      </div>
+    ))}
+  </div>
 
-  <section>
-    <h2 class="font-display text-h2 italic text-bone mb-6">USP — co eldee má, jiní ne</h2>
-    <ol class="space-y-4">
-      {p.usp.map((u, i) => (
-        <li class="flex gap-6">
-          <div class="font-display text-h2 italic text-blood w-12 shrink-0">{i + 1}.</div>
-          <div class="text-body-lg text-bone/85 pt-2">{u}</div>
-        </li>
-      ))}
-    </ol>
-  </section>
+  <PasHlavicka nazev="USP — co eldee má, jiní ne" hlas linka />
+  <ol>
+    {p.usp.map((u, i) => (
+      <li class="grid grid-cols-[3rem_1fr] gap-x-4 items-baseline py-4 border-t border-bone/12 first:border-t-0">
+        <div class="font-display text-h2 italic text-blood">{i + 1}.</div>
+        <div class="text-body-lg text-bone/85">{u}</div>
+      </li>
+    ))}
+  </ol>
 </Layout>

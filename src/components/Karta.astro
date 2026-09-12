@@ -1,0 +1,45 @@
+---
+// Karta bloku I. Vznikla z toho, že tentýž blok kódu byl opsaný třikrát
+// (01 tři hranice claimu, 06 chráněné vzory, 07 tři pravidla na post)
+// a čtvrtý výskyt v 06 „Řada" měl jiné zaoblení a číslo v monu — takže se
+// čtyři místa, která mají být stejná, lišila.
+//
+// ⚠️ Barvu nese HRANA, ne nadpis. Dřív měla sekce DNA nadpis karty krvavý
+// u povahy a zlatý u hodnot, což je stejná informace uložená dvakrát na
+// dvou různých místech. Pravidlo je stejné jako u předělu bloku: barva má
+// v kartě jediného nositele.
+interface Props {
+  /** Číslo pořadí. Píše se do dvou míst „01", ne „1". */
+  cislo?: string;
+  nadpis?: string;
+  /** Tenký doplněk pod textem — výjimka z pravidla, poznámka, upřesnění. */
+  detail?: string;
+  /** Barevná hrana nahoře. `zadna` = karta jen s obrysem. */
+  hrana?: 'gold' | 'blood' | 'bone' | 'zadna';
+  /** Štítek za nadpisem (např. PRIMARY u hlavního archetypu). */
+  stitek?: string;
+}
+const { cislo, nadpis, detail, hrana = 'gold', stitek } = Astro.props;
+
+const HRANA = {
+  gold: 'border-t-[3px] border-t-gold',
+  blood: 'border-t-[3px] border-t-blood',
+  bone: 'border-t-[3px] border-t-bone/45',
+  zadna: '',
+} as const;
+---
+<div class:list={['bg-ink/60 border border-bone/13 px-6 py-5', HRANA[hrana]]}>
+  {cislo && (
+    <div class="font-display italic text-gold text-[34px] leading-none mb-2.5">{cislo}</div>
+  )}
+  {nadpis && (
+    <div class="flex items-baseline gap-3 mb-2">
+      <div class="font-display text-h3 italic text-bone">{nadpis}</div>
+      {stitek && <span class="font-mono text-caption text-blood shrink-0">{stitek}</span>}
+    </div>
+  )}
+  <p class="text-[15px] leading-relaxed text-bone/85"><slot /></p>
+  {detail && (
+    <small class="block mt-2.5 text-[13px] leading-relaxed text-bone/50">{detail}</small>
+  )}
+</div>
