@@ -20,7 +20,7 @@ const HRANA = {
   zadna: '',
 } as const;
 ---
-<div class:list={['bg-ink/60 border border-bone/13 px-6 py-6 sm:px-8 sm:py-7', HRANA[hrana]]}>
+<div class:list={['bg-ink/60 border border-bone/13 px-6 py-6 sm:px-8 sm:py-7', HRANA[hrana]]} data-panel data-hrana={hrana}>
   {nadpis && <h3 class="font-display text-h2 italic text-bone mb-3">{nadpis}</h3>}
   {popis && <p class="text-body-lg text-bone/70 max-w-2xl mb-5">{popis}</p>}
   <slot />

@@ -46,6 +46,11 @@
   h1:first-of-type {
     break-before: avoid;
   }
+  /* Nadpis pásu musí zůstat u toho, co uvozuje. „Český výrobce" skončil
+     samotný na konci stránky a panel k němu se přesunul na další. */
+  h2, h3 {
+    break-after: avoid;
+  }
   /* Color tweaks for print (still readable) */
   /* Pokrývá VŠECHNY varianty text-bone/NN. Dřív tu byl ruční výčet
      (/60 /70 /80), který se rozešel s obsahem — /85, /40, /50 a /55
@@ -64,6 +69,12 @@
     background: #FFFFFF !important;
     border: 1px solid #ddd !important;
   }
+  /* Kostěné rámečky jsou na černé jemný obrys, na bílé nejsou vidět vůbec.
+     Velikostní boxy XS / M / L v sekci Produkt tak v PDF stály bez orámování
+     a vypadaly jako přetečený text. */
+  [class*="border-bone/"] {
+    border-color: #ddd !important;
+  }
   .text-blood {
     color: #B91C1C !important;
   }
@@ -79,9 +90,36 @@
   .text-signal-ok {
     color: #047857 !important;
   }
-  .text-gold {
-    color: #C9A227 !important;
+  /* Zlatá je laděná na černou plochu. Na bílém papíře má #C9A227 kontrast
+     2,42 — na každé stránce knihy tak byl nečitelný štítek sekce („Blok I ·
+     Kdo jsme / 06 · Produkt"), štítky „Rozměr" v kartách pravidel, popisky
+     šablon i poznámky v kartách produktové řady. Tabulka barev tmavší
+     variantu #7A5E0A (6,12) používala už dřív, zbytek knihy ne.
+     ⚠️ Druhý řádek pokrývá `text-gold/NN`: u průhlednosti nad vlastní barvou
+     Chrome v tiskovém médiu spočítal rgb(0, 728007, 0) — tedy nic. Poznámky
+     v kartách „Řada" byly v PDF prakticky bílé. */
+  .text-gold,
+  [class*="text-gold/"] {
+    color: #7A5E0A !important;
   }
+
+  /* ── Karta a Panel na papíře ───────────────────────────────────────────
+     Obě mají `bg-ink/60`, takže jim pravidlo výš přepíše rámeček na šedou
+     linku — a s ním SMAŽE barevnou hranu. V knize přitom platí „barvu nese
+     hrana, ne nadpis" (sekce DNA, karty pravidel, předěl bloku), takže bez
+     ní se v tisku ztratí informace, ne jen ozdoba.
+     Barvy jsou tmavé protějšky: zlatá #C9A227 má na bílé kontrast 2.0
+     a světlá kostěná zmizí úplně.
+     `break-inside` tu musí být zvlášť — pravidlo výš pokrývá figure,
+     section a .rounded-lg, ale karta není ani jedno a lámala se přes
+     stránky (naměřeno v PDF: karta „Kvalita" rozřezaná mezi str. 12 a 13). */
+  [data-karta], [data-panel] {
+    break-inside: avoid;
+  }
+  [data-karta][data-hrana='gold']  { border-top: 3px solid #7A5E0A !important; }
+  [data-karta][data-hrana='blood'] { border-top: 3px solid #B91C1C !important; }
+  [data-karta][data-hrana='bone']  { border-top: 3px solid #555555 !important; }
+  [data-panel][data-hrana='gold']  { border-left: 3px solid #7A5E0A !important; }
   /* ── Předěl bloku ──────────────────────────────────────────────────────
      Jediná plnobarevná stránka v celé tištěné knize. Kniha se na papíře
      převrací do bílé (nahoře), ale předěl musí zůstat tmavý — v tištěném

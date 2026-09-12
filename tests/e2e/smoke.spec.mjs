@@ -169,6 +169,47 @@ test('drobný text nikde nejede ve značkové červené', async ({ page }) => {
   expect(problemy, 'drobný text v Blood Red (kontrast 3.06)').toEqual([]);
 });
 
+// ── Čitelnost na papíře ───────────────────────────────────────────────────
+// Kniha je navržená na černou plochu a v tisku se převrací do bílé. Barvy,
+// které na černé svítí, na bílé zmizí — a nikdo to nevidí, dokud PDF
+// neotevře. Prvním vygenerovaným PDF v3.0 (12. 9.) prošlo pět vad:
+//   · zlatá #C9A227 má na bílé kontrast 2,42 → nečitelný štítek sekce na
+//     KAŽDÉ stránce knihy, štítky „Rozměr", popisky šablon
+//   · `text-gold/85` Chrome v tiskovém médiu spočítal jako rgb(0, 728007, 0)
+//     → poznámky v kartách produktové řady byly prakticky bílé
+//   · kostěné rámečky zmizely → velikostní boxy XS/M/L bez orámování
+//   · Karta a Panel ztrácely barevnou hranu (bg-ink/60 ji přepsalo šedou)
+//   · karty se lámaly přes stránky
+// Emulace `print` je totéž médium, jaké použije `page.pdf()` v generate-pdf.
+test('na papíře nezmizí žádný text', async ({ page }) => {
+  await page.emulateMedia({ media: 'print' });
+  const problemy = [];
+  for (const s of stranky) {
+    await page.goto(s.href);
+    const nalezy = await page.evaluate(() => {
+      const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+      const out = [];
+      document.querySelectorAll('main *').forEach((el) => {
+        if (el.children.length > 0) return;
+        // Předěl bloku je jediná stránka, která na papíře zůstává tmavá.
+        if (el.closest('.predel')) return;
+        const t = (el.textContent || '').trim();
+        if (!t || !/\p{L}/u.test(t)) return;
+        const st = getComputedStyle(el);
+        const m = st.color.match(/\d+/g);
+        if (!m) return;
+        const [r, g, b] = m.map(Number);
+        const L = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+        const kontrast = 1.05 / (L + 0.05);
+        if (kontrast < 4.5) out.push(`${kontrast.toFixed(2)} rgb(${r},${g},${b}) „${t.slice(0, 28)}"`);
+      });
+      return out;
+    });
+    for (const n of nalezy) problemy.push(`${s.href} — ${n}`);
+  }
+  expect(problemy, 'text s kontrastem pod 4.5 na bílém papíře').toEqual([]);
+});
+
 test('Loga a fonty jsou dostupné', async ({ request }) => {
   const soubory = [
     '/logo/wordmark-light.svg',

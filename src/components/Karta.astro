@@ -28,7 +28,7 @@ const HRANA = {
   zadna: '',
 } as const;
 ---
-<div class:list={['bg-ink/60 border border-bone/13 px-6 py-5', HRANA[hrana]]}>
+<div class:list={['bg-ink/60 border border-bone/13 px-6 py-5', HRANA[hrana]]} data-karta data-hrana={hrana}>
   {cislo && (
     <div class="font-display italic text-gold text-[34px] leading-none mb-2.5">{cislo}</div>
   )}
