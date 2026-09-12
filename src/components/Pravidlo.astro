@@ -7,8 +7,8 @@ interface Props {
 const { typ } = Astro.props;
 
 const STYL = {
-  ok:     { stitek: '✓ Pravidlo', hrana: 'border-[#10B981]', barva: 'text-[#10B981]' },
-  ne:     { stitek: '✕ Nikdy',    hrana: 'border-blood',     barva: 'text-blood' },
+  ok:     { stitek: '✓ Pravidlo', hrana: 'border-signal-ok',  barva: 'text-signal-ok' },
+  ne:     { stitek: '✕ Nikdy',    hrana: 'border-blood',      barva: 'text-signal-ne' },
   rozmer: { stitek: 'Rozměr',     hrana: 'border-gold',      barva: 'text-gold' },
 } as const;
 

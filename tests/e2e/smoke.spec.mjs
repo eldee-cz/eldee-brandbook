@@ -128,6 +128,47 @@ test.describe('veřejné vs. interní dělení', () => {
   });
 });
 
+// ── Vlastní pravidlo knihy o barvě ────────────────────────────────────────
+// Sekce Barvy vyhlašuje: „Blood Red nikdy na drobný text na černé." Kniha to
+// sama porušovala na 121 místech — včetně legendy pod tabulkou barev, kde ta
+// věta stála napsaná krvavou v 9 px. Od v3.0 na to jsou signální barvy.
+//
+// Dvě výjimky, obě vědomé:
+//   · obsah uvnitř `Ukazka` — mockup krabičky nebo IG profilu ukazuje, jak
+//     vypadá SKUTEČNÝ materiál; zesvětlit ho by znamenalo, že ukázka lže
+//   · řetězce bez písmen (šipka „↓" u souboru ke stažení) — pozná se tvarem,
+//     nečte se jako text
+test('drobný text nikde nejede ve značkové červené', async ({ page }) => {
+  const problemy = [];
+  for (const s of stranky) {
+    await page.goto(s.href);
+    const nalezy = await page.evaluate(() => {
+      const out = [];
+      document.querySelectorAll('main *').forEach((el) => {
+        if (el.children.length > 0) return;
+        if (el.closest('[data-ukazka]')) return;
+        const t = (el.textContent || '').trim();
+        if (!t || !/\p{L}/u.test(t)) return;
+        const st = getComputedStyle(el);
+        const m = st.color.match(/\d+/g);
+        if (!m) return;
+        const [r, g, b] = m.map(Number);
+        const krvava = (Math.abs(r - 185) < 12 && Math.abs(g - 28) < 12 && Math.abs(b - 28) < 12)
+                    || (Math.abs(r - 220) < 12 && Math.abs(g - 38) < 12 && Math.abs(b - 38) < 12);
+        if (!krvava) return;
+        const px = parseFloat(st.fontSize);
+        const tucne = parseInt(st.fontWeight, 10) >= 700;
+        // „velký nápis": 24 px normálně, 18.66 px tučně
+        if (px >= 24 || (tucne && px >= 18.66)) return;
+        out.push(`${px.toFixed(1)}px „${t.slice(0, 30)}"`);
+      });
+      return out;
+    });
+    for (const n of nalezy) problemy.push(`${s.href} — ${n}`);
+  }
+  expect(problemy, 'drobný text v Blood Red (kontrast 3.06)').toEqual([]);
+});
+
 test('Loga a fonty jsou dostupné', async ({ request }) => {
   const soubory = [
     '/logo/wordmark-light.svg',

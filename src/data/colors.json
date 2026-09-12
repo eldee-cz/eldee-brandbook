@@ -120,6 +120,30 @@
           "drop": "003"
         }
       ]
+    },
+    {
+      "id": "signal",
+      "name": "Signal",
+      "subtitle": "Pokyn, ne identita — „tohle ano“ a „tohle nikdy“ ve štítcích a kartách pravidel",
+      "colors": [
+        {
+          "id": "signal-ok",
+          "name": "Signal OK",
+          "hex": "#10B981",
+          "rgb": "16, 185, 129",
+          "cmyk": "91, 0, 30, 27",
+          "pantone": "—",
+          "primary": true
+        },
+        {
+          "id": "signal-ne",
+          "name": "Signal Ne",
+          "hex": "#F87171",
+          "rgb": "248, 113, 113",
+          "cmyk": "0, 54, 54, 3",
+          "pantone": "—"
+        }
+      ]
     }
   ]
 }

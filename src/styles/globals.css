@@ -11,6 +11,15 @@
   --color-blood-light: #DC2626;
   --color-gold: #C9A227;
   --color-gold-antique: #B8860B;
+
+  /* Signální pár — „tohle ano" / „tohle nikdy". Není to značková paleta:
+     ink, bone, blood a gold nesou identitu, tyhle dvě nesou pokyn.
+     Proto smějí být světlejší, než by se značce líbilo — musí být čitelné
+     v 9,5px štítku na černé, kde Blood Red má kontrast jen 3,06 a podle
+     vlastního pravidla knihy (sekce Barvy) neunese drobný text.
+     Kontrasty na #0A0A0A: ok 7,80 · ne 7,16. */
+  --color-signal-ok: #10B981;
+  --color-signal-ne: #F87171;
   --color-drop-green: #BFFF00;
   --color-drop-orange: #FF6B00;
   --color-drop-blue: #2563EB;

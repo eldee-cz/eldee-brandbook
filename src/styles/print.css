@@ -67,6 +67,18 @@
   .text-blood {
     color: #B91C1C !important;
   }
+  /* Signální pár je laděný na ČERNOU plochu, kde musí být čitelný v 9,5px
+     štítku. Na bílém papíře je přesně obráceně: #F87171 má na bílé kontrast
+     2,77 a #10B981 jen 2,54 — obojí zmizí. Na papíře proto jedou tmavé
+     protějšky (6,47 a 5,48).
+     ⚠️ Zelená tuhle úpravu dosud NEMĚLA: psala se jako text-[#10B981],
+     což je arbitrary hodnota, kterou tenhle soubor nemohl chytit. */
+  .text-signal-ne {
+    color: #B91C1C !important;
+  }
+  .text-signal-ok {
+    color: #047857 !important;
+  }
   .text-gold {
     color: #C9A227 !important;
   }
@@ -162,8 +174,8 @@
   .tabulka-barev-legenda .text-gold {
     color: #7A5E0A !important;
   }
-  .tabulka-barev .text-\[\#10B981\],
-  .tabulka-barev-legenda .text-\[\#10B981\] {
+  .tabulka-barev .text-signal-ok,
+  .tabulka-barev-legenda .text-signal-ok {
     color: #06693F !important;
   }
 

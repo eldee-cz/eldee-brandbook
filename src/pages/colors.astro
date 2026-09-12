@@ -20,8 +20,8 @@ const k = (hex: string) => pomer(hex, INK).toFixed(1);
 ---
 <Layout title="Barvy">
   <SectionTitle
-    title="11 barev, 4 vrstvy"
-    subtitle="Černá nese plochu, červená značku, zlatá výjimečné momenty. Drop barvy se mění, zbytek ne."
+    title="13 barev, 5 vrstev"
+    subtitle="Černá nese plochu, červená značku, zlatá výjimečné momenty. Drop barvy se mění, signální pár řídí čtení téhle knihy."
   />
 
   <PasA
@@ -88,5 +88,29 @@ const k = (hex: string) => pomer(hex, INK).toFixed(1);
       </Pravidlo>
     </Pravidla>
     <TabulkaBarev barvy={skupina('drop').colors} />
+  </PasA>
+
+  <PasA
+    nazev="Signal"
+    popis="Dvě barvy, které neříkají, kdo eldee je — říkají čtenáři, jestli se dívá na pravidlo, nebo na zákaz. Proto stojí mimo identitu a smějí být světlejší, než by se značce líbilo."
+    spec={[`Signal OK na černé · ${k('#10B981')}`, `Signal Ne na černé · ${k('#F87171')}`]}
+  >
+    <Fragment slot="pravidla">
+      <Pravidla sloupec>
+        <Pravidlo typ="ok">
+          Signální pár nese jen štítky a karty pravidel uvnitř téhle knihy. Na produkt,
+          obal ani do kampaně nepatří — tam jede Blood Red.
+        </Pravidlo>
+        <Pravidlo typ="rozmer">
+          V tisku se nepoužívají vůbec. Na bílém papíře mají kontrast 2.8 a 2.5, takže
+          se automaticky převádějí na tmavé protějšky #B91C1C a #047857. Proto nemají Pantone.
+        </Pravidlo>
+        <Pravidlo typ="ne">
+          Zaměňovat Signal Ne za Blood Red. Značková červená se od signální liší záměrně:
+          Blood Red má na černé {k('#B91C1C')} a drobný text neunese.
+        </Pravidlo>
+      </Pravidla>
+    </Fragment>
+    <TabulkaBarev barvy={skupina('signal').colors} />
   </PasA>
 </Layout>

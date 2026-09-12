@@ -32,9 +32,9 @@ interface Props {
 const { barvy, legenda = false } = Astro.props;
 
 const BARVA_VERDIKTU = {
-  bezny: 'text-[#10B981]',
+  bezny: 'text-signal-ok',
   velky: 'text-gold',
-  zadny: 'text-blood',
+  zadny: 'text-signal-ne',
 } as const;
 
 const radky = barvy.map((b) => {
@@ -101,8 +101,8 @@ const radky = barvy.map((b) => {
 
 {legenda && (
   <p class="tabulka-barev-legenda flex flex-wrap gap-x-5 gap-y-1 mt-2.5 font-mono text-[9px] tracking-[0.14em] uppercase text-bone/40">
-    <span><span class="text-[#10B981]">4.5+</span> i drobný text</span>
+    <span><span class="text-signal-ok">4.5+</span> i drobný text</span>
     <span><span class="text-gold">3.0+</span> jen nápisy od 24 px</span>
-    <span><span class="text-blood">pod 3.0</span> jako text ne</span>
+    <span><span class="text-signal-ne">pod 3.0</span> jako text ne</span>
   </p>
 )}

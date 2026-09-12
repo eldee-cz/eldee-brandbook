@@ -40,12 +40,12 @@ const templateLabels: Record<string, string> = {
   <div class="space-y-4">
     {voice.principles.map((p) => (
       <div class="grid md:grid-cols-2 gap-4">
-        <div class="bg-ink/60 border-l-[3px] border-[#10B981] px-5 py-4">
-          <div class="font-mono text-caption text-[#10B981] mb-2">✓ DO — {p.do}</div>
+        <div class="bg-ink/60 border-l-[3px] border-signal-ok px-5 py-4">
+          <div class="font-mono text-caption text-signal-ok mb-2">✓ DO — {p.do}</div>
           <div class="text-body text-bone/80 italic">„{p.exampleDo}"</div>
         </div>
         <div class="bg-ink/60 border-l-[3px] border-blood px-5 py-4">
-          <div class="font-mono text-caption text-blood mb-2">✗ DON'T — {p.dont}</div>
+          <div class="font-mono text-caption text-signal-ne mb-2">✗ DON'T — {p.dont}</div>
           <div class="text-body text-bone/80 italic">„{p.exampleDont}"</div>
         </div>
       </div>
@@ -54,16 +54,16 @@ const templateLabels: Record<string, string> = {
 
   <PasHlavicka nazev="Slovník" hlas linka />
   <div class="grid md:grid-cols-2 gap-5">
-    <div class="bg-ink/60 border border-[#10B981]/30 px-6 py-5">
-      <div class="font-mono text-caption text-[#10B981] mb-3">POUŽÍVEJ</div>
+    <div class="bg-ink/60 border border-signal-ok/30 px-6 py-5">
+      <div class="font-mono text-caption text-signal-ok mb-3">POUŽÍVEJ</div>
       <div class="flex flex-wrap gap-2">
         {voice.vocabulary.use.map((w) => (
-          <span class="bg-[#10B981]/10 text-[#A7F3D0] px-3 py-1 text-body">{w}</span>
+          <span class="bg-signal-ok/10 text-signal-ok px-3 py-1 text-body">{w}</span>
         ))}
       </div>
     </div>
     <div class="bg-ink/60 border border-blood/30 px-6 py-5">
-      <div class="font-mono text-caption text-blood mb-3">NEPOUŽÍVEJ</div>
+      <div class="font-mono text-caption text-signal-ne mb-3">NEPOUŽÍVEJ</div>
       <div class="flex flex-wrap gap-2">
         {voice.vocabulary.dont.map((w) => (
           <span class="bg-blood/10 text-bone/70 px-3 py-1 text-body line-through">{w}</span>
