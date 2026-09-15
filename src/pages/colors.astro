@@ -17,10 +17,14 @@ const skupina = (id: string) => colorsData.groups.find((g) => g.id === id)!;
 // Čísla v textu se počítají ze stejného zdroje jako tabulka, ať se nemůžou
 // rozejít. Dřív byla vypsaná ručně a nesouhlasila.
 const k = (hex: string) => pomer(hex, INK).toFixed(1);
+
+// Počet v nadpisu se taky počítá z dat. Při odebrání tří odstínů (revize
+// 15. 9. 2026) by ručně psaných „13 barev“ zůstalo viset.
+const pocetBarev = colorsData.groups.reduce((n, g) => n + g.colors.length, 0);
 ---
 <Layout title="Barvy">
   <SectionTitle
-    title="13 barev, 5 vrstev"
+    title={`${pocetBarev} barev, ${colorsData.groups.length} vrstev`}
     subtitle="Černá nese plochu, červená značku, zlatá výjimečné momenty. Drop barvy se mění, signální pár řídí čtení téhle knihy."
   />
 
@@ -49,10 +53,6 @@ const k = (hex: string) => pomer(hex, INK).toFixed(1);
       </Zakaz>
       <Pravidla sloupec>
         <Pravidlo typ="ok">Jedno hlavní tlačítko v Blood Red na obrazovku. Druhé jen obrys.</Pravidlo>
-        <Pravidlo typ="ne">
-          Blood Red Dark má na černé kontrast {k('#7F1D1D')} — jako text neprojde nikde.
-          Zbývá mu plocha, pruh a ikona.
-        </Pravidlo>
         <Pravidlo typ="ok">
           Když si nejsi jistý čitelností na černé, sáhni po zlaté ({k('#C9A227')}) nebo po Off-white.
         </Pravidlo>

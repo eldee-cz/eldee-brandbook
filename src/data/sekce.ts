@@ -102,7 +102,7 @@ export const SEKCE: Sekce[] = [
   { cislo: '10', nazev: 'Barvy',         href: '/colors',      blok: 'II',  popis: 'HEX, RGB, CMYK, Pantone, kontrasty.' },
   { cislo: '11', nazev: 'Typografie',    href: '/typography',  blok: 'II',  popis: 'Fonty a jejich použití.' },
   { cislo: '12', nazev: 'Maskot',        href: '/mascot',      blok: 'II',  popis: 'Eldee — lenochod.' },
-  { cislo: '13', nazev: 'Vzor',          href: '/patterns',    blok: 'II',  popis: 'Hole pattern, svatozář, brush.' },
+  { cislo: '13', nazev: 'Doplňkové prvky', href: '/patterns', blok: 'II', popis: 'Svatozář a brush.' },
   { cislo: '14', nazev: 'Vizuální styl', href: '/photography', blok: 'II',  popis: 'Co fotit a co ne.' },
 
   // III — Jak to používáme (veřejné)

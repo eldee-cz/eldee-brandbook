@@ -78,6 +78,22 @@
   .text-blood {
     color: #B91C1C !important;
   }
+  /* ── Logo na papíře ────────────────────────────────────────────────────
+     Světlé logo je dělané na černou plochu. Ukázky a panely se na papíře
+     převracejí do bílé (`.bg-ink` výš), takže by v nich kostěná písmena
+     zmizela — do revize 15. 9. 2026 tam stál textový nápis, který se
+     převáděl sám. Chrome, který PDF tiskne, umí obrázek vyměnit přes
+     `content`. Výjimky jsou plochy, které na papíře zůstávají barevné:
+     dlaždice s pozadím v inline stylu (LogoVariant), červená a úhlová
+     plocha ukázky. */
+  img[src$="/logo/wordmark-light.svg"] {
+    content: url("/logo/wordmark-dark.svg");
+  }
+  [style*="background"] img[src$="/logo/wordmark-light.svg"],
+  .bg-blood img[src$="/logo/wordmark-light.svg"],
+  [class*="bg-[#"] img[src$="/logo/wordmark-light.svg"] {
+    content: url("/logo/wordmark-light.svg");
+  }
   /* Signální pár je laděný na ČERNOU plochu, kde musí být čitelný v 9,5px
      štítku. Na bílém papíře je přesně obráceně: #F87171 má na bílé kontrast
      2,77 a #10B981 jen 2,54 — obojí zmizí. Na papíře proto jedou tmavé

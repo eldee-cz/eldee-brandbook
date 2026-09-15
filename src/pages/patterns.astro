@@ -9,39 +9,16 @@ import Zakaz from '../components/Zakaz.astro';
 
 // Velikosti uvnitř ukázek jsou v `cqw` = procento šířky rámečku. Viz Ukazka.astro.
 ---
-<Layout title="Vzor">
+<Layout title="Doplňkové prvky">
   <SectionTitle
-    title="Vzor a doplňkové prvky"
-    subtitle="Hole pattern, svatozář a brush. Doplňují logo — nikdy ho nenahrazují."
+    title="Doplňkové prvky"
+    subtitle="Svatozář a brush. Doplňují logo — nikdy ho nenahrazují."
   />
 
-  <!-- ── Hole pattern ───────────────────────────────────────────────────── -->
-  <PasHlavicka nazev="Hole pattern" meta={['ovál 12 × 16 mm', 'chráněný průmyslový vzor']} prvni />
-
-  <div class="grid sm:grid-cols-2 gap-4">
-    <Ukazka format="krabice" plocha="podklad" popis="Základní sestava 5 × 2">
-      <img src="/logo/hole-pattern.svg" alt="Hole pattern — pět krát dva oválné otvory" class="w-[72cqw] h-auto" />
-    </Ukazka>
-
-    <Ukazka format="krabice" plocha="podklad" popis="Opakovaný jako plocha">
-      <div class="grid grid-cols-3 gap-[3cqw] opacity-80 w-full">
-        <img src="/logo/hole-pattern.svg" alt="" class="w-full h-auto" />
-        <img src="/logo/hole-pattern.svg" alt="" class="w-full h-auto" />
-        <img src="/logo/hole-pattern.svg" alt="" class="w-full h-auto" />
-      </div>
-    </Ukazka>
-  </div>
-
-  <Pravidla>
-    <Pravidlo typ="ok">Vzor je chráněný průmyslový vzor. Geometrie se nepřekresluje, používá se dodaný soubor.</Pravidlo>
-    <Pravidlo typ="ok">Jako plocha se dlaždicuje vodorovně i svisle, vždy se stejnou roztečí.</Pravidlo>
-    <Pravidlo typ="rozmer">Jeden ovál 12 × 16 mm ve skutečné velikosti. Ve výšivce nikdy menší.</Pravidlo>
-  </Pravidla>
-
   <!-- ── Svatozář ───────────────────────────────────────────────────────── -->
-  <PasHlavicka nazev="Svatozář" meta={['poměr os 66 : 13', 'vždy zlatá #C9A227']} />
+  <PasHlavicka nazev="Svatozář" meta={['poměr os 66 : 13', 'vždy zlatá #C9A227']} prvni />
 
-  <Zakaz>Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru. Každé zvlášť ano — spolu vzniká náboženské čtení, které nechceme.</Zakaz>
+  <Zakaz>Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru. Každé zvlášť ano — spolu vzniká náboženské čtení, které nechceme. Na kusu oblečení smí být obojí, každé na jiném místě — třeba claim na zádech a logo na hrudi.</Zakaz>
 
   <div class="grid sm:grid-cols-2 gap-4">
     <Ukazka format="krabice" plocha="podklad" popis="Samotná svatozář">
@@ -69,7 +46,7 @@ import Zakaz from '../components/Zakaz.astro';
     </Ukazka>
 
     <Ukazka format="krabice" plocha="podklad" popis="Tagline — krvavá červená">
-      <div class="font-brush text-[22cqw] text-blood-light -rotate-3 leading-none">holy socks.</div>
+      <div class="font-brush text-[22cqw] text-blood -rotate-3 leading-none">holy socks.</div>
     </Ukazka>
   </div>
 

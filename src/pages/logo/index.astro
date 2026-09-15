@@ -18,8 +18,8 @@ import AssetDownload from '../../components/AssetDownload.astro';
 ---
 <Layout title="Logo">
   <SectionTitle
-    title="Tři vrstvy log"
-    subtitle="Wordmark pro marketing, monogram LD pro výšivku, vzor děr na produkt. Jedno logo ve třech velikostech použití — ne tři různá loga."
+    title="Dvě vrstvy loga"
+    subtitle="Wordmark pro marketing, monogram LD pro výšivku. Jedno logo ve dvou velikostech použití — ne dvě různá loga."
   />
 
   <!-- ── Wordmark ───────────────────────────────────────────────────────── -->
@@ -35,9 +35,11 @@ import AssetDownload from '../../components/AssetDownload.astro';
     <LogoVariant src="/logo/wordmark-light.svg" alt="Wordmark eldee na černé" bg="ink" caption="Na tmavém podkladu" />
     <LogoVariant src="/logo/wordmark-dark.svg" alt="Wordmark eldee na světlé" bg="bone" caption="Na světlém podkladu" />
     <LogoVariant src="/logo/wordmark-light.svg" alt="Wordmark eldee na červené" bg="blood" caption="Na Blood Red" />
-    <!-- Na zlaté patří TMAVÁ verze: světlá má na #C9A227 kontrast 2.2 a
-         neprojde ani minimem 3:1 pro grafiku. Tmavá má 8.2. -->
-    <LogoVariant src="/logo/wordmark-dark.svg" alt="Wordmark eldee na zlaté" bg="gold" caption="Na zlaté — Holy edice" />
+    <!-- Na zlaté je celé logo tmavé, i prstenec. Světlá verze má na #C9A227
+         kontrast 2.2 a neprojde ani minimem 3:1 pro grafiku; tmavá má 8.2.
+         Samotná tmavá ale nestačí: její prstenec je zlatý a na zlaté splyne
+         (kontrast 1:1) — do revize 15. 9. 2026 tu viselo logo bez prstence. -->
+    <LogoVariant src="/logo/wordmark-on-gold.svg" alt="Wordmark eldee na zlaté" bg="gold" caption="Na zlaté — Holy edice" />
   </div>
 
   <Pravidla>
@@ -59,7 +61,7 @@ import AssetDownload from '../../components/AssetDownload.astro';
   <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
     <LogoVariant src="/logo/wordmark-vertical-light.svg" alt="Svislý wordmark na černé" bg="ink" caption="Na tmavém podkladu" />
     <LogoVariant src="/logo/wordmark-vertical-dark.svg" alt="Svislý wordmark na světlé" bg="bone" caption="Na světlém podkladu" />
-    <LogoVariant src="/logo/wordmark-vertical-dark.svg" alt="Svislý wordmark na zlaté" bg="gold" caption="Na zlaté — Holy edice" />
+    <LogoVariant src="/logo/wordmark-vertical-on-gold.svg" alt="Svislý wordmark na zlaté" bg="gold" caption="Na zlaté — Holy edice" />
   </div>
 
   <Pravidla>
@@ -109,28 +111,10 @@ import AssetDownload from '../../components/AssetDownload.astro';
     <Pravidlo typ="ok">Na jednobarevné aplikace je připravená mono verze, ne ručně odbarvený master.</Pravidlo>
   </Pravidla>
 
-  <!-- ── Vzor děr ───────────────────────────────────────────────────────── -->
-  <PasHlavicka nazev="Vzor děr" meta={['Mřížka · 5×2', 'Ovál 12×16 mm', 'Chráněný průmyslový vzor']} />
-
-  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
-    Chráněný průmyslový vzor a hlavní vyšívaný motiv na lýtku. Není to dekorace —
-    je to ta část značky, kterou má konkurence zakázanou.
-  </p>
-
-  <div class="grid md:grid-cols-2 gap-4">
-    <LogoVariant src="/logo/hole-pattern.svg" alt="Vzor děr 5×2" bg="ink" caption="Mřížka 5×2, ovály 12×16 mm" />
-    <LogoVariant src="/logo/hole-pattern.svg" alt="Vzor děr na světlém podkladu" bg="bone" caption="Na světlém podkladu" />
-  </div>
-
-  <Pravidla>
-    <Pravidlo typ="ne">Měnit počet, rozteč ani tvar děr. Je to zapsaný vzor, ne grafický nápad.</Pravidlo>
-    <Pravidlo typ="rozmer">Nejmenší velikost 40 px na webu, 14 mm v tisku.</Pravidlo>
-  </Pravidla>
-
   <!-- ── Svatozář ───────────────────────────────────────────────────────── -->
   <PasHlavicka nazev="Svatozář" meta={['Burnished Gold #C9A227', 'Druhotný symbol']} />
 
-  <Zakaz>Svatozář se nesmí objevit v jednom záběru s claimem „One of Us.“</Zakaz>
+  <Zakaz>Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru. Na kusu oblečení smí být obojí, každé na jiném místě — třeba claim na zádech a logo na hrudi.</Zakaz>
 
   <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
     Náš protějšek streetwearové korunky. Odkazuje na Holy Socks — tedy na produkt,
@@ -139,7 +123,6 @@ import AssetDownload from '../../components/AssetDownload.astro';
 
   <div class="grid md:grid-cols-2 gap-4">
     <LogoVariant src="/logo/halo.svg" alt="Svatozář ve zlaté" bg="ink" caption="Burnished Gold #C9A227" />
-    <LogoVariant src="/logo/halo-rays.svg" alt="Svatozář s paprsky" bg="ink" caption="Varianta s paprsky" />
   </div>
 
   <Pravidla>
@@ -171,9 +154,10 @@ import AssetDownload from '../../components/AssetDownload.astro';
     <AssetDownload href="/logo/wordmark-vertical-light.svg" label="Svislý wordmark — světlá verze" format="SVG" />
     <AssetDownload href="/logo/wordmark-vertical-dark.svg" label="Svislý wordmark — tmavá verze" format="SVG" />
     <AssetDownload href="/logo/wordmark-vertical-mono.svg" label="Svislý wordmark — jednobarevný" format="SVG" />
+    <AssetDownload href="/logo/wordmark-on-gold.svg" label="Wordmark — na zlatou" format="SVG" />
+    <AssetDownload href="/logo/wordmark-vertical-on-gold.svg" label="Svislý wordmark — na zlatou" format="SVG" />
     <AssetDownload href="/logo/monogram-ld.svg" label="Monogram LD — master" format="SVG" />
     <AssetDownload href="/logo/monogram-mono.svg" label="Monogram LD — jednobarevný" format="SVG" />
-    <AssetDownload href="/logo/hole-pattern.svg" label="Vzor děr" format="SVG" />
     <AssetDownload href="/logo/halo.svg" label="Svatozář" format="SVG" />
   </div>
 </Layout>

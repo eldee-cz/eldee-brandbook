@@ -14,7 +14,7 @@ interface Props {
 }
 const { id, name, hex, rgb, cmyk, pantone, wcag, wcagOnInk, wcagOnBone, primary, drop } = Astro.props;
 const wcagValue = wcag ?? wcagOnInk ?? wcagOnBone;
-const darkColors = ['#0A0A0A', '#3A3A3A', '#7F1D1D', '#B91C1C', '#DC2626', '#B8860B', '#FF6B00', '#2563EB'];
+const darkColors = ['#0A0A0A', '#3A3A3A', '#B91C1C', '#FF6B00', '#2563EB'];
 const textColor = darkColors.includes(hex) ? '#F5F5F0' : '#0A0A0A';
 ---
 <div class="rounded-lg overflow-hidden border border-bone/10">

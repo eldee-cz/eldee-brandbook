@@ -44,22 +44,6 @@
           "cmyk": "0, 85, 85, 27",
           "pantone": "187 C",
           "primary": true
-        },
-        {
-          "id": "blood-dark",
-          "name": "Blood Red Dark",
-          "hex": "#7F1D1D",
-          "rgb": "127, 29, 29",
-          "cmyk": "0, 77, 77, 50",
-          "pantone": "188 C"
-        },
-        {
-          "id": "blood-light",
-          "name": "Blood Red Light",
-          "hex": "#DC2626",
-          "rgb": "220, 38, 38",
-          "cmyk": "0, 83, 83, 14",
-          "pantone": "186 C"
         }
       ]
     },
@@ -76,14 +60,6 @@
           "cmyk": "0, 19, 81, 21",
           "pantone": "7563 C",
           "primary": true
-        },
-        {
-          "id": "gold-antique",
-          "name": "Antique Gold",
-          "hex": "#B8860B",
-          "rgb": "184, 134, 11",
-          "cmyk": "0, 27, 94, 28",
-          "pantone": "131 C"
         }
       ]
     },

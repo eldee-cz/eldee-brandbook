@@ -13,7 +13,7 @@ import ChybiUkazka from '../components/ChybiUkazka.astro';
 // Rozvržení B2. Zvláštnost téhle sekce: ukázka, která má vést, zatím
 // neexistuje — značka nemá jedinou vlastní fotku produktu. Místo stocku,
 // který by to zakryl, drží místo čárkovaný rámeček s tím, co sem přijde.
-// Sekce tak staví na tom, co skutečně je: rendery maskota a vzor děr.
+// Sekce tak staví na tom, co skutečně je: rendery maskota.
 ---
 <Layout title="Vizuální styl">
   <SectionTitle
@@ -32,7 +32,7 @@ import ChybiUkazka from '../components/ChybiUkazka.astro';
     <div class="grid sm:grid-cols-3 gap-4 mt-6">
       <div class="border-l-2 border-bone/25 pl-4">
         <div class="text-[16px] text-bone font-medium mb-1">Čím se to zatím nahrazuje</div>
-        <p class="text-body text-bone/65">Rendery maskota a vzor děr. Ilustrace, ne fotka — a říká se to nahlas.</p>
+        <p class="text-body text-bone/65">Rendery maskota. Ilustrace, ne fotka — a říká se to nahlas.</p>
       </div>
       <div class="border-l-2 border-bone/25 pl-4">
         <div class="text-[16px] text-bone font-medium mb-1">Co se nesmí</div>
@@ -46,7 +46,7 @@ import ChybiUkazka from '../components/ChybiUkazka.astro';
   </div>
 
   <!-- ── Co existuje ────────────────────────────────────────────────────── -->
-  <PasHlavicka nazev="S čím se pracuje dnes" meta={['Rendery maskota · PNG', 'Vzor děr · SVG']} />
+  <PasHlavicka nazev="S čím se pracuje dnes" meta={['Rendery maskota · PNG']} />
 
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <figure class="min-w-0">
@@ -54,13 +54,6 @@ import ChybiUkazka from '../components/ChybiUkazka.astro';
         <img src="/mascot/eldee-fotbalista.png" alt="Render maskota ve štulpnách eldee" class="max-h-full max-w-full" />
       </div>
       <figcaption class="font-mono text-caption text-bone/45 mt-2.5">Render maskota — nese produkt, dokud produkt není</figcaption>
-    </figure>
-
-    <figure class="min-w-0">
-      <div class="aspect-square border border-bone/10 rounded-lg flex items-center justify-center p-10 bg-ink">
-        <img src="/logo/hole-pattern.svg" alt="Vzor děr 5×2" class="max-h-full max-w-full" />
-      </div>
-      <figcaption class="font-mono text-caption text-bone/45 mt-2.5">Vzor děr — jediná podoba chráněného vzoru</figcaption>
     </figure>
 
     <ChybiUkazka format="ctverec" popis="Makro detail úpletu a prostřižení na skutečném vzorku." kdy="Až dorazí vzorky od výrobce" />
