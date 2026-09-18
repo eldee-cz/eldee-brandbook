@@ -106,7 +106,7 @@ export const SEKCE: Sekce[] = [
   { cislo: '14', nazev: 'Vizuální styl', href: '/photography', blok: 'II',  popis: 'Co fotit a co ne.' },
 
   // III — Jak to používáme (veřejné)
-  { cislo: '15', nazev: 'Tisk',          href: '/print',       blok: 'III', popis: 'Vizitka, krabička, hangtag, etiketa.' },
+  { cislo: '15', nazev: 'Tisk',          href: '/print',       blok: 'III', popis: 'Vizitka, krabička, hangtag, samolepky.' },
   { cislo: '16', nazev: 'Digitál',       href: '/digital',     blok: 'III', popis: 'Web, Instagram, TikTok, e-mail.' },
   { cislo: '17', nazev: 'Co-branding',   href: '/co-branding', blok: 'III', popis: 'Klub, ambasador, sponzor.' },
   { cislo: '—',  nazev: 'Assety',        href: '/assets',      blok: 'III', popis: 'Loga, fonty, podklady ke stažení.' },

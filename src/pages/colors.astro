@@ -63,13 +63,13 @@ const pocetBarev = colorsData.groups.reduce((n, g) => n + g.colors.length, 0);
 
   <PasA
     nazev="Premium Accent"
-    popis="Zlatá je výjimka, ne druhá značková barva. Holy edice, foil na hangtagu, certifikát ambasadora."
-    spec={[`Burnished Gold na černé · ${k('#C9A227')}`, 'Tisk · foil, ne CMYK']}
+    popis="Zlatá je výjimka, ne druhá značková barva. Svatozář, Holy edice, certifikát ambasadora."
+    spec={[`Burnished Gold na černé · ${k('#C9A227')}`, 'Tisk · tisk nebo ražba, ne CMYK']}
   >
     <Pravidla slot="pravidla" sloupec>
       <Pravidlo typ="ok">Zlatá je bezpečná i na drobný text — je to nejčitelnější akcent značky.</Pravidlo>
       <Pravidlo typ="ne">Zlatá a Blood Red vedle sebe jako dva akcenty v jednom záběru. Jeden vede.</Pravidlo>
-      <Pravidlo typ="rozmer">V tisku foil, ne CMYK — zlatá namíchaná ze čtyř barev je špinavě žlutá.</Pravidlo>
+      <Pravidlo typ="rozmer">Zlatá se tiskne nebo razí — technika podle dodavatele, nikdy ne ze čtyř tiskových barev. Ta vyjde špinavě žlutá.</Pravidlo>
     </Pravidla>
     <TabulkaBarev barvy={skupina('premium').colors} />
   </PasA>

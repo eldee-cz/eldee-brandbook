@@ -94,6 +94,29 @@
   [class*="bg-[#"] img[src$="/logo/wordmark-light.svg"] {
     content: url("/logo/wordmark-light.svg");
   }
+  /* Místo pro fotku (FotoMisto) je na obrazovce tmavé šrafování. Na papíře se
+     převrací do světlého jako všechny plochy, jinak by z PDF byly černé kvádry
+     se světlým popiskem (test „na papíře nezmizí žádný text"). Tmavé přechody,
+     které na obrazovce oddělují fotku od textu, na papíře nemají co oddělovat. */
+  [data-foto] {
+    background: repeating-linear-gradient(135deg, #F0EFEA 0 6px, #E6E5DF 6px 12px) !important;
+  }
+  [data-foto] span {
+    color: #444444 !important;
+    border-color: #999999 !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+  [data-foto-prechod] { display: none !important; }
+  /* Totéž pro monogram (revize 18. 9. 2026 — vizitka K1 ho má na zadní straně).
+     Tmavá varianta se odvozuje skriptem scripts/generate-monogram-dark.mjs. */
+  img[src$="/logo/monogram-ld.svg"] {
+    content: url("/logo/monogram-ld-dark.svg");
+  }
+  [style*="background"] img[src$="/logo/monogram-ld.svg"],
+  .bg-blood img[src$="/logo/monogram-ld.svg"],
+  [class*="bg-[#"] img[src$="/logo/monogram-ld.svg"] {
+    content: url("/logo/monogram-ld.svg");
+  }
   /* Signální pár je laděný na ČERNOU plochu, kde musí být čitelný v 9,5px
      štítku. Na bílém papíře je přesně obráceně: #F87171 má na bílé kontrast
      2,77 a #10B981 jen 2,54 — obojí zmizí. Na papíře proto jedou tmavé

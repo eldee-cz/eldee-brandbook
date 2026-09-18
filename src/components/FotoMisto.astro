@@ -1,0 +1,24 @@
+---
+// Místo pro fotku hráče v ukázce. Fotky zatím nejsou (čeká se na prototyp),
+// ukázka proto jen značí, KDE fotka bude — šrafovaná plocha s popiskem.
+// Pozadí je v inline stylu, aby ho print.css na papíře nepřevrátil do bílé.
+interface Props {
+  popis?: string;
+  /** Pozice a rozměr plochy uvnitř ukázky (Tailwind třídy, např. "inset-x-0 top-0 h-[60%]"). */
+  class?: string;
+  /** Světlé šrafování pro světlé plochy (bone). */
+  svetla?: boolean;
+  /** Velikost popisku v cqw ukázky. */
+  velikost?: string;
+}
+const { popis = 'fotka hráče', class: trida = 'inset-0', svetla = false, velikost = '2.6cqw' } = Astro.props;
+const srafy = svetla
+  ? 'repeating-linear-gradient(135deg,#e4e2da 0 1.4cqw,#dcdad2 1.4cqw 2.8cqw)'
+  : 'repeating-linear-gradient(135deg,#1c1c1c 0 1.4cqw,#242424 1.4cqw 2.8cqw)';
+const stitek = svetla
+  ? 'color:rgba(10,10,10,.6);border-color:rgba(10,10,10,.35);background:rgba(245,245,240,.6)'
+  : 'color:rgba(245,245,240,.6);border-color:rgba(245,245,240,.35);background:rgba(10,10,10,.55)';
+---
+<div data-foto class={`absolute flex items-center justify-center ${trida}`} style={`background:${srafy}`} aria-hidden="true">
+  <span class="font-mono uppercase tracking-[0.14em] text-center border border-dashed leading-snug" style={`font-size:max(8px,${velikost});padding:.8em 1em;${stitek}`}><slot>{popis}</slot></span>
+</div>

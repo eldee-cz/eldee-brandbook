@@ -6,6 +6,7 @@ import PasHlavicka from '../components/PasHlavicka.astro';
 import Pravidla from '../components/Pravidla.astro';
 import Pravidlo from '../components/Pravidlo.astro';
 import Zakaz from '../components/Zakaz.astro';
+import FotoMisto from '../components/FotoMisto.astro';
 
 // Velikosti uvnitř ukázek jsou v `cqw` = procento šířky rámečku, ne obrazovky.
 // Ukázka je zmenšený artboard: na telefonu má být stejná kompozice, jen menší.
@@ -22,22 +23,51 @@ import Zakaz from '../components/Zakaz.astro';
 
   <Zakaz>Svatozář a claim „One of Us.“ nikdy jako hlavní motiv v jednom záběru. Na kusu oblečení smí být obojí, každé na jiném místě — třeba claim na zádech a logo na hrudi.</Zakaz>
 
-  <Ukazka format="hero" plocha="ink">
-    <div class="font-mono text-[1.25cqw] tracking-[0.18em] uppercase text-gold mb-[2.2cqw]">Drop 001 · live</div>
-    <div class="font-display italic text-[8.5cqw] leading-[0.95] text-bone">One of Us.</div>
-    <div class="font-brush text-gold text-[3.8cqw] -rotate-2 origin-left mt-[1cqw] mb-[3.1cqw]">
-      holy socks. no, just socks with holes.
+  <!-- Revize 18. 9. 2026: lišta s logem, místo pro fotku hráče a mobilní verze (95 % návštěv). -->
+  <div class="grid lg:grid-cols-[3fr_1fr] gap-4 items-start">
+    <Ukazka format="hero" plocha="ink" popis="Počítač · 21:9">
+      <FotoMisto class="right-0 inset-y-0 w-[56%]" velikost="1.6cqw" />
+      <div class="absolute right-0 inset-y-0 w-[56%]" data-foto-prechod style="background:linear-gradient(90deg,#0A0A0A 0,rgba(10,10,10,.35) 30%,transparent 60%)" aria-hidden="true"></div>
+      <div class="absolute inset-x-0 top-0 h-[6.4cqw] px-[4cqw] flex items-center justify-between border-b border-bone/10" style="background:rgba(10,10,10,.85)">
+        <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="h-[3cqw] w-auto" />
+        <span class="font-mono text-[1.05cqw] tracking-[0.16em] uppercase text-bone/75 flex gap-[2.4cqw]"><span>Drop 001</span><span>Příběh</span><span>Kluby</span><span class="text-bone">Košík (0)</span></span>
+      </div>
+      <div class="relative mt-[5cqw]">
+        <div class="font-mono text-[1.25cqw] tracking-[0.18em] uppercase text-gold mb-[2.2cqw]">Drop 001 · live</div>
+        <div class="font-display italic text-[8cqw] leading-[0.95] text-bone">One of Us.</div>
+        <div class="font-brush text-gold text-[3.2cqw] -rotate-2 origin-left mt-[1cqw] mb-[3.1cqw]">
+          holy socks. no, just socks with holes.
+        </div>
+        <div class="flex gap-[1.3cqw]">
+          <span class="bg-blood text-bone font-mono text-[1.35cqw] tracking-[0.1em] uppercase font-bold px-[2.2cqw] py-[1.1cqw]">Koupit</span>
+          <span class="border border-bone/40 text-bone/85 font-mono text-[1.35cqw] tracking-[0.1em] uppercase px-[2.2cqw] py-[1.1cqw]">Příběh</span>
+        </div>
+      </div>
+    </Ukazka>
+
+    <div class="w-full max-w-[260px] mx-auto lg:max-w-none">
+      <Ukazka format="telefon" plocha="ink" popis="Telefon · na výšku">
+        <FotoMisto class="inset-x-0 top-0 h-[110cqw]" velikost="3.4cqw" />
+        <div class="absolute inset-x-0 top-[70cqw] h-[40cqw]" data-foto-prechod style="background:linear-gradient(0deg,#0A0A0A,transparent)" aria-hidden="true"></div>
+        <div class="absolute inset-x-0 top-[5cqw] h-[15cqw] px-[6cqw] flex items-center justify-between" style="background:linear-gradient(180deg,rgba(10,10,10,.7),transparent)">
+          <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="h-[7cqw] w-auto" />
+          <span class="font-mono text-[3.6cqw] tracking-[0.16em] uppercase text-bone border border-bone/35 px-[3.4cqw] py-[2.4cqw]">Menu</span>
+        </div>
+        <div class="absolute inset-x-[6cqw] top-[104cqw]">
+          <div class="font-mono text-[3.4cqw] tracking-[0.18em] uppercase text-gold mb-[3cqw]">Drop 001 · live</div>
+          <div class="font-display italic text-[19cqw] leading-[0.95] text-bone">One of Us.</div>
+          <div class="font-brush text-gold text-[6.4cqw] -rotate-2 origin-left mt-[2cqw] mb-[6cqw]">holy socks. no, just socks with holes.</div>
+          <span class="flex items-center justify-center h-[13cqw] mb-[3cqw] bg-blood text-bone font-mono text-[4cqw] tracking-[0.1em] uppercase font-bold">Koupit</span>
+          <span class="flex items-center justify-center h-[13cqw] border border-bone/40 text-bone/85 font-mono text-[4cqw] tracking-[0.1em] uppercase">Příběh</span>
+        </div>
+      </Ukazka>
     </div>
-    <div class="flex gap-[1.3cqw]">
-      <span class="bg-blood text-bone font-mono text-[1.35cqw] tracking-[0.1em] uppercase font-bold px-[2.2cqw] py-[1.1cqw]">Koupit</span>
-      <span class="border border-bone/40 text-bone/85 font-mono text-[1.35cqw] tracking-[0.1em] uppercase px-[2.2cqw] py-[1.1cqw]">Příběh</span>
-    </div>
-  </Ukazka>
+  </div>
 
   <Pravidla>
     <Pravidlo typ="ok">Claim značky nahoře, produktová linka pod ním. Nikdy obráceně.</Pravidlo>
-    <Pravidlo typ="ok">Jedno hlavní tlačítko v Blood Red, druhé jen obrys.</Pravidlo>
-    <Pravidlo typ="rozmer">Poměr 21:9, nejméně 1920×1080 px.</Pravidlo>
+    <Pravidlo typ="ok">Jedno hlavní tlačítko v Blood Red, druhé jen obrys. Na telefonu přes celou šířku, aspoň 44 px vysoká.</Pravidlo>
+    <Pravidlo typ="rozmer">Počítač 21:9, nejméně 1920×1080 px. Telefon na výšku: fotka nahoře, claim pod ní.</Pravidlo>
   </Pravidla>
 
   <!-- ── Instagram ──────────────────────────────────────────────────────── -->
@@ -45,9 +75,13 @@ import Zakaz from '../components/Zakaz.astro';
 
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <Ukazka format="ctverec" plocha="ink" popis="Drop announcement">
-      <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-gold mb-[4.5cqw]">Drop 001</div>
-      <div class="font-display italic text-[14.5cqw] leading-[0.95] text-blood">Holy<br/>Socks.</div>
-      <div class="font-mono text-[3.2cqw] tracking-[0.18em] text-bone/40 mt-[5cqw]">@eldee.cz</div>
+      <FotoMisto class="inset-x-0 top-0 h-[62%]" popis="fotka hráče ve štulpnách" velikost="3cqw" />
+      <div class="absolute inset-x-0 top-[40%] h-[22%]" data-foto-prechod style="background:linear-gradient(0deg,#0A0A0A,transparent)" aria-hidden="true"></div>
+      <div class="absolute left-[8cqw] bottom-[7cqw] text-left">
+        <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-gold mb-[2cqw]">Drop 001</div>
+        <div class="font-display italic text-[13cqw] leading-[0.95] text-blood">Holy Socks.</div>
+        <div class="font-mono text-[3.2cqw] tracking-[0.18em] text-bone/40 mt-[2.4cqw]">@eldee.cz</div>
+      </div>
     </Ukazka>
 
     <Ukazka format="ctverec" plocha="bone" popis="Meme — pilíř comedy">
@@ -58,16 +92,19 @@ import Zakaz from '../components/Zakaz.astro';
     </Ukazka>
 
     <Ukazka format="ctverec" plocha="blood" popis="UGC repost — razítko">
-      <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-bone/70 mb-[4.5cqw]">Repost</div>
-      <div class="font-display italic text-[12.5cqw] leading-[1.05] text-bone">„Tyhle<br/>jsou<br/>jiný.“</div>
-      <div class="font-brush text-[8.5cqw] text-bone mt-[5cqw]">one of us.</div>
+      <FotoMisto class="inset-x-0 top-0 h-[56%]" popis="fotka od hráče = důkaz" velikost="3cqw" />
+      <div class="absolute left-[8cqw] right-[8cqw] bottom-[7cqw] text-left">
+        <div class="font-mono text-[3.2cqw] tracking-[0.18em] uppercase text-bone/70 mb-[2cqw]">Repost</div>
+        <div class="font-display italic text-[10.5cqw] leading-[1.02] text-bone">„Tyhle jsou jiný.“</div>
+        <div class="font-brush text-[7.5cqw] text-bone mt-[1.5cqw]">one of us.</div>
+      </div>
     </Ukazka>
   </div>
 
   <Pravidla>
     <Pravidlo typ="ok">Hrdina je vždycky hráč, nikdy produkt.</Pravidlo>
     <Pravidlo typ="ok">Mluvíme „my“, ne „oni“.</Pravidlo>
-    <Pravidlo typ="ne">„One of Us.“ není nápis na obrázku. Je to odpověď hráči, který přinesl důkaz.</Pravidlo>
+    <Pravidlo typ="ne">„One of Us.“ jako nápis na obrázku. Jediná výjimka je repost — tam odpovídá hráči, který přinesl důkaz.</Pravidlo>
   </Pravidla>
 
   <!-- ── TikTok / Reels ─────────────────────────────────────────────────── -->
@@ -86,12 +123,15 @@ import Zakaz from '../components/Zakaz.astro';
     </Ukazka>
 
     <Ukazka format="svisle" plocha="bone" zona popis="Player hype">
-      <div class="font-display italic text-[16cqw] leading-[0.95] text-ink">PRVNÍ<br/>ZÁPAS</div>
-      <div class="font-mono text-[4.6cqw] tracking-[0.15em] text-blood mt-[5cqw]">holy socks</div>
+      <FotoMisto class="inset-x-0 top-0 h-[50%]" popis="hráč před zápasem" svetla velikost="4.4cqw" />
+      <div class="absolute inset-x-[12cqw] top-[56%]">
+        <div class="font-display italic text-[16cqw] leading-[0.95] text-ink">PRVNÍ<br/>ZÁPAS</div>
+        <div class="font-mono text-[4.6cqw] tracking-[0.15em] text-blood mt-[5cqw]">holy socks</div>
+      </div>
     </Ukazka>
 
     <Ukazka format="svisle" plocha="blood" zona popis="Founder / návod">
-      <div class="font-display italic text-[14.5cqw] leading-[0.95] text-bone">JAK SE<br/>MĚŘÍ<br/>LÝTKO</div>
+      <div class="font-display italic text-[14.5cqw] leading-[0.95] text-bone">MĚŘENÍ<br/>LÝTKA</div>
       <div class="font-brush text-[9.5cqw] text-bone mt-[4cqw]">návod.</div>
     </Ukazka>
   </div>
@@ -107,15 +147,19 @@ import Zakaz from '../components/Zakaz.astro';
 
   <div class="grid lg:grid-cols-[1.4fr_1fr] gap-4 items-start">
     <!-- Podpis je jediná ukázka v reálné velikosti — čte se, neprohlíží. -->
-    <Ukazka format="volny" plocha="ink" popis="Podpis do e-mailu">
-      <div class="flex items-baseline gap-3 flex-wrap">
-        <span class="font-display italic text-h2 text-bone">Lukáš Hledík</span>
-        <span class="font-mono text-caption text-bone/45">CEO</span>
-      </div>
-      <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="block self-start h-8 w-auto mt-3 mb-3.5" />
-      <div class="font-mono text-caption text-bone/55 leading-[2.1]">
-        <div>lukas@eldee.cz</div>
-        <div>eldeeworld.com · @eldee.cz</div>
+    <!-- Revize 18. 9. 2026: podpis uvidí příjemce na bílé, ne na černé. Gmail ani Outlook
+         písmo značky nenačtou, proto systémové písmo; logo nese značku na vlastní černé dlaždici. -->
+    <Ukazka format="volny" plocha="bila" popis="Podpis do e-mailu — tak, jak ho uvidí příjemce">
+      <div style="font-family:Arial,Helvetica,sans-serif">
+        <div class="text-[15px] text-[#202124]">Díky za rychlou odpověď, vzorky pošlu v pondělí.</div>
+        <div class="text-[15px] text-[#202124]/50 my-3">--</div>
+        <div class="text-[17px] font-bold text-[#202124]">Lukáš Hledík <span class="text-[13px] font-normal text-[#202124]/60 ml-1">CEO</span></div>
+        <div class="inline-block rounded-md px-3 py-2.5 my-2.5 leading-none" style="background:#0A0A0A"><img src="/logo/wordmark-light.svg" alt="Logo eldee" class="block h-[30px] w-auto" /></div>
+        <div class="text-[13px] leading-[1.75] text-[#202124]/80">
+          <div>lukas@eldee.cz</div>
+          <div>+420 000 000 000</div>
+          <div>eldeeworld.com · @eldee.cz</div>
+        </div>
       </div>
     </Ukazka>
 
@@ -127,8 +171,8 @@ import Zakaz from '../components/Zakaz.astro';
   </div>
 
   <Pravidla>
-    <Pravidlo typ="ok">Podpis: jméno, role, značka, kontakt. Nic víc.</Pravidlo>
-    <Pravidlo typ="ok">Role se píše česky, jak je ve firmě.</Pravidlo>
+    <Pravidlo typ="ok">Podpis: jméno, role česky (jak je ve firmě), značka, kontakt. Nic víc.</Pravidlo>
+    <Pravidlo typ="ok">Podpis se ukazuje na bílé. Logo vždy na černé dlaždici jako obrázek PNG, nikdy průhledné.</Pravidlo>
     <Pravidlo typ="ne">Claim značky na obálce podcastu. Ta drží produktovou linku.</Pravidlo>
   </Pravidla>
 

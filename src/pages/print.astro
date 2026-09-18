@@ -16,48 +16,63 @@ import Zakaz from '../components/Zakaz.astro';
   />
 
   <!-- ── Vizitka ────────────────────────────────────────────────────────── -->
-  <PasHlavicka nazev="Vizitka" meta={['85 × 55 mm', 'matte black 350 g']} prvni />
+  <!-- Varianta K1 „červené jádro“ — rozhodnuto při revizi 18. 9. 2026
+       (eldee-business/brand/revize-v3/vizitka-varianty/vizitka-kolo-4.html). -->
+  <PasHlavicka nazev="Vizitka" meta={['85 × 55 mm', 'triplex 700 g · černá–červená–černá']} prvni />
 
   <div class="grid sm:grid-cols-2 gap-4">
     <Ukazka format="vizitka" plocha="ink" popis="Přední strana">
-      <div class="flex items-center justify-between gap-[6cqw]">
-        <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="h-[11cqw] w-auto" />
-        <span class="flex gap-[2.2cqw]">
-          <span class="w-[4cqw] h-[6.5cqw] rounded-full bg-black border border-bone/70 shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)]"></span>
-          <span class="w-[4cqw] h-[6.5cqw] rounded-full bg-black border border-bone/70 shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)]"></span>
-        </span>
-      </div>
-      <div>
-        <div class="font-mono text-[2.6cqw] tracking-[0.18em] uppercase text-gold mb-[1cqw]">CEO</div>
-        <div class="font-display italic text-[7cqw] text-bone leading-none">LUKÁŠ HLEDÍK</div>
-      </div>
+      <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="m-auto w-[54cqw] h-auto" />
     </Ukazka>
 
     <Ukazka format="vizitka" plocha="ink" popis="Zadní strana">
-      <div class="m-auto text-center space-y-[1.6cqw]">
-        <div class="font-mono text-[2.8cqw] tracking-[0.15em] text-bone/80">lukas@eldee.cz</div>
-        <div class="font-mono text-[2.8cqw] tracking-[0.15em] text-bone/80">+420 ...</div>
-        <div class="font-mono text-[2.8cqw] tracking-[0.15em] text-bone/80">eldeeworld.com · @eldee.cz</div>
-        <div class="font-display italic text-[7cqw] text-gold leading-none pt-[1cqw]">LD</div>
+      <div class="flex justify-between items-start gap-[4cqw]">
+        <div>
+          <div class="w-[12cqw] h-[1cqw] bg-blood mb-[3cqw]"></div>
+          <div class="font-display text-[6.4cqw] text-bone leading-none uppercase">Lukáš Hledík</div>
+          <div class="font-mono text-[2.5cqw] tracking-[0.2em] uppercase text-bone/60 mt-[1.8cqw]">CEO</div>
+        </div>
+        <div class="relative shrink-0 w-[23cqw] h-[23cqw] bg-bone rounded-[0.6cqw]" role="img" aria-label="QR kód">
+          <span class="absolute left-[2cqw] top-[2cqw] w-[5.6cqw] h-[5.6cqw] border-[1.3cqw] border-ink"></span>
+          <span class="absolute right-[2cqw] top-[2cqw] w-[5.6cqw] h-[5.6cqw] border-[1.3cqw] border-ink"></span>
+          <span class="absolute left-[2cqw] bottom-[2cqw] w-[5.6cqw] h-[5.6cqw] border-[1.3cqw] border-ink"></span>
+        </div>
+      </div>
+      <div class="flex justify-between items-end gap-[4cqw]">
+        <div class="font-mono text-[2.6cqw] leading-[1.75] text-bone/80">
+          <div>lukas@eldee.cz</div>
+          <div>+420 000 000 000</div>
+          <div>eldeeworld.com · @eldee.cz</div>
+        </div>
+        <img src="/logo/monogram-ld.svg" alt="Monogram LD" class="w-[13cqw] h-auto shrink-0" />
       </div>
     </Ukazka>
   </div>
 
+  <figure class="mt-4 max-w-md" data-ukazka>
+    <div class="h-3 border border-bone/10" style="background:linear-gradient(to bottom,#161616 0 34%,#B91C1C 34% 66%,#050505 66% 100%)"></div>
+    <figcaption class="font-mono text-caption text-bone/45 mt-2.5">Hrana karty — červené jádro (tloušťka zvětšená)</figcaption>
+  </figure>
+
   <Pravidla>
-    <Pravidlo typ="ok">Oválné díry jsou vyseknuté skrz papír, ne natištěné. Karta je ukázka produktu.</Pravidlo>
-    <Pravidlo typ="ne">Zlatá ražba na běžné edici. Gold foil patří jen na premium.</Pravidlo>
-    <Pravidlo typ="rozmer">85 × 55 mm, matný černý karton 350 g.</Pravidlo>
+    <Pravidlo typ="ok">Červená je jen v jádru kartonu. Uvidí ji ten, kdo kartu drží — ne ten, kdo se na ni dívá.</Pravidlo>
+    <Pravidlo typ="ok">QR vpravo nahoře, vždy tmavý na světlém poli. Tak ho přečte každý telefon.</Pravidlo>
+    <Pravidlo typ="rozmer">85 × 55 mm, triplex 700 g černá–červená–černá. Logo bílou ražbou fólií, svatozář zlatá — tiskem nebo ražbou podle dodavatele.</Pravidlo>
   </Pravidla>
 
   <!-- ── Krabička ───────────────────────────────────────────────────────── -->
-  <PasHlavicka nazev="Krabička" meta={['18 × 12 × 5 cm', 'matte black + gold foil']} />
+  <PasHlavicka nazev="Krabička" meta={['18 × 12 × 5 cm', 'matná černá · zlatá svatozář']} />
 
   <div class="grid lg:grid-cols-[1.5fr_1fr] gap-4 items-start">
-    <Ukazka format="krabice" plocha="ink" popis="Víko krabičky">
-      <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="w-[36cqw] h-auto" />
-      <div class="font-brush text-gold text-[7cqw] -rotate-3 mt-[2cqw]">holy socks.</div>
-      <div class="font-mono text-[2.8cqw] tracking-[0.18em] uppercase text-bone/60 mt-[5cqw]">Drop 001 · XS · M · L</div>
-    </Ukazka>
+    <div class="space-y-4 min-w-0">
+      <Ukazka format="krabice" plocha="ink" popis="Víko krabičky">
+        <img src="/logo/wordmark-light.svg" alt="Logo eldee" class="w-[36cqw] h-auto" />
+        <div class="font-brush text-gold text-[7cqw] -rotate-3 mt-[2cqw]">holy socks.</div>
+      </Ukazka>
+      <Ukazka format="bok" plocha="ink" popis="Bok krabičky">
+        <div class="font-mono text-[2.4cqw] tracking-[0.18em] uppercase text-bone/60">Drop 001 · XS · M · L</div>
+      </Ukazka>
+    </div>
 
     <Ukazka format="ctverec" plocha="podklad" popis="Vnitřek">
       <div class="font-mono text-[3.4cqw] tracking-[0.18em] uppercase text-gold mb-[5cqw]">Uvnitř</div>
@@ -68,29 +83,45 @@ import Zakaz from '../components/Zakaz.astro';
   <Pravidla>
     <Pravidlo typ="ok">Wordmark na víku vždy vodorovně a na střed. Svatozář nad ním být nesmí.</Pravidlo>
     <Pravidlo typ="ok">Velikosti na boku krabičky: XS · M · L. Žádné číselné rozpětí EU.</Pravidlo>
-    <Pravidlo typ="rozmer">18 × 12 × 5 cm, matná černá, zlatá ražba na wordmarku.</Pravidlo>
+    <Pravidlo typ="rozmer">18 × 12 × 5 cm, matná černá. Písmena bílá, svatozář zlatá — tiskem nebo ražbou podle dodavatele, nikdy ne ze čtyř tiskových barev.</Pravidlo>
   </Pravidla>
 
   <!-- ── Hangtag ────────────────────────────────────────────────────────── -->
   <PasHlavicka nazev="Hangtag" meta={['5 × 8 cm', 'kraft 300 g']} />
 
-  <div class="max-w-[220px]">
-    <Ukazka format="hangtag" plocha="bone" popis="Přední strana">
-      <div class="font-display italic text-[16cqw] text-gold leading-none">LD</div>
+  <div class="grid grid-cols-2 gap-4 max-w-[460px]">
+    <Ukazka format="hangtag" plocha="kraft" popis="Přední strana">
+      <span class="w-[6cqw] h-[6cqw] rounded-full bg-ink/80" aria-hidden="true"></span>
+      <img src="/logo/monogram-mono-dark.svg" alt="Monogram LD" class="w-[30cqw] h-auto" />
       <div>
-        <div class="font-display italic text-[13cqw] text-ink leading-none">DROP 001</div>
-        <div class="font-mono text-[4.5cqw] tracking-[0.15em] uppercase text-blood mt-[2cqw]">Holy Socks</div>
+        <div class="font-display italic text-[15cqw] text-ink leading-none">DROP 001</div>
+        <div class="font-mono text-[4.5cqw] tracking-[0.15em] uppercase text-ink mt-[2cqw]">Holy Socks</div>
       </div>
-      <div class="w-[26cqw] h-[26cqw] bg-ink grid grid-cols-3 gap-px p-[1.5cqw]">
-        {Array.from({ length: 9 }).map(() => <div class="bg-bone"></div>)}
+      <div class="relative w-[28cqw] h-[28cqw] bg-bone rounded-[1.5cqw]" role="img" aria-label="QR kód">
+        <span class="absolute left-[2.6cqw] top-[2.6cqw] w-[7cqw] h-[7cqw] border-[1.6cqw] border-ink"></span>
+        <span class="absolute right-[2.6cqw] top-[2.6cqw] w-[7cqw] h-[7cqw] border-[1.6cqw] border-ink"></span>
+        <span class="absolute left-[2.6cqw] bottom-[2.6cqw] w-[7cqw] h-[7cqw] border-[1.6cqw] border-ink"></span>
       </div>
+    </Ukazka>
+
+    <Ukazka format="hangtag" plocha="kraft" popis="Zadní strana">
+      <span class="w-[6cqw] h-[6cqw] rounded-full bg-ink/80" aria-hidden="true"></span>
+      <div>
+        <div class="font-mono text-[3.6cqw] tracking-[0.18em] uppercase text-ink">Velikost</div>
+        <div class="font-display italic text-[30cqw] text-ink leading-none mt-[1cqw]">M</div>
+      </div>
+      <div class="w-full font-mono text-[3.4cqw] text-ink text-left">
+        <div class="flex justify-between gap-[2cqw] border-t border-ink/25 py-[2.2cqw]"><span class="uppercase tracking-[0.14em]">Složení</span><span>doplní výrobce</span></div>
+        <div class="flex justify-between gap-[2cqw] border-y border-ink/25 py-[2.2cqw]"><span class="uppercase tracking-[0.14em]">Péče</span><span>symboly</span></div>
+      </div>
+      <div class="font-mono text-[3.2cqw] tracking-[0.12em] uppercase text-ink">Vyrobeno v ČR · eldeeworld.com</div>
     </Ukazka>
   </div>
 
   <Pravidla>
     <Pravidlo typ="ok">QR kód vede na stránku konkrétního dropu, ne na domovskou stránku.</Pravidlo>
-    <Pravidlo typ="ne">Tisknout hangtag na křídový papír. Kraft je součást hmatového dojmu.</Pravidlo>
-    <Pravidlo typ="rozmer">5 × 8 cm, kraft 300 g, otvor 5 mm od horní hrany.</Pravidlo>
+    <Pravidlo typ="ne">Křídový papír a zlatá na kraftu. Kraft je součást hmatového dojmu — a zlatá na něm (kontrast 1,1 : 1) zmizí, proto je logo celé tmavé, i svatozář.</Pravidlo>
+    <Pravidlo typ="rozmer">5 × 8 cm, kraft 300 g, otvor 5 mm od horní hrany. Vzadu velikost, složení a péče; přesné znění dodá výrobce.</Pravidlo>
   </Pravidla>
 
   <!-- ── Samolepky ──────────────────────────────────────────────────────── -->
@@ -101,7 +132,7 @@ import Zakaz from '../components/Zakaz.astro';
   <div class="grid sm:grid-cols-3 gap-4">
     <Ukazka format="ctverec" plocha="podklad" popis="LD monogram">
       <div class="w-[46cqw] h-[46cqw] bg-blood rounded-full flex items-center justify-center">
-        <span class="font-display italic text-[20cqw] text-ink leading-none">LD</span>
+        <img src="/logo/monogram-ld.svg" alt="Monogram LD" class="w-[30cqw] h-auto" />
       </div>
     </Ukazka>
 

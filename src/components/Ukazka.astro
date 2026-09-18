@@ -17,7 +17,7 @@
 // u svislých formátů rovnou 0).
 interface Props {
   /** Poměr stran artboardu. */
-  format?: 'hero' | 'web' | 'ctverec' | 'svisle' | 'vizitka' | 'hangtag' | 'krabice' | 'pruh' | 'banner' | 'volny';
+  format?: 'hero' | 'web' | 'telefon' | 'ctverec' | 'svisle' | 'vizitka' | 'hangtag' | 'krabice' | 'bok' | 'pruh' | 'banner' | 'volny';
   /** Popisek pod ukázkou. */
   popis?: string;
   /** Bezpečná zóna TikToku/Reels — 12 % nahoře i dole. Kreslí se do obrázku,
@@ -26,7 +26,7 @@ interface Props {
   /** Okótovat zónu procentem. Stačí u první ukázky v řadě. */
   zonaStitek?: boolean;
   /** Barva plochy artboardu. */
-  plocha?: 'ink' | 'uhel' | 'bone' | 'blood' | 'podklad';
+  plocha?: 'ink' | 'uhel' | 'bone' | 'blood' | 'podklad' | 'kraft' | 'bila';
 }
 
 const {
@@ -41,12 +41,15 @@ const {
 const POMER: Record<string, string> = {
   hero:    'aspect-[21/9]',
   web:     'aspect-video',
+  // Web na telefonu (iPhone 390 × 844) — 95 % návštěv.
+  telefon: 'aspect-[390/844]',
   ctverec: 'aspect-square',
   svisle:  'aspect-[9/16]',
   // Tiskové formáty mají poměr skutečného výrobku, ne obrázku o něm.
   vizitka: 'aspect-[85/55]',
   hangtag: 'aspect-[5/8]',
   krabice: 'aspect-[3/2]',
+  bok:     'aspect-[18/5]',
   pruh:    'aspect-[3/1]',
   banner:  'aspect-[6/1]',
   volny:   '',
@@ -56,11 +59,13 @@ const POMER: Record<string, string> = {
 const PLOCHA_LAYOUT: Record<string, string> = {
   hero:    'absolute inset-0 px-[7cqw] justify-center',
   web:     'absolute inset-0 px-[6cqw] justify-center',
+  telefon: 'absolute inset-0',
   ctverec: 'absolute inset-0 p-[9cqw] justify-center items-center text-center',
   svisle:  'absolute inset-0 p-[12cqw] justify-center items-center text-center',
   vizitka: 'absolute inset-0 p-[8cqw] justify-between',
   hangtag: 'absolute inset-0 p-[9cqw] justify-between items-center text-center',
   krabice: 'absolute inset-0 p-[8cqw] justify-center items-center text-center',
+  bok:     'absolute inset-0 px-[5cqw] justify-center items-center text-center',
   pruh:    'absolute inset-0 px-[5cqw] justify-center',
   banner:  'absolute inset-0 px-[3cqw] justify-center',
   volny:   'p-8 md:p-10 justify-center',
@@ -73,6 +78,10 @@ const BARVA: Record<string, string> = {
   blood: 'bg-blood text-bone',
   // Neutrální podklad pro předmět, který se fotí NA něčem (samolepka, nášivka).
   podklad: 'bg-bone/5 text-bone',
+  // Kraftový papír visačky. Arbitrary třída schválně: print.css ji na papíře nepřevrací.
+  kraft: 'bg-[#C8A882] text-ink',
+  // Bílá e-mailového klienta — podpis uvidí příjemce na bílé, ne na černé.
+  bila:  'bg-white text-[#202124]',
 };
 ---
 <figure class="min-w-0" data-ukazka>
