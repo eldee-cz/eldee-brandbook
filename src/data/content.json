@@ -210,8 +210,8 @@
       }
     ],
     "velikosti": {
-      "uvod": "Velikostní tabulka stojí na skutečných měřeních lýtek hráčů, ne na přepočtu z velikosti boty. Sbírá se dál — každé měření tabulku zpřesňuje.",
-      "rady": ["XS", "M", "L"],
+      "uvod": "Velikostní tabulka stojí na skutečných měřeních lýtek hráčů, ne na přepočtu z velikosti boty. Měření je uzavřené — tabulka stojí na 83 změřených nohách.",
+      "rady": ["XS", "S", "M", "L"],
       "pozn": "Konkrétní naměřené rozměry jsou interní podklad pro výrobce a do brand booku nepatří."
     },
     "vyroba": {
