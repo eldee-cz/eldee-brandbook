@@ -229,6 +229,36 @@ test('Loga a fonty jsou dostupné', async ({ request }) => {
   }
 });
 
+// 21. 9. 2026: všech 5 písem knihy bylo stažené jen se sadou `latin` a chyběly
+// v nich č ď ě ň ř š ť ů ž. Prohlížeč je znak po znaku nahrazoval systémovým
+// písmem, takže každé české slovo s háčkem bylo vysázené dvěma písmy najednou —
+// v knize, která sama káže typografickou disciplínu. Žádný test to nechytil,
+// protože testy hlídaly text a kontrast, ne to, jestli je text vysázený tím
+// písmem, kterým má být. Tohle je ta chybějící vrstva.
+test('písma umí česky (háčky a kroužek nejsou z náhradního písma)', async ({ request }) => {
+  const { default: wawoff } = await import('wawoff2');
+  const { default: opentype } = await import('opentype.js');
+  const CESTINA = 'áčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ';
+  const pisma = [
+    '/fonts/BigShouldersDisplay-Black.woff2',
+    '/fonts/SpaceGrotesk-Regular.woff2',
+    '/fonts/SpaceGrotesk-Medium.woff2',
+    '/fonts/SpaceGrotesk-Bold.woff2',
+    '/fonts/CaveatBrush-Regular.woff2',
+    '/fonts/JetBrainsMono-Regular.woff2',
+  ];
+  const problemy = [];
+  for (const cesta of pisma) {
+    const res = await request.get(cesta);
+    expect(res.status(), `${cesta} má vrátit 200`).toBe(200);
+    const ttf = await wawoff.decompress(new Uint8Array(await res.body()));
+    const font = opentype.parse(Uint8Array.from(ttf).buffer);
+    const chybi = [...CESTINA].filter((ch) => font.charToGlyph(ch).index === 0);
+    if (chybi.length) problemy.push(`${cesta} — chybí ${chybi.join(' ')}`);
+  }
+  expect(problemy, 'písma bez české diakritiky').toEqual([]);
+});
+
 // Kontrasty v sekci Barvy se počítají z HEX, ne opisují z dat — dřív byly
 // vypsané ručně a sedm z jedenácti hodnot nesedělo. Tohle to hlídá.
 test.describe('kontrasty v sekci Barvy', () => {
