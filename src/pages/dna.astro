@@ -9,20 +9,31 @@ import Karta from '../components/Karta.astro';
 import Panel from '../components/Panel.astro';
 import content from '../data/content.json';
 ---
-<Layout title="Brand DNA">
+<Layout title="DNA značky">
   <SectionTitle
-    title="Personality, hodnoty, archetypy"
-    subtitle="Kdo je eldee jako značka. Pravidla pro chování, hlas, rozhodování."
+    title="Osobnost, hodnoty, archetypy"
+    subtitle="Kdo je eldee jako značka. Pravidla pro chování, hlas a rozhodování."
   />
 
-  <PasHlavicka nazev="Personality" hlas prvni />
+  <!-- Napětí stojí nahoře, ne na konci sekce (revize 22. 9. 2026): je to klíč,
+       kterým se čtou všechny karty pod ním. Dokud viselo dole, prokousal se
+       k němu čtenář až po dvanácti kartách, z nichž si do té doby nic neodnesl. -->
+  <PasHlavicka nazev={content.dna.napeti.nadpis} hlas prvni />
+  <Panel>
+    <p class="text-body-lg text-bone/85 max-w-3xl">{content.dna.napeti.text}</p>
+    <!-- Pointa celé sekce, ne doraz pásu — proto drží hlas značky
+         (display italic zlatá), a ne 17px jako běžný Doraz. -->
+    <p class="font-display text-h3 italic text-gold mt-5">{content.dna.napeti.veta}</p>
+  </Panel>
+
+  <PasHlavicka nazev="Osobnost" hlas linka popis="Každý rys říká, co značka dělá — a co nedělá. Bez té druhé půlky by seděl na kteroukoli mladou značku." />
   <div class="grid md:grid-cols-2 gap-5">
     {content.dna.personality.map((p) => (
       <Karta nadpis={p.trait} hrana="blood">{p.description}</Karta>
     ))}
   </div>
 
-  <PasHlavicka nazev="Hodnoty" hlas linka />
+  <PasHlavicka nazev="Hodnoty" hlas linka popis="Hodnota tady neznamená, co máme rádi, ale jak se rozhodujeme, když je to těžké." />
   <div class="grid md:grid-cols-2 gap-5">
     {content.dna.values.map((v) => (
       <Karta nadpis={v.value} hrana="gold">{v.description}</Karta>
@@ -33,27 +44,18 @@ import content from '../data/content.json';
     nazev="Archetypy"
     hlas
     linka
-    popis="Jungian brand archetypy — pomáhají rozhodovat se v hraničních případech (campaign, content, sponsorship)."
+    popis="Jungovské archetypy značky — pomáhají rozhodnout hraniční případy: kampaň, obsah, partnerství."
   />
   <div class="grid md:grid-cols-3 gap-5">
     {content.dna.archetypes.map((a) => (
       <Karta
         nadpis={a.name}
         hrana={a.primary ? 'blood' : 'zadna'}
-        stitek={a.primary ? 'PRIMARY' : undefined}
+        stitek={a.primary ? 'HLAVNÍ' : undefined}
       >
         {a.description}
       </Karta>
     ))}
   </div>
-
-  <!-- Rebel vs. patřičnost: bez tohohle panelu si brand book protiřečí -->
-  <PasHlavicka nazev={content.dna.napeti.nadpis} hlas linka />
-  <Panel>
-    <p class="text-body-lg text-bone/85 max-w-3xl">{content.dna.napeti.text}</p>
-    <!-- Pointa celé sekce, ne doraz pásu — proto drží hlas značky
-         (display italic zlatá), a ne 17px jako běžný Doraz. -->
-    <p class="font-display text-h3 italic text-gold mt-5">{content.dna.napeti.veta}</p>
-  </Panel>
 
 </Layout>

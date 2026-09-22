@@ -95,34 +95,81 @@
   },
 
   "audience": {
-    "primary": {
-      "name": "Mladý fotbalista",
-      "age": "10–19 let, těžiště žáci a dorost",
-      "geography": "ČR — Praha, Brno, Ostrava, regionální okresní města",
-      "income": "Kapesné rodičů 1–3k Kč/měs + brigády",
-      "lifestyle": [
-        "Trénuje 4×+ týdně, hraje soutěžně (průzkum 6/2026, 27 hráčů)",
-        "Na zápas nosí tube návlek + vlastní ponožky — 93 % hráčů z průzkumu",
-        "Kapsa na chránič je nejžádanější vlastnost (63 %), preferuje nízký střih",
-        "Sleduje fotbalové TikToky, IG hráčských kont, YouTube highlight reels",
-        "Estetika důležitější než cena (do limitu kapesného)",
-        "Sociální status — co nosíš v šatně je signál"
-      ],
-      "pain": "Pro ostatní jsou štulpny doplněk. Pro nás středobod. Žádný brand to nechápe.",
-      "motivation": "Napodobit idoly z TV — ale neamatérsky. Místo stříhání nových štulpen před každým zápasem má pár, který vydrží celou sezónu."
-    },
-    "secondary": {
-      "name": "Amatérský fotbalový klub (B2B)",
-      "type": "Mládežnické kluby",
-      "geography": "Celá ČR, ~940 klubů v databázi",
-      "decisionMaker": "Trenér, vedoucí mládeže, předseda klubu",
-      "lifestyle": [
-        "Rozpočet limitovaný, závislý na sponzorech",
-        "Hledá způsob, jak získat pro klub další prostředky — eldee dává 10 % z prodejů zpět klubu",
-        "Komunikuje přes e-mail, FB Messenger, telefon"
-      ],
-      "pain": "Stejní výrobci sportovní výbavy (Decathlon, Sportisimo), žádná diferenciace. Klubový obchod vypadá jako klubový obchod konkurence.",
-      "motivation": "Najít originálního dodavatele, který nabídne kvalitu + slevu klubu + příběh."
+    "personas": [
+      {
+        "key": "zak",
+        "name": "Žák",
+        "label": "B2C · 10–14",
+        "age": "10–14 let, mladší a starší žáci",
+        "role": "Rozhoduje on, platí rodič",
+        "geography": "ČR — kluby ve městech i na okrese",
+        "income": "Vlastní žádný. Nákup schvaluje rodič.",
+        "lifestyle": [
+          "Chce to, co má v šatně kluk, kterého si váží",
+          "Kanál: TikTok, spoluhráči, co viděl na tréninku",
+          "Cena není jeho problém — je problém toho, kdo platí",
+          "Stříhat štulpny mu doma zakážou; eldee to řeší za něj"
+        ],
+        "pain": "Chce patřit mezi ty, co už to mají. A nemá jak si to koupit sám.",
+        "motivation": "Mít to, co si ostatní stříhají nůžkama — ale pořádně, a bez hádky doma."
+      },
+      {
+        "key": "dorostenec",
+        "name": "Dorostenec",
+        "label": "B2C · 15–19",
+        "age": "15–19 let, dorost a starší",
+        "role": "Rozhoduje i platí sám",
+        "geography": "ČR — Praha, Brno, Ostrava, regionální okresní města",
+        "income": "Kapesné 1–3k Kč/měs + brigády",
+        "lifestyle": [
+          "Trénuje 4×+ týdně, hraje soutěžně (průzkum 6/2026, 27 hráčů)",
+          "Na zápas nosí tube návlek + vlastní ponožky — 93 % hráčů z průzkumu",
+          "Kapsa na chránič je nejžádanější vlastnost (63 %), preferuje nízký střih",
+          "Kanál: Instagram, hráčské účty, drop kultura",
+          "Estetika nad cenou — do limitu, který si sám nastaví",
+          "Co nosí v šatně, je signál, o kterém se nemluví"
+        ],
+        "pain": "Pro ostatní jsou štulpny doplněk. Pro nás středobod. Žádný brand to nechápe.",
+        "motivation": "Vlastní styl, který nemusí nikomu vysvětlovat. Pozná to ten, kdo hraje."
+      },
+      {
+        "key": "rodic",
+        "name": "Rodič",
+        "label": "TŘETÍ STRANA",
+        "role": "Neoslovujeme ho, ale musí projít",
+        "geography": "Platí za žáka, u dorostence už jen dorovnává",
+        "lifestyle": [
+          "Není cílovka k oslovení — je to ten, kdo schválí nebo zamítne",
+          "Ptá se na tři věci: vydrží to? kdo to vyrábí? kolik to stojí?",
+          "Odpověď má být fakt, ne nadšení: český výrobce, životnost na sezóny",
+          "Rodič není terč vtipů značky — to je hranice"
+        ],
+        "pain": "Bojí se, že je to hloupost za osm stovek, co vydrží tři zápasy.",
+        "motivation": "Koupit jednou pořádnou věc místo pátého páru, co se do měsíce roztrhá."
+      },
+      {
+        "key": "klub",
+        "name": "Amatérský fotbalový klub",
+        "label": "B2B",
+        "type": "Mládežnické kluby",
+        "geography": "Celá ČR, ~940 klubů v databázi",
+        "decisionMaker": "Trenér, vedoucí mládeže, předseda klubu",
+        "lifestyle": [
+          "Rozpočet limitovaný, závislý na sponzorech",
+          "Hledá způsob, jak získat pro klub další prostředky — eldee dává 10 % z prodejů zpět klubu",
+          "Komunikuje přes e-mail, FB Messenger, telefon"
+        ],
+        "pain": "Stejní výrobci sportovní výbavy (Decathlon, Sportisimo), žádná diferenciace. Klubový obchod vypadá jako klubový obchod konkurence.",
+        "motivation": "Najít originálního dodavatele, který nabídne kvalitu + slevu klubu + příběh."
+      }
+    ],
+    "neni": {
+      "nadpis": "Pro koho eldee není",
+      "body": [
+        "Kdo hledá nejlevnější štulpny do výprodeje. Cenou eldee nesoutěží a soutěžit nebude.",
+        "Kdo chce klubové logo přes celou nohu. Na cizím materiálu drží eldee roli podpisu, ne plochy.",
+        "Kdo ten detail nepozná. Hranice není sport — futsal, florbal, sálovka, kdokoli nosí štulpny naostro. Hranice je, jestli víš, proč tam ty díry jsou."
+      ]
     }
   },
 
@@ -224,44 +271,45 @@
   },
 
   "dna": {
+    "napeti": {
+      "nadpis": "Rebel a patřičnost si neodporují",
+      "text": "Rebel bez party je sólista a to je přesně to, co eldee neprodává. Patřičnost bez rebelie je klubový obchod. Dohromady dávají větu, která drží obojí:",
+      "veta": "Nejsme parta jako ostatní. A uvnitř té party držíme spolu."
+    },
     "personality": [
       {
         "trait": "Drzý",
-        "description": "Dělá si prdel ze sebe i z fotbalového světa. Self-aware, ne arogantní."
+        "description": "Dělá si prdel ze sebe dřív než z ostatních. Nikdy z amatérského fotbalu — ten je doma, ne terč."
       },
       {
-        "trait": "Sebevědomý",
-        "description": "Ví, že produkt je dobrý. Nemusí to dokazovat křikem."
+        "trait": "Klidný",
+        "description": "Produkt mluví první. Značka neříká, jak je dobrá; ukáže díry a mlčí."
       },
       {
         "trait": "Pořádný",
-        "description": "Když to děláme, děláme to pořádně. Žádné kompromisy."
+        "description": "Radši pozdě a hotové než rychle a pak reklamace. Platí na sérii i na odpověď v komentářích."
       },
       {
         "trait": "Lidský",
-        "description": "Za eldee stojí hráč, ne korporát. Patříš mezi své."
+        "description": "Píše hráč, ne oddělení marketingu. Na zprávu odpoví člověk a pozná se to."
       }
     ],
     "values": [
       {
         "value": "Patřičnost",
-        "description": "Nadřazená hodnota. Značka stojí uvnitř party, ne naproti ní — mluvíme „my“, nikdy „vy“."
+        "description": "Nadřazená hodnota. Když stojí proti sobě „vypadat líp“ a „patřit víc“, vybíráme patřit. Mluvíme „my“, nikdy „vy“ — a platí to i na klub a na ambasadora."
       },
       {
-        "value": "Kvalita",
-        "description": "Top materiály, český výrobce, dlouhá životnost. Pořádně, nebo vůbec."
+        "value": "Pořádně, nebo vůbec",
+        "description": "Radši odložíme drop, než poslat sérii, která není hotová. Stejně přísně se posuzuje materiál, výrobce i termín. Český výrobce, životnost na sezóny."
       },
       {
-        "value": "Originalita",
-        "description": "Dva chráněné průmyslové vzory. Žádné kopírování."
-      },
-      {
-        "value": "Komunita",
-        "description": "Mladí fotbalisti, kluby, ambasadoři. Spolupráce > transakce."
+        "value": "Vlastní, ne opsané",
+        "description": "Co eldee vypustí, musí být její věc. Dva zapsané vzory jsou důsledek téhle hodnoty, ne ona sama — kdyby zítra vypršely, nemění se nic."
       },
       {
         "value": "Férovost",
-        "description": "Komise ambasadorům, slevy klubům, transparentní ceník."
+        "description": "Klub i hráč vědí předem, na čem jsou. Ceník bez hvězdiček, podmínky bez drobného písma."
       }
     ],
     "archetypes": [
@@ -280,11 +328,6 @@
         "name": "Creator",
         "description": "Dva chráněné designy = originální tvorba. Eldee přidává něco nového do fotbalového šatníku."
       }
-    ],
-    "napeti": {
-      "nadpis": "Rebel a patřičnost si neodporují",
-      "text": "Rebel bez party je sólista a to je přesně to, co eldee neprodává. Patřičnost bez rebelie je klubový obchod. Dohromady dávají větu, která drží obojí:",
-      "veta": "Nejsme parta jako ostatní. A uvnitř té party držíme spolu."
-    }
+    ]
   }
 }

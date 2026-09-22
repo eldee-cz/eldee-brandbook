@@ -70,6 +70,31 @@ import loga from '../../data/loga.json';
     <Pravidlo typ="ok">Použij ji jen tam, kde se vodorovný nápis nevejde — ne pro změnu.</Pravidlo>
   </Pravidla>
 
+  <!-- ── Jednobarevné varianty ──────────────────────────────────────────── -->
+  <!-- Doplněno 22. 9. 2026. Mono sada existovala v repu, ale kniha ji neukazovala
+       ani jednou a tmavá půlka pro světlé podklady chyběla úplně — takže pravidlo
+       „mono verze je připravená, neodbarvuj master“ nebylo čím naplnit. -->
+  <PasHlavicka nazev="Jednobarevné varianty" meta={['Bez zlaté', 'Výšivka · ražba · jednobarevný tisk']} />
+
+  <p class="text-body-lg text-bone/70 max-w-2xl mb-5">
+    Tam, kde technika unese jen jednu barvu — výšivka, ražba, razítko, jednobarevný tisk —
+    jde <strong class="text-bone">i svatozář ve stejné barvě jako písmena</strong>. Světlá verze
+    na tmavý podklad, tmavá na světlý. Obě jsou hotové, neodbarvuje se master.
+  </p>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <LogoVariant src="/logo/wordmark-mono.svg" alt="Jednobarevný wordmark na černé" bg="ink" caption="Světlá na tmavém" />
+    <LogoVariant src="/logo/wordmark-mono-dark.svg" alt="Jednobarevný wordmark na světlé" bg="bone" caption="Tmavá na světlém" />
+    <LogoVariant src="/logo/wordmark-vertical-mono.svg" alt="Svislý jednobarevný wordmark na černé" bg="ink" caption="Svislá na tmavém" />
+    <LogoVariant src="/logo/wordmark-vertical-mono-dark.svg" alt="Svislý jednobarevný wordmark na světlé" bg="bone" caption="Svislá na světlém" />
+  </div>
+
+  <Pravidla>
+    <Pravidlo typ="ok">Jednobarevná verze se bere hotová — pro obě polarity existuje soubor.</Pravidlo>
+    <Pravidlo typ="ne">Míchat jednu barvu se zlatou svatozáří. Buď má barvu všechno, nebo nic.</Pravidlo>
+    <Pravidlo typ="ok">Na kraft patří tmavá mono verze: zlatá má na kraftu kontrast 1,1 : 1 a zmizí.</Pravidlo>
+  </Pravidla>
+
   <!-- ── Monogram ───────────────────────────────────────────────────────── -->
   <PasHlavicka nazev="Monogram LD" meta={['Nejmenší velikost · 16 px / 5 mm', 'Ochranná zóna · výška „L“']} />
 

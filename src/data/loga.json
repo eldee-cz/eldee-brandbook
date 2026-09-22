@@ -20,6 +20,11 @@
     "pozn": "Jednobarevné aplikace: výšivka, ražba, jednobarevný tisk."
   },
   {
+    "soubor": "wordmark-mono-dark.svg",
+    "label": "Wordmark — jednobarevný tmavý",
+    "pozn": "Jednobarevné aplikace na světlém podkladu."
+  },
+  {
     "soubor": "wordmark-vertical-light.svg",
     "label": "Svislý wordmark — světlá verze",
     "pozn": "Úzké formáty na tmavém: banner, boční pás."
@@ -33,6 +38,11 @@
     "soubor": "wordmark-vertical-mono.svg",
     "label": "Svislý wordmark — jednobarevný",
     "pozn": "Úzké formáty jednobarevně."
+  },
+  {
+    "soubor": "wordmark-vertical-mono-dark.svg",
+    "label": "Svislý wordmark — jednobarevný tmavý",
+    "pozn": "Úzké formáty jednobarevně na světlém."
   },
   {
     "soubor": "wordmark-vertical-on-gold.svg",
