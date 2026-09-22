@@ -15,6 +15,7 @@ import AssetDownload from '../../components/AssetDownload.astro';
 // SVG do vyšívárny“) i rozměry („spára 1,8 mm“) — mezi souvětími o tom, jak
 // logo vzniklo. Teď: popis je jedna věta, rozměry jsou v hlavičce pásu,
 // pravidla v kartách pod ukázkou.
+import loga from '../../data/loga.json';
 ---
 <Layout title="Logo">
   <SectionTitle
@@ -149,15 +150,8 @@ import AssetDownload from '../../components/AssetDownload.astro';
   <PasHlavicka nazev="Ke stažení" meta={['Formát · SVG']} />
 
   <div class="grid md:grid-cols-2 gap-3">
-    <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark — světlá verze" format="SVG" />
-    <AssetDownload href="/logo/wordmark-dark.svg" label="Wordmark — tmavá verze" format="SVG" />
-    <AssetDownload href="/logo/wordmark-vertical-light.svg" label="Svislý wordmark — světlá verze" format="SVG" />
-    <AssetDownload href="/logo/wordmark-vertical-dark.svg" label="Svislý wordmark — tmavá verze" format="SVG" />
-    <AssetDownload href="/logo/wordmark-vertical-mono.svg" label="Svislý wordmark — jednobarevný" format="SVG" />
-    <AssetDownload href="/logo/wordmark-on-gold.svg" label="Wordmark — na zlatou" format="SVG" />
-    <AssetDownload href="/logo/wordmark-vertical-on-gold.svg" label="Svislý wordmark — na zlatou" format="SVG" />
-    <AssetDownload href="/logo/monogram-ld.svg" label="Monogram LD — master" format="SVG" />
-    <AssetDownload href="/logo/monogram-mono.svg" label="Monogram LD — jednobarevný" format="SVG" />
-    <AssetDownload href="/logo/halo.svg" label="Svatozář" format="SVG" />
+    {loga.map((l) => (
+      <AssetDownload href={`/logo/${l.soubor}`} label={l.label} pozn={l.pozn} format="SVG" />
+    ))}
   </div>
 </Layout>

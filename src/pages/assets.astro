@@ -9,6 +9,7 @@ import { VERZE } from '../data/sekce';
 // (nadpisy roman, ne kurzívou jako mluvící blok I), ale jako jediná sekce
 // bloku nemá ukázky. Pásy tady proto dělí vodorovná linka — stejné kritérium
 // jako v bloku I: linka tam, kde pás neoddělí obrázek.
+import loga from '../data/loga.json';
 ---
 
 <Layout title="Asset Index">
@@ -19,11 +20,9 @@ import { VERZE } from '../data/sekce';
 
   <PasHlavicka nazev="Loga (SVG)" prvni />
   <div class="grid md:grid-cols-2 gap-3">
-    <AssetDownload href="/logo/wordmark-light.svg" label="Wordmark light" format="SVG" />
-    <AssetDownload href="/logo/wordmark-dark.svg" label="Wordmark dark" format="SVG" />
-    <AssetDownload href="/logo/wordmark-on-gold.svg" label="Wordmark na zlatou" format="SVG" />
-    <AssetDownload href="/logo/monogram-ld.svg" label="LD Monogram" format="SVG" />
-    <AssetDownload href="/logo/halo.svg" label="Halo" format="SVG" />
+    {loga.map((l) => (
+      <AssetDownload href={`/logo/${l.soubor}`} label={l.label} pozn={l.pozn} format="SVG" />
+    ))}
   </div>
 
   <PasHlavicka nazev="PDF" linka />

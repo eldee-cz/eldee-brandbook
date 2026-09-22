@@ -1,0 +1,67 @@
+[
+  {
+    "soubor": "wordmark-light.svg",
+    "label": "Wordmark — světlá verze",
+    "pozn": "Základní stav značky. Na tmavé plochy."
+  },
+  {
+    "soubor": "wordmark-dark.svg",
+    "label": "Wordmark — tmavá verze",
+    "pozn": "Na světlé plochy a do tisku."
+  },
+  {
+    "soubor": "wordmark-on-gold.svg",
+    "label": "Wordmark — na zlatou",
+    "pozn": "Na zlaté plochy: krabička, hangtag, ražba."
+  },
+  {
+    "soubor": "wordmark-mono.svg",
+    "label": "Wordmark — jednobarevný",
+    "pozn": "Jednobarevné aplikace: výšivka, ražba, jednobarevný tisk."
+  },
+  {
+    "soubor": "wordmark-vertical-light.svg",
+    "label": "Svislý wordmark — světlá verze",
+    "pozn": "Úzké formáty na tmavém: banner, boční pás."
+  },
+  {
+    "soubor": "wordmark-vertical-dark.svg",
+    "label": "Svislý wordmark — tmavá verze",
+    "pozn": "Úzké formáty na světlém."
+  },
+  {
+    "soubor": "wordmark-vertical-mono.svg",
+    "label": "Svislý wordmark — jednobarevný",
+    "pozn": "Úzké formáty jednobarevně."
+  },
+  {
+    "soubor": "wordmark-vertical-on-gold.svg",
+    "label": "Svislý wordmark — na zlatou",
+    "pozn": "Úzké formáty na zlaté ploše."
+  },
+  {
+    "soubor": "monogram-ld.svg",
+    "label": "Monogram LD — master",
+    "pozn": "Malé plochy, kde by se wordmark rozpadl: avatar, favicon, nášivka."
+  },
+  {
+    "soubor": "monogram-ld-dark.svg",
+    "label": "Monogram LD — tmavý",
+    "pozn": "Monogram na světlé plochy a do tisku."
+  },
+  {
+    "soubor": "monogram-mono.svg",
+    "label": "Monogram LD — jednobarevný",
+    "pozn": "Na výšivku: spára 1,8 mm a prsten svatozáře 1,6 mm při nášivce 35 mm."
+  },
+  {
+    "soubor": "monogram-mono-dark.svg",
+    "label": "Monogram LD — jednobarevný tmavý",
+    "pozn": "Jednobarevný monogram na světlé plochy."
+  },
+  {
+    "soubor": "halo.svg",
+    "label": "Svatozář",
+    "pozn": "Druhotný symbol. Samostatně jen v produktovém kontextu — krabička, štítek, obal."
+  }
+]

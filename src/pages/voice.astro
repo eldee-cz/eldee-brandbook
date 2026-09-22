@@ -8,6 +8,8 @@ import PasHlavicka from '../components/PasHlavicka.astro';
 import Karta from '../components/Karta.astro';
 import Panel from '../components/Panel.astro';
 import Doraz from '../components/Doraz.astro';
+import Pravidla from '../components/Pravidla.astro';
+import Pravidlo from '../components/Pravidlo.astro';
 import voice from '../data/voice-examples.json';
 
 const templateLabels: Record<string, string> = {
@@ -71,6 +73,18 @@ const templateLabels: Record<string, string> = {
       </div>
     </div>
   </div>
+
+  <Doraz barva="tlumena">{voice.vocabulary.vyjimka}</Doraz>
+
+  <!-- Angličtina v eldee není nedopatření: slogan značky i produktová řada jsou
+       anglicky záměrně. Chybělo jen pravidlo, kde končí — bez něj se do knihy
+       vloudily anglické nadpisy sekcí (rozhodnuto 22. 9. 2026). -->
+  <PasHlavicka nazev="Čeština a angličtina" hlas linka />
+  <Pravidla>
+    <Pravidlo typ="ok">Kniha a web jsou česky — nadpisy, popisky i pravidla.</Pravidlo>
+    <Pravidlo typ="ok">Anglicky zůstávají slogany („One of Us.“, „Holy Socks.“) a artefakty pro hráče: certifikát, nášivka, merch.</Pravidlo>
+    <Pravidlo typ="ne">Míchat jazyky uvnitř jedné věty nebo nadpisu. Buď celé česky, nebo celé anglicky.</Pravidlo>
+  </Pravidla>
 
   <PasHlavicka nazev="Šablony" hlas linka />
   <div class="space-y-4">

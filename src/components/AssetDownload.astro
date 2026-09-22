@@ -4,8 +4,10 @@ interface Props {
   label: string;
   format: string;
   size?: string;
+  /** Kdy se varianta používá. Bez pravidla se logo nenabízí (rozhodnuto 22. 9. 2026). */
+  pozn?: string;
 }
-const { href, label, format, size } = Astro.props;
+const { href, label, format, size, pozn } = Astro.props;
 ---
 <a
   href={href}
@@ -14,6 +16,7 @@ const { href, label, format, size } = Astro.props;
 >
   <div>
     <div class="text-body text-bone group-hover:text-bone">{label}</div>
+    {pozn && <div class="text-[13px] leading-snug text-bone/50 mt-0.5">{pozn}</div>}
     {size && <div class="font-mono text-caption text-bone/40">{size}</div>}
   </div>
   <div class="flex items-center gap-3">

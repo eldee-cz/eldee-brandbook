@@ -41,14 +41,14 @@ function data(id: string) {
 
   <PasA
     nazev="Display"
-    popis="Big Shoulders Black Italic. Nese wordmark, nadpisy a slogany — všechno, co má křičet."
-    spec={['Řez · 900 Black', 'Sklon · vždy italic']}
+    popis="Big Shoulders Black, sázené v italic. Nese wordmark, nadpisy a slogany — všechno, co má křičet."
+    spec={['Řez · 900 Black', 'Sklon · elektronický italic']}
     prvni
   >
     <Pravidla slot="pravidla" sloupec>
       <Pravidlo typ="ok">Jen H1, H2, slogan a wordmark.</Pravidlo>
       <Pravidlo typ="ne">Display na běžný odstavec. Po třech řádcích se nedá číst.</Pravidlo>
-      <Pravidlo typ="ok">Italic je součást písma značky, ne zvýraznění. Neitalický display nepoužíváme.</Pravidlo>
+      <Pravidlo typ="ok">Italic je součást písma značky, ne zvýraznění. Sklon je elektronický — pravý kurzivní řez Big Shoulders neexistuje.</Pravidlo>
     </Pravidla>
     <VzorekPisma {...data('display')} />
   </PasA>

@@ -54,6 +54,8 @@ const pr = content.produkt;
   <PasHlavicka nazev={pr.vyroba.nadpis} hlas linka />
   <Panel hrana="zadna">
     <p class="text-body-lg text-bone/85 max-w-3xl">{pr.vyroba.text}</p>
+    <p class="text-body-lg text-bone/85 max-w-3xl mt-4">{pr.vyroba.material}</p>
+    <Doraz barva="tlumena">{pr.vyroba.materialPozn}</Doraz>
     <Doraz>{pr.vyroba.pravidlo}</Doraz>
   </Panel>
 </Layout>
