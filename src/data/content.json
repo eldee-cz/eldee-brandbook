@@ -149,18 +149,20 @@
       },
       {
         "key": "klub",
-        "name": "Amatérský fotbalový klub",
+        "name": "Mládežnický klub",
         "label": "B2B",
-        "type": "Mládežnické kluby",
-        "geography": "Celá ČR, ~940 klubů v databázi",
-        "decisionMaker": "Trenér, vedoucí mládeže, předseda klubu",
+        "type": "Mládežnické oddíly — fotbal i halové sporty",
+        "geography": "Celá ČR, od okresních oddílů po krajské kluby",
+        "role": "Podnět dá trenér, schválí vedoucí mládeže nebo předseda, zaplatí rodiče přes klub",
         "lifestyle": [
-          "Rozpočet limitovaný, závislý na sponzorech",
-          "Hledá způsob, jak získat pro klub další prostředky — eldee dává 10 % z prodejů zpět klubu",
-          "Komunikuje přes e-mail, FB Messenger, telefon"
+          "Rozpočet je limitovaný a závislý na sponzorech; větší nákup se plánuje na sezónu",
+          "Hledá způsob, jak pro klub získat další prostředky",
+          "Objednávka pro tým běží přes Messenger a tabulku: kdo, kolik, jaká velikost",
+          "Trenér nechce být skladník — chce, aby tým vypadal jako tým a on měl klid",
+          "Co klub pořídí, obhajuje před rodiči; musí to vydržet víc než jednu sezónu"
         ],
-        "pain": "Stejní výrobci sportovní výbavy (Decathlon, Sportisimo), žádná diferenciace. Klubový obchod vypadá jako klubový obchod konkurence.",
-        "motivation": "Najít originálního dodavatele, který nabídne kvalitu + slevu klubu + příběh."
+        "pain": "Objednat týmu výbavu znamená týden dopisování a pak reklamace velikostí. A výsledek vypadá jako u každého druhého klubu.",
+        "motivation": "Aby tým vypadal jako tým, ne jako slepenec — a aby to trenéra nestálo víc času než trénink."
       }
     ],
     "neni": {
@@ -168,7 +170,9 @@
       "body": [
         "Kdo hledá nejlevnější štulpny do výprodeje. Cenou eldee nesoutěží a soutěžit nebude.",
         "Kdo chce klubové logo přes celou nohu. Na cizím materiálu drží eldee roli podpisu, ne plochy.",
-        "Kdo ten detail nepozná. Hranice není sport — futsal, florbal, sálovka, kdokoli nosí štulpny naostro. Hranice je, jestli víš, proč tam ty díry jsou."
+        "Kdo ten detail nepozná. Hranice není sport — futsal, florbal, sálovka, kdokoli nosí štulpny naostro. Hranice je, jestli víš, proč tam ty díry jsou.",
+        "Klub, který chce vlastní úpravu designu „jen trochu jinak“. Zapsané vzory se na zakázku nepřekreslují — klubová je barva a jméno, ne tvar.",
+        "Klub, kde to chce jediný člověk. Když do toho nejde trenér ani rodiče, skončí to u deseti párů ve skladu."
       ]
     }
   },
