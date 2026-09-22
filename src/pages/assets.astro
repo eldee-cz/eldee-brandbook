@@ -4,6 +4,7 @@ import SectionTitle from '../components/SectionTitle.astro';
 import PasHlavicka from '../components/PasHlavicka.astro';
 import AssetDownload from '../components/AssetDownload.astro';
 import { VERZE } from '../data/sekce';
+import { isHQ } from '../buildMode';
 
 // Assety jsou v knize zvláštní případ: patří do bloku III, který INSTRUUJE
 // (nadpisy roman, ne kurzívou jako mluvící blok I), ale jako jediná sekce
@@ -29,7 +30,14 @@ import loga from '../data/loga.json';
   <div class="grid md:grid-cols-2 gap-3">
     <!-- Verze se bere z `sekce.ts`, ne z ručně psaného textu. Dřív tu stálo
          „v3.0" natvrdo a při vydání v3.1 by se to rozešlo se sidebarem. -->
-    <AssetDownload href="/eldee-brandbook.pdf" label={`Brand Book ${VERZE} — kompletní`} format="PDF" size="~5 MB" />
+    <!-- Dvě PDF od 22. 9. 2026: veřejná adresa nabízí logomanuál (bez bloku I),
+         interní celou knihu. Dřív tu byl jeden odkaz na interní PDF i ve veřejném
+         buildu, takže si ho odtud mohl stáhnout kdokoli. -->
+    <AssetDownload
+      href={isHQ ? '/eldee-brandbook.pdf' : '/eldee-logomanual.pdf'}
+      label={isHQ ? `Brand Book ${VERZE} — kompletní` : `Logomanuál ${VERZE}`}
+      format="PDF"
+    />
   </div>
 
   <PasHlavicka

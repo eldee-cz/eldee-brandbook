@@ -117,6 +117,52 @@
   [class*="bg-[#"] img[src$="/logo/monogram-ld.svg"] {
     content: url("/logo/monogram-ld.svg");
   }
+  /* ── Tmavé ukázky zůstávají tmavé ──────────────────────────────────────
+     Ukázka produktu není plocha stránky: krabička JE matná černá a vizitka JE
+     černá–červená–černá — stojí to ve specifikaci přímo nad obrázkem. Když se
+     plocha na papíře převrátí do bílé (`.bg-ink` výš), ukázka přestane ukazovat
+     věc, o které mluví. Stejná výjimka, jakou má `.predel`.
+     Netýká se to ploch `podklad` / `bone` / `bila` — ty jsou světlé i na
+     obrazovce. (Fáze 2 revize v3.0, 22. 9. 2026.) */
+  [data-ukazka][data-plocha='ink'] .bg-ink,
+  [data-ukazka][data-plocha='uhel'] [class*='bg-['] {
+    background: #0A0A0A !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  [data-ukazka][data-plocha='ink'] .bg-ink,
+  [data-ukazka][data-plocha='ink'] .bg-ink [class*='text-bone'],
+  [data-ukazka][data-plocha='uhel'] [class*='bg-['],
+  [data-ukazka][data-plocha='uhel'] [class*='bg-['] [class*='text-bone'] {
+    color: #F5F5F0 !important;
+  }
+  /* Zlatá se na bílém papíře ztmavuje (níž), na černé ukázce by zmizela. */
+  [data-ukazka][data-plocha='ink'] .bg-ink [class*='text-gold'],
+  [data-ukazka][data-plocha='uhel'] [class*='bg-['] [class*='text-gold'] {
+    color: #C9A227 !important;
+  }
+  /* Světlé logo se na papíře vyměňuje za tmavé — uvnitř tmavé ukázky nesmí. */
+  [data-ukazka][data-plocha='ink'] img[src$="/logo/wordmark-light.svg"],
+  [data-ukazka][data-plocha='uhel'] img[src$="/logo/wordmark-light.svg"] {
+    content: url("/logo/wordmark-light.svg");
+  }
+  [data-ukazka][data-plocha='ink'] img[src$="/logo/monogram-ld.svg"],
+  [data-ukazka][data-plocha='uhel'] img[src$="/logo/monogram-ld.svg"] {
+    content: url("/logo/monogram-ld.svg");
+  }
+  /* Místo pro fotku se na papíře převrací do světlého šrafování (výš) — uvnitř
+     tmavé ukázky ale leží na černé, kde by světlý blok s tmavým popiskem působil
+     jako díra. Tam zůstává tmavé, jako na obrazovce. */
+  [data-ukazka][data-plocha='ink'] [data-foto],
+  [data-ukazka][data-plocha='uhel'] [data-foto] {
+    background: repeating-linear-gradient(135deg, #161616 0 6px, #1E1E1E 6px 12px) !important;
+  }
+  [data-ukazka][data-plocha='ink'] [data-foto] span,
+  [data-ukazka][data-plocha='uhel'] [data-foto] span {
+    color: #A6A6A0 !important;
+    border-color: #4A4A4A !important;
+    background: rgba(10, 10, 10, 0.6) !important;
+  }
   /* Signální pár je laděný na ČERNOU plochu, kde musí být čitelný v 9,5px
      štítku. Na bílém papíře je přesně obráceně: #F87171 má na bílé kontrast
      2,77 a #10B981 jen 2,54 — obojí zmizí. Na papíře proto jedou tmavé
@@ -186,6 +232,38 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  /* ── Obálka a tiráž ───────────────────────────────────────────────────
+     Stejné zacházení jako s předělem bloku: plnobarevná plocha od kraje ke
+     kraji. Bez `margin: 0` a `width: 100%` nesahala černá k pravému ani
+     dolnímu okraji — naměřeno 22. 9. 2026 na vykreslené stránce (jas krajních
+     pixelů 255 vpravo i dole, 11 vlevo), takže to tentokrát nebyl artefakt
+     zmenšeného náhledu jako 12. 9. */
+  .titulka,
+  .tiraz {
+    background: #0A0A0A !important;
+    width: 100% !important;
+    min-height: 297mm;
+    margin: 0 !important;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .titulka *,
+  .tiraz * {
+    box-sizing: border-box;
+  }
+  /* Na papíře se světlé logo vyměňuje za tmavé (výš) — na obálce a v tiráži
+     leží na černé, kde by zmizelo. Stejná výjimka jako u tmavých ukázek. */
+  .titulka img[src$="/logo/wordmark-light.svg"],
+  .tiraz img[src$="/logo/wordmark-light.svg"] {
+    content: url("/logo/wordmark-light.svg");
+  }
+  /* Globální převod textu na černou tady neplatí. */
+  .titulka, .titulka *,
+  .tiraz, .tiraz * {
+    color: inherit;
+  }
+
   /* Globální převod „všechen text na černou“ musí uvnitř předělu neplatit.
      Selektor s .predel má vyšší specificitu než ten globální, proto vyhrává. */
   .predel,
@@ -216,6 +294,30 @@
     text-decoration: none !important;
   }
   .predel a::after { content: none !important; }
+  /* ── Seznamy se nelámou tak, aby jejich zbytek osiřel ─────────────────
+     Naměřeno 22. 9. 2026: 42 ze 108 stran mělo obsah končící nad 65 % výšky
+     a několik neslo jediný utržený řádek (str. 19 — jeden bod anti-persony,
+     str. 29 — čtyři body Taba bez nadpisu, který zůstal o stránku zpátky).
+     `break-inside: avoid` na kartách bylo doplněno 12. 9., na seznamy se
+     zapomnělo. Obsah knihy je výjimka: je dlouhý a držet ho pohromadě by
+     vyrobilo horší díru, než jakou řeší. */
+  ul, ol {
+    break-inside: avoid;
+  }
+  li {
+    break-inside: avoid;
+  }
+  [data-obsah] ul,
+  [data-obsah] ol {
+    break-inside: auto;
+  }
+
+  /* Totéž platí pro obsah knihy: na papíře je to obsah, ne seznam odkazů.
+     Podtržené položky z něj dělají technický blok (revize 22. 9. 2026). */
+  [data-obsah] a {
+    text-decoration: none !important;
+  }
+  [data-obsah] a::after { content: none !important; }
 
   /* ── Tabulka barev ─────────────────────────────────────────────────────
      Na obrazovce se vodorovně posouvá, na papíře se posunout nedá — tam by

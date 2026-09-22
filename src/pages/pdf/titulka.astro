@@ -1,0 +1,78 @@
+---
+// Titulní strana PDF. Na webu se na ni nikdo nedostane — není v `sekce.ts`,
+// takže ji nenese ani navigace, ani obsah. Do knihy ji vkládá až
+// `scripts/generate-pdf.mjs` jako první stránku.
+//
+// Proč vznikla (revize v3.0, fáze 2, 22. 9. 2026): PDF začínalo rovnou předělem
+// bloku I. Kdo dostal přílohu „eldee-brandbook.pdf", otevřel dokument, který se
+// nepředstavil — bez názvu, verze i data nešlo poznat, jestli drží v3.0 nebo
+// verzi z jara.
+import Layout from '../../components/Layout.astro';
+import { isHQ } from '../../buildMode';
+import { VERZE } from '../../data/sekce';
+
+const nazev = isHQ ? 'Brand Book' : 'Logomanuál';
+const popis = isHQ
+  ? 'Kdo jsme, jak vypadáme, jak to používáme.'
+  : 'Vizuální identita pro partnery a dodavatele.';
+const datum = new Date().toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Layout title={nazev} description={`eldee ${nazev} ${VERZE}`} plnaPlocha>
+  <div class="titulka">
+    <div class="titulka-hlava">
+      <img src="/logo/wordmark-light.svg" alt="eldee" class="titulka-logo" />
+    </div>
+
+    <div class="titulka-stred">
+      <div class="titulka-stitek">{VERZE}</div>
+      <h1 class="titulka-nazev">{nazev}</h1>
+      <p class="titulka-popis">{popis}</p>
+    </div>
+
+    <div class="titulka-pata">
+      <span>eldee · {datum}</span>
+      <span>eldeeworld.com</span>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .titulka {
+    background: #0a0a0a;
+    color: #f5f5f0;
+    min-height: 100vh;
+    padding: 30mm 24mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .titulka-logo { width: 46mm; height: auto; display: block; }
+  .titulka-stitek {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11pt; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c9a227; margin-bottom: 6mm;
+  }
+  .titulka-nazev {
+    font-family: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+    font-weight: 900; font-style: italic; text-transform: uppercase;
+    font-size: 64pt; line-height: 0.92; margin: 0; letter-spacing: -0.01em;
+  }
+  .titulka-popis {
+    font-size: 13pt; line-height: 1.45; color: rgba(245, 245, 240, 0.72);
+    margin: 6mm 0 0; max-width: 105mm;
+  }
+  .titulka-pata {
+    display: flex; justify-content: space-between; gap: 8mm;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 9pt; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(245, 245, 240, 0.5);
+    border-top: 1px solid rgba(245, 245, 240, 0.18); padding-top: 5mm;
+  }
+  @media print {
+    .titulka {
+      min-height: 297mm;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>

@@ -25,6 +25,19 @@
           "value": "public, max-age=300, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/eldee-logomanual.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
+        }
+      ]
     }
   ]
 }

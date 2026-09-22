@@ -12,9 +12,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate-pdf": "npm run build:hq && node scripts/generate-pdf.mjs",
-    "build:full": "npm run build:hq && node scripts/generate-pdf.mjs && npm run build",
+    "build:full": "npm run generate-pdf:oba && npm run build:hq",
     "test": "playwright test",
-    "test:headed": "playwright test --headed"
+    "test:headed": "playwright test --headed",
+    "generate-pdf:verejny": "npm run build && node scripts/generate-pdf.mjs --verejny",
+    "generate-pdf:oba": "npm run generate-pdf && npm run generate-pdf:verejny"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

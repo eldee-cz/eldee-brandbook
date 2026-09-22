@@ -43,6 +43,13 @@ const skupinyLM = poradiBloku
 
     <PrintBreak />
 
+    <!-- Obsah stojí hned za obálkou, ne na konci sekce 01 (revize 22. 9. 2026).
+         V PDF visel na stranách 8–9, tedy až za celým jádrem značky — čtenář
+         dostal sedm stran textu dřív, než se dozvěděl, co v knize je. -->
+    <TableOfContents />
+
+    <PrintBreak />
+
     <!-- Proč zrovna tahle emoce -->
     <section>
       <PasHlavicka nazev="Proč zrovna tahle emoce" hlas linka />
@@ -171,9 +178,6 @@ const skupinyLM = poradiBloku
       <Doraz barva="tlumena">{j.hranice.znamka}</Doraz>
     </section>
 
-    <PrintBreak />
-
-    <TableOfContents />
   </Layout>
 ) : (
   <Layout title="Logomanual" description="eldee Logomanual — vizuální identita pro partnery a dodavatele.">

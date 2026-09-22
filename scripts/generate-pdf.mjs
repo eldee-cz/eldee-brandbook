@@ -14,15 +14,33 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { poradiStranek, blokyProBuild } from '../src/data/sekce.ts';
 
-// PDF se dělá z interního buildu — má celou knihu včetně bloku I.
-const HQ = true;
-const PAGES = poradiStranek(HQ);
-const PREDELY = new Set(blokyProBuild(HQ).map((b) => b.href));
+// Dvě PDF, dva režimy (22. 9. 2026):
+//   bez přepínače → INTERNÍ brand book (celá kniha včetně bloku I)
+//   --verejny     → VEŘEJNÝ logomanuál (jen to, co unese veřejná adresa)
+//
+// ⚠️ Důvod, proč to vzniklo: do 22. 9. existovalo jen jedno PDF, generované
+// z interního buildu a uložené v `public/`. Astro kopíruje `public/` do obou
+// buildů, takže veřejná adresa nabízela ke stažení celou interní knihu —
+// Positioning, persony, MOQ i provizi. Ověřeno stažením z logomanuálu.
+// Proto interní PDF NESMÍ ležet v `public/`: soubor, který tam není, se
+// do veřejného buildu nemůže dostat ani omylem.
+const VEREJNY = process.argv.includes('--verejny');
+const HQ = !VEREJNY;
+// Titulka a tiráž nejsou v `sekce.ts` (nemají být v navigaci ani v obsahu),
+// takže se do pořadí přidávají až tady — první a poslední stránka knihy.
+const TITULKA = '/pdf/titulka';
+const TIRAZ = '/pdf/tiraz';
+const PAGES = [TITULKA, ...poradiStranek(HQ), TIRAZ];
+// Stránky bez okrajů a bez čísla: předěly bloků + obálka a tiráž. U všech je to
+// plnobarevná plocha od kraje ke kraji, kde by bílý rám vypadal jako chyba tisku.
+const PREDELY = new Set([TITULKA, TIRAZ, ...blokyProBuild(HQ).map((b) => b.href)]);
 
 const OKRAJE = { top: '16mm', bottom: '16mm', left: '14mm', right: '14mm' };
 // Předěl bloku je plnobarevná stránka od kraje ke kraji. S okraji by kolem
 // tmavé plochy zůstal bílý rám a vypadalo by to jako chyba tisku.
 const BEZ_OKRAJU = { top: '0', bottom: '0', left: '0', right: '0' };
+
+const VYSTUP = HQ ? 'pdf-interni/eldee-brandbook.pdf' : 'public/eldee-logomanual.pdf';
 
 const PORT = 4322;
 const BASE = `http://localhost:${PORT}`;
@@ -70,10 +88,21 @@ try {
   // PDF je plná kniha, takže `dist/` musí být interní build. Z veřejného
   // logomanuálu by celý blok I chyběl a v PDF by zůstaly stránky s
   // přesměrováním. Spouštět přes `npm run generate-pdf`, který staví build:hq.
-  const kontrola = await fetch(`${BASE}${PAGES[0]}`);
-  if (!kontrola.ok) {
+  // Pojistka na obě strany. Stránka bloku I existuje jen v interním buildu,
+  // takže jejím stavem se pozná, co v dist/ leží. Bez té druhé půlky by
+  // `--verejny` nad interním buildem vyrobil veřejné PDF s celým blokem I —
+  // přesně ten únik, kvůli kterému dvě PDF vznikla.
+  const SONDA = '/blok/kdo-jsme';
+  const sonda = await fetch(`${BASE}${SONDA}`, { redirect: 'manual' });
+  const jeHQ = sonda.status === 200;
+  if (HQ && !jeHQ) {
     throw new Error(
-      `V dist/ není interní build — ${PAGES[0]} vrací ${kontrola.status}. Spusť "npm run generate-pdf".`,
+      `V dist/ není interní build — ${SONDA} vrací ${sonda.status}. Spusť "npm run generate-pdf".`,
+    );
+  }
+  if (VEREJNY && jeHQ) {
+    throw new Error(
+      `V dist/ je INTERNÍ build, ale generuje se veřejné PDF — vzniklo by s celým blokem I. Spusť "npm run generate-pdf:verejny".`,
     );
   }
 
@@ -100,7 +129,7 @@ try {
     // Předěl musí být právě jedna stránka. Když se rozteče na dvě, je v knize
     // prázdný list a je lepší se to dozvědět tady než z tiskárny.
     if (jePredel && pocet !== 1) {
-      throw new Error(`Předěl ${path} má ${pocet} stránek místo jedné — zkontroluj min-height v print.css`);
+      throw new Error(`${path} má ${pocet} stránek místo jedné — zkontroluj min-height v print.css`);
     }
     const copied = await merged.copyPages(src, src.getPageIndices());
     copied.forEach((p) => {
@@ -137,9 +166,9 @@ try {
   console.log(`Čísla stránek: ${vytisteno} z ${strany.length} (předěly bloků se nečíslují)`);
 
   const out = await merged.save();
-  const outPath = 'public/eldee-brandbook.pdf';
+  const outPath = VYSTUP;
   await writeFile(outPath, out);
-  console.log(`PDF written: ${outPath} (${(out.length / 1024 / 1024).toFixed(2)} MB)`);
+  console.log(`PDF written: ${outPath} (${(out.length / 1024 / 1024).toFixed(2)} MB) — ${HQ ? 'INTERNÍ, mimo public/' : 'VEŘEJNÝ'}`);
 
   await browser.close();
 } finally {

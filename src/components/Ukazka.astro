@@ -84,7 +84,7 @@ const BARVA: Record<string, string> = {
   bila:  'bg-white text-[#202124]',
 };
 ---
-<figure class="min-w-0" data-ukazka>
+<figure class="min-w-0" data-ukazka data-plocha={plocha}>
   <div class={`@container relative overflow-hidden border border-bone/10 ${POMER[format]} ${BARVA[plocha]}`}>
     <div class={`flex flex-col ${PLOCHA_LAYOUT[format]}`}>
       <slot />

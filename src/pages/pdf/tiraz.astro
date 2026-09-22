@@ -1,0 +1,93 @@
+---
+// Závěrečná strana PDF (tiráž). Protějšek titulky — kniha má mít konec, ne
+// prostě přestat. Do 22. 9. 2026 poslední strana končila uprostřed licenčního
+// výčtu v Assetech.
+//
+// Stejně jako titulka není v `sekce.ts`, takže ji nenese navigace ani obsah;
+// vkládá ji `scripts/generate-pdf.mjs` jako poslední stránku.
+import Layout from '../../components/Layout.astro';
+import { isHQ } from '../../buildMode';
+import { VERZE } from '../../data/sekce';
+
+const nazev = isHQ ? 'Brand Book' : 'Logomanuál';
+const datum = new Date().toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const pravidla = [
+  'Logo, vzory a texty jsou majetkem eldee. Použití jen s písemným svolením.',
+  'Díry na lýtku a kapsa na chránič: zapsané průmyslové vzory (EUIPO, 2026) — platí v celé EU.',
+  'Fonty pocházejí z Google Fonts pod licencí OFL (volné i pro komerční použití).',
+  'Tahle kniha je živý dokument. Když si pravidlo a praxe odporují, vyhrává kniha — a pravidlo se opraví.',
+];
+---
+<Layout title={`${nazev} — tiráž`} description={`eldee ${nazev} ${VERZE}`} plnaPlocha>
+  <div class="tiraz">
+    <div class="tiraz-stred">
+      {/* Claim „One of Us." tu stál a porušoval vlastní pravidlo knihy: svatozář
+          a claim nikdy jako hlavní motiv v jednom záběru — a wordmark svatozář
+          obsahuje. Stejná vada, jakou jsme 22. 9. opravovali v Co-brandingu.
+          Místo claimu nese stránku název knihy. */}
+      <img src="/logo/wordmark-light.svg" alt="eldee" class="tiraz-logo" />
+      <p class="tiraz-claim">{nazev} {VERZE}</p>
+    </div>
+
+    <div class="tiraz-obsah">
+      <ul class="tiraz-pravidla">
+        {pravidla.map((p) => <li>{p}</li>)}
+      </ul>
+
+      <div class="tiraz-pata">
+        <div><span class="k">Dokument</span>eldee {nazev} {VERZE}</div>
+        <div><span class="k">Vydáno</span>{datum}</div>
+        <div><span class="k">Web</span>eldeeworld.com</div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tiraz {
+    background: #0a0a0a;
+    color: #f5f5f0;
+    min-height: 100vh;
+    padding: 30mm 24mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16mm;
+  }
+  .tiraz-stred { padding-top: 14mm; }
+  .tiraz-logo { width: 40mm; height: auto; display: block; }
+  .tiraz-claim {
+    font-family: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+    font-weight: 900; font-style: italic; text-transform: uppercase;
+    font-size: 26pt; line-height: 1; color: #c9a227; margin: 7mm 0 0;
+  }
+  .tiraz-pravidla {
+    list-style: none; margin: 0 0 12mm; padding: 0;
+    max-width: 128mm; display: grid; gap: 4mm;
+  }
+  .tiraz-pravidla li {
+    font-size: 10.5pt; line-height: 1.5; color: rgba(245, 245, 240, 0.72);
+    padding-left: 6mm; position: relative;
+  }
+  .tiraz-pravidla li::before {
+    content: '·'; position: absolute; left: 0; color: #c9a227;
+  }
+  .tiraz-pata {
+    display: flex; flex-wrap: wrap; gap: 4mm 12mm;
+    border-top: 1px solid rgba(245, 245, 240, 0.18); padding-top: 5mm;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 9pt; letter-spacing: 0.1em; color: rgba(245, 245, 240, 0.72);
+  }
+  .tiraz-pata .k {
+    display: block; font-size: 8pt; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(245, 245, 240, 0.4); margin-bottom: 1.5mm;
+  }
+  @media print {
+    .tiraz {
+      min-height: 297mm;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
