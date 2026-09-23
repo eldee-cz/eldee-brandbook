@@ -8,11 +8,12 @@
 
 import { chromium } from 'playwright';
 import { PDFDocument, rgb } from 'pdf-lib';
+import * as pdfLib from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import wawoff from 'wawoff2';
 import { writeFile, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
-import { poradiStranek, blokyProBuild, sekceProBuild, BLOKY } from '../src/data/sekce.ts';
+import { poradiStranek, blokyProBuild, sekceProBuild, BLOKY, VERZE, PORADI_BLOKU } from '../src/data/sekce.ts';
 
 // Dvě PDF, dva režimy (22. 9. 2026):
 //   bez přepínače → INTERNÍ brand book (celá kniha včetně bloku I)
@@ -30,12 +31,20 @@ const HQ = !VEREJNY;
 // takže se do pořadí přidávají až tady — první a poslední stránka knihy.
 const TITULKA = '/pdf/titulka';
 const TIRAZ = '/pdf/tiraz';
-const PAGES = [TITULKA, ...poradiStranek(HQ), TIRAZ];
+// Ve veřejné knize není `/` sekcí (je to rozcestník), takže by v PDF chyběl
+// obsah úplně — do 23. 9. 2026 logomanuál začínal obálkou a hned blokem II.
+// Interní kniha `/` v pořadí má, jako sekci 01.
+const ROZCESTNIK = HQ ? [] : ['/'];
+const PAGES = [TITULKA, ...ROZCESTNIK, ...poradiStranek(HQ), TIRAZ];
 // Stránky bez okrajů a bez čísla: předěly bloků + obálka a tiráž. U všech je to
 // plnobarevná plocha od kraje ke kraji, kde by bílý rám vypadal jako chyba tisku.
 const PREDELY = new Set([TITULKA, TIRAZ, ...blokyProBuild(HQ).map((b) => b.href)]);
 
-const OKRAJE = { top: '16mm', bottom: '16mm', left: '14mm', right: '14mm' };
+// ⚠️ Tyhle hodnoty Chrome IGNORUJE — skutečné okraje diktuje `@page` v
+// print.css (ověřeno 23. 9. 2026: změna 16 → 20 → 24 mm tady nezměnila ani
+// počet stran, ani polohu textu). Zůstávají jen proto, že `page.pdf()` bez
+// `margin` sáhne po svém výchozím palci. Okraj se mění v print.css.
+const OKRAJE = { top: '24mm', bottom: '16mm', left: '14mm', right: '14mm' };
 // 14 mm v bodech — záhlaví musí lícovat s levým okrajem textu.
 const OKRAJ_PT = (14 / 25.4) * 72;
 // Předěl bloku je plnobarevná stránka od kraje ke kraji. S okraji by kolem
@@ -43,6 +52,15 @@ const OKRAJ_PT = (14 / 25.4) * 72;
 const BEZ_OKRAJU = { top: '0', bottom: '0', left: '0', right: '0' };
 
 const VYSTUP = HQ ? 'pdf-interni/eldee-brandbook.pdf' : 'public/eldee-logomanual.pdf';
+
+// ── Čísla stránek v obsahu (dvouprůchodové generování) ─────────────────────
+// Obsah knihy do 23. 9. 2026 vypisoval sekce a popisky, ale ne kde je najdeš —
+// v tištěné knize je takový obsah skoro k ničemu. Čísla se nedají vysázet na
+// jeden zátah: dokud není PDF hotové, neví se, na které straně sekce začíná.
+// Proto dva průchody jako u LaTeXu — první mapu spočítá, druhý ji vysází.
+const MAPA_SOUBOR = 'src/data/strankyPdf.json';
+const MAPA_KLIC = HQ ? 'interni' : 'verejny';
+const DRUHY_PRUCHOD = process.argv.includes('--druhy-pruchod');
 
 const PORT = 4322;
 const BASE = `http://localhost:${PORT}`;
@@ -71,7 +89,9 @@ const MONO_WOFF2 = 'public/fonts/JetBrainsMono-Regular.woff2';
 // opakovalo dvakrát pod sebou. Tak to dělá i knižní sazba.
 const ZAHLAVI = {
   velikost: 8,
-  odKrajeNahore: 32, // pt od horního kraje; obsah začíná na 16 mm (45 pt)
+  // 38 pt = 13,4 mm od kraje papíru, 10,6 mm nad textem (ten začíná na 24 mm).
+  // Řádek tak sedí zhruba uprostřed horního okraje a dýchá na obě strany.
+  odKrajeNahore: 38,
 };
 
 const CISLO = {
@@ -81,6 +101,84 @@ const CISLO = {
   barva: rgb(0x55 / 255, 0x55 / 255, 0x55 / 255),
   odKrajeDole: 20, // pt, uvnitř 16mm dolního okraje
 };
+
+// pdf-lib nemá pro záložky API, takže se strom staví ručně z objektů. Dvě
+// úrovně: blok → sekce. Každá položka musí znát rodiče, souseda vlevo i vpravo,
+// jinak ji čtečka nevykreslí.
+function vytvorZalozky(doc, prvniStrana, hq) {
+  // PDFString kóduje PDFDocEncoding (latin-1) a české znaky v něm zmizí —
+  // „Příběh" vyšlo jako „PYíb˙h" (naměřeno 23. 9. 2026). Unicode názvy musí
+  // jít přes PDFHexString, což je UTF-16BE s BOM.
+  const { PDFName, PDFNumber, PDFHexString, PDFArray } = pdfLib;
+  const ctx = doc.context;
+  const strany = doc.getPages();
+  const odkazNaStranu = (cislo) => {
+    const idx = Math.min(Math.max(cislo - 1, 0), strany.length - 1);
+    const pole = PDFArray.withContext(ctx);
+    pole.push(strany[idx].ref);
+    pole.push(PDFName.of('Fit'));
+    return pole;
+  };
+
+  const sekce = sekceProBuild(hq);
+  const skupiny = PORADI_BLOKU
+    .map((id) => ({ blok: BLOKY[id], polozky: sekce.filter((s) => s.blok === id) }))
+    .filter((g) => g.polozky.length > 0 && (hq || g.blok.verejny));
+
+  // Plochý seznam položek nejvyšší úrovně: obálka, bloky, tiráž.
+  const vrchol = [];
+  vrchol.push({ titul: 'Obálka', strana: 1, deti: [] });
+  for (const g of skupiny) {
+    const deti = g.polozky
+      .filter((s) => prvniStrana[s.href])
+      .map((s) => ({
+        titul: s.cislo === '—' ? s.nazev : `${s.cislo} · ${s.nazev}`,
+        strana: prvniStrana[s.href],
+        deti: [],
+      }));
+    vrchol.push({ titul: `Blok ${g.blok.id} · ${g.blok.nazev}`, strana: prvniStrana[g.blok.href] ?? deti[0]?.strana ?? 1, deti });
+  }
+  vrchol.push({ titul: 'Tiráž', strana: strany.length, deti: [] });
+
+  const korenRef = ctx.nextRef();
+
+  // Vyrobí řetěz sourozenců a vrátí { first, last, pocet }.
+  const postavUroven = (polozky, rodicRef) => {
+    if (polozky.length === 0) return null;
+    const refy = polozky.map(() => ctx.nextRef());
+    let celkem = 0;
+    polozky.forEach((p, i) => {
+      const dict = new Map();
+      dict.set(PDFName.of('Title'), PDFHexString.fromText(p.titul));
+      dict.set(PDFName.of('Parent'), rodicRef);
+      dict.set(PDFName.of('Dest'), odkazNaStranu(p.strana));
+      if (i > 0) dict.set(PDFName.of('Prev'), refy[i - 1]);
+      if (i < polozky.length - 1) dict.set(PDFName.of('Next'), refy[i + 1]);
+      const potomci = postavUroven(p.deti, refy[i]);
+      if (potomci) {
+        dict.set(PDFName.of('First'), potomci.first);
+        dict.set(PDFName.of('Last'), potomci.last);
+        // Záporný počet = větev zabalená; čtenář uvidí bloky a rozbalí si sekci.
+        dict.set(PDFName.of('Count'), PDFNumber.of(-potomci.pocet));
+        celkem += potomci.pocet;
+      }
+      ctx.assign(refy[i], ctx.obj(Object.fromEntries([...dict].map(([k, v]) => [k.asString().slice(1), v]))));
+      celkem += 1;
+    });
+    return { first: refy[0], last: refy[refy.length - 1], pocet: celkem };
+  };
+
+  const uroven = postavUroven(vrchol, korenRef);
+  ctx.assign(korenRef, ctx.obj({
+    Type: 'Outlines',
+    First: uroven.first,
+    Last: uroven.last,
+    Count: PDFNumber.of(uroven.pocet),
+  }));
+  doc.catalog.set(PDFName.of('Outlines'), korenRef);
+  doc.catalog.set(PDFName.of('PageMode'), PDFName.of('UseOutlines'));
+  console.log(`Záložky: ${vrchol.length} na první úrovni, ${uroven.pocet} celkem`);
+}
 
 async function waitForServer(url, retries = 60) {
   for (let i = 0; i < retries; i++) {
@@ -92,6 +190,8 @@ async function waitForServer(url, retries = 60) {
   }
   throw new Error('Server did not start in time');
 }
+
+let potrebaDruhyPruchod = false;
 
 console.log(`Starting preview server on port ${PORT}...`);
 const server = spawn('npx', ['astro', 'preview', '--port', String(PORT), '--host', 'localhost'], {
@@ -132,6 +232,8 @@ try {
   const predelIndexy = new Set();
   // Index stránky → { cesta, prvniVSekci }, aby se dalo dopsat živé záhlaví.
   const puvodStranky = new Map();
+  // Cesta → číslo první stránky (1-based), podklad pro čísla v obsahu.
+  const prvniStrana = {};
 
   for (const path of PAGES) {
     const jePredel = PREDELY.has(path);
@@ -153,6 +255,7 @@ try {
     const copied = await merged.copyPages(src, src.getPageIndices());
     copied.forEach((p, i) => {
       if (jePredel) predelIndexy.add(merged.getPageCount());
+      if (i === 0) prvniStrana[path] = merged.getPageCount() + 1;
       puvodStranky.set(merged.getPageCount(), { cesta: path, prvniVSekci: i === 0 });
       merged.addPage(p);
     });
@@ -209,9 +312,41 @@ try {
   }
   console.log(`Čísla stránek: ${vytisteno} z ${strany.length} (předěly bloků se nečíslují)`);
 
+  // ── Metadata a záložky ─────────────────────────────────────────────────
+  // Do 23. 9. 2026 PDF nemělo ani jedno: v záložce čtečky svítilo jen jméno
+  // souboru a 110 stran se dalo procházet jen scrollováním. Mapa sekcí už
+  // existuje kvůli číslům v obsahu, takže záložky z ní vyjdou skoro zadarmo.
+  const nazevDokumentu = `eldee ${HQ ? 'Brand Book' : 'Logomanuál'} ${VERZE}`;
+  merged.setTitle(nazevDokumentu);
+  merged.setAuthor('eldee');
+  merged.setSubject(HQ
+    ? 'Interní brand book — kdo jsme, jak vypadáme, jak to používáme.'
+    : 'Vizuální identita eldee pro partnery a dodavatele.');
+  merged.setCreator('eldee brand book (Astro + Playwright)');
+  merged.setProducer('eldee');
+  merged.setCreationDate(new Date());
+  merged.setModificationDate(new Date());
+
+  vytvorZalozky(merged, prvniStrana, HQ);
+
   const out = await merged.save();
   const outPath = VYSTUP;
   await writeFile(outPath, out);
+
+  // Sedí mapa, ze které se sázel obsah, s hotovým dokumentem?
+  const mapa = JSON.parse(await readFile(MAPA_SOUBOR, 'utf8'));
+  if (JSON.stringify(mapa[MAPA_KLIC]) !== JSON.stringify(prvniStrana)) {
+    mapa[MAPA_KLIC] = prvniStrana;
+    await writeFile(MAPA_SOUBOR, JSON.stringify(mapa, null, 2) + '\n');
+    if (DRUHY_PRUCHOD) {
+      console.warn('⚠️ Mapa stránek se mění i po druhém průchodu — čísla v obsahu můžou být o stránku vedle. Spusť generování ještě jednou.');
+    } else {
+      potrebaDruhyPruchod = true;
+      console.log('Mapa stránek se změnila → druhý průchod vysází čísla do obsahu.');
+    }
+  } else {
+    console.log('Mapa stránek sedí — čísla v obsahu odpovídají dokumentu.');
+  }
   console.log(`PDF written: ${outPath} (${(out.length / 1024 / 1024).toFixed(2)} MB) — ${HQ ? 'INTERNÍ, mimo public/' : 'VEŘEJNÝ'}`);
 
   await browser.close();
@@ -220,4 +355,17 @@ try {
   server.kill('SIGTERM');
   // give it a moment to die
   await new Promise((r) => setTimeout(r, 500));
+}
+
+// Druhý průchod až tady: preview server musí být po smrti, jinak by si nový
+// běh nesáhl na port 4322.
+if (potrebaDruhyPruchod) {
+  const { spawnSync } = await import('node:child_process');
+  const prostredi = HQ ? { ...process.env, PUBLIC_HQ_BUILD: '1' } : process.env;
+  console.log('\n── Druhý průchod ──────────────────────────────────────────');
+  const build = spawnSync('npx', ['astro', 'build'], { stdio: 'inherit', env: prostredi });
+  if (build.status !== 0) throw new Error('Druhý průchod: build selhal');
+  const args = ['scripts/generate-pdf.mjs', '--druhy-pruchod', ...(HQ ? [] : ['--verejny'])];
+  const znovu = spawnSync('node', args, { stdio: 'inherit', env: prostredi });
+  if (znovu.status !== 0) throw new Error('Druhý průchod: generování selhalo');
 }

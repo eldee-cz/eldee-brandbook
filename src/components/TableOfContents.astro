@@ -1,6 +1,13 @@
 ---
 import { isHQ } from '../buildMode';
 import { BLOKY, sekceProBuild, type BlokId } from '../data/sekce';
+import strankyPdf from '../data/strankyPdf.json';
+
+// Čísla stránek do obsahu. Na webu jsou položky odkazy a číslo tam nedává
+// smysl, proto se ukazuje jen na papíře (`hidden print:block`). Mapu vyrábí
+// scripts/generate-pdf.mjs — v PDF do 23. 9. 2026 obsah čísla neměl vůbec,
+// takže říkal CO v knize je, ale ne KDE.
+const stranky: Record<string, number> = isHQ ? strankyPdf.interni : strankyPdf.verejny;
 
 const sekce = sekceProBuild(isHQ);
 const poradiBloku: BlokId[] = ['I', 'II', 'III'];
@@ -12,12 +19,12 @@ const skupiny = poradiBloku
 // „str. 69“, zatímco PDF mělo 100 stran. Na webu je to navíc odkaz, ne kniha,
 // takže čísla stránek řeší až PDF export.
 ---
-<nav class="my-12" data-obsah>
-  <div class="font-mono text-caption text-gold mb-8">OBSAH</div>
+<nav class="my-12 print:my-6" data-obsah>
+  <div class="font-mono text-caption text-gold mb-8 print:mb-5">OBSAH</div>
 
   {skupiny.map((g) => (
-    <section class="mb-10">
-      <div class="flex items-baseline gap-4 pb-3 mb-4 border-b border-bone/15">
+    <section class="mb-10 print:mb-6">
+      <div class="flex items-baseline gap-4 pb-3 mb-4 print:pb-2 print:mb-2 border-b border-bone/15">
         <span class="font-mono text-caption text-bone/40">BLOK {g.blok.id}</span>
         <span class="font-display text-h3 italic text-bone">{g.blok.nazev}</span>
         <span class="text-body text-bone/45 ml-auto hidden sm:block">{g.blok.otazka}</span>
@@ -28,11 +35,16 @@ const skupiny = poradiBloku
           <li>
             <a
               href={s.href}
-              class="grid grid-cols-[2rem_1fr] sm:grid-cols-[2rem_14rem_1fr] gap-x-4 items-baseline py-2.5 px-2 -mx-2 rounded hover:bg-bone/5 transition group"
+              class="grid grid-cols-[2rem_1fr] sm:grid-cols-[2rem_14rem_1fr] print:grid-cols-[2rem_14rem_1fr_2.5rem] gap-x-4 items-baseline py-2.5 print:py-1 px-2 -mx-2 rounded hover:bg-bone/5 transition group"
             >
               <span class="font-mono text-caption text-gold">{s.cislo}</span>
               <span class="font-display text-h3 text-bone group-hover:text-gold transition">{s.nazev}</span>
               <span class="col-start-2 sm:col-start-3 text-body text-bone/45">{s.popis}</span>
+              {stranky[s.href] && (
+                <span class="hidden print:block col-start-4 row-start-1 font-mono text-caption text-bone/45 text-right tabular-nums">
+                  {stranky[s.href]}
+                </span>
+              )}
             </a>
           </li>
         ))}

@@ -180,15 +180,18 @@ const skupinyLM = poradiBloku
 
   </Layout>
 ) : (
-  <Layout title="Logomanual" description="eldee Logomanual — vizuální identita pro partnery a dodavatele.">
-    <div class="min-h-[58vh] flex flex-col justify-center">
+  <Layout title="Logomanuál" description="eldee Logomanual — vizuální identita pro partnery a dodavatele.">
+    <!-- Hero rozcestníku je na webu první dojem, v PDF by stál hned za obálkou
+         a opakoval by ji. V tisku ho proto nahrazuje obsah s čísly stránek
+         (23. 9. 2026 — do té doby logomanuál v PDF neměl obsah vůbec). -->
+    <div class="min-h-[58vh] flex flex-col justify-center print:hidden">
       <div class="flex items-center gap-4 mb-10">
         <div class="w-1.5 h-8 bg-blood shrink-0"></div>
-        <div class="font-mono text-caption text-gold">eldee · logomanual · 2026</div>
+        <div class="font-mono text-caption text-gold">eldee · logomanuál · 2026</div>
       </div>
 
       <h1 class="font-display italic text-bone text-[clamp(56px,11vw,150px)] leading-[0.9] tracking-tight">
-        Logomanual
+        Logomanuál
       </h1>
       <p class="mt-8 max-w-2xl text-body-lg text-bone/80">
         Jak správně pracovat s vizuální identitou eldee — logo, barvy, fonty a aplikace.
@@ -196,8 +199,12 @@ const skupinyLM = poradiBloku
       </p>
     </div>
 
+    <div class="hidden print:block">
+      <TableOfContents />
+    </div>
+
     {skupinyLM.map((g) => (
-      <section class="mt-12">
+      <section class="mt-12 print:hidden">
         <div class="flex items-baseline gap-4 pb-3 mb-4 border-b border-bone/15">
           <span class="font-display text-h3 italic text-bone">{g.blok.nazev}</span>
           <span class="text-body text-bone/45 ml-auto hidden sm:block">{g.blok.otazka}</span>

@@ -123,8 +123,22 @@ test.describe('veřejné vs. interní dělení', () => {
 
   test('domovská stránka je rozcestník, ne interní sekce 01', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1').first()).toContainText(/Logomanual/i);
+    await expect(page.locator('h1').first()).toContainText(/Logomanuál/i);
     expect(await page.content()).not.toContain('One of Us.');
+  });
+
+  // Od 23. 9. 2026 má veřejná domovská stránka i obsah knihy (v tisku nahrazuje
+  // rozcestník, protože logomanuál v PDF žádný obsah neměl). Obsah se staví ze
+  // stejné komponenty jako interní, takže musí hlídat, že nevypíše blok I.
+  test('obsah na veřejné domovské stránce nevypisuje interní sekce', async ({ page }) => {
+    await page.goto('/');
+    const obsah = page.locator('[data-obsah]');
+    await expect(obsah).toHaveCount(1);
+    const text = await obsah.innerText();
+    for (const interni of ['Příběh', 'DNA', 'Pro koho', 'Positioning', 'Produkt', 'Hlas a tón']) {
+      expect(text, `obsah nesmí nabízet interní sekci „${interni}"`).not.toContain(interni);
+    }
+    expect(text).toContain('Logo');
   });
 });
 

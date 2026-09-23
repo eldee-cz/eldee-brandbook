@@ -1,7 +1,10 @@
 @media print {
+  /* Horní okraj je vyšší než ostatní: nad textem musí zůstat pás pro živé
+     záhlaví (23. 9. 2026). Při 16 mm byl řádek záhlaví namáčknutý mezi kraj
+     papíru a nadpis — k vrcholu velkých písmen mu zbývalo ~4,6 mm. */
   @page {
     size: A4;
-    margin: 16mm 14mm;
+    margin: 24mm 14mm 16mm;
   }
   /* Předěl bloku je plnobarevná stránka od kraje ke kraji, takže potřebuje
      vlastní stránku bez okrajů. Okraje diktuje tahle @page deklarace, ne
@@ -31,7 +34,13 @@
     max-width: 100% !important;
     padding: 0 !important;
   }
-  /* Avoid breaks inside cards */
+  /* Karty a ukázky se netrhají přes stránky.
+     ⚠️ `section` tu drží i celý pás sekce, takže když se pás nevejde na zbytek
+     stránky, skočí celý a po něm zůstane díra — tak vzniká 14 stran, kde obsah
+     končí nad 45 % výšky (naměřeno 23. 9. 2026). Je to vědomá výměna: opačná
+     volba vyrábí utržené řádky na začátku další stránky, což je v sazbě horší.
+     Zkoušelo se i povolit lámání dlouhých seznamů (`ul:has(> li:nth-child(6))`)
+     — nezměnilo to ani jednu stránku, protože drží `section`, ne `ul`. */
   figure, section, .rounded-lg {
     break-inside: avoid;
   }
