@@ -12,7 +12,7 @@ import fontkit from '@pdf-lib/fontkit';
 import wawoff from 'wawoff2';
 import { writeFile, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
-import { poradiStranek, blokyProBuild } from '../src/data/sekce.ts';
+import { poradiStranek, blokyProBuild, sekceProBuild, BLOKY } from '../src/data/sekce.ts';
 
 // Dvě PDF, dva režimy (22. 9. 2026):
 //   bez přepínače → INTERNÍ brand book (celá kniha včetně bloku I)
@@ -36,6 +36,8 @@ const PAGES = [TITULKA, ...poradiStranek(HQ), TIRAZ];
 const PREDELY = new Set([TITULKA, TIRAZ, ...blokyProBuild(HQ).map((b) => b.href)]);
 
 const OKRAJE = { top: '16mm', bottom: '16mm', left: '14mm', right: '14mm' };
+// 14 mm v bodech — záhlaví musí lícovat s levým okrajem textu.
+const OKRAJ_PT = (14 / 25.4) * 72;
 // Předěl bloku je plnobarevná stránka od kraje ke kraji. S okraji by kolem
 // tmavé plochy zůstal bílý rám a vypadalo by to jako chyba tisku.
 const BEZ_OKRAJU = { top: '0', bottom: '0', left: '0', right: '0' };
@@ -57,6 +59,21 @@ const BASE = `http://localhost:${PORT}`;
 // kterou sám zakazuje. Kvůli tomu se woff2 dekomprimuje na TTF (stejně jako
 // v generate-wordmark.mjs) a embeduje přes fontkit.
 const MONO_WOFF2 = 'public/fonts/JetBrainsMono-Regular.woff2';
+// ── Živé záhlaví ───────────────────────────────────────────────────────────
+// Do 23. 9. 2026 nesl štítek sekce jen 18 stran ze 110 — ten na první straně
+// každé sekce. Na zbylých 92 čtenář uprostřed knihy nevěděl, kde je: vytištěná
+// a rozsypaná kniha se nedala složit a hledání pravidla znamenalo listovat
+// zpátky na začátek sekce.
+//
+// Kreslí se stejnou cestou jako čísla stránek (pdf-lib nad hotovým dokumentem),
+// protože Chrome neumí `@page` margin boxy ani CSS countery. Na PRVNÍ straně
+// sekce se vynechává — tam stojí velký nadpis a štítek pod ním, takže by se
+// opakovalo dvakrát pod sebou. Tak to dělá i knižní sazba.
+const ZAHLAVI = {
+  velikost: 8,
+  odKrajeNahore: 32, // pt od horního kraje; obsah začíná na 16 mm (45 pt)
+};
+
 const CISLO = {
   velikost: 8,
   // #555555 — stejný tlumený odstín, jaký print.css používá pro drobný text
@@ -113,6 +130,8 @@ try {
   const merged = await PDFDocument.create();
   // Indexy stránek, které jsou předělem bloku — čísla se na ně netisknou.
   const predelIndexy = new Set();
+  // Index stránky → { cesta, prvniVSekci }, aby se dalo dopsat živé záhlaví.
+  const puvodStranky = new Map();
 
   for (const path of PAGES) {
     const jePredel = PREDELY.has(path);
@@ -132,8 +151,9 @@ try {
       throw new Error(`${path} má ${pocet} stránek místo jedné — zkontroluj min-height v print.css`);
     }
     const copied = await merged.copyPages(src, src.getPageIndices());
-    copied.forEach((p) => {
+    copied.forEach((p, i) => {
       if (jePredel) predelIndexy.add(merged.getPageCount());
+      puvodStranky.set(merged.getPageCount(), { cesta: path, prvniVSekci: i === 0 });
       merged.addPage(p);
     });
   }
@@ -147,7 +167,31 @@ try {
   const monoTtf = Buffer.from(await wawoff.decompress(new Uint8Array(monoWoff2)));
   const mono = await merged.embedFont(monoTtf, { subset: true });
 
+  // ── Živé záhlaví na každou stránku uvnitř sekce ────────────────────────
+  // Podstránky (/logo/construction) nejsou v SEKCE samostatně — patří pod
+  // sekci, která je má v `podstranky`, jinak by zůstaly bez záhlaví.
+  const sekce = sekceProBuild(HQ);
+  const najdiProCestu = (cesta) =>
+    sekce.find((x) => x.href === cesta) ?? sekce.find((x) => (x.podstranky ?? []).includes(cesta));
+
   const strany = merged.getPages();
+  let sZahlavim = 0;
+  for (const [i, str] of strany.entries()) {
+    const puvod = puvodStranky.get(i);
+    if (!puvod || predelIndexy.has(i) || puvod.prvniVSekci) continue;
+    const s = najdiProCestu(puvod.cesta);
+    if (!s) continue;
+    const vlevo = s.cislo === '—' ? s.nazev : `${s.cislo} · ${s.nazev}`;
+    const vpravo = `Blok ${BLOKY[s.blok].id} · ${BLOKY[s.blok].nazev}`;
+    const { width, height } = str.getSize();
+    const y = height - ZAHLAVI.odKrajeNahore;
+    str.drawText(vlevo, { x: OKRAJ_PT, y, size: ZAHLAVI.velikost, font: mono, color: CISLO.barva });
+    const sirkaVpravo = mono.widthOfTextAtSize(vpravo, ZAHLAVI.velikost);
+    str.drawText(vpravo, { x: width - OKRAJ_PT - sirkaVpravo, y, size: ZAHLAVI.velikost, font: mono, color: CISLO.barva });
+    sZahlavim += 1;
+  }
+  console.log(`Živé záhlaví: ${sZahlavim} stran (první strana sekce, předěly, obálka a tiráž ho nemají)`);
+
   let vytisteno = 0;
   for (const [i, str] of strany.entries()) {
     const cislo = String(i + 1);
